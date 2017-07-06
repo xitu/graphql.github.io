@@ -5,6 +5,9 @@
  * This source code is licensed under the license found in the
  * LICENSE file in the root directory of this source tree.
  */
+if (!process.env.PWD) {
+  process.env.PWD = process.cwd();
+}
 
 var path = require('path');
 var express = require('express');
