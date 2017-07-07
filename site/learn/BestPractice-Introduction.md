@@ -16,14 +16,14 @@ GraphQL 规范特意忽略了一些面向 API 的重要问题，例如处理网�
 
 ### HTTP
 
-GraphQL 通常通过单入口来提供 HTTP 服务的完整功能，这一实现方式与暴露一组 URL 且每个 URL 只暴露一个资源的 REST API 不同。虽然 GraphQL 也可以搭配一组资源 URL 使用，但这可能导致您在使用 GraphiQL 等工具时更加困难。
+GraphQL 通常通过单入口来提供 HTTP 服务的完整功能，这一实现方式与暴露一组 URL 且每个 URL 只暴露一个资源的 REST API 不同。虽然 GraphQL 也可以搭配一组资源 URL 使用，但这可能导致您在使用 GraphiQL 等工具时遇到困难。
 
 了解更多：[提供 HTTP 服务](/learn/serving-over-http/)。
 
 
 ### JSON（使用 GZIP 压缩）
 
-GraphQL 服务通常返回 JSON 格式的数据，但 GraphQL 规范[并未指定这一点](http://facebook.github.io/graphql/#sec-Serialization-Format)。对于期望更好的网络性能的 API 层来说，使用 JSON 似乎是一个奇怪的选择，但由于它主要是文本，因而在 GZIP 压缩后表现非常好。
+GraphQL 服务通常返回 JSON 格式的数据，但 GraphQL 规范[并未要求这一点](http://facebook.github.io/graphql/#sec-Serialization-Format)。对于期望更好的网络性能的 API 层来说，使用 JSON 似乎是一个奇怪的选择，但由于它主要是文本，因而在 GZIP 压缩后表现非常好。
 
 推荐任何在生产环境下的 GraphQL 服务都启用 GZIP，并推荐在客户端请求头中加入：
 
@@ -36,7 +36,7 @@ Accept-Encoding: gzip
 
 ### 版本控制
 
-虽然没有什么可以阻止 GraphQL 服务像任何其他 REST API 一样进行版本控制，但 GraphQL 强烈认为可以通过 GraphQL schema 的不断进化来避免版本控制。
+虽然没有什么可以阻止 GraphQL 服务像任何其他 REST API 一样进行版本控制，但 GraphQL 强烈认为可以通过 GraphQL schema 的持续演进来避免版本控制。
 
 为什么大多数 API 有版本？当某个 API 入口能够返回的数据被限制，则*任何更改*都可以被视为一个破坏性变更，而破坏性变更需要发布一个新的版本。如果向 API 添加新功能需要新版本，那么在经常发布版本并拥有许多增量版本与保证 API 的可理解性和可维护性之间就需要权衡。
 
