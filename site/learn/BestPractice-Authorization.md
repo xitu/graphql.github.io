@@ -1,18 +1,18 @@
 ---
-title: Authorization
+title: 授权
 layout: ../_core/DocsLayout
-category: Best Practices
+category: 最佳实践
 permalink: /learn/authorization/
 next: /learn/pagination/
 ---
 
-> Delegate authorization logic to the business logic layer
+> 将授权逻辑委托给业务逻辑层
 
-Authorization is a type of business logic that describes whether a given user/session/context has permission to perform an action or see a piece of data. For example:
+授权是一种业务逻辑，描述给定的用户/会话/上下文是否具有执行操作或查看一条数据的权限。例如：
 
-*“Only authors can see their drafts”*
+*“只有作者才能看到他们自己的草稿”*
 
-Enforcing this kind of behavior should happen in the [business logic layer](/learn/thinking-in-graphs/#business-logic-layer). It is tempting to place authorization logic in the GraphQL layer like so:
+应当在[业务逻辑层](/learn/thinking-in-graphs/#business-logic-layer)实施这种行为。在 GraphQL 层中放置授权逻辑是很吸引人的，如下所示：
 
 ```javascript
 var postType = new GraphQLObjectType({
@@ -21,7 +21,7 @@ var postType = new GraphQLObjectType({
     body: {
       type: GraphQLString,
       resolve: (post, args, context, { rootValue }) => {
-        // return the post body only if the user is the post's author
+        // 只有当用户是帖子的作者时才返回帖子正文
         if (context.user && (context.user.id === post.authorId)) {
           return post.body;
         }
@@ -32,12 +32,12 @@ var postType = new GraphQLObjectType({
 });
 ```
 
-Notice that we define “author owns a post" by checking whether the post's `authorId` field equals the current user’s `id`. Can you spot the problem? We would need to duplicate this code for each entry point into the service. Then if the authorization logic is not kept perfectly in sync, users could see different data depending on which API they use. Yikes! We can avoid that by having a [single source of truth](/learn/thinking-in-graphs/#business-logic-layer) for authorization.
+可以看到我们通过检查帖子的 `authorId` 字段是否等于当前用户的 `id` 来定义“作者拥有一个帖子”。你能发现其中的问题吗？我们需要复制这段代码到服务中的每一个入口点。一旦我们无法保证授权逻辑的完全同步，用户可能在使用不同的 API 时看到不同的数据。我们可以通过确定授权的[唯一真实来源](/learn/thinking-in-graphs/#business-logic-layer)来避免这种情况。
 
-Defining authorization logic inside the resolver is fine when learning GraphQL or prototyping. However, for a production codebase, delegate authorization logic to the business logic layer. Here’s an example:
+在学习 GraphQL 或原型设计时，在解析器内定义授权逻辑是可以接受的。然而，对于生产代码库来说，还是将授权逻辑委托给业务逻辑层。这里有一个例子：
 
 ```javascript
-//Authorization logic lives inside postRepository
+// 授权逻辑在 postRepository 中
 var postRepository = require('postRepository');
 
 var postType = new GraphQLObjectType({
@@ -53,6 +53,6 @@ var postType = new GraphQLObjectType({
 });
 ```
 
-In the example above, we see that the business logic layer requires the caller to provide a user object. If you are using GraphQL.js, the User object should be populated on the `context` argument or `rootValue` in the fourth argument of the resolver.
+在上面的例子中，我们看到业务逻辑层要求调用者提供一个用户对象。如果您使用 GraphQL.js，您应当在解析器的 `context` 参数或是第四个参数中的 `rootValue` 上填充 User 对象。
 
-We recommend passing a fully-hydrated User object instead of an opaque token or API key to your business logic layer. This way, we can handle the distinct concerns of [authentication](/graphql-js/authentication-and-express-middleware/) and authorization in different stages of the request processing pipeline.
+我们建议将完全混合的 User 对象传递给业务逻辑层，而非传递不透明的 token 或 API 密钥。这样，我们可以在请求处理管道的不同阶段处理[身份验证](/graphql-js/authentication-and-express-middleware/)和授权的不同问题。
