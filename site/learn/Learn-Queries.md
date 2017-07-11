@@ -24,9 +24,9 @@ sublinks: Fields,Arguments,Aliases,Fragments,Variables,Operation Name,Directives
 
 你立即就能发现，查询和其结果拥有几乎一样的结构。这是 GraphQL 最重要的特性，因为这样一来，你就总是能得到你想要的数据，而服务器也准确地知道客户端请求的字段。
 
-`name`字段返回`String`类型，在这个示例中是《星球大战》主角的名字是：`"R2-D2"`。
+`name` 字段返回 `String` 类型，在这个示例中是《星球大战》主角的名字是：`"R2-D2"`。
 
-> 对了，还有一点 — 上述查询是*可交互的*。也就是你可以按你喜欢来改变查询，然后看看新的结果。尝试给查询中的`hero`对象添加一个`appearsIn`字段，看看新的结果吧。
+> 对了，还有一点 — 上述查询是*可交互的*。也就是你可以按你喜欢来改变查询，然后看看新的结果。尝试给查询中的 `hero` 对象添加一个` appearsIn` 字段，看看新的结果吧。
 
 在前一例子中，我们请求了我们主角的名字，返回了一个 String/字符串类型，但是字段也能指代 Object/对象类型。这个时候，你可以对这个对象的字段进行 *sub-selection/次级选择*。GraphQL 查询能够遍历相关对象及其字段，使得客户端可以一次请求查询大量相关数据，而不像传统REST架构中那样需要多次往返查询。
 
@@ -43,7 +43,7 @@ sublinks: Fields,Arguments,Aliases,Fragments,Variables,Operation Name,Directives
 }
 ```
 
-注意这个例子中，`friends`返回了一个数组的项目，GraphQL 查询会同等看待单个项目或者一个列表的项目，然而我们可以通过schema所指示的内容来预测将会得到哪一种。
+注意这个例子中，`friends` 返回了一个数组的项目，GraphQL 查询会同等看待单个项目或者一个列表的项目，然而我们可以通过schema所指示的内容来预测将会得到哪一种。
 
 
 ## Arguments/参数
@@ -72,7 +72,7 @@ sublinks: Fields,Arguments,Aliases,Fragments,Variables,Operation Name,Directives
 }
 ```
 
-参数可以是多种不同的类型。上面例子中，我们使用了一个枚举类型，其代表了一个有限选项集合（本例中为长度单位，即是`METER`或者`FOOT`）。GraphQL 自带一套默认类型，但是GraphQL 服务器可以声明一套自己的定制类型，只要能序列化成你的传输格式即可。
+参数可以是多种不同的类型。上面例子中，我们使用了一个枚举类型，其代表了一个有限选项集合（本例中为长度单位，即是 `METER` 或者 `FOOT` ）。GraphQL 自带一套默认类型，但是GraphQL 服务器可以声明一套自己的定制类型，只要能序列化成你的传输格式即可。
 
 [更多的 GraphQL 类型系统请点击这儿。](/learn/schema)
 
@@ -92,7 +92,7 @@ sublinks: Fields,Arguments,Aliases,Fragments,Variables,Operation Name,Directives
 }
 ```
 
-上例中，两个`hero`字段将会存在冲突，但是因为我们可以将其另取一个别名，我们也就可以在一次请求中得到两个结果。
+上例中，两个 `hero` 字段将会存在冲突，但是因为我们可以将其另取一个别名，我们也就可以在一次请求中得到两个结果。
 
 
 ## Fragments/片段
@@ -132,9 +132,9 @@ fragment comparisonFields on Character {
 
 使用变量之前，我们得做三件事：
 
-1. 使用`$variableName`替代查询中的静态值。
-2. 声明`$variableName`为查询接受的变量之一。
-3. 将`variableName: value`通过传输专用（通常是 JSON ）的分离的变量字典中。
+1. 使用 `$variableName` 替代查询中的静态值。
+2. 声明 `$variableName` 为查询接受的变量之一。
+3. 将 `variableName: value` 通过传输专用（通常是 JSON ）的分离的变量字典中。
 
 全部做完之后就像这个样子：
 
@@ -155,11 +155,11 @@ query HeroNameAndFriends($episode: Episode) {
 
 ### Variable definitions/变量定义
 
-变量定义看上去像是上述查询中的`($episode: Episode)`。其工作方式跟类型语言中函数的参数定义一样。它以列出所有变量，变量前缀必须为`$`，后跟其类型，本例中为`Episode`。
+变量定义看上去像是上述查询中的 `($episode: Episode)`。其工作方式跟类型语言中函数的参数定义一样。它以列出所有变量，变量前缀必须为 `$`，后跟其类型，本例中为 `Episode`。
 
 所有声明的变量都必须是标量、枚举型或者输入对象类型。所以如果想要传递一个复杂对象到一个字段上，你必须知道服务器上其匹配的类型。可以从Schema页面了解更多关于输入对象类型的信息。
 
-变量定义可以是可选的或者必要的。上例中，`Episode`后并没有`!`，因此其是可选的。但是如果你传递变量的字段要求非空参数，那变量一定是必要的。
+变量定义可以是可选的或者必要的。上例中，`Episode` 后并没有 `!`，因此其是可选的。但是如果你传递变量的字段要求非空参数，那变量一定是必要的。
 
 如果想要进一步了解变量定义的句法，可以学习 GraphQL 的schema语言。schema语言在Schema中有细述。
 
@@ -183,7 +183,7 @@ query HeroNameAndFriends($episode: Episode = "JEDI") {
 
 ## Operation name/操作名称
 
-上面案例中我们看到的另一个东西就是我们的查询还有个_操作名_。这之前，我们都使用了简写句法，省略了`query`关键字和查询名称，但是生产中使用这些可以使我们代码减少歧义。
+上面案例中我们看到的另一个东西就是我们的查询还有个_操作名_。这之前，我们都使用了简写句法，省略了 `query` 关键字和查询名称，但是生产中使用这些可以使我们代码减少歧义。
 
 就把它想成你喜欢的程序语言中的函数名。例如，在JavaScript中，我们只用匿名函数就可以工作，但是当我们给了函数名之后，就更加容易追踪、调试我们的代码，并在其被调用的时候做日志。同理，GraphQL 的查询和变更名称，以及片段名称，都可以成为服务端侧用来识别不同 GraphQL 请求的有效调试工具。
 
@@ -206,12 +206,12 @@ query Hero($episode: Episode, $withFriends: Boolean!) {
 }
 ```
 
-尝试修改上面的变量，传递`true`给`withFriends`，看看结果的变化。
+尝试修改上面的变量，传递 `true` 给 `withFriends`，看看结果的变化。
 
 我们用了 GraphQL 中一种称作_指令_的新特性。一个指令可以附着在字段或者片段包含的字段上，然后以任何服务端期待的方式来改变查询的执行。GraphQL 的核心规范包含两个指令，其必须被任何规范兼容的 GraphQL 服务器实现所支持：
 
-- `@include(if: Boolean)` 仅在参数为`true`时，包含此字段。
-- `@skip(if: Boolean)` 如果参数为`true`，跳过此字段。
+- `@include(if: Boolean)` 仅在参数为 `true` 时，包含此字段。
+- `@skip(if: Boolean)` 如果参数为 `true`，跳过此字段。
 
 指令在你不得不通过字符串操作来增减查询的字段时解救你。服务端实现也可以定义新的指令来添加新的特性。
 
@@ -220,7 +220,7 @@ query Hero($episode: Episode, $withFriends: Boolean!) {
 
 GraphQL 的大部分讨论集中在数据获取，但是任何完整的数据平台也都需要一个改变服务端数据的方法。
 
-REST中，任何请求都可能最后导致一些服务端副作用，但是约定上建议不要使用`GET`请求来修改数据。GraphQL 也是类似 — 技术上而言，任何查询都可以被实现为导致数据写入。然而，建一个约定来规范任何导致写入的操作都应该显示通过mutation/变更来发送。
+REST中，任何请求都可能最后导致一些服务端副作用，但是约定上建议不要使用 `GET` 请求来修改数据。GraphQL 也是类似 — 技术上而言，任何查询都可以被实现为导致数据写入。然而，建一个约定来规范任何导致写入的操作都应该显示通过mutation/变更来发送。
 
 就如同查询一样，如果任何变更字段返回一个对象类型，你也能请求其嵌套字段。获取一个对象变更后的新状态也是十分有用的。我们来看看一个变更例子：
 
@@ -234,9 +234,9 @@ mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
 }
 ```
 
-注意`createReview`字段如何返回了新建的review的`stars`和`commentary`字段。这在变更已有数据时特别有用，例如，当一个字段自增的时候，我们可以在一个请求中变更并查询这个字段的新值。
+注意 `createReview` 字段如何返回了新建的 review 的 `stars` 和 `commentary` 字段。这在变更已有数据时特别有用，例如，当一个字段自增的时候，我们可以在一个请求中变更并查询这个字段的新值。
 
-你也可能注意到，这个例子中，我们传递的`review`变量并非标量。它是一个_输入对象类型_，一种特殊的对象类型，可以作为参数传递。你可以在Schema页面上了解到更多关于输入类型的信息。
+你也可能注意到，这个例子中，我们传递的 `review` 变量并非标量。它是一个_输入对象类型_，一种特殊的对象类型，可以作为参数传递。你可以在Schema页面上了解到更多关于输入类型的信息。
 
 ### Multiple fields in mutations/变更中的多个字段
 
@@ -244,7 +244,7 @@ mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
 
 **查询字段时，是并行执行，而变更字段时，是线性执行，一个接着一个。**
 
-这意味着如果我们一个请求中发送了两个`incrementCredits`变更，第一个保证在第二个之前执行，以确保我们不会出现竞态。
+这意味着如果我们一个请求中发送了两个 `incrementCredits` 变更，第一个保证在第二个之前执行，以确保我们不会出现竞态。
 
 
 ## Inline Fragments/内联片段
@@ -268,16 +268,16 @@ query HeroForEpisode($ep: Episode!) {
 }
 ```
 
-这个查询中，`hero`字段返回`Character`类型，取决于`episode`参数，其可能是`Human`或者`Droid`类型。在直接选择的情况下，你只能请求`Character`上存在的字段，譬如`name`。
+这个查询中，`hero` 字段返回 `Character` 类型，取决于 `episode` 参数，其可能是 `Human` 或者 `Droid` 类型。在直接选择的情况下，你只能请求 `Character` 上存在的字段，譬如 `name`。
 
-如果要请求具体类型上的字段，你需要使用一个类型条件_内联片段_。因为第一个片段标注为`... on Droid`，`primaryFunction`仅在`hero`返回的`Character`为`Droid`类型时才会执行。同理适用于`Human`类型的`height`字段。
+如果要请求具体类型上的字段，你需要使用一个类型条件_内联片段_。因为第一个片段标注为 `... on Droid`，`primaryFunction` 仅在 `hero` 返回的 `Character` 为 `Droid` 类型时才会执行。同理适用于 `Human` 类型的 `height` 字段。
 
 具名片段也可以用于同样的情况，因为具名片段总是附带了一个类型。
 
 
 ### Meta fields/元字段
 
-某些情况下，你并不知道你将从 GraphQL 服务获得什么类型，这时候你就需要一些方法在客户端来决定如何处理这些数据。GraphQL 允许你在查询的任何位置请求`__typename`，一个元字段，以获得那个位置的对象类型名称。
+某些情况下，你并不知道你将从 GraphQL 服务获得什么类型，这时候你就需要一些方法在客户端来决定如何处理这些数据。GraphQL 允许你在查询的任何位置请求 `__typename`，一个元字段，以获得那个位置的对象类型名称。
 
 ```graphql
 # { "graphiql": true}
@@ -297,7 +297,7 @@ query HeroForEpisode($ep: Episode!) {
 }
 ```
 
-上面的查询中，`search`返回了一个联合类型，其可能是三种选项之一。没有`__typename`字段的情况下，几乎不可能在客户端分辨开这三个不同的类型。
+上面的查询中，`search` 返回了一个联合类型，其可能是三种选项之一。没有 `__typename` 字段的情况下，几乎不可能在客户端分辨开这三个不同的类型。
 
 GraphQL 服务提供了不少元字段，剩下的部分用于描述[内省](../introspection/)系统。
 
