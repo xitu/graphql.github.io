@@ -7,7 +7,7 @@ permalink: /learn/best-practices/
 next: /learn/thinking-in-graphs/
 ---
 
-GraphQL 规范特意忽略了一些面向 API 的重要问题，例如处理网络、授权和分页。这并不意味着在使用 GraphQL 时没有针对这些问题的解决方案，只是因为它们并非 GraphQL 的描述中的一部分，可代以通行的做法来实现。
+GraphQL 规范特意忽略了一些面向 API 的重要问题，例如处理网络、授权和分页。这并不意味着在使用 GraphQL 时没有针对这些问题的解决方案，只是因为它们*并非* GraphQL 定义中的一部分，可代以工程上通行的做法来实现。
 
 本章节中的文章并非不可改动的真理，在某些情况下使用其他方式可能会更加合适。其中的一些文章介绍了 Facebook 在设计和部署 GraphQL 服务的过程中的一些开发理念，而另外一些则是为解决诸如提供 HTTP 服务和执行授权等常见问题提出了更多的策略建议。
 
@@ -16,7 +16,7 @@ GraphQL 规范特意忽略了一些面向 API 的重要问题，例如处理网�
 
 ### HTTP
 
-GraphQL 通常通过单入口来提供 HTTP 服务的完整功能，这一实现方式与暴露一组 URL 且每个 URL 只暴露一个资源的 REST API 不同。虽然 GraphQL 也可以搭配一组资源 URL 使用，但这可能导致您在使用 GraphiQL 等工具时遇到困难。
+GraphQL 通常通过单入口来提供 HTTP 服务的完整功能，这一实现方式与暴露一组 URL 且每个 URL 只暴露一个资源的 REST API 不同。虽然 GraphQL 也可以暴露多个资源 URL 来使用，但这可能导致您在使用 GraphiQL 等工具时遇到困难。
 
 了解更多：[提供 HTTP 服务](/learn/serving-over-http/)。
 
