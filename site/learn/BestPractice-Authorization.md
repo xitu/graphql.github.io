@@ -55,6 +55,6 @@ var postType = new GraphQLObjectType({
 
 在上面的例子中，我们看到业务逻辑层要求调用者提供一个用户对象。如果您使用 GraphQL.js，您应当在解析器的 `context` 参数或是第四个参数中的 `rootValue` 上填充 User 对象。
 
-我们建议将完全“混合₁”的 User 对象传递给业务逻辑层，而非传递不透明的 token 或 API 密钥。这样，我们可以在请求处理管道的不同阶段处理[身份验证](/graphql-js/authentication-and-express-middleware/)和授权的不同问题。
+我们建议将完全“`hydrated`/混合₁”的 User 对象传递给业务逻辑层，而非传递不透明的 token 或 API 密钥。这样，我们可以在请求处理管道的不同阶段处理[身份验证](/graphql-js/authentication-and-express-middleware/)和授权的不同问题。
 
-> 1. “混合”一个对象是指：对一个存储在内存中且尚未包含任何域数据（“真实”数据）的对象，使用域数据（例如来自数据库、网络或文件系统的数据）进行填充。
+> 1. “混合”一个对象是指：对一个存储在内存中且尚未包含任何域数据（“真实”数据）的对象，使用域数据（例如来自数据库、网络或文件系统的数据）进行填充。 [\*](https://stackoverflow.com/questions/6991135/what-does-it-mean-to-hydrate-an-object)
