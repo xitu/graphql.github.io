@@ -4,10 +4,10 @@ layout: ../_core/DocsLayout
 category: 学习
 permalink: /learn/queries/
 next: /learn/schema/
-sublinks: Fields,Arguments,Aliases,Fragments,Variables,Operation Name,Directives,Mutations,Inline Fragments
+sublinks: Fields / 字段,Arguments / 参数,Aliases / 别名,Fragments / 片段,Variables / 变量,Operation Name / 操作名称,Directives / 指令,Mutations / 变更,Inline Fragments / 内联片段
 ---
 
-你可以在本页学到有关如何查询GraphQL服务器的详细信息。
+你可以在本页学到有关如何查询 GraphQL 服务器的详细信息。
 
 ## Fields/字段
 
@@ -28,7 +28,7 @@ sublinks: Fields,Arguments,Aliases,Fragments,Variables,Operation Name,Directives
 
 > 对了，还有一点 — 上述查询是*可交互的*。也就是你可以按你喜欢来改变查询，然后看看新的结果。尝试给查询中的 `hero` 对象添加一个` appearsIn` 字段，看看新的结果吧。
 
-在前一例子中，我们请求了我们主角的名字，返回了一个 String/字符串类型，但是字段也能指代 Object/对象类型。这个时候，你可以对这个对象的字段进行 *sub-selection/次级选择*。GraphQL 查询能够遍历相关对象及其字段，使得客户端可以一次请求查询大量相关数据，而不像传统REST架构中那样需要多次往返查询。
+在前一例子中，我们请求了我们主角的名字，返回了一个 String/字符串类型，但是字段也能指代 Object/对象类型。这个时候，你可以对这个对象的字段进行 *sub-selection/次级选择*。GraphQL 查询能够遍历相关对象及其字段，使得客户端可以一次请求查询大量相关数据，而不像传统 REST 架构中那样需要多次往返查询。
 
 ```graphql
 # { "graphiql": true }
@@ -43,7 +43,7 @@ sublinks: Fields,Arguments,Aliases,Fragments,Variables,Operation Name,Directives
 }
 ```
 
-注意这个例子中，`friends` 返回了一个数组的项目，GraphQL 查询会同等看待单个项目或者一个列表的项目，然而我们可以通过schema所指示的内容来预测将会得到哪一种。
+注意这个例子中，`friends` 返回了一个数组的项目，GraphQL 查询会同等看待单个项目或者一个列表的项目，然而我们可以通过 schema 所指示的内容来预测将会得到哪一种。
 
 
 ## Arguments/参数
@@ -60,7 +60,7 @@ sublinks: Fields,Arguments,Aliases,Fragments,Variables,Operation Name,Directives
 }
 ```
 
-在类似REST的系统中，你只能传递一组简单参数 — 请求中的 query 参数和 URL 段。但是在 GraphQL 中，每一个字段和嵌套对象都能有自己的一组参数，从而使得 GraphQL 可以完美替代多次 API 获取请求。甚至你也可以给 scalar/标量字段传递参数，用于实现服务端的一次转换，而不用每个客户端分别转换。
+在类似 REST 的系统中，你只能传递一组简单参数 — 请求中的 query 参数和 URL 段。但是在 GraphQL 中，每一个字段和嵌套对象都能有自己的一组参数，从而使得 GraphQL 可以完美替代多次 API 获取请求。甚至你也可以给 scalar/标量字段传递参数，用于实现服务端的一次转换，而不用每个客户端分别转换。
 
 ```graphql
 # { "graphiql": true }
@@ -97,7 +97,7 @@ sublinks: Fields,Arguments,Aliases,Fragments,Variables,Operation Name,Directives
 
 ## Fragments/片段
 
-假设我们的app有比较复杂的页面，将正反派主角及其友军分为两拨。你立马就能想到对应的查询会变得复杂，因为我们需要将一些字段重复至少两次 — 两方各一次以作比较。
+假设我们的 app 有比较复杂的页面，将正反派主角及其友军分为两拨。你立马就能想到对应的查询会变得复杂，因为我们需要将一些字段重复至少两次 — 两方各一次以作比较。
 
 这就是为何 GraphQL 包含了称作_片段_的可复用单元。片段使你能够组织一组字段，然后在需要它们的的地方引入。下面例子展示了如何使用片段解决上述场景：
 
@@ -121,7 +121,7 @@ fragment comparisonFields on Character {
 }
 ```
 
-你可以看到上面的查询如何漂亮地重复了字段。片段的概念经常用于将复杂的应用数据需求分割成小块，特别是你要将大量不同片段的UI组件组合成一个初始数据获取的时候。
+你可以看到上面的查询如何漂亮地重复了字段。片段的概念经常用于将复杂的应用数据需求分割成小块，特别是你要将大量不同片段的 UI 组件组合成一个初始数据获取的时候。
 
 
 ## Variables/变量
@@ -134,7 +134,7 @@ fragment comparisonFields on Character {
 
 1. 使用 `$variableName` 替代查询中的静态值。
 2. 声明 `$variableName` 为查询接受的变量之一。
-3. 将 `variableName: value` 通过传输专用（通常是 JSON ）的分离的变量字典中。
+3. 将 `variableName: value` 通过传输专用（通常是 JSON）的分离的变量字典中。
 
 全部做完之后就像这个样子：
 
@@ -161,7 +161,7 @@ query HeroNameAndFriends($episode: Episode) {
 
 变量定义可以是可选的或者必要的。上例中，`Episode` 后并没有 `!`，因此其是可选的。但是如果你传递变量的字段要求非空参数，那变量一定是必要的。
 
-如果想要进一步了解变量定义的句法，可以学习 GraphQL 的schema语言。schema语言在Schema中有细述。
+如果想要进一步了解变量定义的句法，可以学习 GraphQL 的 schema 语言。schema 语言在 Schema 中有细述。
 
 
 ### Default variables/默认变量
@@ -185,12 +185,12 @@ query HeroNameAndFriends($episode: Episode = "JEDI") {
 
 上面案例中我们看到的另一个东西就是我们的查询还有个_操作名_。这之前，我们都使用了简写句法，省略了 `query` 关键字和查询名称，但是生产中使用这些可以使我们代码减少歧义。
 
-就把它想成你喜欢的程序语言中的函数名。例如，在JavaScript中，我们只用匿名函数就可以工作，但是当我们给了函数名之后，就更加容易追踪、调试我们的代码，并在其被调用的时候做日志。同理，GraphQL 的查询和变更名称，以及片段名称，都可以成为服务端侧用来识别不同 GraphQL 请求的有效调试工具。
+就把它想成你喜欢的程序语言中的函数名。例如，在 JavaScript 中，我们只用匿名函数就可以工作，但是当我们给了函数名之后，就更加容易追踪、调试我们的代码，并在其被调用的时候做日志。同理，GraphQL 的查询和变更名称，以及片段名称，都可以成为服务端侧用来识别不同 GraphQL 请求的有效调试工具。
 
 
 ## Directives/指令
 
-我们上面讨论的变量使得我们可以避免手动字符串插值构建动态查询。传递变量给参数解决了一大堆这样的问题，但是我们可能也需要一个方式使用变量动态地改变我们查询的结构。譬如我们假设有个UI组件，其有概括视图和详情视图，后者比前者拥有更多的字段。
+我们上面讨论的变量使得我们可以避免手动字符串插值构建动态查询。传递变量给参数解决了一大堆这样的问题，但是我们可能也需要一个方式使用变量动态地改变我们查询的结构。譬如我们假设有个 UI 组件，其有概括视图和详情视图，后者比前者拥有更多的字段。
 
 我们来构建一个这种组件的查询：
 
@@ -220,7 +220,7 @@ query Hero($episode: Episode, $withFriends: Boolean!) {
 
 GraphQL 的大部分讨论集中在数据获取，但是任何完整的数据平台也都需要一个改变服务端数据的方法。
 
-REST中，任何请求都可能最后导致一些服务端副作用，但是约定上建议不要使用 `GET` 请求来修改数据。GraphQL 也是类似 — 技术上而言，任何查询都可以被实现为导致数据写入。然而，建一个约定来规范任何导致写入的操作都应该显示通过mutation/变更来发送。
+REST 中，任何请求都可能最后导致一些服务端副作用，但是约定上建议不要使用 `GET` 请求来修改数据。GraphQL 也是类似 — 技术上而言，任何查询都可以被实现为导致数据写入。然而，建一个约定来规范任何导致写入的操作都应该显示通过 mutation/变更来发送。
 
 就如同查询一样，如果任何变更字段返回一个对象类型，你也能请求其嵌套字段。获取一个对象变更后的新状态也是十分有用的。我们来看看一个变更例子：
 
@@ -236,7 +236,7 @@ mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
 
 注意 `createReview` 字段如何返回了新建的 review 的 `stars` 和 `commentary` 字段。这在变更已有数据时特别有用，例如，当一个字段自增的时候，我们可以在一个请求中变更并查询这个字段的新值。
 
-你也可能注意到，这个例子中，我们传递的 `review` 变量并非标量。它是一个_输入对象类型_，一种特殊的对象类型，可以作为参数传递。你可以在Schema页面上了解到更多关于输入类型的信息。
+你也可能注意到，这个例子中，我们传递的 `review` 变量并非标量。它是一个_输入对象类型_，一种特殊的对象类型，可以作为参数传递。你可以在 Schema 页面上了解到更多关于输入类型的信息。
 
 ### Multiple fields in mutations/变更中的多个字段
 
@@ -249,7 +249,7 @@ mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
 
 ## Inline Fragments/内联片段
 
-跟许多类型系统一样，GraphQL schema 也具备定义接口和联合类型的能力。[在schema指南中可了解更多。](/learn/schema/#interfaces)
+跟许多类型系统一样，GraphQL schema 也具备定义接口和联合类型的能力。[在 schema 指南中可了解更多。](/learn/schema/#interfaces)
 
 如果你查询的字段返回的是接口或者联合类型，那么你可能需要使用*内联片段*来取出下层具体类型的数据：
 
