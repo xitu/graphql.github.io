@@ -16,7 +16,7 @@ next: /learn/pagination/
 
 ```javascript
 var postType = new GraphQLObjectType({
-  name: ‘Post’,
+  name: 'Post',
   fields: {
     body: {
       type: GraphQLString,
@@ -41,7 +41,7 @@ var postType = new GraphQLObjectType({
 var postRepository = require('postRepository');
 
 var postType = new GraphQLObjectType({
-  name: ‘Post’,
+  name: 'Post',
   fields: {
     body: {
       type: GraphQLString,
