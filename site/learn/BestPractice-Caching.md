@@ -39,7 +39,7 @@ permalink: /learn/caching/
 
 为了这一目的而使用 `id` 字段的一个问题是如何让使用 GraphQL API 的客户端能够与现有的 API 并存。例如，如果我们现有的 API 接受了特定类型的 ID，但是我们的 GraphQL API 使用了全局唯一 ID，那么同时使用两者可能是棘手的。
 
-在这些情况下，GraphQL API 可以在单独的字段中暴露以前的 API 的 ID。This gives us the best of both worlds：
+在这些情况下，GraphQL API 可以在单独的字段中暴露以前的 API 的 ID。这同时带给我们两方面的好处：
 
  - GraphQL 客户端可以继续依靠一致的机制来获取全局唯一 ID。
  - 当客户端需要使用我们以前的 API 时也可以从对象中获取 `previousApiId` 并使用它。
