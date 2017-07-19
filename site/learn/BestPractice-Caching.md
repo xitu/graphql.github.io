@@ -37,7 +37,7 @@ permalink: /learn/caching/
 
 ## 与现有 API 的兼容
 
-为了这一目的而使用 `id` 字段的一个问题是如何让使用 GraphQL API 的客户端能够与现有的 API 并存。例如，如果我们现有的 API 接受了特定类型的 ID，但是我们的 GraphQL API 使用了全局唯一 ID，那么同时使用两者可能是棘手的。
+为了这一目的而使用 `id` 字段的一个问题是如何让使用 GraphQL API 的客户端能够与现有的 API 并存。例如，如果我们现有的 API 接受了特定类型的 ID，但是我们的 GraphQL API 使用了全局唯一 ID，那么同时使用两者可能比较棘手。
 
 在这些情况下，GraphQL API 可以在单独的字段中暴露以前的 API 的 ID。这同时带给我们两方面的好处：
 
