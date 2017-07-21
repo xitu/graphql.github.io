@@ -1,17 +1,17 @@
 ---
-title: Caching
+title: 缓存
 layout: ../_core/DocsLayout
-category: Best Practices
+category: 最佳实践
 permalink: /learn/caching/
 ---
 
-> Providing Object Identifiers allows clients to build rich caches
+> 提供对象的标识符以便客户端构建丰富的缓存
 
-In an endpoint-based API, clients can use HTTP caching to easily avoid refetching resources, and for identifying when two resources are the same. The URL in these APIs is a **globally unique identifier** that the client can leverage to build a cache. In GraphQL, though, there's no URL-like primitive that provides this globally unique identifier for a given object. It's hence a best practice for the API to expose such an identifier for clients to use.
+在基于入口端点的 API 中，客户端可以使用 HTTP 缓存来确定两个资源是否相同，从而轻松避免重新获取资源。这些 API 中的 URL 是**全局唯一标识符**，客户端可以利用它来构建缓存。然而，在 GraphQL 中，没有类似 URL 的基元能够为给定对象提供全局唯一标识符。这里提供为 API 暴露这种标识符以供客户端使用的最佳实践。
 
-## Globally Unique IDs
+## 全局唯一 ID
 
-One possible pattern for this is reserving a field, like `id`, to be a globally unique identifier. The example schema used throughout these docs uses this approach:
+一个可行的模式是将一个字段（如 `id`）保留为全局唯一标识符。这些文档中使用的示例模式使用此方法：
 
 ```graphql
 # { "graphiql": true }
@@ -31,21 +31,21 @@ One possible pattern for this is reserving a field, like `id`, to be a globally 
 }
 ```
 
-This is a powerful tool to hand to client developers. In the same way that the URLs of a resource-based API provided a globally unique key, the `id` field in this system provides a globally unique key.
+这是向客户端开发人员提供的强大工具。与基于资源的 API 使用 URL 作为全局唯一主键相同的方式，该系统中提供 `id` 字段作为全局唯一主键。
 
-If the backend uses something like UUIDs for identifiers, then exposing this globally unique ID may be very straightforward! If the backend doesn't have a globally unique ID for every object already, the GraphQL layer might have to construct this. Oftentimes, that's as simple as appending the name of the type to the ID and using that as the identifier; the server might then make that ID opaque by base64-encoding it.
+如果后端使用类似 UUID 的标识符，那么暴露这个全局唯一 ID 可能非常简单！如果后端对于每个对象并未分配全局唯一 ID，则 GraphQL 层可能需要构造此 ID。通常来说，将类型的名称附加到 ID 并将其用作标识符都很简单；服务器可能会通过 base64 编码使该 ID 不透明。
 
-## Compatibility with existing APIs
+## 与现有 API 的兼容
 
-One concern with using the `id` field for this purpose is how a client using the GraphQL API would work with existing APIs. For example, if our existing API accepted a type-specific ID, but our GraphQL API uses globally unique IDs, then using both at once can be tricky.
+为了这一目的而使用 `id` 字段的一个问题是如何让使用 GraphQL API 的客户端能够与现有的 API 并存。例如，如果我们现有的 API 接受了特定类型的 ID，但是我们的 GraphQL API 使用了全局唯一 ID，那么同时使用两者可能比较棘手。
 
-In these cases, the GraphQL API can expose the previous API's IDs in a separate field. This gives us the best of both worlds:
+在这些情况下，GraphQL API 可以在单独的字段中暴露以前的 API 的 ID。这同时带给我们两方面的好处：
 
- - GraphQL clients can continue to rely on a consistent mechanism for getting a globally unique ID.
- - Clients that need to work with our previous API can also fetch `previousApiId` from the object, and use that.
+ - GraphQL 客户端可以继续依靠一致的机制来获取全局唯一 ID。
+ - 当客户端需要使用我们以前的 API 时也可以从对象中获取 `previousApiId` 并使用它。
 
-## Alternatives
+## 备选方案
 
-While globally unique IDs have proven to be a powerful pattern in the past, they are not the only pattern that can be used, nor are they right for every situation. The really critical functionality that the client needs is the ability to derive a globally unique identifier for their caching. While having the server derive that ID simplifies the client, the client can also derive the identifier. Oftentimes, this would be as simple as combining the type of the object (queried with `__typename`) with some type-unique identifier.
+虽然全局唯一 ID 在过去已经被证明是一种强大的模式，但它们并不是唯一可以使用的模式，也不适用于每种情况。客户端需要的真正关键功能是为其缓存导出全局唯一标识符的能力。服务器可以导出此 ID 以简化客户端，而客户端同样也可以导出标识符。通常，将对象的类型（通过 `__typename` 查询）与某些类型唯一标识符相结合就很简单。
 
-Additionally, if replacing an existing API with a GraphQL API, it may be confusing if all of the fields in GraphQL are the same **except** `id`, which changed to be globally unique. This would be another reason why one might choose not to use `id` as the globally unique field.
+另外，如果使用 GraphQL API 替换现有的 API，那么如果 GraphQL 中的其他所有字段都相同，**只**更换了全局唯一的 `id`，这可能会令人困惑。这可能是为什么不选用 `id` 作为全局唯一字段的另一个原因。
