@@ -1,18 +1,18 @@
 ---
-title: Pagination
+title: 分页
 layout: ../_core/DocsLayout
-category: Best Practices
+category: 最佳实践
 permalink: /learn/pagination/
 next: /learn/caching/
 ---
 
-> Different pagination models enable different client capabilities
+> 不同的分页模型可以实现不同的客户端功能
 
-A common use case in GraphQL is traversing the relationship between sets of objects. There are a number of different ways that these relationships can be exposed in GraphQL, giving a varying set of capabilities to the client developer.
+在 GraphQL 中一个常见的用例是遍历对象集合之间的连接/connection。在 GraphQL 中有许多不同的方式来展示这些连接，为客户端开发人员提供了一组不同的功能。
 
-## Plurals
+## 复数
 
-The most simple way to expose a connection between objects is with a field that returns a plural type. For example, if we wanted to get a list of R2-D2's friends, we could just ask for all of them:
+暴露对象之间连接的最简单方法是返回一个复数类型的字段。例如，如果我们想得到一个 R2-D2 的朋友列表，我们可以直接请求所有的朋友：
 
 ```graphql
 # { "graphiql": true }
@@ -26,9 +26,9 @@ The most simple way to expose a connection between objects is with a field that 
 }
 ```
 
-## Slicing
+## 切片
 
-Quickly, though, we realize that there are additional behaviors a client might want. A client might want to be able to specify how many friends they want to fetch; maybe they only want the first two. So we'd want to expose something like:
+但是，尽管如此，我们也意识到客户端可能需要其他行为。客户可能希望能够指定他们想要获取的朋友数量；也许他们只要前两个。所以我们想要暴露一些类似的东西：
 
 
 ```graphql
@@ -42,19 +42,19 @@ Quickly, though, we realize that there are additional behaviors a client might w
 }
 ```
 
-But if we just fetched the first two, we might want to paginate through the list as well; once the client fetches the first two friends, they might want to send a second request to ask for the next two friends. How can we enable that behavior?
+但即使我们仅仅获得前两个结果，我们可能仍然想要在列表中分页：一旦客户端获取前两个朋友，他们可能会发送第二个请求来请求接下来的两个朋友。我们如何启用这个行为？
 
-## Pagination and Edges
+## 分页和边
 
-There are a number of ways we could do pagination:
+我们有很多种方法来实现分页：
 
- - We could do something like `friends(first:2 offset:2)` to ask for the next two in the list.
- - We could do something like `friends(first:2 after:$friendId)`, to ask for the next two after the last friend we fetched.
- - We could do something like `friends(first:2 after:$friendCursor)`, where we get a cursor from the last item and use that to paginate.
+ - 我们可以像这样 `friends(first:2 offset:2)` 来请求列表中接下来的两个结果。
+ - 我们可以像这样 `friends(first:2 after:$friendId)`, 来请求我们上一次获取到的最后一个朋友之后的两个结果。
+ - 我们可以像这样 `friends(first:2 after:$friendCursor)`, 从最后一项中获取一个游标并使用它来分页。
 
-In general, we've found that **cursor-based pagination** is the most powerful of those designed. Especially if the cursors are opaque, either offset or ID-based pagination can be implemented using cursor-based pagination (by making the cursor the offset or the ID), and using cursors gives additional flexibility if the pagination model changes in the future. As a reminder that the cursors are opaque and that their format should not be relied upon, we suggest base64 encoding them.
+一般来说，我们发现**基于游标的分页**是最强大的分页。特别当游标是不透明的时，则可以使用基于游标的分页（通过为游标设置偏移或 ID）来实现基于偏移或基于 ID 的分页，并且如果分页模型在将来发生变化，则使用游标可以提供额外的灵活性。需要提醒的是，游标是不透明的，并且它们的格式不应该被依赖，我们建议用 base64 编码它们。
 
-That leads us to a problem; though; how do we get the cursor from the object? We wouldn't want cursor to live on the `User` type; it's a property of the connection, not of the object. So we might want to introduce a new layer of indirection; our `friends` field should give us a list of edges, and an edge has both a cursor and the underlying node:
+这导致我们遇到一个问题：我们如何从对象中获取游标？我们不希望游标放置在 `User` 类型上；它是连接的属性，而不是对象的属性。所以我们可能想要引入一个新的间接层；我们的 `friends` 字段应该给我们一个边/edge 的列表，边同时具有游标和底层节点：
 
 ```graphql
 {
@@ -72,13 +72,13 @@ That leads us to a problem; though; how do we get the cursor from the object? We
 }
 ```
 
-The concept of an edge also proves useful if there is information that is specific to the edge, rather than to one of the objects. For example, if we wanted to expose "friendship time" in the API, having it live on the edge is a natural place to put it.
+如果存在针对于边而不是针对于某一个对象的信息，则边这个概念也被证明是有用的。例如，如果我们想要在 API 中暴露“友谊时间”，将其放置在边里是很自然的。
 
-## End-of-list, counts, and Connections
+## 列表的结尾, 计数, 以及连接
 
-Now we have the ability to paginate through the connection using cursors, but how do we know when we reach the end of the connection? We have to keep querying until we get an empty list back, but we'd really like for the connection to tell us when we've reached the end so we don't need that additional request. Similarly, what if we want to know additional information about the connection itself; for example, how many total friends does R2-D2 have?
+现在我们有能力使用游标对连接进行分页，但是我们如何知道何时到达连接的结尾？我们必须继续查询，直到我们收到一个空列表，但是我们真的希望连接能够告诉我们什么时候到达结尾，这样我们不需要额外的请求。同样的，如果我们想知道关于连接本身的附加信息怎么办；例如，R2-D2 有多少个朋友？
 
-To solve both of these problems, our `friends` field can return a connection object. The connection object will then have field for the edges, as well as other information (like total count and information about whether a next page exists). So our final query might look more like:
+为了解决这两个问题，我们的 `friends` 字段可以返回一个连接对象。然后，连接对象将具有边其中的字段以及其他信息（如总计数和有关下一页是否存在的信息）。所以我们的最终查询可能看起来像这样：
 
 
 ```graphql
@@ -102,18 +102,18 @@ To solve both of these problems, our `friends` field can return a connection obj
 }
 ```
 
-Note that we also might include `endCursor` and `startCursor` in this `PageInfo` object. This way, if we don't need any of the additional information that the edge contains, we don't need to query for the edges at all, since we got the cursors needed for pagination from `pageInfo`. This leads to a potential usability improvement for connections; instead of just exposing the `edges` list, we could also expose a dedicated list of just the nodes, to avoid a layer of indirection.
+请注意，我们也可能在这个 `PageInfo` 对象中包含 `endCursor` 和 `startCursor`。这样，如果我们不需要边所包含的任何附加信息，我们就不需要查询边，因为我们从 `pageInfo` 获取了分页所需的游标。这导致连接的潜在可用性改进；相比于仅暴露 `edges` 列表，我们还可以暴露一个仅包含节点的专用列表，以避免使用间接层。
 
-## Complete Connection Model
+## 完整的连接模型
 
-Clearly, this is more complex than our original design of just having a plural! But by adopting this design, we've unlocked a number of capabilities for the client:
+显然，这比我们原来只有复数的设计更复杂！但是通过采用这种设计，我们已经为客户解锁了许多功能：
 
- - The ability to paginate through the list.
- - The ability to ask for information about the connection itself, like `totalCount` or `pageInfo`.
- - The ability to ask for information about the edge itself, like `cursor` or `friendshipTime`.
- - The ability to change how our backend does pagination, since the user just uses opaque cursors.
+ - 为列表分页的能力。
+ - 请求有关连接本身的信息的能力，如 `totalCount` 或 `pageInfo`。
+ - 请求有关边本身的信息的能力，如 `cursor` 或 `friendshipTime`。
+ - 改变我们后端如何实现分页的能力，因为用户仅使用不透明的游标。
 
-To see this in action, there's an additional field in the example schema, called `friendsConnection`, that exposes all of these concepts. You can check it out in the example query. Try removing the `after` parameter to `friendsConnection` to see how the pagination will be affected. Also, try replacing the `edges` field with the helper `friends` field on the connection, which lets you get directly to the list of friends without the additional edge layer of indirection, when that's appropriate for clients.
+要查看此操作，在示例 schema 中有一个附加字段，称为 `friendsConnection`，它暴露了所有这些概念。你可以在示例查询中查看它。尝试将 `after` 参数从 `friendsConnection` 移除以查看分页如何受到影响。另外，尝试用连接上的 `friends` 辅助字段替换 `edges` 字段，当适用于客户端时，这样可以直接访问朋友列表而无需额外的边这一层。
 
 ```graphql
 # { "graphiql": true }
@@ -136,4 +136,3 @@ To see this in action, there's an additional field in the example schema, called
   }
 }
 ```
-

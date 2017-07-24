@@ -1,29 +1,32 @@
 ---
-title: Thinking in Graphs
+title: 图论思维
 layout: ../_core/DocsLayout
-category: Best Practices
+category: 最佳实践
 permalink: /learn/thinking-in-graphs/
 next: /learn/serving-over-http/
 ---
 
-## It's Graphs All the Way Down [\*](https://en.wikipedia.org/wiki/Turtles_all_the_way_down)
-> With GraphQL, you model your business domain as a graph
+## 世界是图组成的 [\*](https://en.wikipedia.org/wiki/Turtles_all_the_way_down)
 
-Graphs are powerful tools for modeling many real-world phenomena because they resemble our natural mental models and verbal descriptions of the underlying process. With GraphQL, you model your business domain as a graph by defining a schema; within your schema, you define different types of nodes and how they connect/relate to one another. On the client, this creates a pattern similar to Object-Oriented Programming: types that reference other types. On the server, since GraphQL only defines the interface, you have the freedom to use it with any backend (new or legacy!).
+> 用 GraphQL，你可以用图对你的业务逻辑建模，图是图论的图
 
-## Shared Language
-> Naming things is a hard but important part of building intuitive APIs
+图论是对真实世界的各种现象进行建模的有力工具，因为图很像我们心中自然形成的模型，我们对真实世界各种现象的口头描述也类似于图。用 GraphQL，你可以通过定义一个 schema ，来用图对你的业务模型建模。在这个 schema 里，你定义不同类型的节点，以及这些节点与其他节点之间是如何连通、相关的。在客户端，这形成了一个类似于面向对象编程的模式：一个类型会引用另一个类型。在服务端，因为 GraphQL 只定义接口，你可以将它与任何后端搭配使用（新的或旧有的！）。
 
-Think of your GraphQL schema as an expressive shared language for your team and your users. To build a good schema, examine the everyday language you use to describe your business. For example, let's try to describe an email app in plain english:
+## 通行的用语
 
-* A user can have multiple email accounts
-* Each email account has an address, inbox, drafts, deleted items, and sent items
-* Each email has a sender, receive date, subject, and body
-* Users cannot send an email without a recipient address
+> 为事物取名是创建合乎直觉的 API 过程中困难而重要的一部分
 
-Naming things is a hard but important part of building intuitive APIs, so take time to carefully think about what makes sense for your problem domain and users. Your team should develop a shared understanding and consensus of these business domain rules because you will need to choose intuitive, durable names for nodes and relationships in the GraphQL schema. Try to imagine some of the queries you will want to execute:
+把 GraphQL 的 schema 想象成一个富有表达力的、在你的团队和你的用户之间通行的用语。为了构建一个优雅的 schema，得首先考察用来描述你的业务的日常用语。举个例子，我们来用自然语言描述一下一个邮件应用：
 
-Fetch the number of unread emails in my inbox for all my accounts
+* 用户可以拥有多个邮箱账户
+* 每个邮箱账户拥有一个地址、收件箱、草稿、已删除邮件，以及已发送邮件
+* 每封邮件有一个发送者、接收日期、主题和内容
+* 用户不能发送没有接收地址的邮件
+
+为事物取名是创建合乎直觉的 API 过程中困难而重要的一部分，所以花点时间仔细地思考什么对于你的问题域和用户是有意义的。你的团队应该对它们有一套一致的理解，并对这个领域的业务规则达成一致意见，因为你需要为 GraphQL schema 中的节点和关系找到符合直觉的、经久耐用的名字。来试着想象一些你可能会想发送的请求：
+
+获取我的所有邮箱账户的收件箱中的未读邮件数量：
+
 ```graphql
 {
   accounts {
@@ -34,7 +37,8 @@ Fetch the number of unread emails in my inbox for all my accounts
 }
 ```
 
-Fetch the "preview info" for the first 20 drafts in the main account
+获取我的主账户中前 20 的草稿的“预览信息”：
+
 ```graphql
 {
   mainAccount {
@@ -50,23 +54,26 @@ fragment previewInfo on Email {
 }
 ```
 
-## Business Logic Layer
-> Your business logic layer should act as the single source of truth for enforcing business domain rules
+## 业务逻辑层
 
-Where should you define the actual business logic? Where should you perform validation and authorization checks? The answer: inside a dedicated business logic layer. Your business logic layer should act as the single source of truth for enforcing business domain rules.
+> 你的业务逻辑层应该作为实施业务领域规则的唯一数据源。
 
-![Business Logic Layer Diagram](/img/diagrams/business_layer.png)
+你应该在哪里放实际的业务逻辑？又应该在哪进行验证鉴权等操作？答案是：委托到一个业务逻辑层里。你的业务逻辑层应该作为维护业务领域规则的唯一数据源。
 
-In the diagram above, all entry points (REST, GraphQL, and RPC) into the system will be processed with the same validation, authorization, and error handling rules.
+![业务逻辑层图解](/img/diagrams/business_layer.png)
 
-### Working with Legacy Data
-> Prefer building a GraphQL schema that describes how clients use the data, rather than mirroring the legacy database schema.
+在上图中，所有的数据入口点（REST、GraphQL 和 RPC）都要经过同一个验证鉴权逻辑，应用同样的错误处理规则。
 
-Sometimes, you will find yourself working with legacy data sources that do not perfectly reflect how clients consume the data. In these cases, prefer building a GraphQL schema that describes how clients use the data, rather than mirroring the legacy database schema.
+### 处理旧有数据
 
-Build your GraphQL schema to express "what" rather than "how". Then you can improve your implementation details without breaking the interface with older clients.
+> 比起完全照搬旧有数据的数据库 schema，我们更应该构建描述了客户端是如何使用数据的一个 GraphQL schema。
 
-## One Step at a time
-> Get validation and feedback more frequently
+有时候你会发现你需要处理旧有的数据源，它们的数据库 schema 没有很好地反映客户端使用数据的方式。在这种情况下，比起完全照搬旧有数据的数据库 schema，我们更应该构建描述了客户端是如何使用数据的一个 GraphQL schema。
 
-Don't try to model your entire business domain in one sitting. Rather, build only the part of the schema that you need for one scenario at a time. By gradually expanding the schema, you will get validation and feedback more frequently to steer you toward building the right solution.
+用你的 GraphQL schema 来表达“什么”而不是“如何”。这样你就能优化你的实现细节，同时不破坏与旧的客户端之间的接口。
+
+## 小步前进
+
+> 更频繁地验证想法、取得反馈。
+
+不要尝试一次性地对你的整个业务域进行建模，而应该一次只建一个你当下所需的业务场景的 schema。通过一点点扩展 schema，你可以更频繁地验证想法、取得反馈，向着正确的解决方案前进。
