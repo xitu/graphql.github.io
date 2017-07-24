@@ -23,7 +23,7 @@ export default ({ page, category, title, section, className, noSearch, children 
       </title>
       <meta name="viewport" content="width=640" />
       <meta property="og:title" content="GraphQL: 一种用于 API 的查询语言。" />
-      <meta property="og:description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 在时间推移下的演进变得更加容易，并提供强大的开发者工具。" />
+      <meta property="og:description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。" />
       <meta property="og:type" content="website" />
       <meta property="og:url" content="http://graphql.cn/" />
       <meta property="og:image" content="/img/og_image.png" />
@@ -31,7 +31,7 @@ export default ({ page, category, title, section, className, noSearch, children 
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content="@graphql" />
       <meta name="twitter:title" content="GraphQL: 一种用于 API 的查询语言。" />
-      <meta name="twitter:description" content="GraphQL 提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，并让 API 在时间推移下的演进变得更加容易。" />
+      <meta name="twitter:description" content="GraphQL 提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，并让 API 更加容易随着时间推移而演进。" />
       <meta name="twitter:image" content="/img/twitter_image.png" />
       <link rel="shortcut icon" href="/img/favicon.png" />
       <link rel="home" type="application/rss+xml" href="/blog/rss.xml" title="GraphQL 团队博客" />
