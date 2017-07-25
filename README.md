@@ -1,4 +1,5 @@
 # Contributing
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 Organization gh-pages deploy the `master` branch, so active development occurs
 on this `source` branch.
@@ -28,3 +29,14 @@ Anytime you change the contents, just refresh the page and it's going to be upda
 
 Once pushed to the `source` branch, Travis CI will publish http://graphql.org/
 
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+| [<img src="https://avatars2.githubusercontent.com/u/8622362?v=4" width="100px;"/><br /><sub>根号三</sub>](http://blog.sqrtthree.com/)<br />[👀](#review-sqrthree "Reviewed Pull Requests") [📋](#eventOrganizing-sqrthree "Event Organizing") | [<img src="https://avatars0.githubusercontent.com/u/6275168?v=4" width="100px;"/><br /><sub>Jonir Rings</sub>](https://jonirrings.com/)<br />[📋](#eventOrganizing-jonirrings "Event Organizing") [👀](#review-jonirrings "Reviewed Pull Requests") |
+| :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!

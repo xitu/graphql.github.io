@@ -1,0 +1,31 @@
+{
+  "projectName": "graphql.github.io",
+  "projectOwner": "xitu",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "sqrthree",
+      "name": "根号三",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/8622362?v=4",
+      "profile": "http://blog.sqrtthree.com/",
+      "contributions": [
+        "review",
+        "eventOrganizing"
+      ]
+    },
+    {
+      "login": "jonirrings",
+      "name": "Jonir Rings",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6275168?v=4",
+      "profile": "https://jonirrings.com/",
+      "contributions": [
+        "eventOrganizing",
+        "review"
+      ]
+    }
+  ]
+}
