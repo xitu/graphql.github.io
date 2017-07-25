@@ -35,7 +35,7 @@ Once pushed to the `source` branch, Travis CI will publish http://graphql.org/
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-| [<img src="https://avatars2.githubusercontent.com/u/8622362?v=4" width="100px;"/><br /><sub>根号三</sub>](http://blog.sqrtthree.com/)<br />[👀](#review-sqrthree "Reviewed Pull Requests") [📋](#eventOrganizing-sqrthree "Event Organizing") | [<img src="https://avatars0.githubusercontent.com/u/6275168?v=4" width="100px;"/><br /><sub>Jonir Rings</sub>](https://jonirrings.com/)<br />[📋](#eventOrganizing-jonirrings "Event Organizing") [👀](#review-jonirrings "Reviewed Pull Requests") |
+| [<img src="https://avatars2.githubusercontent.com/u/8622362?v=4" width="100px;"/><br /><sub>根号三</sub>](https://github.com/sqrthree)<br />[👀](#review-sqrthree "Reviewed Pull Requests") [📋](#eventOrganizing-sqrthree "Event Organizing") | [<img src="https://avatars0.githubusercontent.com/u/6275168?v=4" width="100px;"/><br /><sub>Jonir Rings</sub>](https://jonirrings.com/)<br />[📋](#eventOrganizing-jonirrings "Event Organizing") [👀](#review-jonirrings "Reviewed Pull Requests") |
 | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
