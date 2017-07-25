@@ -1,17 +1,17 @@
 ---
-title: Schemas and Types
+title: Schema 和类型
 layout: ../_core/DocsLayout
-category: Learn
+category: 学习
 permalink: /learn/schema/
 next: /learn/validation/
-sublinks: Type System,Type Language,Object Types and Fields,Arguments,The Query and Mutation Types,Scalar Types,Enumeration Types,Lists and Non-Null,Interfaces,Union Types,Input Types
+sublinks: Type System / 类型系统,Type Language / 类型语言,Object Types and Fields / 对象类型和字段,Arguments / 参数,The Query and Mutation Types / 查询和变更类型,Scalar Types / 标量类型,Enumeration Types / 枚举类型,Lists and Non-Null / 列表和非空,Interfaces / 接口,Union Types / 联合类型,Input Types / 输入类型
 ---
 
-On this page, you'll learn all you need to know about the GraphQL type system and how it describes what data can be queried. Since GraphQL can be used with any backend framework or programming language, we'll stay away from implementation-specific details and talk only about the concepts.
+在本页，你将学到关于 GraphQL 类型系统中所有你需要了解的知识，以及类型系统如何描述可以查询的数据。因为 GraphQL 可以运行在任何后端框架或者编程语言之上，我们将摒除实现上的细节而仅仅专注于其概念。
 
-### Type system
+### Type system/类型系统
 
-If you've seen a GraphQL query before, you know that the GraphQL query language is basically about selecting fields on objects. So, for example, in the following query:
+如果你之前见到过 GraphQL 查询，你就知道 GraphQL 查询语言基本上就是关于选择对象上的字段。因此，例如在下列查询中：
 
 ```graphql
 # { "graphiql": true }
@@ -23,21 +23,21 @@ If you've seen a GraphQL query before, you know that the GraphQL query language 
 }
 ```
 
-1. We start with a special "root" object
-2. We select the `hero` field on that
-3. For the object returned by `hero`, we select the `name` and `appearsIn` fields
+1. 我们以一个特殊的对象 "root" 开始
+2. 选择其上的 `hero` 字段
+3. 对于 `hero` 返回的对象，我们选择 `name` 和 `appearsIn` 字段
 
-Because the shape of a GraphQL query closely matches the result, you can predict what the query will return without knowing that much about the server. But it's useful to have an exact description of the data we can ask for - what fields can we select? What kinds of objects might they return? What fields are available on those sub-objects? That's where the schema comes in.
+因为一个 GraphQL 查询的结构和结果非常相似，因此即便不知道服务器的情况，你也能预测查询会返回什么结果。但是一个关于我们所需要的数据的确切描述依然很有意义，我们能选择什么字段？服务器会返回哪种对象？这些对象下有哪些字段可用？这便是引入 schema 的原因。
 
-Every GraphQL service defines a set of types which completely describe the set of possible data you can query on that service. Then, when queries come in, they are validated and executed against that schema.
+每一个 GraphQL 服务都会定义一套类型，用以描述你可能从那个服务查询到的数据。每当查询到来，服务器就会根据 schema 验证并执行查询。
 
-### Type language
+### Type language/类型语言
 
-GraphQL services can be written in any language. Since we can't rely on a specific programming language syntax, like JavaScript, to talk about GraphQL schemas, we'll define our own simple language. We'll use the "GraphQL schema language" - it's similar to the query language, and allows us to talk about GraphQL schemas in a language-agnostic way.
+GraphQL 服务可以用任何语言编写，因为我们并不依赖于任何特定语言的句法句式（譬如 JavaScript ）来与 GraphQL schema 沟通，我们定义了自己的简单语言，称之为 “GraphQL schema 语言” —— 它和 GraphQL 的查询语言很相似，让我们能够和 GraphQL schema 之间可以无语言差异地沟通。
 
-### Object types and fields
+### Object types and fields/对象类型和字段
 
-The most basic components of a GraphQL schema are object types, which just represent a kind of object you can fetch from your service, and what fields it has. In the GraphQL schema language, we might represent it like this:
+一个 GraphQL schema 中的最基本的组件是对象类型，它就表示你可以从服务上获取到什么类型的对象，以及这个对象有什么字段。使用 GraphQL schema 语言，我们可以这样表示它：
 
 ```graphql
 type Character {
@@ -46,19 +46,19 @@ type Character {
 }
 ```
 
-The language is pretty readable, but let's go over it so that we can have a shared vocabulary:
+虽然这语言可读性相当好，但我们还是一起看看其用语，以便我们可以有些共通的词汇：
 
-- `Character` is a _GraphQL Object Type_, meaning it's a type with some fields. Most of the types in your schema will be object types.
-- `name` and `appearsIn` are _fields_ on the `Character` type. That means that `name` and `appearsIn` are the only fields that can appear in any part of a GraphQL query that operates on the `Character` type.
-- `String` is one of the built-in _scalar_ types - these are types that resolve to a single scalar object, and can't have sub-selections in the query. We'll go over scalar types more later.
-- `String!` means that the field is _non-nullable_, meaning that the GraphQL service promises to always give you a value when you query this field. In the type language, we'll represent those with an exclamation mark.
-- `[Episode]!` represents an _array_ of `Episode` objects. Since it is also _non-nullable_, you can always expect an array (with zero or more items) when you query the `appearsIn` field.
+- `Character` 是一个_ GraphQL 对象类型_，表示其是一个拥有一些字段的类型。你的 schema 中的大多数类型都会是对象类型。
+- `name` 和 `appearsIn` 是 `Character` 类型上的_字段_。这意味着在一个操作 `Character` 类型的 GraphQL 查询中的任何部分，都只能出现 `name` 和 `appearsIn` 字段。
+- `String` 是内置的_标量_类型之一 —— 标量类型是解析到单个标量对象的类型，无法在查询中对它进行次级选择。后面我们将细述标量类型。
+- `String!` 表示这个字段是_非空的_，GraphQL 服务保证当你查询这个字段后总会给你返回一个值。在类型语言里面，我们用一个感叹号来表示这个特性。
+- `[Episode]!` 表示一个 `Episode` _数组_。因为它也是_非空的_，所以当你查询 `appearsIn` 字段的时候，你也总能得到一个数组（零个或者多个元素）。
 
-Now you know what a GraphQL object type looks like, and how to read the basics of the GraphQL type language.
+现在你知道一个 GraphQL 对象类型看上去是怎样，也知道如何阅读基础的 GraphQL 类型语言了。
 
-### Arguments
+### Arguments/参数
 
-Every field on a GraphQL object type can have zero or more arguments, for example the `length` field below:
+GraphQL 对象类型上的每一个字段都可能有零个或者多个参数，例如下面的 `length` 字段：
 
 ```graphql
 type Starship {
@@ -68,13 +68,13 @@ type Starship {
 }
 ```
 
-All arguments are named. Unlike languages like JavaScript and Python where functions take a list of ordered arguments, all arguments in GraphQL are passed by name specifically. In this case, the `length` field has one defined argument, `unit`.
+所有参数都是具名的，不像 JavaScript 或者 Python 之类的语言，函数接受一个有序参数列表，而在 GraphQL 中，所有参数必须具名传递。本例中，`length` 字段定义了一个参数，`unit`。
 
-Arguments can be either required or optional. When an argument is optional, we can define a _default value_ - if the `unit` argument is not passed, it will be set to `METER` by default.
+参数可能是必选或者可选的，当一个参数是可选的，我们可以定义一个_默认值_ —— 如果 `unit` 参数没有传递，那么它将会被默认设置为 `METER`。
 
-### The Query and Mutation types
+### The Query and Mutation types/查询和变更类型
 
-Most types in your schema will just be normal object types, but there are two types that are special within a schema:
+你的 schema 中大部分的类型都是普通对象类型，但是一个 schema 内有两个特殊类型：
 
 ```graphql
 schema {
@@ -83,7 +83,7 @@ schema {
 }
 ```
 
-Every GraphQL service has a `query` type and may or may not have a `mutation` type. These types are the same as a regular object type, but they are special because they define the _entry point_ of every GraphQL query. So if you see a query that looks like:
+每一个 GraphQL 服务都有一个 `query` 类型，可能有一个 `mutation` 类型。这两个类型和常规对象类型无差，但是它们之所以特殊，是因为它们定义了每一个 GraphQL 查询的_入口_。因此如果你看到一个像这样的查询：
 
 ```graphql
 # { "graphiql": true }
@@ -97,7 +97,7 @@ query {
 }
 ```
 
-That means that the GraphQL service needs to have a `Query` type with `hero` and `droid` fields:
+那表示这个 GraphQL 服务需要一个 `Query` 类型，且其上有 `hero` 和 `droid` 字段：
 
 ```graphql
 type Query {
@@ -106,15 +106,15 @@ type Query {
 }
 ```
 
-Mutations work in a similar way - you define fields on the `Mutation` type, and those are available as the root mutation fields you can call in your query.
+变更也是类似的工作方式 —— 你在 `Mutation` 类型上定义一些字段，然后这些字段将作为 mutation 根字段使用，接着你就能在你的查询中调用。
 
-It's important to remember that other than the special status of being the "entry point" into the schema, the `Query` and `Mutation` types are the same as any other GraphQL object type, and their fields work exactly the same way.
+有必要记住的是，除了作为 schema 的入口，`Query` 和 `Mutation` 类型与其它 GraphQL 对象类型别无二致，它们的字段也是一样的工作方式。
 
-### Scalar types
+### Scalar types/标量类型
 
-A GraphQL object type has a name and fields, but at some point those fields have to resolve to some concrete data. That's where the scalar types come in: they represent the leaves of the query.
+一个对象类型有自己的名字和字段，而某些时候，这些字段必然会解析到具体数据。这就是标量类型的来源：它们表示对应 GraphQL 查询的叶子节点。
 
-In the following query, the `name` and `appearsIn` will resolve to scalar types:
+下列查询中，`name` 和 `appearsIn` 将解析到标量类型：
 
 ```graphql
 # { "graphiql": true }
@@ -126,32 +126,32 @@ In the following query, the `name` and `appearsIn` will resolve to scalar types:
 }
 ```
 
-We know this because those fields don't have any sub-fields - they are the leaves of the query.
+我们知道这些字段没有任何次级字段 —— 因为让它们是查询的叶子节点。
 
-GraphQL comes with a set of default scalar types out of the box:
+GraphQL 自带一组默认标量类型：
 
-- `Int`: A signed 32‐bit integer.
-- `Float`: A signed double-precision floating-point value.
-- `String`: A UTF‐8 character sequence.
-- `Boolean`: `true` or `false`.
-- `ID`: The ID scalar type represents a unique identifier, often used to refetch an object or as the key for a cache. The ID type is serialized in the same way as a String; however, defining it as an `ID` signifies that it is not intended to be human‐readable.
+- `Int`：有符号 32 位整数。
+- `Float`：有符号双精度浮点值。
+- `String`：UTF‐8 字符序列。
+- `Boolean`：`true` 或者 `false`。
+- `ID`：ID 标量类型表示一个唯一标识符，通常用以重新获取对象或者作为缓存中的键。ID 类型使用和 String 一样的方式序列化；然而将其定义为 ID 意味着并不需要人类可读型。
 
-In most GraphQL service implementations, there is also a way to specify custom scalar types. For example, we could define a `Date` type:
+大部分的 GraphQL 服务实现中，都有自定义标量类型的方式。例如，我们可以定义一个 `Date` 类型：
 
 ```graphql
 scalar Date
 ```
 
-Then it's up to our implementation to define how that type should be serialized, deserialized, and validated. For example, you could specify that the `Date` type should always be serialized into an integer timestamp, and your client should know to expect that format for any date fields.
+然后就取决于我们的实现中如何定义将其序列化、反序列化和验证。例如，你可以指定 `Date` 类型应该总是被序列化成整型时间戳，而客户端应该知道去要求任何 date 字段都是这个格式。
 
-### Enumeration types
+### Enumeration types/枚举类型
 
-Also called _Enums_, enumeration types are a special kind of scalar that is restricted to a particular set of allowed values. This allows you to:
+也称作_枚举/enum_，枚举类型是一种特殊的标量，它限制在一个特殊的可选值集合内。这让你能够：
 
-1. Validate that any arguments of this type are one of the allowed values
-2. Communicate through the type system that a field will always be one of a finite set of values
+1. 验证这个类型的任何参数是可选值的的某一个
+2. 与类型系统沟通，一个字段总是一个有限值集合的其中一个值。
 
-Here's what an enum definition might look like in the GraphQL schema language:
+下面是一个用 GraphQL schema 语言表示的 enum 定义：
 
 ```graphql
 enum Episode {
@@ -161,13 +161,13 @@ enum Episode {
 }
 ```
 
-This means that wherever we use the type `Episode` in our schema, we expect it to be exactly one of `NEWHOPE`, `EMPIRE`, or `JEDI`.
+这表示无论我们在 schema 的哪处使用了 `Episode`，都可以肯定它返回的是 `NEWHOPE`、`EMPIRE` 和 `JEDI` 之一。
 
-Note that GraphQL service implementations in various languages will have their own language-specific way to deal with enums. In languages that support enums as a first-class citizen, the implementation might take advantage of that; in a language like JavaScript with no enum support, these values might be internally mapped to a set of integers. However, these details don't leak out to the client, which can operate entirely in terms of the string names of the enum values.
+注意，各种语言实现的 GraphQL 服务会有其独特的枚举处理方式。对于将枚举作为一等公民的语言，它的实现就可以利用这个特性；而对于像 JavaScript 这样没有枚举支持的语言，这些枚举值可能就被内部映射成整数值。当然，这些细节都不会泄漏到客户端，客户端会根据字符串名称来操作枚举值。
 
-### Lists and Non-Null
+### Lists and Non-Null/列表和非空
 
-Object types, scalars, and enums are the only kinds of types you can define in GraphQL. But when you use the types in other parts of the schema, or in your query variable declarations, you can apply additional _type modifiers_ that affect validation of those values. Let's look at an example:
+对象类型，标量以及枚举是 GraphQL 中你唯一可以定义的类型种类。但是当你在 schema 的其他部分使用这些类型时，或者在你的查询变量声明处使用时，你可以给它们应用额外的_类型修饰符_来影响这些值的验证。我们先来看一个例子：
 
 ```graphql
 type Character {
@@ -176,9 +176,9 @@ type Character {
 }
 ```
 
-Here, we're using a `String` type and marking it as _Non-Null_ by adding an exclamation mark, `!` after the type name. This means that our server always expects to return a non-null value for this field, and if it ends up getting a null value that will actually trigger a GraphQL execution error, letting the client know that something has gone wrong.
+此处我们使用了一个 `String` 类型，并通过在类型名后面添加一个感叹号`!`将其标注为_非空_。这表示我们的服务器对于这个字段，总是会返回一个非空值，如果它结果得到了一个空值，那么事实上将会触发一个 GraphQL 执行错误，以让客户端知道发生了错误。
 
-The Non-Null type modifier can also be used when defining arguments for a field, which will cause the GraphQL server to return a validation error if a null value is passed as that argument, whether in the GraphQL string or in the variables.
+非空类型修饰符也可以用于定义字段上的参数，如果这个参数上传递了一个空值（不管通过 GraphQL 字符串还是变量），那么会导致服务器返回一个验证错误。
 
 ```graphql
 # { "graphiql": true, "variables": { "id": null } }
@@ -189,45 +189,45 @@ query DroidById($id: ID!) {
 }
 ```
 
-Lists work in a similar way: We can use a type modifier to mark a type as a `List`, which indicates that this field will return an array of that type. In the schema language, this is denoted by wrapping the type in square brackets, `[` and `]`. It works the same for arguments, where the validation step will expect an array for that value.
+列表的运作方式也类似：我们也可以使用一个类型修饰符来标记一个类型为 `List`，表示这个字段会返回这个类型的数组。在 GraphQL schema 语言中，我们通过将类型包在方括号（`[` 和 `]`）中的方式来标记列表。列表对于参数也是一样的运作方式，验证的步骤会要求对应值为数组。
 
-The Non-Null and List modifiers can be combined. For example, you can have a List of Non-Null Strings:
+非空和列表修饰符可以组合使用。例如你可以要求一个非空字符串的数组：
 
 ```graphql
 myField: [String!]
 ```
 
-This means that the _list itself_ can be null, but it can't have any null members. For example, in JSON:
+这表示_数组本身_可以为空，但是其不能有任何空值成员。用JSON举例如下：
 
 ```js
-myField: null // valid
-myField: [] // valid
-myField: ['a', 'b'] // valid
-myField: ['a', null, 'b'] // error
+myField: null // 有效
+myField: [] // 有效
+myField: ['a', 'b'] // 有效
+myField: ['a', null, 'b'] // 错误
 ```
 
-Now, let's say we defined a Non-Null List of Strings:
+然后，我们来定义一个不可为空的字符串数组：
 
 ```graphql
 myField: [String]!
 ```
 
-This means that the list itself cannot be null, but it can contain null values:
+这表示数组本身不能为空，但是其可以包含空值成员:
 
 ```js
-myField: null // error
-myField: [] // valid
-myField: ['a', 'b'] // valid
-myField: ['a', null, 'b'] // valid
+myField: null // 错误
+myField: [] // 有效
+myField: ['a', 'b'] // 有效
+myField: ['a', null, 'b'] // 有效
 ```
 
-You can arbitrarily nest any number of Non-Null and List modifiers, according to your needs.
+你可以根据需求嵌套任意层非空和列表修饰符。
 
-### Interfaces
+### Interfaces/接口
 
-Like many type systems, GraphQL supports interfaces. An _Interface_ is an abstract type that includes a certain set of fields that a type must include to implement the interface.
+跟许多类型系统一样，GraphQL 支持接口。一个_接口_是一个抽象类型，它包含某些字段，而对象类型必须包含这些字段，才能算实现了这个接口。
 
-For example, you could have an interface `Character` that represents any character in the Star Wars trilogy:
+例如，你可以用一个 `Character` 接口用以表示《星球大战》三部曲中的任何角色：
 
 ```graphql
 interface Character {
@@ -238,9 +238,9 @@ interface Character {
 }
 ```
 
-This means that any type that _implements_ `Character` needs to have these exact fields, with these arguments and return types.
+这意味着任何_实现_ `Character` 的类型都要具有这些字段，并有对应参数和返回类型。
 
-For example, here are some types that might implement `Character`:
+例如，这里有一些可能实现了 `Character` 的类型：
 
 ```graphql
 type Human implements Character {
@@ -261,11 +261,11 @@ type Droid implements Character {
 }
 ```
 
-You can see that both of these types have all of the fields from the `Character` interface, but also bring in extra fields, `totalCredits`, `starships` and `primaryFunction`, that are specific to that particular type of character.
+可见这两个类型都具备 `Character` 接口的所有字段，但也引入了其他的字段 `totalCredits`、`starships` 和 `primaryFunction`，这都属于特定的类型的角色。
 
-Interfaces are useful when you want to return an object or set of objects, but those might be of several different types.
+当你要返回一个对象或者一组对象，特别是一组不同的类型时，接口就显得特别有用。
 
-For example, note that the following query produces an error:
+注意下面例子的查询会产生错误：
 
 ```graphql
 # { "graphiql": true, "variables": { "ep": "JEDI" } }
@@ -277,9 +277,9 @@ query HeroForEpisode($ep: Episode!) {
 }
 ```
 
-The `hero` field returns the type `Character`, which means it might be either a `Human` or a `Droid` depending on the `episode` argument. In the query above, you can only ask for fields that exist on the `Character` interface, which doesn't include `primaryFunction`.
+`hero` 字段返回 `Character` 类型，取决于 `episode` 参数，它可能是 `Human` 或者 `Droid` 类型。上面的查询中，你只能查询 `Character` 接口中存在的字段，而其中并不包含 `primaryFunction`。
 
-To ask for a field on a specific object type, you need to use an inline fragment:
+如果要查询一个只存在于特定对象类型上的字段，你需要使用内联片段：
 
 ```graphql
 # { "graphiql": true, "variables": { "ep": "JEDI" } }
@@ -293,19 +293,19 @@ query HeroForEpisode($ep: Episode!) {
 }
 ```
 
-Learn more about this in the [inline fragments](/learn/queries/#inline-fragments) section in the query guide.
+你可以在查询指南的[内联片段](/learn/queries/#inline-fragments)章节了解更多相关信息。
 
-### Union types
+### Union types/联合类型
 
-Union types are very similar to interfaces, but they don't get to specify any common fields between the types.
+联合类型和接口十分相似，但是它并不指定类型之间的任何共同字段。
 
 ```graphql
 union SearchResult = Human | Droid | Starship
 ```
 
-Wherever we return a `SearchResult` type in our schema, we might get a `Human`, a `Droid`, or a `Starship`. Note that members of a union type need to be concrete object types; you can't create a union type out of interfaces or other unions.
+在我们的schema中，任何返回一个 `SearchResult` 类型的地方，都可能得到一个 `Human`、`Droid` 或者 `Starship`。注意，联合类型的成员需要是具体对象类型；你不能使用接口或者其他联合类型来创造一个联合类型。
 
-In this case, if you query a field that returns the `SearchResult` union type, you need to use a conditional fragment to be able to query any fields at all:
+这时候，如果你需要查询一个返回 `SearchResult` 联合类型的字段，那么你得使用条件片段才能查询任意字段。
 
 ```graphql
 # { "graphiql": true}
@@ -327,9 +327,9 @@ In this case, if you query a field that returns the `SearchResult` union type, y
 }
 ```
 
-### Input types
+### Input types/输入类型
 
-So far, we've only talked about passing scalar values, like enums or strings, as arguments into a field. But you can also easily pass complex objects. This is particularly valuable in the case of mutations, where you might want to pass in a whole object to be created. In the GraphQL schema language, input types look exactly the same as regular object types, but with the keyword `input` instead of `type`:
+目前为止，我们只讨论过将例如枚举和字符串等标量值作为参数传递给字段，但是你也能很容易地传递复杂对象。这在 mutation/变更中特别有用，因为有时候你需要传递一整个对象作为新建对象。在 GraphQL schema 语言中，输入对象看上去和常规对象一模一样，除了关键字是 `input` 而不是 `type`：
 
 ```graphql
 input ReviewInput {
@@ -338,7 +338,7 @@ input ReviewInput {
 }
 ```
 
-Here is how you could use the input object type in a mutation:
+你可以像这样在 mutation/变更中使用输入对象类型：
 
 ```graphql
 # { "graphiql": true, "variables": { "ep": "JEDI", "review": { "stars": 5, "commentary": "This is a great movie!" } } }
@@ -350,4 +350,4 @@ mutation CreateReviewForEpisode($ep: Episode!, $review: ReviewInput!) {
 }
 ```
 
-The fields on an input object type can themselves refer to input object types, but you can't mix input and output types in your schema. Input object types also can't have arguments on their fields.
+输入对象类型上的字段本身也可以指代输入对象类型，但是你不能在你的 schema 混淆输入和输出类型。输入对象类型的字段当然也不能拥有参数。
