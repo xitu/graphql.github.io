@@ -1,7 +1,7 @@
 ---
 title: Serving over HTTP
 layout: ../_core/DocsLayout
-category: Best Practices
+category: 最佳实践
 permalink: /learn/serving-over-http/
 next: /learn/authorization/
 ---
