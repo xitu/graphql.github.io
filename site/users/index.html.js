@@ -527,11 +527,11 @@ module.exports = ({ page }) =>
       <div className="prose">
         <h1>谁在使用 GraphQL？</h1>
         <p>
-          GraphQL 以及被各种体量的团队所使用，在不同的环境、不同的语言下，用于增强移动应用、网站和API。
+          GraphQL 已经被各种体量的团队所使用，在不同的环境、不同的语言下，用于增强移动应用、网站和 API。
         </p>
         <p>
-          你的公司也在使用 GraphQL吗？<br />
-          编辑这个页面然后发出一个<a target="_blank" href={'https://github.com/graphql/graphql.github.io/edit/source/site/' + page.relPath}>Pull Request</a>来加上你的logo吧。
+          你的公司也在使用 GraphQL 吗？<br />
+          编辑这个页面然后发出一个 <a target="_blank" href={'https://github.com/graphql/graphql.github.io/edit/source/site/' + page.relPath}>Pull Request</a> 来加上你的 logo 吧。
         </p>
       </div>
 
