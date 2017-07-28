@@ -1,25 +1,25 @@
 ---
-title: Serving over HTTP
+title: 提供 HTTP 服务
 layout: ../_core/DocsLayout
-category: Best Practices
+category: 最佳实践
 permalink: /learn/serving-over-http/
 next: /learn/authorization/
 ---
 
-HTTP is the most common choice for client-server protocol when using GraphQL because of its ubiquity. Here are some guidelines for setting up a GraphQL server to operate over HTTP.
+使用 GraphQL 时，最常见被选用的客户端到服务器协议是无处不在的 HTTP。以下是设置 GraphQL 服务器以通过 HTTP 进行操作的一些准则。
 
-## Web Request Pipeline
-Most modern web frameworks use a pipeline model where requests are passed through a stack of middleware (AKA filters/plugins). As the request flows through the pipeline, it can be inspected, transformed, modified, or terminated with a response. GraphQL should be placed after all authentication middleware, so that you have access to the same session and user information you would in your HTTP endpoint handlers.
+## 网络请求管道
+大多数现代 Web 框架使用一个管道模型，通过一组中间件（也称为过滤器/插件）堆栈传递请求。当请求流经管道时，它可以被检查、转换、修改、或是返回响应并终止。GraphQL 应当被放置在所有身份验证中间件之后，以便您在 HTTP 入口端点处理器中能够访问到相同的会话和用户信息。
 
-## URIs, Routes
-HTTP is commonly associated with REST, which uses "resources" as its core concept. In contrast, GraphQL's conceptual model is an entity graph. As a result, entities in GraphQL are not identified by URLs. Instead, a GraphQL server operates on a single URL/endpoint, usually `/graphql`, and all GraphQL requests for a given service should be directed at this endpoint.
+## URI 和路由
+HTTP 通常与 REST 相关联，REST 使用“资源”作为其核心概念。相比之下，GraphQL 的概念模型是一个实体图。因此，GraphQL 中的实体无法通过 URL 识别。相反，GraphQL 服务器在单个 URL /入口端点（通常是 `/graphql`）上运行，并且所有提供服务的 GraphQL 请求都应被导向此入口端点。
 
-## HTTP Methods, Headers, and Body
-Your GraphQL HTTP server should handle the HTTP GET and POST methods.
+## HTTP 方法、标题和正文
+您的 GraphQL HTTP 服务器应当能够处理 HTTP GET 和 POST 方法。
 
-### GET request
+### GET 请求
 
-When receiving an HTTP GET request, the GraphQL query should be specified in the "query" query string. For example, if we wanted to execute the following GraphQL query:
+在收到一个 HTTP GET 请求时，应当在 “query” 查询字符串（query string）中指定 GraphQL 查询。例如，如果我们要执行以下 GraphQL 查询：
 
 ```graphql
 {
@@ -29,17 +29,17 @@ When receiving an HTTP GET request, the GraphQL query should be specified in the
 }
 ```
 
-This request could be sent via an HTTP GET like so:
+此请求可以通过 HTTP GET 发送，如下所示：
 
 ```
 http://myapi/graphql?query={me{name}}
 ```
 
-Query variables can be sent as a JSON-encoded string in an additional query parameter called `variables`.  If the query contains several named operations, an `operationName` query parameter can be used to control which one should be executed.
+查询变量可以作为 JSON 编码的字符串发送到名为 `variables` 的附加查询参数中。如果查询包含多个命名操作，则可以使用一个 `operationName` 查询参数来控制哪一个应当执行。
 
-### POST request
+### POST 请求
 
-A standard GraphQL POST request should use the `application/json` content type, and include a JSON-encoded body of the following form:
+标准的 GraphQL POST 请求应当使用 `application/json` 内容类型（content type），并包含以下形式 JSON 编码的请求体：
 
 ```js
 {
@@ -49,18 +49,18 @@ A standard GraphQL POST request should use the `application/json` content type, 
 }
 ```
 
-`operationName` and `variables` are optional fields. `operationName` is only required if multiple operations are present in the query.
+`operationName` 和 `variables` 是可选字段。仅当查询中存在多个操作时才需要 `operationName`。
 
-In addition to the above, we recommend supporting two additional cases:
+除了上边这种请求之外，我们还建议支持另外两种情况：
 
-* If the "query" query string parameter is present (as in the GET example above), it should be parsed and handled in the same way as the HTTP GET case.
-* If the "application/graphql" Content-Type header is present, treat the HTTP POST body contents as the GraphQL query string.
+* 如果存在 “query” 这一查询字符串参数（如上面的 GET 示例中），则应当以与 HTTP GET 相同的方式进行解析和处理。
+* 如果存在 “application/graphql” Content-Type 头，则将 HTTP POST 请求体内容视为 GraphQL 查询字符串。
 
-If you're using express-graphql, you already get these behaviors for free.
+如果您使用的是 express-graphql，那么您已经直接获得了这些支持。
 
-## Response
+## 响应
 
-Regardless of the method by which the query and variables were sent, the response should be returned in the body of the request in JSON format. As mentioned in the spec, a query might result in some data and some errors, and those should be returned in a JSON object of the form:
+无论使用任何方法发送查询和变量，响应都应当以 JSON 格式在请求正文中返回。如规范中所述，查询结果可能会是一些数据和一些错误，并且应当用以下形式的 JSON 对象返回：
 
 ```js
 {
@@ -69,10 +69,10 @@ Regardless of the method by which the query and variables were sent, the respons
 }
 ```
 
-If there were no errors returned, the `"errors"` field should not be present on the response. If no data is returned, [according to the GraphQL spec](http://facebook.github.io/graphql/#sec-Data), the `"data"` field should only be included if the error occurred during execution.
+如果没有返回错误，响应中不应当出现 `"errors"` 字段。如果没有返回数据，则 [根据 GraphQL 规范](http://facebook.github.io/graphql/#sec-Data)，只能在执行期间发生错误时才能包含 `"data"` 字段。
 
 ## GraphiQL
-GraphiQL is useful during testing and development but should be disabled in production by default. If you are using express-graphql, you can toggle it based on the NODE_ENV environment variable:
+GraphiQL 在测试和开发过程中非常有用，但在生产环境下应当默认被禁用。如果您使用的是 express-graphql，可以根据 NODE_ENV 环境变量进行切换：
 
 ```
 app.use('/graphql', graphqlHTTP({
@@ -82,4 +82,4 @@ app.use('/graphql', graphqlHTTP({
 ```
 
 ## Node
-If you are using NodeJS, we recommend using either [express-graphql](https://github.com/graphql/express-graphql) or [graphql-server](https://github.com/apollostack/graphql-server).
+如果您正在使用 NodeJS，我们建议使用 [express-graphql](https://github.com/graphql/express-graphql) 或 [graphql-server](https://github.com/apollostack/graphql-server)。
