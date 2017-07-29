@@ -7,44 +7,43 @@ sublinks: formatError,GraphQLError,locatedError,syntaxError
 next: /graphql-js/execution/
 ---
 
-The `graphql/error` module is responsible for creating and formatting
-GraphQL errors. You can import either from the `graphql/error` module, or from the root `graphql` module. For example:
+`graphql/error` 模块负责创建和格式化 GraphQL 的错误信息。你可以直接从 `graphql/error`模块导入，也可以从 `graphql` 这个根模块导入。举例来说就是这样：
 
 ```js
 import { GraphQLError } from 'graphql'; // ES6
 var { GraphQLError } = require('graphql'); // CommonJS
 ```
 
-## Overview
+## 概述
 
 <ul class="apiIndex">
   <li>
     <a href="#graphqlerror">
       <pre>class GraphQLError</pre>
-      A representation of an error that occurred within GraphQL.
+      GraphQLError 表示 GraphQL 产生的错误信息。
     </a>
   </li>
   <li>
     <a href="#syntaxerror">
       <pre>function syntaxError</pre>
-      Produces a GraphQLError representing a syntax error.
+      产生一个表示语法错误的 GraphQLError。
     </a>
   </li>
   <li>
     <a href="#locatedError">
       <pre>function locatedError</pre>
-      Produces a new GraphQLError aware of the location responsible for the error.
+      产生一个新的负责错误定位的 GraphQLError。
     </a>
   </li>
   <li>
     <a href="#formaterror">
       <pre>function formatError</pre>
-      Format an error according to the rules described by the Response Format.
+      根据响应格式的规则描述格式化一条错误信息。
     </a>
   </li>
 </ul>
 
-## Errors
+## 错误信息
 
 ### GraphQLError
 
@@ -60,9 +59,7 @@ class GraphQLError extends Error {
 }
 ```
 
-A representation of an error that occurred within GraphQL. Contains
-information about where in the query the error occurred for debugging. Most
-commonly constructed with `locatedError` below.
+GraphQLError 表示 GraphQL 产生的错误信息。它包含一些用于调试的信息，比如 query 语句中错误发生的位置。最常见的错误信息就是下面的的 `locatedError` 。
 
 ### syntaxError
 
@@ -74,8 +71,7 @@ function syntaxError(
 ): GraphQLError;
 ```
 
-Produces a GraphQLError representing a syntax error, containing useful
-descriptive information about the syntax error's position in the source.
+产生一个表示语法错误的 GraphQLError，它包含原始语句中语法错误具体定位的描述性信息。
 
 ### locatedError
 
@@ -83,9 +79,7 @@ descriptive information about the syntax error's position in the source.
 function locatedError(error: ?Error, nodes: Array<any>): GraphQLError {
 ```
 
-Given an arbitrary Error, presumably thrown while attempting to execute a
-GraphQL operation, produce a new GraphQLError aware of the location in the
-document responsible for the original Error.
+当尝试执行 GraphQL 操作时抛出的任意一个错误，都会产生一个新的负责原始错误文档定位的 GraphQLError 。
 
 ### formatError
 
@@ -103,5 +97,4 @@ type GraphQLErrorLocation = {
 };
 ```
 
-Given a GraphQLError, format it according to the rules described by the
-Response Format, Errors section of the GraphQL Specification.
+给定一个 GraphQLError，根据 GraphQL 说明中的响应格式和错误分类的规则描述格式化错误信息。
