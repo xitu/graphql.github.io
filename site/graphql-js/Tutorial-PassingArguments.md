@@ -6,7 +6,7 @@ permalink: /graphql-js/passing-arguments/
 next: /graphql-js/object-types/
 ---
 
-Just like a REST API, it's common to pass arguments to an endpoint in a GraphQL API. By defining the arguments in the schema language, typechecking happens automatically. Each argument must be named and have a type. For example, in the [Basic Types documentation](/graphql-js/basic-types/) we had an endpoint called `rollThreeDice`:
+就像 REST API 一样，在 GraphQL API 中，通常向入口端点传入参数，在 schema language 中定义参数，并自动进行类型检查。每一个参数必须有名字和数据类型。举个例子，在 [基础类型文档](/graphql-js/basic-types/) 中，我们定义了一个名为 `rollThreeDice` 的入口端点：
 
 ```javascript
 type Query {
@@ -14,7 +14,7 @@ type Query {
 }
 ```
 
-Instead of hardcoding “three”, we might want a more general function that rolls `numDice` dice, each of which have `numSides` sides. We can add arguments to the GraphQL schema language like this:
+我们可能想要一个更通用的函数来实现投掷点数 `numDice` ，而不是硬性地设为 "3"，并且有一个参数 `numSide` 来表示骰子的面数，我们可以这样在 GraphQL schema language 实现：
 
 ```javascript
 type Query {
@@ -22,9 +22,9 @@ type Query {
 }
 ```
 
-The exclamation point in `Int!` indicates that `numDice` can't be null, which means we can skip a bit of validation logic to make our server code simpler. We can let `numSides` be null and assume that by default a die has 6 sides.
+ `Int!` 中的感叹号表示参数 `numDice` 不能为 null，这意味着我们可以跳过一些数据类型验证来简化服务端的代码。我们可以让 `numSides` 为 null，并假定一个骰子默认有 6 个面。
 
-So far, our resolver functions took no arguments. When a resolver takes arguments, they are passed as one “args” object, as the first argument to the function. So rollDice could be implemented as:
+到现在为止，我们的解析器没有参数。当解析器传入一个 "args" 对象作为函数的第一个参数，rollDice 可以被这样实现：
 
 ```javascript
 var root = {
@@ -38,7 +38,7 @@ var root = {
 };
 ```
 
-It's convenient to use [ES6 destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) for these parameters, since you know what format they will be. So we can also write `rollDice` as
+如果你知道参数的格式是什么样子的，那使用 [ES6 解构](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) 会更加方便，所以 `rollDice` 也可以写成这样：
 
 ```javascript
 var root = {
@@ -52,23 +52,23 @@ var root = {
 };
 ```
 
-If you're familiar with destructuring, this is a bit nicer because the line of code where `rollDice` is defined tells you about what the arguments are.
+如果你熟悉解构，在 `rollDice` 被定义的时候，就可以清楚地知道参数是什么。
 
-The entire code for a server that hosts this `rollDice` API is:
+`rollDice` 服务端的 API 的完整代码如下：
 
 ```javascript
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var { buildSchema } = require('graphql');
 
-// Construct a schema, using GraphQL schema language
+// 使用 GraphQL schema language 构造一个 schema
 var schema = buildSchema(`
   type Query {
     rollDice(numDice: Int!, numSides: Int): [Int]
   }
 `);
 
-// The root provides a resolver function for each API endpoint
+// root 为每个 端点入口 API 提供一个解析器
 var root = {
   rollDice: function ({numDice, numSides}) {
     var output = [];
@@ -89,7 +89,7 @@ app.listen(4000);
 console.log('Running a GraphQL API server at localhost:4000/graphql');
 ```
 
-When you call this API, you have to pass each argument by name. So for the server above, you could issue this GraphQL query to roll three six-sided dice:
+当你调用这个 API 时，你需要按名称传入每个参数，对于上面的服务器代码，你可以通过发起这样的 GraphQL 查询，来投掷一个 6 面的，点数为 3 的骰子。
 
 ```javascript
 {
@@ -97,11 +97,11 @@ When you call this API, you have to pass each argument by name. So for the serve
 }
 ```
 
-If you run this code with `node server.js` and browse to http://localhost:4000/graphql you can try out this API.
+如果你使用 `node server.js` 运行这段代码，你可以浏览  http://localhost:4000/graphql 来尝试这个 API。
 
-When you're passing arguments in code, it's generally better to avoid constructing the whole query string yourself. Instead, you can use `$` syntax to define variables in your query, and pass the variables as a separate map.
+当你在代码中传递参数时，最好避免自己构建整个查询语句。你可以使用 `$` 语法来定义一条查询中的变量，并将变量作为单独映射来传递。
 
-For example, some JavaScript code that calls our server above is:
+举个例子，请求上面服务器代码的部分 JavaScript 代码如下：
 
 ```javascript
 var dice = 3;
@@ -123,6 +123,6 @@ xhr.send(JSON.stringify({
 }));
 ```
 
-Using `$dice` and `$sides` as variables in GraphQL means we don't have to worry about escaping on the client side.
+使用 `$dice` 和 `$sides` 作为 GraphQL 中的变量，我们可以不用担心在客户端转义。
 
-With basic types and argument passing, you can implement anything you can implement in a REST API. But GraphQL supports even more powerful queries. You can replace multiple API calls with a single API call if you learn how to [define your own object types](/graphql-js/object-types/).
+通过基础类型和参数传递，你可以定义任意你在 REST API 中定义的内容。但 GraphQL 支持更强大的查询。如果你学习了 [定义你自己的对象类型](/graphql-js/object-types/)，你可以用单个 API 调用来代替多个 API 调用。
