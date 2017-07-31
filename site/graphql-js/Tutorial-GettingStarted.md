@@ -7,56 +7,56 @@ permalink: /graphql-js/
 next: /graphql-js/running-an-express-graphql-server/
 ---
 
-## Prerequisites
+## 学前准备
 
-Before getting started, you should have Node v6 installed, although the examples should mostly work in previous versions of Node as well. For this guide, we won't use any language features that require transpilation, but we will use some ES6 features like [Promises](http://www.html5rocks.com/en/tutorials/es6/promises/), [classes](http://javascriptplayground.com/blog/2014/07/introduction-to-es6-classes-tutorial/), and [fat arrow functions](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-arrow-functions/), so if you aren't familiar with them you might want to read up on them first.
+即使这些示例大部分在以前版本的 Node 中也能正常运行，你也应该至少在开始学习之前安装了 v6 版本以上的 Node 环境 。在本篇指南中，我们不会使用任何需要转换的语言特性，但是我们会使用 ES6 的部分新特性，比如 [Promises](http://www.html5rocks.com/en/tutorials/es6/promises/)，[classes](http://javascriptplayground.com/blog/2014/07/introduction-to-es6-classes-tutorial/) 和 [fat arrow functions](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-arrow-functions/)。所以如果你不熟悉它们，你应该先去了解一下。
 
-To create a new project and install GraphQL.js in your current directory:
+创建一个新项目，在你当前目录去安装 GraphQL.js：
 
 ```bash
 npm init
 npm install graphql --save
 ```
 
-## Writing Code
+## 编写代码
 
-To handle GraphQL queries, we need a schema that defines the `Query` type, and we need an API root with a function called a “resolver” for each API endpoint. For an API that just returns “Hello world!”, we can put this code in a file named `server.js`:
+我们需要一个定义“Query”类型的图表来处理 GraphQL 查询。我们还需要一个 API 根节点，为每个 API 端点提供一个名为“resolver”的函数。对于只要返回“Hello world！”的 API，我们可以将此代码放在名为 `server.js` 的文件中：
 
 ```javascript
 var { graphql, buildSchema } = require('graphql');
 
-// Construct a schema, using GraphQL schema language
+// 使用 GraphQL 图表语言构建一个图
 var schema = buildSchema(`
   type Query {
     hello: String
   }
 `);
 
-// The root provides a resolver function for each API endpoint
+// 根节点为每个 API 端点提供一个 resolver 函数endpoint
 var root = {
   hello: () => {
     return 'Hello world!';
   },
 };
 
-// Run the GraphQL query '{ hello }' and print out the response
+// 运行 GraphQL query '{ hello }’ ，打印响应
 graphql(schema, '{ hello }', root).then((response) => {
   console.log(response);
 });
 ```
 
-If you run this with:
+如果你像这样运行代码：
 
 ```bash
 node server.js
 ```
 
-You should see the GraphQL response printed out:
+你会看到打印出的 GraphQL 响应：
 
 ```javascript
 { data: { hello: 'Hello world!' } }
 ```
 
-Congratulations - you just executed a GraphQL query!
+恭喜 - 你刚刚执行了一个 GraphQL 的查询！
 
-For practical applications, you'll probably want to run GraphQL queries from an API server, rather than executing GraphQL with a command line tool. To use GraphQL for an API server over HTTP, check out [Running an Express GraphQL Server](/graphql-js/running-an-express-graphql-server/).
+在实际应用中，你不会在命令行工具里执行 GraphQL，而是可能会想从一个 API 服务器 运行 GraphQL 查询。如何在 HTTP API 服务器运行 GraphQL，请查看[运行 GraphQL 服务器](/graphql-js/running-an-express-graphql-server/)章节。
