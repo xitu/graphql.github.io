@@ -53,7 +53,7 @@ type Starship {
 
 
 
-## Root fields & resolvers 根字段&解析器函数
+## 根字段&解析器函数
 
 每一个GraphQL服务端应用的顶层，必有一个类型代表着所有GraphQL API的入口，我们将他称之为Root Type 根类型或者查询类型。
 
@@ -75,7 +75,7 @@ Query: {
 - `args`可以提供在GraphQL查询中传入的参数
 - `context`会被提供了所有解析器，并且持有重要的上下文信息比如当前登入的用户或者数据库访问对象
 
-## Asynchronous resolvers 异步解析器函数
+## 异步解析器函数
 
 让我们分析下下文中的解析器函数
 
@@ -91,7 +91,7 @@ human(obj, args, context) {
 
 这里要注意的是，只有解析器函数能感知到Promise，GraphQL查询只关注`human`字段是否返回，在执行期间如果异步操作没有完成，则GraphQL会一直等待下去，因此在这个环节需要关注并发处理上的优化。
 
-## Trivial resolvers 标准解析器
+## 标准解析器
 
 现在`Human`对象已经生成了，但GraphQL还是会继续递归执行下去。
 
