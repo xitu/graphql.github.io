@@ -6,11 +6,11 @@ permalink: /learn/execution/
 next: /learn/introspection/
 ---
 
-After being validated, a GraphQL query is executed by a GraphQL server which returns a result that mirrors the shape of the requested query, typically as JSON.
+在验证环节之后，GraphQL服务端在处理数据之后，会根据GraphQL query的请求内容生成对应结构的结果，一般情况下会以JSON形式返回。
 
-GraphQL cannot execute a query without a type system, let's use an example type system to illustrate executing a query. This is a part of the same type system used throughout the examples in these articles:
+GraphQL 不能脱离类型系统处理query，让我们用一个类型系统的例子来说明一个查询的执行过程，在这一系列的文章中我们重复使用了这些类型，下文是其中的一部分
 
-```graphql
+```
 type Query {
   human(id: ID!): Human
 }
@@ -32,9 +32,9 @@ type Starship {
 }
 ```
 
-In order to describe what happens when a query is executed, let's use an example to walk through.
+现在让我们用一个例子来描述当一个查询请求被执行的全过程
 
-```graphql
+```
 # { "graphiql": true }
 {
   human(id: 1002) {
@@ -47,18 +47,19 @@ In order to describe what happens when a query is executed, let's use an example
 }
 ```
 
-You can think of each field in a GraphQL query as a function or method of the previous type which returns the next type. In fact, this is exactly how GraphQL works. Each field on each type is backed by a function called the *resolver* which is provided by the GraphQL server developer. When a field is executed, the corresponding *resolver* is called to produce the next value.
+您可以将GraphQL查询中的每个字段视为返回下一个类型的上一个类型的函数或方法。事实上，这正是GraphQL的工作原理。每个类型的每个字段都由称为解析器的函数支持，该函数由GraphQL服务器开发人员提供。当一个字段被执行时，相应的解析器被调用以产生下一个值。
 
-If a field produces a scalar value like a string or number, then the execution completes. However if a field produces an object value then the query will contain another selection of fields which apply to that object. This continues until scalar values are reached. GraphQL queries always end at scalar values.
+如果字段产生标量值，例如字符串或数字，则执行完成。但是，如果一个字段产生一个实体对象，则该查询将继续执行对应字段的解析器函数，直到生成标量值。 GraphQL查询始终以标量值结尾。
 
 
-## Root fields & resolvers
 
-At the top level of every GraphQL server is a type that represents all of the possible entry points into the GraphQL API, it's often called the *Root* type or the *Query* type.
+## Root fields & resolvers 根字段&解析器函数
 
-In this example, our Query type provides a field called `human` which accepts the argument `id`. The resolver function for this field likely accesses a database and then constructs and returns a `Human` object.
+每一个GraphQL服务端应用的顶层，必有一个类型代表着所有GraphQL API的入口，我们将他称之为Root Type 根类型或者查询类型。
 
-```js
+在这个例子中查询类型提供了一个字段`human`,并且接受一个参数`id`.resolver函数请求了数据库并通过构造函数染回了`Human`对象
+
+```
 Query: {
   human(obj, args, context) {
     return context.db.loadHumanByID(args.id).then(
@@ -68,18 +69,17 @@ Query: {
 }
 ```
 
-This example is written in JavaScript, however GraphQL servers can be built in [many different languages](/code/). A resolver function receives three arguments:
+这个例子使用了JavaScript语言，但GraphQL服务端应用可以被[多种语言实现](https://github.com/whisperfairy/graphql-china.github.io/blob/zh-cn/code).无论哪种语言，解析器函数都接受3个参数
 
-- `obj` The previous object, which for a field on the root Query type is often not used.
-- `args` The arguments provided to the field in the GraphQL query.
-- `context` A value which is provided to every resolver and holds important contextual information like the currently logged in user, or access to a database.
+- `obj`上一级对象，如果字段属于根节点查询类型通常不会被使用。
+- `args`可以提供在GraphQL查询中传入的参数
+- `context`会被提供了所有解析器，并且持有重要的上下文信息比如当前登入的用户或者数据库访问对象
 
+## Asynchronous resolvers 异步解析器函数
 
-## Asynchronous resolvers
+让我们分析下下文中的解析器函数
 
-Let's take a closer look at what's happening in this resolver function.
-
-```js
+```
 human(obj, args, context) {
   return context.db.loadHumanByID(args.id).then(
     userData => new Human(userData)
@@ -87,16 +87,15 @@ human(obj, args, context) {
 }
 ```
 
-The `context` is used to provide access to a database which is used to load the data for a user by the `id` provided as an argument in the GraphQL query. Since loading from a database is an asynchronous operation, this returns a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). In JavaScript Promises are used to work with asynchronous values, but the same concept exists in many languages, often called *Futures*, *Tasks* or *Deferred*. When the database returns, we can construct and return a new `Human` object.
+`context`提供了一个数据库访问对象用来通过查询中传递的参数`id`来查询数据，因为从数据库拉去数据的过程是一个异步操作，该方法返回了一个[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)对象，在JavaScript语言中Promises对象用来返回异步操作，但这个概念在各种语言中都有提及，比如Futures，Tasks或者Defferred。当数据库返回查询结果，我们就能通过构造函数返回一个新的`Human`对象。
 
-Notice that while the resolver function needs to be aware of Promises, the GraphQL query does not. It simply expects the `human` field to return something which it can then ask the `name` of. During execution, GraphQL will wait for Promises, Futures, and Tasks to complete before continuing and will do so with optimal concurrency.
+这里要注意的是，只有解析器函数能感知到Promise，GraphQL查询只关注`human`字段是否返回，在执行期间如果异步操作没有完成，则GraphQL会一直等待下去，因此在这个环节需要关注并发处理上的优化。
 
+## Trivial resolvers 标准解析器
 
-## Trivial resolvers
+现在`Human`对象已经生成了，但GraphQL还是会继续递归执行下去。
 
-Now that a `Human` object is available, GraphQL execution can continue with the fields requested on it.
-
-```js
+```
 Human: {
   name(obj, args, context) {
     return obj.name
@@ -104,18 +103,17 @@ Human: {
 }
 ```
 
-A GraphQL server is powered by a type system which is used to determine what to do next. Even before the `human` field returns anything, GraphQL knows that the next step will be to resolve fields on the `Human` type since the type system tells it that the `human` field will return a `Human`.
+GraphQL 服务端应用的业务取决于类型系统的结构。在`human`对象返回值之前，GraphQL会根据预设好的类型系统与对应的Resolver函数决定如何以及返回什么样的Human字段。
 
-Resolving the name in this case is very straight-forward. The name resolver function is called and the `obj` argument is the `new Human` object returned from the previous field. In this case, we expect that Human object to have a `name` property which we can read and return directly.
+在这个例子中，对name字段的处理非常的清晰，name字段对应的resolver函数调用了在上层回调函数生成的`new Human`对象在这个案例中，我们设计Human对象会拥有一个`name`属性可以让我们从obj对象中直接读取。
 
-In fact, many GraphQL libraries will let you omit resolvers this simple and will just assume that if a resolver isn't provided for a field, that a property of the same name should be read and returned.
+事实上在返回的字段可以直接从对象中获得的时候，大部分GraphQL 库可以让我们省略定义resolver的步骤，当然这是当我们请求的字段可以直接从上层返回对象中取得并返回的情况。
 
+## Scalar coercion 标量强制
 
-## Scalar coercion
+当`name`字段被处理后，`appearsIn`和`starships`字段可以被同步执行，`appearsIn`字段
 
-While the `name` field is being resolved, the `appearsIn` and `starships` fields can be resolved concurrently. The `appearsIn` field could also have a trivial resolver, but let's take a closer look:
-
-```js
+```
 Human: {
   appearsIn(obj) {
     return obj.appearsIn // returns [ 4, 5, 6 ]
@@ -123,16 +121,15 @@ Human: {
 }
 ```
 
-Notice that our type system claims `appearsIn` will return Enum values with known values, however this function is returning numbers! Indeed if we look up at the result we'll see that the appropriate Enum values are being returned. What's going on?
+请注意，我们的类型系统声明`appearsIn`字段将返回具有已知值的枚举值，但是此函数返回数字！实际上，如果我们查看结果，我们将看到正在返回适当的枚举值。这是怎么回事？
 
-This is an example of scalar coercion. The type system knows what to expect and will convert the values returned by a resolver function into something that upholds the API contract. In this case, there may be an Enum defined on our server which uses numbers like `4`, `5`, and `6` internally, but represents them as Enum values in the GraphQL type system.
+这是标量强制的一个例子。类型系统知道预期的内容，并将将解析器函数返回的值转换为维护API合同的内容。在这种情况下，可能在我们的服务器上定义了一个Enum，但resolver在内部使用4,5和6的整数类型，但在GraphQL类型系统中将它们表示为枚举值，如果类型不匹配将返回null。
 
+## 列表解析器
 
-## List resolvers
+我们已经看到一个字段返回上面的`appearsIn`字段的事物列表时会发生什么。它返回了枚举值的列表，因为这是系统期望的类型，列表中的每个项目被强制为适当的枚举值。让我们看下`startships`被解析的时候会发生什么？
 
-We've already seen a bit of what happens when a field returns a list of things with the `appearsIn` field above. It returned a *list* of enum values, and since that's what the type system expected, each item in the list was coerced to the appropriate enum value. What happens when the `starships` field is resolved?
-
-```js
+```
 Human: {
   starships(obj, args, context) {
     return obj.starshipIDs.map(
@@ -144,18 +141,16 @@ Human: {
 }
 ```
 
-The resolver for this field is not just returning a Promise, it's returning a *list* of Promises. The `Human` object had a list of ids of the `Starships` they piloted, but we need to go load all of those ids to get real Starship objects.
+解析器函数在这个字段中返回了一个Promise对象，它返回一个Promises列表。`Human`对象具有他们正在驾驶的`Starships`的ids列表，但是我们需要加载所有这些ids来获得真正的Starship对象。
 
-GraphQL will wait for all of these Promises concurrently before continuing, and when left with a list of objects, it will concurrently continue yet again to load the `name` field on each of these items.
+GraphQL将在同步执行这些Promise，当返回一个对象列表，它将继续同步加载每个这些对象的`name`字段。
 
+## 产生结果
 
-## Producing the result
+当每个字段被解析时，结果值被放置到键值映射中，字段名称（或别名）作为键，并且解析器的值作为值，这继续从查询的底部叶字段返回直到根据“查询”类型的原始字段。总而言之，这些结构反映了原始查询，然后可以将其发送（通常为JSON）到请求的客户端。
 
-As each field is resolved, the resulting value is placed into a key-value map with the field name (or alias) as the key and the resolved value as the value, this continues from the bottom leaf fields of the query all the way back up to the original field on the root Query type. Collectively these produce a structure that mirrors the original query which can then be sent (typically as JSON) to the client which requested it.
-
-Let's take one last look at the original query to see how all these resolving functions produce a result:
-
-```graphql
+让我们最后一眼看看原来的查询，看看这些解析函数如何产生一个结果：
+```
 # { "graphiql": true }
 {
   human(id: 1002) {
