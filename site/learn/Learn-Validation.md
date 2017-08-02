@@ -100,7 +100,7 @@ fragment NameAndAppearancesAndFriends on Character {
 }
 ```
 
-这个查询是无效的，因为 `primaryFunction` 并不是 `Character` 的字段。我们需要某种方法来表示我们希望获取 `primaryFunction`，如果对应的 `Character` 是 `Droid`，并在其他情况下忽略此字段。我们可以使用之前引入的片段来解决这个问题。先在 `Droid` 上定义一个片段，然后在查询中引入它，这样我们就能在定义了 `primaryFunction` 的地方查询它。
+这个查询是无效的，因为 `primaryFunction` 并不是 `Character` 的字段。我们需要某种方法来表示：如果对应的 `Character` 是 `Droid`，我们希望获取 `primaryFunction` 字段，而在其他情况下，则忽略此字段。我们可以使用之前引入的“片段”来解决这个问题。先在 `Droid` 上定义一个片段，然后在查询中引入它，这样我们就能在定义了 `primaryFunction` 的地方查询它。
 
 ```graphql
 # { "graphiql": true }
