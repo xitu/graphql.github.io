@@ -7,7 +7,7 @@ sublinks: formatError,GraphQLError,locatedError,syntaxError
 next: /graphql-js/execution/
 ---
 
-`graphql/error` 模块负责创建和格式化 GraphQL 的错误信息。你可以直接从 `graphql/error`模块导入，也可以从 `graphql` 这个根模块导入。举例来说就是这样：
+`graphql/error` 模块负责创建和格式化 GraphQL 的错误信息。你可以直接从 `graphql/error` 模块导入，也可以从 `graphql` 这个根模块导入。举例来说就是这样：
 
 ```js
 import { GraphQLError } from 'graphql'; // ES6
@@ -38,7 +38,7 @@ var { GraphQLError } = require('graphql'); // CommonJS
   <li>
     <a href="#formaterror">
       <pre>function formatError</pre>
-      根据响应格式的规则描述格式化一条错误信息。
+      根据响应格式的规则描述来格式化一条错误信息。
     </a>
   </li>
 </ul>
@@ -59,7 +59,7 @@ class GraphQLError extends Error {
 }
 ```
 
-GraphQLError 表示 GraphQL 产生的错误信息。它包含一些用于调试的信息，比如 query 语句中错误发生的位置。最常见的错误信息就是下面的的 `locatedError` 。
+GraphQLError 表示 GraphQL 产生的错误信息。它包含一些用于调试的信息，比如查询语句中错误发生的位置。最常见的错误信息就是下面的的 `locatedError` 。
 
 ### syntaxError
 
@@ -97,4 +97,4 @@ type GraphQLErrorLocation = {
 };
 ```
 
-给定一个 GraphQLError，根据 GraphQL 说明中的响应格式和错误分类的规则描述格式化错误信息。
+给定一个 GraphQLError，根据 GraphQL 规范中的响应格式和错误分类的规则描述格式化错误信息。
