@@ -7,28 +7,27 @@ sublinks: execute
 next: /graphql-js/language/
 ---
 
-The `graphql/execution` module is responsible for the execution phase of
-fulfilling a GraphQL request. You can import either from the `graphql/execution` module, or from the root `graphql` module. For example:
+`graphql/execution` 模块负责完成一个 GraphQL 请求的执行阶段。你可以直接从 `graphql/execution` 模块导入，也可以从 `graphql` 这个根模块导入。举例来说就是这样：
 
 ```js
 import { execute } from 'graphql'; // ES6
 var { execute } = require('graphql'); // CommonJS
 ```
 
-## Overview
+## 概述
 
 <ul class="apiIndex">
   <li>
     <a href="#execute">
       <pre>function execute</pre>
-      Executes a GraphQL request on the provided schema.
+      对定义好的 schema 执行一个 GraphQL 请求。
     </a>
   </li>
 </ul>
 
-## Execution
+## 执行
 
-### execute
+### 执行
 
 ```js
 export function execute(
@@ -46,13 +45,10 @@ type ExecutionResult = {
 }
 ```
 
-Implements the "Evaluating requests" section of the GraphQL specification.
+上面的代码实现了 GraphQL 规范中评估请求“的部分。
 
-Returns a Promise that will eventually be resolved and never rejected.
+它会返回一个最终一定会被 resolve 而不会被 reject 的 Promise。
 
-If the arguments to this function do not result in a legal execution context,
-a GraphQLError will be thrown immediately explaining the invalid input.
+如果这个函数的参数导致产生了一个非法的执行上下文，那么马上就会有一个解释非法输入的 GraphQLError 被抛出。
 
-`ExecutionResult` represents the result of execution. `data` is the result of
-executing the query, `errors` is null if no errors occurred, and is a
-non-empty array if an error occurred.
+`ExecutionResult` 代表执行的结果。`data` 是执行查询语句的结果，`errors` 在没有错误发生时为空，在有错误发生时为一个非空的数组。
