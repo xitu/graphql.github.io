@@ -6,9 +6,9 @@ permalink: /graphql-js/constructing-types/
 next: /graphql-js/express-graphql/
 ---
 
-对多数应用来说，你可以在开始运行的时候使用 GraphQL 模式语言声明固有的 Schema。但有些情况下，使用程序构建 Schema 也很有用。你可使用 `GraphQLSchema` 构造函数来做这件事。
+对多数应用来说，你可以在开始运行的时候使用 GraphQL Schema Languange 声明固有的 Schema。但有些情况下，使用程序构建 Schema 也很有用。你可使用 `GraphQLSchema` 构造函数来做这件事。
 
-使用 `GraphQLSchema` 构造函数创建 Schema 时，你在定义 `Query` 和 `Mutation` 类型时不用单纯的模式语言，而是像对象一样创建它们。
+使用 `GraphQLSchema` 构造函数创建 Schema 时，你在定义 `Query` 和 `Mutation` 类型时不用单纯的 Schema Language，而是像对象一样创建它们。
 
 例如，假设我们要实现个简单的 API，根据 id 在一些硬编码数据中查询某个用户数据。我们可以用 `buildSchema` 这么写：
 
@@ -56,7 +56,7 @@ app.listen(4000);
 console.log('Running a GraphQL API server at localhost:4000/graphql');
 ```
 
-也可以在不使用 GraphQL 模式语言的情况下实现相同的 API:
+也可以在不使用 GraphQL Schema Language 的情况下实现相同的 API:
 
 ```javascript
 var express = require('express');
@@ -114,4 +114,4 @@ console.log('Running a GraphQL API server at localhost:4000/graphql');
 
 当我们使用这种方式构建 API 时，根解析器是构建在 `Query` 和 `Mutation` 类型， 而不是 `root` 对象上的。
 
-这种方法在你想要通过一些手段（例如数据库模式）自动创建 GraphQL Schema 时很有用。如此一来你就可以拥有一些类似于创建和更改数据库记录的通用模板。还有，在实现类似集合类型（union types）这种没法轻易映射为 ES6 Class 或者纯模式语言实现的功能时，此方法也很有用。
+这种方法在你想要通过一些手段（例如数据库 Schema）自动创建 GraphQL Schema 时很有用。如此一来你就可以拥有一些类似于创建和更改数据库记录的通用模板。还有，在实现类似集合类型（union types）这种没法轻易映射为 ES6 Class 或者纯 Schema Language 实现的功能时，此方法也很有用。
