@@ -4,12 +4,12 @@ layout: ../_core/DocsLayout
 category: 学习
 permalink: /learn/schema/
 next: /learn/validation/
-sublinks: Type System / 类型系统,Type Language / 类型语言,Object Types and Fields / 对象类型和字段,Arguments / 参数,The Query and Mutation Types / 查询和变更类型,Scalar Types / 标量类型,Enumeration Types / 枚举类型,Lists and Non-Null / 列表和非空,Interfaces / 接口,Union Types / 联合类型,Input Types / 输入类型
+sublinks: 类型系统（Type System）,类型语言（Type Language）,对象类型和字段（Object Types and Fields）,参数（Arguments）,查询和变更类型（The Query and Mutation Types）,标量类型（Scalar Types）,枚举类型（Enumeration Types）,列表和非空（Lists and Non-Null）,接口（Interfaces）,联合类型（Union Types ）,输入类型（Input Types） 
 ---
 
 在本页，你将学到关于 GraphQL 类型系统中所有你需要了解的知识，以及类型系统如何描述可以查询的数据。因为 GraphQL 可以运行在任何后端框架或者编程语言之上，我们将摒除实现上的细节而仅仅专注于其概念。
 
-### Type system/类型系统
+### 类型系统（Type System）
 
 如果你之前见到过 GraphQL 查询，你就知道 GraphQL 查询语言基本上就是关于选择对象上的字段。因此，例如在下列查询中：
 
@@ -31,11 +31,11 @@ sublinks: Type System / 类型系统,Type Language / 类型语言,Object Types a
 
 每一个 GraphQL 服务都会定义一套类型，用以描述你可能从那个服务查询到的数据。每当查询到来，服务器就会根据 schema 验证并执行查询。
 
-### Type language/类型语言
+### 类型语言（Type Language）
 
-GraphQL 服务可以用任何语言编写，因为我们并不依赖于任何特定语言的句法句式（譬如 JavaScript ）来与 GraphQL schema 沟通，我们定义了自己的简单语言，称之为 “GraphQL schema 语言” —— 它和 GraphQL 的查询语言很相似，让我们能够和 GraphQL schema 之间可以无语言差异地沟通。
+GraphQL 服务可以用任何语言编写，因为我们并不依赖于任何特定语言的句法句式（譬如 JavaScript）来与 GraphQL schema 沟通，我们定义了自己的简单语言，称之为 “GraphQL schema language” —— 它和 GraphQL 的查询语言很相似，让我们能够和 GraphQL schema 之间可以无语言差异地沟通。
 
-### Object types and fields/对象类型和字段
+### 对象类型和字段（Object Types and Fields）
 
 一个 GraphQL schema 中的最基本的组件是对象类型，它就表示你可以从服务上获取到什么类型的对象，以及这个对象有什么字段。使用 GraphQL schema 语言，我们可以这样表示它：
 
@@ -56,7 +56,7 @@ type Character {
 
 现在你知道一个 GraphQL 对象类型看上去是怎样，也知道如何阅读基础的 GraphQL 类型语言了。
 
-### Arguments/参数
+###参数（Arguments）
 
 GraphQL 对象类型上的每一个字段都可能有零个或者多个参数，例如下面的 `length` 字段：
 
@@ -72,7 +72,7 @@ type Starship {
 
 参数可能是必选或者可选的，当一个参数是可选的，我们可以定义一个_默认值_ —— 如果 `unit` 参数没有传递，那么它将会被默认设置为 `METER`。
 
-### The Query and Mutation types/查询和变更类型
+### 查询和变更类型（The Query and Mutation Types）
 
 你的 schema 中大部分的类型都是普通对象类型，但是一个 schema 内有两个特殊类型：
 
@@ -110,7 +110,7 @@ type Query {
 
 有必要记住的是，除了作为 schema 的入口，`Query` 和 `Mutation` 类型与其它 GraphQL 对象类型别无二致，它们的字段也是一样的工作方式。
 
-### Scalar types/标量类型
+### 标量类型（Scalar Types）
 
 一个对象类型有自己的名字和字段，而某些时候，这些字段必然会解析到具体数据。这就是标量类型的来源：它们表示对应 GraphQL 查询的叶子节点。
 
@@ -144,9 +144,9 @@ scalar Date
 
 然后就取决于我们的实现中如何定义将其序列化、反序列化和验证。例如，你可以指定 `Date` 类型应该总是被序列化成整型时间戳，而客户端应该知道去要求任何 date 字段都是这个格式。
 
-### Enumeration types/枚举类型
+### 枚举类型（Enumeration Types）
 
-也称作_枚举/enum_，枚举类型是一种特殊的标量，它限制在一个特殊的可选值集合内。这让你能够：
+也称作_枚举（enum）_，枚举类型是一种特殊的标量，它限制在一个特殊的可选值集合内。这让你能够：
 
 1. 验证这个类型的任何参数是可选值的的某一个
 2. 与类型系统沟通，一个字段总是一个有限值集合的其中一个值。
@@ -165,7 +165,7 @@ enum Episode {
 
 注意，各种语言实现的 GraphQL 服务会有其独特的枚举处理方式。对于将枚举作为一等公民的语言，它的实现就可以利用这个特性；而对于像 JavaScript 这样没有枚举支持的语言，这些枚举值可能就被内部映射成整数值。当然，这些细节都不会泄漏到客户端，客户端会根据字符串名称来操作枚举值。
 
-### Lists and Non-Null/列表和非空
+### 列表和非空（Lists and Non-Null）
 
 对象类型，标量以及枚举是 GraphQL 中你唯一可以定义的类型种类。但是当你在 schema 的其他部分使用这些类型时，或者在你的查询变量声明处使用时，你可以给它们应用额外的_类型修饰符_来影响这些值的验证。我们先来看一个例子：
 
@@ -197,7 +197,7 @@ query DroidById($id: ID!) {
 myField: [String!]
 ```
 
-这表示_数组本身_可以为空，但是其不能有任何空值成员。用JSON举例如下：
+这表示_数组本身_可以为空，但是其不能有任何空值成员。用 JSON 举例如下：
 
 ```js
 myField: null // 有效
@@ -212,7 +212,7 @@ myField: ['a', null, 'b'] // 错误
 myField: [String]!
 ```
 
-这表示数组本身不能为空，但是其可以包含空值成员:
+这表示数组本身不能为空，但是其可以包含空值成员：
 
 ```js
 myField: null // 错误
@@ -223,7 +223,7 @@ myField: ['a', null, 'b'] // 有效
 
 你可以根据需求嵌套任意层非空和列表修饰符。
 
-### Interfaces/接口
+### 接口（Interfaces）
 
 跟许多类型系统一样，GraphQL 支持接口。一个_接口_是一个抽象类型，它包含某些字段，而对象类型必须包含这些字段，才能算实现了这个接口。
 
@@ -293,9 +293,9 @@ query HeroForEpisode($ep: Episode!) {
 }
 ```
 
-你可以在查询指南的[内联片段](/learn/queries/#inline-fragments)章节了解更多相关信息。
+你可以在查询指南的 [内联片段](/learn/queries/#inline-fragments) 章节了解更多相关信息。
 
-### Union types/联合类型
+### 联合类型（Union Types ）
 
 联合类型和接口十分相似，但是它并不指定类型之间的任何共同字段。
 
@@ -327,9 +327,9 @@ union SearchResult = Human | Droid | Starship
 }
 ```
 
-### Input types/输入类型
+### 输入类型（Input Types） 
 
-目前为止，我们只讨论过将例如枚举和字符串等标量值作为参数传递给字段，但是你也能很容易地传递复杂对象。这在 mutation/变更中特别有用，因为有时候你需要传递一整个对象作为新建对象。在 GraphQL schema 语言中，输入对象看上去和常规对象一模一样，除了关键字是 `input` 而不是 `type`：
+目前为止，我们只讨论过将例如枚举和字符串等标量值作为参数传递给字段，但是你也能很容易地传递复杂对象。这在变更（mutation）中特别有用，因为有时候你需要传递一整个对象作为新建对象。在 GraphQL schema 语言中，输入对象看上去和常规对象一模一样，除了关键字是 `input` 而不是 `type`：
 
 ```graphql
 input ReviewInput {
@@ -338,7 +338,7 @@ input ReviewInput {
 }
 ```
 
-你可以像这样在 mutation/变更中使用输入对象类型：
+你可以像这样在变更（mutation）中使用输入对象类型：
 
 ```graphql
 # { "graphiql": true, "variables": { "ep": "JEDI", "review": { "stars": 5, "commentary": "This is a great movie!" } } }
