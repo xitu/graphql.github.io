@@ -1,5 +1,5 @@
 ---
-title: 提供 HTTP 服务
+title: 通过 HTTP 提供服务
 layout: ../_core/DocsLayout
 category: 最佳实践
 permalink: /learn/serving-over-http/
@@ -35,7 +35,7 @@ HTTP 通常与 REST 相关联，REST 使用“资源”作为其核心概念。�
 http://myapi/graphql?query={me{name}}
 ```
 
-查询变量可以作为 JSON 编码的字符串发送到名为 `variables` 的附加查询参数中。如果查询包含多个命名操作，则可以使用一个 `operationName` 查询参数来控制哪一个应当执行。
+查询变量可以作为 JSON 编码的字符串发送到名为 `variables` 的附加查询参数中。如果查询包含多个具名操作，则可以使用一个 `operationName` 查询参数来控制哪一个应当执行。
 
 ### POST 请求
 
@@ -82,4 +82,4 @@ app.use('/graphql', graphqlHTTP({
 ```
 
 ## Node
-如果您正在使用 NodeJS，我们建议使用 [express-graphql](https://github.com/graphql/express-graphql) 或 [graphql-server](https://github.com/apollostack/graphql-server)。
+如果您正在使用 NodeJS，我们推荐使用 [express-graphql](https://github.com/graphql/express-graphql) 或 [graphql-server](https://github.com/apollostack/graphql-server)。
