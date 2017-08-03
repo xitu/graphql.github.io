@@ -130,4 +130,4 @@ fragment DroidFields on Droid {
 }
 ```
 
-这只是验正系统的冰山一角；事实上需要一大套验证规则才能保证 GraphQL 查询的语义意义。规范中的“验证”章节有关于本话题更详细的内容，GraphQL.js 的 [validation](https://github.com/graphql/graphql-js/blob/master/src/validation) 目录包含了规范兼容的 GraphQL 验证器实现代码。
+这只是验证系统的冰山一角；事实上需要一大套验证规则才能保证 GraphQL 查询的语义意义。规范中的“验证”章节有关于本话题更详细的内容，GraphQL.js 的 [validation](https://github.com/graphql/graphql-js/blob/master/src/validation) 目录包含了规范兼容的 GraphQL 验证器实现代码。
