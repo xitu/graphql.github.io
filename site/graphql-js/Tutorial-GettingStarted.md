@@ -25,7 +25,7 @@ npm install graphql --save
 ```javascript
 var { graphql, buildSchema } = require('graphql');
 
-// 使用 GraphQL 图表语言构建一个 schema
+// 使用 GraphQL schema language 构建一个 schema
 var schema = buildSchema(`
   type Query {
     hello: String
@@ -39,7 +39,7 @@ var root = {
   },
 };
 
-// 运行 GraphQL query ’{ hello }’ ，输出响应
+// 运行 GraphQL query '{ hello }' ，输出响应
 graphql(schema, '{ hello }', root).then((response) => {
   console.log(response);
 });
@@ -59,4 +59,4 @@ node server.js
 
 恭喜 - 你刚刚执行了一个 GraphQL 的查询！
 
-在实际应用中，你可能不会在命令行工具里执行 GraphQL，而是会想从一个 API 服务器运行 GraphQL 查询。如何在 HTTP API 服务器运行 GraphQL，请查看[运行 GraphQL 服务器](/graphql-js/running-an-express-graphql-server/)章节。
+在实际应用中，你可能不会在命令行工具里执行 GraphQL，而是会想从一个 API 服务器运行 GraphQL 查询。如何在 HTTP API 服务器运行 GraphQL，请查看 [运行 GraphQL 服务器](/graphql-js/running-an-express-graphql-server/) 章节。
