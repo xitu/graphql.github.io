@@ -329,7 +329,7 @@ union SearchResult = Human | Droid | Starship
 
 ### 输入类型（Input Types） 
 
-目前为止，我们只讨论过将例如枚举和字符串等标量值作为参数传递给字段，但是你也能很容易地传递复杂对象。这在变更（mutation）中特别有用，因为有时候你需要传递一整个对象作为新建对象。在 GraphQL schema language中，输入对象看上去和常规对象一模一样，除了关键字是 `input` 而不是 `type`：
+目前为止，我们只讨论过将例如枚举和字符串等标量值作为参数传递给字段，但是你也能很容易地传递复杂对象。这在变更（mutation）中特别有用，因为有时候你需要传递一整个对象作为新建对象。在 GraphQL schema language 中，输入对象看上去和常规对象一模一样，除了关键字是 `input` 而不是 `type`：
 
 ```graphql
 input ReviewInput {
