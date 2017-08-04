@@ -1,9 +1,9 @@
 ---
-标题: 关于 Graphs 的思考
-规划: ../_core/DocsLayout
-目录: 最佳实践
-固定链接: /learn/thinking-in-graphs/
-下一篇: /learn/serving-over-http/
+-title: Thinking in Graphs
+-layout: ../_core/DocsLayout
+-category: Best Practices
+-permalink: /learn/thinking-in-graphs/
+-next: /learn/serving-over-http/
 ---
 
 ## 一切皆是图 [\*](https://en.wikipedia.org/wiki/Turtles_all_the_way_down)
@@ -57,7 +57,7 @@ fragment previewInfo on Email {
 
 ![业务逻辑层图](https://github.com/GraphQL-China/graphql-china.github.io/blob/36dc31c0465335a4e93eab8fcb770c4adcfba8d1/site/img/diagrams/business_layer.png)
 
-在上图中，系统中的所有入口点（REST，GraphQL和RPC）都将使用相同的验证，授权和错误处理规则进行处理。
+在上图中，系统中的所有入口点（REST、GraphQL和RPC）都将使用相同的验证，授权和错误处理规则进行处理。
 
 ### 使用遗留数据
 > 希望构建一个描述客户端如何使用数据的 GraphQL schema，而不是镜像遗留数据库 schema。
@@ -69,4 +69,4 @@ fragment previewInfo on Email {
 ## 一次一步
 > 更频繁地进行验证和获得反馈
 
-不要试图一次就做一个模型来构建整个业务域。 而是一次只构建一个场景所需的部分图表。渐渐的拓展图表，为了寻找到构建的正确解决方案，你要更频繁地进行验证和获得反馈。
+不要试图一次就做一个模型来构建整个业务域。 而是一次只构建一个场景所需的部分图表。渐渐地拓展图表，为了寻找到构建的正确解决方案，你要更频繁地进行验证和获得反馈。
