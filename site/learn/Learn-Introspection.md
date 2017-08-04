@@ -1,18 +1,18 @@
 ---
-title: 自省
+title: 内省
 layout: ../_core/DocsLayout
 category: 学习
 permalink: /learn/introspection/
 next: /learn/best-practices/
 ---
 
-我们有时候会需要去问 GraphQL Schema 它支持哪些查询。GraphQL 通过自省系统让我们可以做到这点！
+我们有时候会需要去问 GraphQL Schema 它支持哪些查询。GraphQL 通过内省系统让我们可以做到这点！
 
 在我们的星战例子里，文件
 [starWarsIntrospection-test.js](https://github.com/graphql/graphql-js/blob/master/src/__tests__/starWarsIntrospection-test.js)
-包含了一系列展示了自省系统的查询，它也是一个测试文件，用来检验参考实现的自省系统。
+包含了一系列展示了内省系统的查询，它也是一个测试文件，用来检验参考实现的内省系统。
 
-如果我们设计了类型系统，我们自然知道哪些类型是可用的。但如果类型系统不是我们设计的，我们也可以问 GraphQL，通过查询 `__schema` 字段，一个查询的根类型总是有这个字段。现在来试试，查询一下有哪些可用的类型。
+如果是我们亲自设计了类型，那我们自然知道哪些类型是可用的。但如果类型不是我们设计的，我们也可以通过查询 `__schema` 字段来向 GraphQL 询问哪些类型是可用的。一个查询的根类型总是有 `__schema` 这个字段。现在来试试，查询一下有哪些可用的类型。
 
 
 ```graphql
@@ -38,9 +38,9 @@ next: /learn/best-practices/
  - **Query, Character, Human, Episode, Droid** - 这些是我们在类型系统中定义的类型。
  - **String, Boolean** - 这些是内建的标量，由类型系统提供。
  - **\_\_Schema, \_\_Type, \_\_TypeKind, \_\_Field, \_\_InputValue,
-\_\_EnumValue, \_\_Directive** - 这些有着两个下划线的类型是自省系统的一部分。
+\_\_EnumValue, \_\_Directive** - 这些有着两个下划线的类型是内省系统的一部分。
 
-现在，来试试找到一个可以探索出有哪些可用查询的地方。当我们设计类型系统的时候，我们确定了一个所有查询开始的地方，来问问自省系统它是什么！
+现在，来试试找到一个可以探索出有哪些可用查询的地方。当我们设计类型系统的时候，我们确定了一个所有查询开始的地方，来问问内省系统它是什么！
 
 ```graphql
 # { "graphiql": true }
@@ -90,7 +90,7 @@ next: /learn/best-practices/
 }
 ```
 
-对于一个对象来说，知道它有哪些字段是很有用的，所以来问问自省系统 `Droid` 有哪些字段：
+对于一个对象来说，知道它有哪些字段是很有用的，所以来问问内省系统 `Droid` 有哪些字段：
 
 ```graphql
 # { "graphiql": true }
@@ -144,7 +144,7 @@ next: /learn/best-practices/
 
 ```
 
-最后我们来看看自省系统特别适合用来开发工具的特性，我们来向自省系统请求文档！
+最后我们来看看内省系统特别适合用来开发工具的特性，我们来向内省系统请求文档！
 
 ```graphql
 # { "graphiql": true }
@@ -156,6 +156,6 @@ next: /learn/best-practices/
 }
 ```
 
-因此我们可以通过自省系统接触到类型系统的文档，并做出文档浏览器，或是丰富的 IDE 体验。
+因此我们可以通过内省系统接触到类型系统的文档，并做出文档浏览器，或是提供丰富的 IDE 体验。
 
-这些只是自省系统的浅浅一层。我们还可以查询枚举值、某个类型实现了什么接口等等，我们甚至可以对自省系统自省。关于这个主题的详细说明可以看规范的“Introspection”部分，以及 GraphQL.js 中的 [introspection](https://github.com/graphql/graphql-js/blob/master/src/type/introspection.js) 文件，它包含了符合规范的一个自省系统的实现。
+这些只是内省系统的浅浅一层。我们还可以查询枚举值、某个类型实现了什么接口等等，我们甚至可以对内省系统内省。关于这个主题的详细说明可以看规范的“Introspection”部分，以及 GraphQL.js 中的 [introspection](https://github.com/graphql/graphql-js/blob/master/src/type/introspection.js) 文件，它包含了符合规范的一个内省系统的实现。
