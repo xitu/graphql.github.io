@@ -1,17 +1,17 @@
 ---
-title: Authentication and Express Middleware
-sidebarTitle: Authentication & Middleware
+title: 认证和 Express 中间件
+sidebarTitle: 认证 & 中间件
 layout: ../_core/GraphQLJSLayout
-category: GraphQL.js Tutorial
+category: GraphQL.js 指南
 permalink: /graphql-js/authentication-and-express-middleware/
 next: /graphql-js/constructing-types/
 ---
 
-It's simple to use any Express middleware in conjunction with `express-graphql`. In particular, this is a great pattern for handling authentication.
+Express 中间件可以很方便地结合 `express-graphql` 使用，这也是一个良好的认证处理模式。
 
-To use middleware with a GraphQL resolver, just use the middleware like you would with a normal Express app. The `request` object is then available as the second argument in any resolver.
+你可以就像普通 Express 应用使用中间件一样把中间件和 GraphQL 解析器一起使用。然后 `request` 对象就会作为解析函数的第二参数传入。（译者案：[v0.5.0](https://github.com/graphql/graphql-js/releases/tag/v0.5.0) 之后，作为第三参数）
 
-For example, let's say we wanted our server to log the IP address of every request, and we also want to write an API that returns the IP address of the caller. We can do the former with middleware, and the latter by accessing the `request` object in a resolver. Here's server code that implements this:
+举个例子，假设我们想要服务器记录每个请求的 IP 地址，并编写一个返回调用者 IP 地址的 API。前者我们通过中间件完成，后者则通过在解析器中取 `request` 对象即可。下面是实现这个功能的服务端代码：
 
 ```javascript
 var express = require('express');
@@ -46,8 +46,8 @@ app.listen(4000);
 console.log('Running a GraphQL API server at localhost:4000/graphql');
 ```
 
-In a REST API, authentication is often handled with a header, that contains an auth token which proves what user is making this request. Express middleware processes these headers and puts authentication data on the Express `request` object. Some middleware modules that handle authentication like this are [Passport](http://passportjs.org/), [express-jwt](https://github.com/auth0/express-jwt), and [express-session](https://github.com/expressjs/session). Each of these modules works with `express-graphql`.
+在 REST API 中，认证通常是借由 header 处理的，其中包含一个 auth token 用于识别发出请求的用户。Express 中间件会处理这些 header，并将认证数据放进 Express 的 `request` 对象。如此处理认证的中间件模块有 [Passport](http://passportjs.org/), [express-jwt](https://github.com/auth0/express-jwt)，和 [express-session](https://github.com/expressjs/session)。这些模块每一个能配合 `express-graphql` 使用。
 
-If you aren't familiar with any of these authentication mechanisms, we recommend using `express-jwt` because it's simple without sacrificing any future flexibility.
+如果你对这些认证机制都不熟悉，我们推荐使用 `express-jwt`，因为它既简单又不会牺牲任何后期的弹性。
 
-If you've read through the docs linearly to get to this point, congratulations! You now know everything you need to build a practical GraphQL API server.
+如果你是从头读到这儿的，那么恭喜你！你现在已经知道构建一个 GraphQL API 服务器的所有知识了。
