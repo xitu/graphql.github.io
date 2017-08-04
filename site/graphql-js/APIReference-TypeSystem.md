@@ -1,5 +1,5 @@
 ---
-title: graphql/types
+title: graphql/type 类型系统
 layout: ../_core/GraphQLJSLayout
 category: API Reference
 permalink: /graphql-js/type/
@@ -7,14 +7,14 @@ sublinks: getNamedType,getNullableType,GraphQLBoolean,GraphQLEnumType,GraphQLFlo
 next: /graphql-js/utilities/
 ---
 
-The `graphql/type` module is responsible for defining GraphQL types and schema. You can import either from the `graphql/type` module, or from the root `graphql` module. For example:
+`graphql/type` 模块的职责为定义 GraphQL 的类型和 schemea。你可以从 `graphql/type` 模块或是根模块 `graphql` 引入。例如：
 
 ```js
 import { GraphQLSchema } from 'graphql'; // ES6
 var { GraphQLSchema } = require('graphql'); // CommonJS
 ```
 
-## Overview
+## 概览
 
 *Schema*
 
@@ -22,146 +22,146 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
   <li>
     <a href="#graphqlschema">
       <pre>class GraphQLSchema</pre>
-      A representation of the capabilities of a GraphQL Server.
+      描述一个 GraphQL 服务器的功能。
     </a>
   </li>
 </ul>
 
-*Definitions*
+*定义（Definitions）*
 
 <ul class="apiIndex">
   <li>
     <a href="#graphqlscalartype">
       <pre>class GraphQLScalarType</pre>
-      A scalar type within GraphQL.
+      GraphQL 中表示标量的类型。
     </a>
   </li>
   <li>
     <a href="#graphqlobjecttype">
       <pre>class GraphQLObjectType</pre>
-      An object type within GraphQL that contains fields.
+      GraphQL 中包含字段的对象类型。
     </a>
   </li>
   <li>
     <a href="#graphqlinterfacetype">
       <pre>class GraphQLInterfaceType</pre>
-      An interface type within GraphQL that defines fields implementations will contain.
+      GraphQL 中的接口类型，定义了实现该接口需要持有的字段。
     </a>
   </li>
   <li>
     <a href="#graphqluniontype">
       <pre>class GraphQLUnionType</pre>
-      A union type within GraphQL that defines a list of implementations.
+      GraphQL 中的联合类型，定义一系列有效类型的合集。
     </a>
   </li>
   <li>
     <a href="#graphqlenumtype">
       <pre>class GraphQLEnumType</pre>
-      An enum type within GraphQL that defines a list of valid values.
+      GraphQL 中的枚举类型，定义一个有效值的列表。
     </a>
   </li>
   <li>
     <a href="#graphqlinputobjecttype">
       <pre>class GraphQLInputObjectType</pre>
-      An input object type within GraphQL that represents structured inputs.
+      GraphQL 中的输入对象类型，表示一系列结构化的输入参数。
     </a>
   </li>
   <li>
     <a href="#graphqllist">
       <pre>class GraphQLList</pre>
-      A type wrapper around other types that represents a list of those types.
+      类型包装器，表示被包装类型的列表。
     </a>
   </li>
   <li>
     <a href="#graphqlnonnull">
       <pre>class GraphQLNonNull</pre>
-      A type wrapper around other types that represents a non-null version of those types.
+      类型包装器，表示被包装类型取值不为 null 的版本。
     </a>
   </li>
 </ul>
 
-*Predicates*
+*谓词函数（Predicates）*
 
 <ul class="apiIndex">
   <li>
     <a href="#isinputtype">
       <pre>function isInputType</pre>
-      Returns if a type can be used as input types for arguments and directives.
+      判断某类型是否可以作为字段查询参数。
     </a>
   </li>
   <li>
     <a href="#isoutputtype">
       <pre>function isOutputType</pre>
-      Returns if a type can be used as output types as the result of fields.
+      判断某类型是否可以作为字段查询结果的值。
   </li>
   <li>
     <a href="#isleaftype">
       <pre>function isLeafType</pre>
-      Returns if a type can be a leaf value in a response.
+      判断某类型是否可以作为响应结果的叶节点值。
     </a>
   </li>
   <li>
     <a href="#iscompositetype">
       <pre>function isCompositeType</pre>
-      Returns if a type can be the parent context of a selection set.
+      判断某类型是否为组合类型，即是否可作为参加组合的叶节点的父节点。
     </a>
   </li>
   <li>
     <a href="#isabstracttype">
       <pre>function isAbstractType</pre>
-      Returns if a type is a combination of object types.
+      判断某类型是否为抽象类型，即是否可代表其一系列 Object 类型实现。
     </a>
   </li>
 </ul>
 
-*Un-modifiers*
+*去包装函数（Un-modifiers）*
 
 <ul class="apiIndex">
   <li>
     <a href="#getnullabletype">
       <pre>function getNullableType</pre>
-      Strips any non-null wrappers from a type.
+      去掉非空包装，返回原先的类型。
     </a>
   </li>
   <li>
     <a href="#getnamedtype">
       <pre>function getNamedType</pre>
-      Strips any non-null or list wrappers from a type.
+      去掉非空和列表包装，返回原先的类型。
     </a>
   </li>
 </ul>
 
-*Scalars*
+*标量（Scalar）类型*
 
 <ul class="apiIndex">
   <li>
     <a href="#graphqlint">
       <pre>var GraphQLInt</pre>
-      A scalar type representing integers.
+      整型数标量类型。
     </a>
   </li>
   <li>
     <a href="#graphqlfloat">
       <pre>var GraphQLFloat</pre>
-      A scalar type representing floats.
+      浮点数标量类型。
     </a>
   </li>
   <li>
     <a href="#graphqlstring">
       <pre>var GraphQLString</pre>
-      A scalar type representing strings.
+      字符串标量类型。
     </a>
   </li>
   <li>
     <a href="#graphqlboolean">
       <pre>var GraphQLBoolean</pre>
-      A scalar type representing booleans.
+      布尔标量类型。
     </a>
   </li>
   <li>
     <a href="#graphqlid">
       <pre>var GraphQLID</pre>
-      A scalar type representing IDs.
+      ID 标量类型。
     </a>
   </li>
 </ul>
@@ -181,11 +181,9 @@ type GraphQLSchemaConfig = {
 }
 ```
 
-A Schema is created by supplying the root types of each type of operation,
-query and mutation (optional). A schema definition is then supplied to the
-validator and executor.
+使用指定的 query 及 mutation（可选）的根类型来创建Schema。生成的 Schema 可用于之后的校验器和执行器。
 
-#### Example
+#### 示例
 
 ```js
 var MyAppSchema = new GraphQLSchema({
@@ -194,7 +192,7 @@ var MyAppSchema = new GraphQLSchema({
 });
 ```
 
-## Definitions
+## 定义（Definitions）
 
 ### GraphQLScalarType
 
@@ -212,9 +210,7 @@ type GraphQLScalarTypeConfig<InternalType> = {
 }
 ```
 
-The leaf values of any request and input values to arguments are
-Scalars (or Enums) and are defined with a name and a series of serialization
-functions used to ensure validity.
+构建用于表示请求的叶节点值和输入值的标量（或枚举）类型 `GraphQLScalarType` 时，需要指定 `name` 以及一系列用于确保值的有效性的序列化函数。
 
 #### Example
 
@@ -297,14 +293,11 @@ type GraphQLFieldConfigMap = {
 };
 ```
 
-Almost all of the GraphQL types you define will be object types. Object types
-have a name, but most importantly describe their fields.
+几乎所有你要去定义的 GraphQL 类型都会是 Object 类型。Object 类型有自己的名字 `name`，但最重要的是它描述了它有哪些字段。
 
-When two types need to refer to each other, or a type needs to refer to
-itself in a field, you can use a function expression (aka a closure or a
-thunk) to supply the fields lazily.
+当两个类型需要相互指涉，或是某类型需要的某一字段类型为其自身，你可以使用函数表达式（也可称为闭包或是 thunk）来实现字段类型的延后求值。
 
-#### Examples
+#### 示例
 
 ```js
 var AddressType = new GraphQLObjectType({
@@ -345,12 +338,9 @@ type GraphQLInterfaceTypeConfig = {
 };
 ```
 
-When a field can return one of a heterogeneous set of types, a Interface type
-is used to describe what types are possible, what fields are in common across
-all types, as well as a function to determine which type is actually used
-when the field is resolved.
+当一个字段可能返回多种不同类型时，可使用接口类型 `GraphQLInterfaceType`，来描述这些可能类型有什么共同字段，也可指定 `resolveType` 函数来决定该字段实际被解析时为何种类型。
 
-#### Example
+#### 示例
 
 ```js
 var EntityType = new GraphQLInterfaceType({
@@ -378,11 +368,9 @@ type GraphQLUnionTypeConfig = {
 type GraphQLObjectsThunk = () => Array<GraphQLObjectType>;
 ```
 
-When a field can return one of a heterogeneous set of types, a Union type
-is used to describe what types are possible as well as providing a function
-to determine which type is actually used when the field is resolved.
+当一个字段可以返回多种不同类型时，可使用联合类型 `GraphQLUnionType` 描述所有可能类型，也可指定 `resolveType` 函数该字段实际被解析时为何种类型。
 
-### Example
+### 示例
 
 ```js
 var PetType = new GraphQLUnionType({
@@ -430,6 +418,10 @@ type GraphQLEnumValueDefinition = {
 }
 ```
 
+一些请求的叶节点值和输入值为枚举类型。GraphQL 会将枚举值序列化为字符串，但在内部使用时，枚举值可以用任何类型来表示，一般用整型来表示。
+
+备注：如果在定义时没有指定 `value`，在内部使用时会用枚举类型的 `name` 作为其值。
+
 Some leaf values of requests and input values are Enums. GraphQL serializes
 Enum values as strings, however internally Enums can be represented by any
 kind of type, often integers.
@@ -437,7 +429,7 @@ kind of type, often integers.
 Note: If a value is not provided in a definition, the name of the enum value
 will be used as it's internal value.
 
-#### Example
+#### 示例
 
 ```js
 var RGBType = new GraphQLEnumType({
@@ -487,12 +479,11 @@ type GraphQLInputObjectFieldMap = {
 };
 ```
 
-An input object defines a structured collection of fields which may be
-supplied to a field argument.
+一个输入对象类型定义了一群可以作为某字段查询参数的字段。
 
-Using `NonNull` will ensure that a value must be provided by the query
+使用 `NonNull` 标明查询一定会有返回值。
 
-#### Example
+#### 示例
 
 ```js
 var GeoPoint = new GraphQLInputObjectType({
@@ -513,11 +504,9 @@ class GraphQLList {
 }
 ```
 
-A list is a kind of type marker, a wrapping type which points to another
-type. Lists are often created within the context of defining the fields of
-an object type.
+列表类型是一种类型标记，用来包装另一个类型。在定义一个对象类型的字段时，经常出现。
 
-#### Example
+#### 示例
 
 ```js
 var PersonType = new GraphQLObjectType({
@@ -537,13 +526,9 @@ class GraphQLNonNull {
 }
 ```
 
-A non-null is a kind of type marker, a wrapping type which points to another
-type. Non-null types enforce that their values are never null and can ensure
-an error is raised if this ever occurs during a request. It is useful for
-fields which you can make a strong guarantee on non-nullability, for example
-usually the id field of a database row will never be null.
+非空（non-null）类型是一种类型标记，用来包装另一个类型。强制其取值不能为 null，在某次请求时如果出现 null 值便会抛出错误。用于标记你确信肯定非空的字段时很有用，例如通常来说，数据库里某条数据的 id 字段都不会为空。
 
-#### Example
+#### 示例
 
 ```js
 var RowType = new GraphQLObjectType({
@@ -554,7 +539,7 @@ var RowType = new GraphQLObjectType({
 });
 ```
 
-## Predicates
+## 谓词函数
 
 ### isInputType
 
@@ -562,7 +547,7 @@ var RowType = new GraphQLObjectType({
 function isInputType(type: ?GraphQLType): boolean
 ```
 
-These types may be used as input types for arguments and directives.
+判断某类型是否可以作为字段查询参数。
 
 ### isOutputType
 
@@ -570,7 +555,7 @@ These types may be used as input types for arguments and directives.
 function isOutputType(type: ?GraphQLType): boolean
 ```
 
-These types may be used as output types as the result of fields
+判断某类型是否可以作为字段查询结果的值。
 
 ### isLeafType
 
@@ -578,7 +563,7 @@ These types may be used as output types as the result of fields
 function isLeafType(type: ?GraphQLType): boolean
 ```
 
-These types may describe types which may be leaf values
+判断某类型是否可以作为响应结果的叶节点值。
 
 ### isCompositeType
 
@@ -586,7 +571,7 @@ These types may describe types which may be leaf values
 function isCompositeType(type: ?GraphQLType): boolean
 ```
 
-These types may describe the parent context of a selection set
+判断某类型是否为组合类型，即是否可作为参加组合的叶节点的父节点。
 
 ### isAbstractType
 
@@ -594,9 +579,9 @@ These types may describe the parent context of a selection set
 function isAbstractType(type: ?GraphQLType): boolean
 ```
 
-These types may describe a combination of object types
+判断某类型是否为抽象类型，即是否可代表其一系列 Object 类型实现。
 
-## Un-modifiers
+## 去包装函数（Un-modifiers）
 
 ### getNullableType
 
@@ -604,8 +589,7 @@ These types may describe a combination of object types
 function getNullableType(type: ?GraphQLType): ?GraphQLNullableType
 ```
 
-If a given type is non-nullable, this strips the non-nullability and
-returns the underlying type.
+若该类型是非空类型的包装结果，该函数会去掉包装，返回原先的类型。
 
 ### getNamedType
 
@@ -613,8 +597,7 @@ returns the underlying type.
 function getNamedType(type: ?GraphQLType): ?GraphQLNamedType
 ```
 
-If a given type is non-nullable or a list, this repeated strips the
-non-nullability and list wrappers and returns the underlying type.
+若该类型是非空类型或列表类型的包装结果，该函数会去掉包装，返回原先的类型。
 
 ## Scalars
 
@@ -624,7 +607,7 @@ non-nullability and list wrappers and returns the underlying type.
 var GraphQLInt: GraphQLScalarType;
 ```
 
-A `GraphQLScalarType` that represents an int.
+一个代表整型数的 `GraphQLScalarType`。
 
 ### GraphQLFloat
 
@@ -632,7 +615,7 @@ A `GraphQLScalarType` that represents an int.
 var GraphQLFloat: GraphQLScalarType;
 ```
 
-A `GraphQLScalarType` that represents a float.
+一个代表浮点数的 `GraphQLScalarType`。
 
 ### GraphQLString
 
@@ -640,7 +623,7 @@ A `GraphQLScalarType` that represents a float.
 var GraphQLString: GraphQLScalarType;
 ```
 
-A `GraphQLScalarType` that represents a string.
+一个代表字符串的 `GraphQLScalarType`。
 
 ### GraphQLBoolean
 
@@ -648,7 +631,7 @@ A `GraphQLScalarType` that represents a string.
 var GraphQLBoolean: GraphQLScalarType;
 ```
 
-A `GraphQLScalarType` that represents a boolean.
+一个代表布尔值的 `GraphQLScalarType`。
 
 ### GraphQLID
 
@@ -656,4 +639,4 @@ A `GraphQLScalarType` that represents a boolean.
 var GraphQLID: GraphQLScalarType;
 ```
 
-A `GraphQLScalarType` that represents an ID.
+一个代表 ID 值的 `GraphQLScalarType`。
