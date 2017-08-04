@@ -20,7 +20,7 @@ npm install graphql --save
 
 ## 编写代码
 
-我们需要一个定义 `Query` 类型的图表来处理 GraphQL 查询。我们还需要一个 API 根节点，为每个 API 端点提供一个名为“resolver”的函数。对于只返回“Hello world！”的 API，我们可以将此代码放在名为 `server.js` 的文件中：
+我们需要一个定义 `Query` 类型的 schema 来处理 GraphQL 查询。我们还需要一个 API 根节点，为每个 API 端点提供一个名为“resolver”的函数。对于只返回“Hello world！”的 API，我们可以将此代码放在名为 `server.js` 的文件中：
 
 ```javascript
 var { graphql, buildSchema } = require('graphql');
