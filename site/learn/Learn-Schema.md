@@ -4,7 +4,7 @@ layout: ../_core/DocsLayout
 category: 学习
 permalink: /learn/schema/
 next: /learn/validation/
-sublinks: 类型系统（Type System）,类型语言（Type Language）,对象类型和字段（Object Types and Fields）,参数（Arguments）,查询和变更类型（The Query and Mutation Types）,标量类型（Scalar Types）,枚举类型（Enumeration Types）,列表和非空（Lists and Non-Null）,接口（Interfaces）,联合类型（Union Types ）,输入类型（Input Types） 
+sublinks: 类型系统（Type System）,类型语言（Type Language）,对象类型和字段（Object Types and Fields）,参数（Arguments）,查询和变更类型（The Query and Mutation Types）,标量类型（Scalar Types）,枚举类型（Enumeration Types）,列表和非空（Lists and Non-Null）,接口（Interfaces）,联合类型（Union Types）,输入类型（Input Types） 
 ---
 
 在本页，你将学到关于 GraphQL 类型系统中所有你需要了解的知识，以及类型系统如何描述可以查询的数据。因为 GraphQL 可以运行在任何后端框架或者编程语言之上，我们将摒除实现上的细节而仅仅专注于其概念。
@@ -37,7 +37,7 @@ GraphQL 服务可以用任何语言编写，因为我们并不依赖于任何特
 
 ### 对象类型和字段（Object Types and Fields）
 
-一个 GraphQL schema 中的最基本的组件是对象类型，它就表示你可以从服务上获取到什么类型的对象，以及这个对象有什么字段。使用 GraphQL schema 语言，我们可以这样表示它：
+一个 GraphQL schema 中的最基本的组件是对象类型，它就表示你可以从服务上获取到什么类型的对象，以及这个对象有什么字段。使用 GraphQL schema language，我们可以这样表示它：
 
 ```graphql
 type Character {
@@ -48,11 +48,11 @@ type Character {
 
 虽然这语言可读性相当好，但我们还是一起看看其用语，以便我们可以有些共通的词汇：
 
-- `Character` 是一个_ GraphQL 对象类型_，表示其是一个拥有一些字段的类型。你的 schema 中的大多数类型都会是对象类型。
-- `name` 和 `appearsIn` 是 `Character` 类型上的_字段_。这意味着在一个操作 `Character` 类型的 GraphQL 查询中的任何部分，都只能出现 `name` 和 `appearsIn` 字段。
-- `String` 是内置的_标量_类型之一 —— 标量类型是解析到单个标量对象的类型，无法在查询中对它进行次级选择。后面我们将细述标量类型。
-- `String!` 表示这个字段是_非空的_，GraphQL 服务保证当你查询这个字段后总会给你返回一个值。在类型语言里面，我们用一个感叹号来表示这个特性。
-- `[Episode]!` 表示一个 `Episode` _数组_。因为它也是_非空的_，所以当你查询 `appearsIn` 字段的时候，你也总能得到一个数组（零个或者多个元素）。
+- `Character` 是一个** GraphQL 对象类型**，表示其是一个拥有一些字段的类型。你的 schema 中的大多数类型都会是对象类型。
+- `name` 和 `appearsIn` 是 `Character` 类型上的**字段**。这意味着在一个操作 `Character` 类型的 GraphQL 查询中的任何部分，都只能出现 `name` 和 `appearsIn` 字段。
+- `String` 是内置的**标量**类型之一 —— 标量类型是解析到单个标量对象的类型，无法在查询中对它进行次级选择。后面我们将细述标量类型。
+- `String!` 表示这个字段是**非空的**，GraphQL 服务保证当你查询这个字段后总会给你返回一个值。在类型语言里面，我们用一个感叹号来表示这个特性。
+- `[Episode]!` 表示一个 `Episode` **数组**。因为它也是**非空的**，所以当你查询 `appearsIn` 字段的时候，你也总能得到一个数组（零个或者多个元素）。
 
 现在你知道一个 GraphQL 对象类型看上去是怎样，也知道如何阅读基础的 GraphQL 类型语言了。
 
@@ -70,7 +70,7 @@ type Starship {
 
 所有参数都是具名的，不像 JavaScript 或者 Python 之类的语言，函数接受一个有序参数列表，而在 GraphQL 中，所有参数必须具名传递。本例中，`length` 字段定义了一个参数，`unit`。
 
-参数可能是必选或者可选的，当一个参数是可选的，我们可以定义一个_默认值_ —— 如果 `unit` 参数没有传递，那么它将会被默认设置为 `METER`。
+参数可能是必选或者可选的，当一个参数是可选的，我们可以定义一个**默认值** —— 如果 `unit` 参数没有传递，那么它将会被默认设置为 `METER`。
 
 ### 查询和变更类型（The Query and Mutation Types）
 
@@ -83,7 +83,7 @@ schema {
 }
 ```
 
-每一个 GraphQL 服务都有一个 `query` 类型，可能有一个 `mutation` 类型。这两个类型和常规对象类型无差，但是它们之所以特殊，是因为它们定义了每一个 GraphQL 查询的_入口_。因此如果你看到一个像这样的查询：
+每一个 GraphQL 服务都有一个 `query` 类型，可能有一个 `mutation` 类型。这两个类型和常规对象类型无差，但是它们之所以特殊，是因为它们定义了每一个 GraphQL 查询的**入口**。因此如果你看到一个像这样的查询：
 
 ```graphql
 # { "graphiql": true }
@@ -146,7 +146,7 @@ scalar Date
 
 ### 枚举类型（Enumeration Types）
 
-也称作_枚举（enum）_，枚举类型是一种特殊的标量，它限制在一个特殊的可选值集合内。这让你能够：
+也称作**枚举（enum）**，枚举类型是一种特殊的标量，它限制在一个特殊的可选值集合内。这让你能够：
 
 1. 验证这个类型的任何参数是可选值的的某一个
 2. 与类型系统沟通，一个字段总是一个有限值集合的其中一个值。
@@ -167,7 +167,7 @@ enum Episode {
 
 ### 列表和非空（Lists and Non-Null）
 
-对象类型，标量以及枚举是 GraphQL 中你唯一可以定义的类型种类。但是当你在 schema 的其他部分使用这些类型时，或者在你的查询变量声明处使用时，你可以给它们应用额外的_类型修饰符_来影响这些值的验证。我们先来看一个例子：
+对象类型，标量以及枚举是 GraphQL 中你唯一可以定义的类型种类。但是当你在 schema 的其他部分使用这些类型时，或者在你的查询变量声明处使用时，你可以给它们应用额外的**类型修饰符**来影响这些值的验证。我们先来看一个例子：
 
 ```graphql
 type Character {
@@ -176,7 +176,7 @@ type Character {
 }
 ```
 
-此处我们使用了一个 `String` 类型，并通过在类型名后面添加一个感叹号`!`将其标注为_非空_。这表示我们的服务器对于这个字段，总是会返回一个非空值，如果它结果得到了一个空值，那么事实上将会触发一个 GraphQL 执行错误，以让客户端知道发生了错误。
+此处我们使用了一个 `String` 类型，并通过在类型名后面添加一个感叹号`!`将其标注为**非空**。这表示我们的服务器对于这个字段，总是会返回一个非空值，如果它结果得到了一个空值，那么事实上将会触发一个 GraphQL 执行错误，以让客户端知道发生了错误。
 
 非空类型修饰符也可以用于定义字段上的参数，如果这个参数上传递了一个空值（不管通过 GraphQL 字符串还是变量），那么会导致服务器返回一个验证错误。
 
@@ -197,7 +197,7 @@ query DroidById($id: ID!) {
 myField: [String!]
 ```
 
-这表示_数组本身_可以为空，但是其不能有任何空值成员。用 JSON 举例如下：
+这表示**数组本身**可以为空，但是其不能有任何空值成员。用 JSON 举例如下：
 
 ```js
 myField: null // 有效
@@ -225,7 +225,7 @@ myField: ['a', null, 'b'] // 有效
 
 ### 接口（Interfaces）
 
-跟许多类型系统一样，GraphQL 支持接口。一个_接口_是一个抽象类型，它包含某些字段，而对象类型必须包含这些字段，才能算实现了这个接口。
+跟许多类型系统一样，GraphQL 支持接口。一个**接口**是一个抽象类型，它包含某些字段，而对象类型必须包含这些字段，才能算实现了这个接口。
 
 例如，你可以用一个 `Character` 接口用以表示《星球大战》三部曲中的任何角色：
 
@@ -238,7 +238,7 @@ interface Character {
 }
 ```
 
-这意味着任何_实现_ `Character` 的类型都要具有这些字段，并有对应参数和返回类型。
+这意味着任何**实现** `Character` 的类型都要具有这些字段，并有对应参数和返回类型。
 
 例如，这里有一些可能实现了 `Character` 的类型：
 
@@ -295,7 +295,7 @@ query HeroForEpisode($ep: Episode!) {
 
 你可以在查询指南的 [内联片段](/learn/queries/#inline-fragments) 章节了解更多相关信息。
 
-### 联合类型（Union Types ）
+### 联合类型（Union Types）
 
 联合类型和接口十分相似，但是它并不指定类型之间的任何共同字段。
 
@@ -329,7 +329,7 @@ union SearchResult = Human | Droid | Starship
 
 ### 输入类型（Input Types） 
 
-目前为止，我们只讨论过将例如枚举和字符串等标量值作为参数传递给字段，但是你也能很容易地传递复杂对象。这在变更（mutation）中特别有用，因为有时候你需要传递一整个对象作为新建对象。在 GraphQL schema 语言中，输入对象看上去和常规对象一模一样，除了关键字是 `input` 而不是 `type`：
+目前为止，我们只讨论过将例如枚举和字符串等标量值作为参数传递给字段，但是你也能很容易地传递复杂对象。这在变更（mutation）中特别有用，因为有时候你需要传递一整个对象作为新建对象。在 GraphQL schema language中，输入对象看上去和常规对象一模一样，除了关键字是 `input` 而不是 `type`：
 
 ```graphql
 input ReviewInput {
