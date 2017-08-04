@@ -67,7 +67,7 @@ sublinks: 字段（Fields）,参数Arguments）,别名（Aliases）,片段（Fra
 {
   human(id: "1000") {
     name
-    height（unit: FOOT)
+    height(unit: FOOT)
   }
 }
 ```
@@ -282,7 +282,7 @@ query HeroForEpisode($ep: Episode!) {
 ```graphql
 # { "graphiql": true}
 {
-  search（text: "an") {
+  search(text: "an") {
     __typename
     ... on Human {
       name
