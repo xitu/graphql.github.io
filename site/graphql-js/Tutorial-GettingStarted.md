@@ -1,8 +1,8 @@
 ---
-title: Getting Started With GraphQL.js
-sidebarTitle: Getting Started
+title: GraphQL.js 入门
+sidebarTitle: 入门
 layout: ../_core/GraphQLJSLayout
-category: GraphQL.js Tutorial
+category: GraphQL.js 指南
 permalink: /graphql-js/
 next: /graphql-js/running-an-express-graphql-server/
 ---
