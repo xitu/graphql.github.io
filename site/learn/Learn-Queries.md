@@ -4,7 +4,7 @@ layout: ../_core/DocsLayout
 category: 学习
 permalink: /learn/queries/
 next: /learn/schema/
-sublinks: 字段（Fields）,参数Arguments）,别名（Aliases）,片段（Fragments）,变量（Variables）,操作名称（Operation Name）,指令（Directives）,变更（Mutations）,内联片段（Inline Fragments）
+sublinks: 字段（Fields）,参数（Arguments）,别名（Aliases）,片段（Fragments）,变量（Variables）,操作名称（Operation Name）,指令（Directives）,变更（Mutations）,内联片段（Inline Fragments）
 ---
 
 你可以在本页学到有关如何查询 GraphQL 服务器的详细信息。
