@@ -1,5 +1,5 @@
 ---
-title: graphql/type 类型系统
+title: graphql/types
 layout: ../_core/GraphQLJSLayout
 category: API Reference
 permalink: /graphql-js/type/
@@ -7,7 +7,7 @@ sublinks: getNamedType,getNullableType,GraphQLBoolean,GraphQLEnumType,GraphQLFlo
 next: /graphql-js/utilities/
 ---
 
-`graphql/type` 模块的职责为定义 GraphQL 的类型和 schemea。你可以从 `graphql/type` 模块或是根模块 `graphql` 引入。例如：
+`graphql/type` 模块的职责为定义 GraphQL 的类型和 schema。你可以从 `graphql/type` 模块或是根模块 `graphql` 引入。例如：
 
 ```js
 import { GraphQLSchema } from 'graphql'; // ES6
@@ -75,7 +75,7 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
   <li>
     <a href="#graphqlnonnull">
       <pre>class GraphQLNonNull</pre>
-      类型包装器，表示被包装类型取值不为 null 的版本。
+      类型包装器，表示被包装类型取值非空的版本。
     </a>
   </li>
 </ul>
@@ -103,18 +103,18 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
   <li>
     <a href="#iscompositetype">
       <pre>function isCompositeType</pre>
-      判断某类型是否为组合类型，即是否可作为参加组合的叶节点的父节点。
+      判断某类型是否可以作为一个选择集的父级上下文。
     </a>
   </li>
   <li>
     <a href="#isabstracttype">
       <pre>function isAbstractType</pre>
-      判断某类型是否为抽象类型，即是否可代表其一系列 Object 类型实现。
+      判断某类型是否为对象类型的组合。
     </a>
   </li>
 </ul>
 
-*去包装函数（Un-modifiers）*
+*去包装修饰器（Un-modifiers）*
 
 <ul class="apiIndex">
   <li>
@@ -212,7 +212,7 @@ type GraphQLScalarTypeConfig<InternalType> = {
 
 构建用于表示请求的叶节点值和输入值的标量（或枚举）类型 `GraphQLScalarType` 时，需要指定 `name` 以及一系列用于确保值的有效性的序列化函数。
 
-#### Example
+#### 示例
 
 ```js
 var OddType = new GraphQLScalarType({
@@ -295,7 +295,7 @@ type GraphQLFieldConfigMap = {
 
 几乎所有你要去定义的 GraphQL 类型都会是 Object 类型。Object 类型有自己的名字 `name`，但最重要的是它描述了它有哪些字段。
 
-当两个类型需要相互指涉，或是某类型需要的某一字段类型为其自身，你可以使用函数表达式（也可称为闭包或是 thunk）来实现字段类型的延后求值。
+当两个类型需要相互指代，或是某类型需要的某一字段类型为其自身，你可以使用函数表达式（也可称为闭包或是 thunk）来实现字段类型的延后求值。
 
 #### 示例
 
@@ -422,13 +422,6 @@ type GraphQLEnumValueDefinition = {
 
 备注：如果在定义时没有指定 `value`，在内部使用时会用枚举类型的 `name` 作为其值。
 
-Some leaf values of requests and input values are Enums. GraphQL serializes
-Enum values as strings, however internally Enums can be represented by any
-kind of type, often integers.
-
-Note: If a value is not provided in a definition, the name of the enum value
-will be used as it's internal value.
-
 #### 示例
 
 ```js
@@ -479,7 +472,7 @@ type GraphQLInputObjectFieldMap = {
 };
 ```
 
-一个输入对象类型定义了一群可以作为某字段查询参数的字段。
+一个输入对象类型定义了一组可以作为某字段查询参数的字段。
 
 使用 `NonNull` 标明查询一定会有返回值。
 
@@ -571,7 +564,7 @@ function isLeafType(type: ?GraphQLType): boolean
 function isCompositeType(type: ?GraphQLType): boolean
 ```
 
-判断某类型是否为组合类型，即是否可作为参加组合的叶节点的父节点。
+判断某类型是否可以作为一个选择集的父级上下文。
 
 ### isAbstractType
 
@@ -579,9 +572,9 @@ function isCompositeType(type: ?GraphQLType): boolean
 function isAbstractType(type: ?GraphQLType): boolean
 ```
 
-判断某类型是否为抽象类型，即是否可代表其一系列 Object 类型实现。
+判断某类型是否为对象类型的组合。
 
-## 去包装函数（Un-modifiers）
+## 去包装修饰器（Un-modifiers）
 
 ### getNullableType
 
