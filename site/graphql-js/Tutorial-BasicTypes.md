@@ -30,7 +30,7 @@ var schema = buildSchema(`
   }
 `);
 
-// root 将会提供每个 API 接口端点的解析函数
+// root 将会提供每个 API 入口端点的解析函数
 var root = {
   quoteOfTheDay: () => {
     return Math.random() < 0.5 ? 'Take it easy' : 'Salvation lies within';
