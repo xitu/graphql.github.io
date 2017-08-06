@@ -16,7 +16,7 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
 
 ## 概览
 
-*Schema*
+**Schema**
 
 <ul class="apiIndex">
   <li>
@@ -27,7 +27,7 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-*定义（Definitions）*
+**定义（Definitions）**
 
 <ul class="apiIndex">
   <li>
@@ -57,7 +57,7 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
   <li>
     <a href="#graphqlenumtype">
       <pre>class GraphQLEnumType</pre>
-      GraphQL 中的枚举类型，定义一个有效值的列表。
+      GraphQL 中的枚举类型，定义一系列有效值的合集。
     </a>
   </li>
   <li>
@@ -80,24 +80,24 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-*谓词函数（Predicates）*
+**谓词函数（Predicates）**
 
 <ul class="apiIndex">
   <li>
     <a href="#isinputtype">
       <pre>function isInputType</pre>
-      判断某类型是否可以作为字段查询参数。
+      判断某类型是否可以作为字段查询参数和指令的输入类型。
     </a>
   </li>
   <li>
     <a href="#isoutputtype">
       <pre>function isOutputType</pre>
-      判断某类型是否可以作为字段查询结果的值。
+      判断某类型是否可以作为字段查询结果值的类型。
   </li>
   <li>
     <a href="#isleaftype">
       <pre>function isLeafType</pre>
-      判断某类型是否可以作为响应结果的叶节点值。
+      判断某类型是否可以作为响应结果叶节点值的类型。
     </a>
   </li>
   <li>
@@ -114,7 +114,7 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-*去包装修饰器（Un-modifiers）*
+**去包装修饰器（Un-modifiers）**
 
 <ul class="apiIndex">
   <li>
@@ -131,37 +131,37 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-*标量（Scalar）类型*
+**标量（Scalar）类型**
 
 <ul class="apiIndex">
   <li>
     <a href="#graphqlint">
       <pre>var GraphQLInt</pre>
-      整型数标量类型。
+      表示整数的标量类型。
     </a>
   </li>
   <li>
     <a href="#graphqlfloat">
       <pre>var GraphQLFloat</pre>
-      浮点数标量类型。
+      表示浮点数的标量类型。
     </a>
   </li>
   <li>
     <a href="#graphqlstring">
       <pre>var GraphQLString</pre>
-      字符串标量类型。
+      表示字符串的标量类型。
     </a>
   </li>
   <li>
     <a href="#graphqlboolean">
       <pre>var GraphQLBoolean</pre>
-      布尔标量类型。
+      表示布尔值的标量类型。
     </a>
   </li>
   <li>
     <a href="#graphqlid">
       <pre>var GraphQLID</pre>
-      ID 标量类型。
+      表示 ID 的标量类型。
     </a>
   </li>
 </ul>
@@ -181,7 +181,7 @@ type GraphQLSchemaConfig = {
 }
 ```
 
-使用指定的 query 及 mutation（可选）的根类型来创建Schema。生成的 Schema 可用于之后的校验器和执行器。
+使用指定的 query 及 mutation（可选）的根类型来创建 Schema。生成的 Schema 可用于之后的校验器和执行器。
 
 #### 示例
 
@@ -210,7 +210,7 @@ type GraphQLScalarTypeConfig<InternalType> = {
 }
 ```
 
-构建用于表示请求的叶节点值和输入值的标量（或枚举）类型 `GraphQLScalarType` 时，需要指定 `name` 以及一系列用于确保值的有效性的序列化函数。
+所有请求的叶节点值和输入值都必须是标量（或枚举）类型。构建标量类型 `GraphQLScalarType` 时，需要指定 `name` 以及一系列用于确保值的有效性的序列化函数。
 
 #### 示例
 
@@ -295,7 +295,7 @@ type GraphQLFieldConfigMap = {
 
 几乎所有你要去定义的 GraphQL 类型都会是 Object 类型。Object 类型有自己的名字 `name`，但最重要的是它描述了它有哪些字段。
 
-当两个类型需要相互指代，或是某类型需要的某一字段类型为其自身，你可以使用函数表达式（也可称为闭包或是 thunk）来实现字段类型的延后求值。
+当两个类型需要相互指代，或是某类型的某一字段类型为其自身，你可以使用函数表达式（也可称为闭包或是 thunk）来实现字段类型的延后求值。
 
 #### 示例
 
@@ -338,7 +338,7 @@ type GraphQLInterfaceTypeConfig = {
 };
 ```
 
-当一个字段可能返回多种不同类型时，可使用接口类型 `GraphQLInterfaceType`，来描述这些可能类型有什么共同字段，也可指定 `resolveType` 函数来决定该字段实际被解析时为何种类型。
+当一个字段可能返回多种不同类型时，可使用接口类型 `GraphQLInterfaceType`，来描述所有可能类型必须有的共同字段，也可指定 `resolveType` 函数来决定该字段实际被解析时为何种类型。
 
 #### 示例
 
@@ -368,7 +368,7 @@ type GraphQLUnionTypeConfig = {
 type GraphQLObjectsThunk = () => Array<GraphQLObjectType>;
 ```
 
-当一个字段可以返回多种不同类型时，可使用联合类型 `GraphQLUnionType` 描述所有可能类型，也可指定 `resolveType` 函数该字段实际被解析时为何种类型。
+当一个字段可以返回多种不同类型时，可使用联合类型 `GraphQLUnionType` 描述所有可能类型，也可指定 `resolveType` 函数来决定该字段实际被解析时为何种类型。
 
 ### 示例
 
@@ -418,7 +418,7 @@ type GraphQLEnumValueDefinition = {
 }
 ```
 
-一些请求的叶节点值和输入值为枚举类型。GraphQL 会将枚举值序列化为字符串，但在内部使用时，枚举值可以用任何类型来表示，一般用整型来表示。
+一些请求的叶节点值和输入值为枚举类型 `GraphQLEnumType`。GraphQL 会将枚举值序列化为字符串，但在内部使用时，枚举值可以用任何类型来表示，一般用整型来表示。
 
 备注：如果在定义时没有指定 `value`，在内部使用时会用枚举类型的 `name` 作为其值。
 
@@ -474,7 +474,7 @@ type GraphQLInputObjectFieldMap = {
 
 一个输入对象类型定义了一组可以作为某字段查询参数的字段。
 
-使用 `NonNull` 标明查询一定会有返回值。
+使用 `NonNull` 确保查询一定会有返回值。
 
 #### 示例
 
@@ -532,7 +532,7 @@ var RowType = new GraphQLObjectType({
 });
 ```
 
-## 谓词函数
+## 谓词函数（Predicates）
 
 ### isInputType
 
@@ -540,7 +540,7 @@ var RowType = new GraphQLObjectType({
 function isInputType(type: ?GraphQLType): boolean
 ```
 
-判断某类型是否可以作为字段查询参数。
+判断某类型是否可以作为字段查询参数和指令的输入类型。
 
 ### isOutputType
 
@@ -548,7 +548,7 @@ function isInputType(type: ?GraphQLType): boolean
 function isOutputType(type: ?GraphQLType): boolean
 ```
 
-判断某类型是否可以作为字段查询结果的值。
+判断某类型是否可以作为字段查询结果值的类型。
 
 ### isLeafType
 
@@ -556,7 +556,7 @@ function isOutputType(type: ?GraphQLType): boolean
 function isLeafType(type: ?GraphQLType): boolean
 ```
 
-判断某类型是否可以作为响应结果的叶节点值。
+判断某类型是否可以作为响应结果叶节点值的类型。
 
 ### isCompositeType
 
