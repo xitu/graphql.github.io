@@ -1,7 +1,7 @@
 ---
-title: Passing Arguments
+title: 传递参数
 layout: ../_core/GraphQLJSLayout
-category: GraphQL.js Tutorial
+category: GraphQL.js 教程
 permalink: /graphql-js/passing-arguments/
 next: /graphql-js/object-types/
 ---
@@ -14,7 +14,7 @@ type Query {
 }
 ```
 
-我们可能想要一个更通用的函数来实现投掷点数 `numDice` ，而不是硬性地设为 "3"，并且有一个参数 `numSide` 来表示骰子的面数，我们可以这样在 GraphQL schema language 实现：
+我们可能想要一个更通用的函数来实现投掷 `numDice` 个的骰子，而不是硬性地设为 "3"，并且有一个参数 `numSide` 来表示骰子的面数，我们可以这样在 GraphQL schema language 实现：
 
 ```javascript
 type Query {
@@ -68,7 +68,7 @@ var schema = buildSchema(`
   }
 `);
 
-// root 为每个 端点入口 API 提供一个解析器
+// root 为每个端点入口 API 提供一个解析器
 var root = {
   rollDice: function ({numDice, numSides}) {
     var output = [];
@@ -89,7 +89,7 @@ app.listen(4000);
 console.log('Running a GraphQL API server at localhost:4000/graphql');
 ```
 
-当你调用这个 API 时，你需要按名称传入每个参数，对于上面的服务器代码，你可以通过发起这样的 GraphQL 查询，来投掷一个 6 面的，点数为 3 的骰子。
+当你调用这个 API 时，你需要按名称传入每个参数，对于上面的服务器代码，你可以通过发起这样的 GraphQL 查询，来投掷 3 个六面的骰子。
 
 ```javascript
 {
@@ -97,7 +97,7 @@ console.log('Running a GraphQL API server at localhost:4000/graphql');
 }
 ```
 
-如果你使用 `node server.js` 运行这段代码，你可以浏览  http://localhost:4000/graphql 来尝试这个 API。
+如果你使用 `node server.js` 运行这段代码，你可以浏览 http://localhost:4000/graphql 来尝试这个 API。
 
 当你在代码中传递参数时，最好避免自己构建整个查询语句。你可以使用 `$` 语法来定义一条查询中的变量，并将变量作为单独映射来传递。
 
@@ -123,6 +123,6 @@ xhr.send(JSON.stringify({
 }));
 ```
 
-使用 `$dice` 和 `$sides` 作为 GraphQL 中的变量，我们可以不用担心在客户端转义。
+使用 `$dice` 和 `$sides` 作为 GraphQL 中的变量，我们无需在客户端对它们进行转义。
 
-通过基础类型和参数传递，你可以定义任意你在 REST API 中定义的内容。但 GraphQL 支持更强大的查询。如果你学习了 [定义你自己的对象类型](/graphql-js/object-types/)，你可以用单个 API 调用来代替多个 API 调用。
+通过基础类型和参数传递，你可以定义任意你"能够"在 REST API 中定义的内容。但 GraphQL 支持更强大的查询。如果你学习了 [定义你自己的对象类型](/graphql-js/object-types/)，你可以用单个 API 调用来代替多个 API 调用。
