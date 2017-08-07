@@ -1,16 +1,16 @@
 ---
-title: Mutations and Input Types
+title: 变更和输入类型
 layout: ../_core/GraphQLJSLayout
-category: GraphQL.js Tutorial
+category: GraphQL.js 教程
 permalink: /graphql-js/mutations-and-input-types/
 next: /graphql-js/authentication-and-express-middleware/
 ---
 
-If you have an API endpoint that alters data, like inserting data into a database or altering data already in a database, you should make this endpoint a `Mutation` rather than a `Query`. This is as simple as making the API endpoint part of the top-level `Mutation` type instead of the top-level `Query` type.
+假设你有一个 API 入口端点用于修改数据，像是向数据库中插入数据或修改已有数据，在 GraphQL 中，你应该将这个入口端点做为 `Mutation` 而不是 `Query`。这十分简单，只需要将这个入口端点做成 `Mutation` 类型顶层的一部份即可。
 
-Let's say we have a “message of the day” server, where anyone can update the message of the day, and anyone can read the current one. The GraphQL schema for this is simply:
+假设我们有一个“今日消息”服务器，每个人都可以在上面更新“今日消息”，或者阅读当前的“今日消息”。这个服务器的 GraphQL schema 很简单：
 
-```javascript
+```graphql
 type Mutation {
   setMessage(message: String): String
 }
@@ -20,9 +20,9 @@ type Query {
 }
 ```
 
-It's often convenient to have a mutation that maps to a database create or update operation, like `setMessage`, return the same thing that the server stored. That way, if you modify the data on the server, the client can learn about those modifications.
+将一个变更（mutation）映射到数据库的 create 或者 update 操作会很方便，如 `setMessage`，其会返回数据库所存的数据。这样一来，你修改了服务端的数据，客户端就能获知这个修改
 
-Both mutations and queries can be handled by root resolvers, so the root that implements this schema can simply be:
+不论变更还是查询，根级解析器能够处理，因此实现 schema 的 root 可以如下：
 
 ```javascript
 var fakeDatabase = {};
@@ -37,11 +37,11 @@ var root = {
 };
 ```
 
-You don't need anything more than this to implement mutations. But in many cases, you will find a number of different mutations that all accept the same input parameters. A common example is that creating an object in a database and updating an object in a database often take the same parameters. To make your schema simpler, you can use “input types” for this, by using the `input` keyword instead of the `type` keyword.
+实现变更不必需要更多的东西。但是更多情况下，你会发现有多个不同的变更接受相同的输入参数。常见的案例是在数据库中创建对象和更新对象的接口就会接受一样的参数。你可以使用“输入类型”来简化 schema，使用 `input` 关键字而不是 `type` 关键字即可。
 
-For example, instead of a single message of the day, let's say we have many messages, indexed in a database by the `id` field, and each message has both a `content` string and an `author` string. We want a mutation API both for creating a new message and for updating an old message. We could use the schema:
+例如，我们每天有多条而不是一条消息，在数据库中以 `id` 字段为索引，每条消息都有一个 `content` 和 `author` 字符串。我们需要一个变更 API，用于创建新消息和更新旧消息。我们可以使用这个 schema：
 
-```javascript
+```graphql
 input MessageInput {
   content: String
   author: String
@@ -63,20 +63,20 @@ type Mutation {
 }
 ```
 
-Here, the mutations return a `Message` type, so that the client can get more information about the newly-modified `Message` in the same request as the request that mutates it.
+此处的变更返回一个 `Message` 类型，因此客户端通过变更的请求就能获取到新修改的 `Message` 的信息。
 
-Input types can't have fields that are other objects, only basic scalar types, list types, and other input types.
+输入类型的字段不能是其他对象类型，只能是基础标量类型、列表类型或者其他输入类型。
 
-Naming input types with `Input` on the end is a useful convention, because you will often want both an input type and an output type that are slightly different for a single conceptual object.
+一个有用的习惯是在末尾使用 `Input` 命名输入类型，因为通常对于一个单一概念对象你会有类似的输入和输出类型。
 
-Here's some runnable code that implements this schema, keeping the data in memory:
+下面的可运行代码实现了上述 schema，数据保存在内存中：
 
 ```javascript
 var express = require('express');
 var graphqlHTTP = require('express-graphql');
 var { buildSchema } = require('graphql');
 
-// Construct a schema, using GraphQL schema language
+// 使用 GraphQL schema language 构建 schema
 var schema = buildSchema(`
   input MessageInput {
     content: String
@@ -99,7 +99,7 @@ var schema = buildSchema(`
   }
 `);
 
-// If Message had any complex fields, we'd put them on this object.
+// 如果 Message 拥有复杂字段，我们把它们放在这个对象里面。
 class Message {
   constructor(id, {content, author}) {
     this.id = id;
@@ -108,7 +108,7 @@ class Message {
   }
 }
 
-// Maps username to content
+// 映射 username 到 content
 var fakeDatabase = {};
 
 var root = {
@@ -147,9 +147,9 @@ app.listen(4000, () => {
 
 ```
 
-To call a mutation, you must use the keyword `mutation` before your GraphQL query. To pass an input type, provide the data written as if it's a JSON object. For example, with the server defined above, you can create a new message and return the `id` of the new message with this operation:
+你必须在你的 GraphQL 查询前面使用关键字 `mutation` 才能调用变更，并将数据作为 JSON 对象以传入输入类型。如果用上面定义的服务器，你可以使用以下操作创建一条消息并返回这条消息的 `id`：
 
-```javascript
+```graphql
 mutation {
   createMessage(input: {
     author: "andy",
@@ -160,7 +160,7 @@ mutation {
 }
 ```
 
-You can use variables to simplify mutation client logic just like you can with queries. For example, some JavaScript code that calls the server to execute this mutation is:
+你也像查询一样使用变量来简化变更的客户端逻辑。如下调用服务端变更的 JavaScript 代码：
 
 ```javascript
 var author = 'andy';
@@ -189,4 +189,4 @@ xhr.send(JSON.stringify({
 }));
 ```
 
-One particular type of mutation is operations that change users, like signing up a new user. While you can implement this using GraphQL mutations, you can reuse many existing libraries if you learn about [GraphQL with authentication and Express middleware](/graphql-js/authentication-and-express-middleware/).
+一个十分特殊变更类型是“改变用户”，譬如注册新用户。你能使用 GraphQL 变更实现这个功能，在学完 [GraphQL 认证和 Express 中间件](/graphql-js/authentication-and-express-middleware/) 之后你也能使用现有库来实现。
