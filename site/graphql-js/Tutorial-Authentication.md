@@ -9,7 +9,7 @@ next: /graphql-js/constructing-types/
 
 Express 中间件可以很方便地结合 `express-graphql` 使用，这也是一个良好的认证处理模式。
 
-你可以就像普通 Express 应用使用中间件一样把中间件和 GraphQL 解析器一起使用。然后 `request` 对象就会作为解析函数的第二参数传入。（译者案：[v0.5.0](https://github.com/graphql/graphql-js/releases/tag/v0.5.0) 之后，作为第三参数）
+你可以就像普通 Express 应用使用中间件一样把中间件和 GraphQL 解析器一起使用。然后 `request` 对象就会作为解析函数的第二参数传入。（译者注：[v0.5.0](https://github.com/graphql/graphql-js/releases/tag/v0.5.0) 之后，作为第三参数）
 
 举个例子，假设我们想要服务器记录每个请求的 IP 地址，并编写一个返回调用者 IP 地址的 API。前者我们通过中间件完成，后者在解析器中取 `request` 对象即可。下面是实现这个功能的服务端代码：
 
