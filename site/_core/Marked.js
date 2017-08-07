@@ -450,6 +450,7 @@ var inline = {
   escape: /^\\([\\`*{}\[\]()#+\-.!_>])/,
   autolink: /^<([^ >]+(@|:\/)[^ >]+)>/,
   url: noop,
+  sup: /^<sup>([\s\S]+?)<\/sup>/,
   tag: /^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,
   link: /^!?\[(inside)\]\(href\)/,
   reflink: /^!?\[(inside)\]\s*\[([^\]]*)\]/,
@@ -593,6 +594,13 @@ InlineLexer.prototype.output = function(src) {
       text = cap[1];
       href = text;
       out.push(React.DOM.a({href: this.sanitizeUrl(href)}, text));
+      continue;
+    }
+
+    // sup
+    if (cap = this.rules.sup.exec(src)) {
+      src = src.substring(cap[0].length);
+      out.push(React.DOM.sup(null, this.output(cap[2] || cap[1])));
       continue;
     }
 
