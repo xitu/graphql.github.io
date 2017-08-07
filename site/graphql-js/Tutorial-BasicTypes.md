@@ -14,7 +14,7 @@ GraphQL schema language 支持的标量类型有 `String`、`Int`、`Float`、`B
 
 如果是列表类型，使用方括号将对应类型包起来，如 `[Int]` 就表示一个整数列表。
 
-这些类型都直接映射 JavaScript，所以你可以直接返回原本包含这些类型的原生 JavaScript 对象。下面是一个展示如何使用这些基础类型的示例：
+这些类型都直接映射 JavaScript，所以你可以直接返回原本包含这些类型的原生 JavaScript 对象。下面是一个展示如何使用这些基本类型的示例：
 
 ```javascript
 var express = require('express');
