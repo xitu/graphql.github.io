@@ -1,14 +1,14 @@
 ---
-title: GraphQL Clients
+title: GraphQL 客户端
 layout: ../_core/GraphQLJSLayout
-category: GraphQL.js Tutorial
+category: GraphQL.js 教程
 permalink: /graphql-js/graphql-clients/
 next: /graphql-js/basic-types/
 ---
 
-Since a GraphQL API has more underlying structure than a REST API, there are more powerful clients like [Relay](https://facebook.github.io/relay/) which can automatically handle batching, caching, and other features. But you don't need a complex client to call a GraphQL server. With `express-graphql`, you can just send an HTTP POST request to the endpoint you mounted your GraphQL server on, passing the GraphQL query as the `query` field in a JSON payload.
+由于 GraphQL API 拥有比 REST API 更多的下层结构，它也有更强大的客户端。辟如 [Relay](https://facebook.github.io/relay/)，它能自动操作批处理、缓存等等。但你并不需要一个复杂的客户端才能调用 GraphQL 服务器，在有了 `express-graphql` 的情况下，你可以向 GraphQL 服务器上的入口端点发送一个 HTTP POST 请求，其中将 GraphQL 查询作为 JSON 载荷的 `query` 字段，就能调用 GraphQL 服务器。
 
-For example, let's say we mounted a GraphQL server on http://localhost:4000/graphql as in the example code for [running an Express GraphQL server](/graphql-js/running-an-express-graphql-server/), and we want to send the GraphQL query `{ hello }`. We can do this from the command line with `curl`. If you paste this into a terminal:
+假设我们运行了 [Express GraphQL 服务器](/graphql-js/running-an-express-graphql-server/) 的案例代码，GraphQL 服务运行于 http://localhost:4000/graphql，我们想要发送 GraphQL 请求 `{ hello }`。我们在命令行中运行 `curl`，将下面代码粘贴到终端中去：
 
 ```bash
 curl -X POST \
@@ -17,13 +17,13 @@ curl -X POST \
 http://localhost:4000/graphql
 ```
 
-You should see the output returned as JSON:
+你会见到输出的 JSON：
 
 ```bash
 {"data":{"hello":"Hello world!"}}
 ```
 
-It's also simple to send GraphQL from the browser. Open up http://localhost:4000, open a developer console, and paste in:
+通过浏览器发送 GraphQL 也很简单。打开 http://localhost:4000，开启开发者终端，粘贴：
 
 ```javascript
 var xhr = new XMLHttpRequest();
@@ -37,23 +37,23 @@ xhr.onload = function () {
 xhr.send(JSON.stringify({query: "{ hello }"}));
 ```
 
-You should see the data returned, logged in the console:
+你会在终端中见到返回的数据：
 
 ```
 data returned: Object { hello: "Hello world!" }
 ```
 
-In this example, the query was just a hardcoded string. As your application becomes more complex, and you add GraphQL endpoints that take arguments as described in [Passing Arguments](/graphql-js/passing-arguments/), you will want to construct GraphQL queries using variables in client code. You can do this by including a keyword prefixed with a dollar sign in the query, and passing an extra `variables` field on the payload.
+案例中的查询是硬编码的字符串。一旦你的应用变得复杂，你添加了像 [传递参数](/graphql-js/passing-arguments/) 中描述的那种接收参数的 GraphQL 入口端点，就会想在客户端代码中使用参数构建 GraphQL 查询。你可以在查询中包含一个以`$`开头的关键字，并传递额外的 `variables` 字段给载荷来完成这个。
 
-For example, let's say you're running the example server from [Passing Arguments](/graphql-js/passing-arguments/) that has a schema of
+假设你运行了 [传递参数](/graphql-js/passing-arguments/) 的案例服务器：
 
-```javascript
+```graphql
 type Query {
   rollDice(numDice: Int!, numSides: Int): [Int]
 }
 ```
 
-You could access this from JavaScript with the code:
+你可以使用下列 JavaScript 代码来接入：
 
 ```javascript
 var dice = 3;
@@ -75,8 +75,8 @@ xhr.send(JSON.stringify({
 }));
 ```
 
-Using this syntax for variables is a good idea because it automatically prevents bugs due to escaping, and it makes it easier to monitor your server.
+这种语法的变量有助于自动避免转义 bug，也更容易监控服务器。
 
-In general, it will take a bit more time to set up a GraphQL client like Relay, but it's worth it to get more features as your application grows. You might want to start out just using HTTP requests as the underlying transport layer, and switching to a more complex client as your application gets more complex.
+通常情况下，配置诸如 Relay 的客户端会花更多的时间，但是当你的应用发展壮大之时还是值得为了更多的特性而配置客户端。一开始你可以用 HTTP 请求作为传输层，之后切换到更复杂的客户端以满足你应用增长的复杂性需求。
 
-At this point you can write a client and server in GraphQL for an API that receives a single string. To do more, you will want to [learn how to use the other basic data types](/graphql-js/basic-types/).
+本文中你学会了如何编写只返回一条字符串的 API 的 GraphQL 客户端和服务器。如果你不想止步于此，你可以学习使用如何使用其他 [基本类型](/graphql-js/basic-types/)。
