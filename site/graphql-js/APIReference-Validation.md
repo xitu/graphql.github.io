@@ -1,37 +1,36 @@
 ---
 title: graphql/validation
 layout: ../_core/GraphQLJSLayout
-category: API Reference
+category: API 参考
 permalink: /graphql-js/validation/
 sublinks: specifiedRules,validate
 ---
 
-The `graphql/validation` module fulfills the Validation phase of fulfilling a
-GraphQL result. You can import either from the `graphql/validation` module, or from the root `graphql` module. For example:
+`graphql/validation` 模块负责完成一个 GraphQL 请求的验证阶段。你可以从 `graphql/validation` 模块导入，或者从根 `graphql` 模块导入，如下：
 
 ```js
 import { validate } from 'graphql/validation'; // ES6
 var { validate } = require('graphql/validation'); // CommonJS
 ```
 
-## Overview
+## 概览
 
 <ul class="apiIndex">
   <li>
     <a href="#validate">
       <pre>function validate</pre>
-      Validates an AST against a provided Schema.
+      根据给定 Schema 验证一个 AST（抽象语法树）。
     </a>
   </li>
   <li>
     <a href="#specifiedrules">
       <pre>var specifiedRules</pre>
-      A list of standard validation rules described in the GraphQL specification.
+      GraphQL 规范中描述的一系列标准验证规则。
     </a>
   </li>
 </ul>
 
-## Validation
+## 验证
 
 ### validate
 
@@ -43,21 +42,15 @@ function validate(
 ): Array<GraphQLError>
 ```
 
-Implements the "Validation" section of the spec.
+实现规范的“验证”章节。
 
-Validation runs synchronously, returning an array of encountered errors, or
-an empty array if no errors were encountered and the document is valid.
+验证过程会同步执行，如果发生错误则返回错误数组，如果文档有效没有发生错误，则返回空数组。
 
-A list of specific validation rules may be provided. If not provided, the
-default list of rules defined by the GraphQL specification will be used.
+如果未提供特定的验证规则，则执行 GraphQL 规范的默认验证规则。
 
-Each validation rules is a function which returns a visitor
-(see the language/visitor API). Visitor methods are expected to return
-GraphQLErrors, or Arrays of GraphQLErrors when invalid.
+每个验证规则都是一个函数，返回一个 visitor（查看 language/visitor API）。visitor 方法应当在文档无效时返回 GraphQLErrors，或者 GraphQLError 数组。
 
-Visitors can also supply `visitSpreadFragments: true` which will alter the
-behavior of the visitor to skip over top level defined fragments, and instead
-visit those fragments at every point a spread is encountered.
+visitor 应该支持 `visitSpreadFragments: true`，这将改变 visitor 的行为：跳过顶层定义的片段，并访问这些片段的所有展开点。
 
 ### specifiedRules
 
@@ -65,4 +58,4 @@ visit those fragments at every point a spread is encountered.
 var specifiedRules: Array<(context: ValidationContext): any>
 ```
 
-This set includes all validation rules defined by the GraphQL spec
+这个集合包含了所有 GraphQL 规范定义的验证规则。
