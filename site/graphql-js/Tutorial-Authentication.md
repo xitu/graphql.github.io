@@ -46,7 +46,7 @@ app.listen(4000);
 console.log('Running a GraphQL API server at localhost:4000/graphql');
 ```
 
-在 REST API 中，认证通常是借由 header 处理的，其中包含一个 auth token 用于识别发出请求的用户。Express 中间件会处理这些 header，并将认证数据放进 Express 的 `request` 对象。如此处理认证的中间件模块有 [Passport](http://passportjs.org/)、 [express-jwt](https://github.com/auth0/express-jwt) 和 [express-session](https://github.com/expressjs/session)。这些模块每一个都能配合 `express-graphql` 使用。
+在 REST API 中，认证通常是借由 header 处理的，其中包含一个 auth token 用于识别发出请求的用户。Express 中间件会处理这些 header，并将认证数据放进 Express 的 `request` 对象。像这样处理认证的中间件模块有 [Passport](http://passportjs.org/)、 [express-jwt](https://github.com/auth0/express-jwt) 和 [express-session](https://github.com/expressjs/session)。这些模块每一个都能配合 `express-graphql` 使用。
 
 如果你对这些认证机制都不熟悉，我们推荐使用 `express-jwt`，因为它既简单又不会牺牲任何后期的弹性。
 
