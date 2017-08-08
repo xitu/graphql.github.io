@@ -7,79 +7,79 @@ sublinks: BREAK,getLocation,Kind,lex,parse,parseValue,printSource,visit
 next: /graphql-js/type/
 ---
 
-The `graphql/language` module is responsible for parsing and operating on the GraphQL language. You can import either from the `graphql/language` module, or from the root `graphql` module. For example:
+`graphql/language` 模块负责对 GraphQL 查询语言进行解析和操作。你既可以从 `graphql/language` 模块引入，也可以从根模块 `graphql` 引入。示例如下：
 
 ```js
 import { Source } from 'graphql'; // ES6
 var { Source } = require('graphql'); // CommonJS
 ```
 
-## Overview
+## 概述
 
-*Source*
+**Source**
 
 <ul class="apiIndex">
   <li>
     <a href="#source">
       <pre>class Source</pre>
-      Represents the input string to the GraphQL server
+      表示传递给 GraphQL 服务的输入字符串。
     </a>
   </li>
   <li>
     <a href="#getlocation">
       <pre>function getLocation</pre>
-      Converts a character offset to a row and column in the Source
+      将字符偏移量转化为 Source 中的行和列。
     </a>
   </li>
 </ul>
 
-*Lexer*
+**词法分析器**
 
 <ul class="apiIndex">
   <li>
     <a href="#lex">
       <pre>function lex</pre>
-      Lexes a GraphQL Source according to the GraphQL Grammar
+      根据 GraphQL 语法对 GraphQL 的 Source 类进行词法分析。
     </a>
   </li>
 </ul>
 
-*Parser*
+**解析器**
 
 <ul class="apiIndex">
   <li>
     <a href="#parse">
       <pre>function parse</pre>
-      Parses a GraphQL Source according to the GraphQL Grammar
+      根据 GraphQL 语法对 GraphQL 的 Source 类进行解析。
     </a>
   </li>
   <li>
     <a href="#parseValue">
       <pre>function parseValue</pre>
-      Parses a value according to the GraphQL Grammar
+      根据 GraphQL 语法对值进行解析。
     </a>
   </li>
   <li>
     <a href="#kind">
       <pre>var Kind</pre>
-      Represents the various kinds of parsed AST nodes.
+      表示已解析的抽象语法树（Abstract Syntax Tree, AST）中节点的各种类型。
     </a>
   </li>
 </ul>
 
-*Visitor*
+**访问方法**
 
 <ul class="apiIndex">
   <li>
     <a href="#visit">
       <pre>function visit</pre>
-      A general-purpose visitor to traverse a parsed GraphQL AST
+      一个通用的访问方法，用于遍历一个已解析的 GraphQL AST。
     </a>
   </li>
   <li>
     <a href="#break">
       <pre>var BREAK</pre>
-      A token to allow breaking out of the visitor.
+      用于允许中断访问方法的 token。
     </a>
   </li>
 </ul>
@@ -90,7 +90,7 @@ var { Source } = require('graphql'); // CommonJS
   <li>
     <a href="#print">
       <pre>function print</pre>
-      Prints an AST in a standard format.
+      以一个标准的格式打印出一个 AST。
     </a>
   </li>
 </ul>
@@ -105,10 +105,7 @@ export class Source {
 }
 ```
 
-A representation of source input to GraphQL. The name is optional,
-but is mostly useful for clients who store GraphQL documents in
-source files; for example, if the GraphQL input is in a file Foo.graphql,
-it might be useful for name to be "Foo.graphql".
+对 GraphQL 源输入的表示。name 参数是可选的，但对于将 GraphQL 文档存储在源文件里的客户端来说，这个参数是非常有用的；举个例子，如果 GraphQL 的输入是在一个名为 Foo.graphql 的文件里，那么将 name 设置为 "Foo.graphql" 在之后就会很有用了。
 
 ### getLocation
 
@@ -121,12 +118,11 @@ type SourceLocation = {
 }
 ```
 
-Takes a Source and a UTF-8 character offset, and returns the corresponding
-line and column as a SourceLocation.
+接收一个 Source 对象和一个 UTF-8 编码的字符偏移量作为参数，返回一个 SourceLocation 对象，包含相关的行列位置信息。
 
-## Lexer
+## 词法分析器
 
-### lex
+### 词法分析
 
 ```js
 function lex(source: Source): Lexer;
@@ -141,19 +137,13 @@ export type Token = {
 };
 ```
 
-Given a Source object, this returns a Lexer for that source.
-A Lexer is a function that acts like a generator in that every time
-it is called, it returns the next token in the Source. Assuming the
-source lexes, the final Token emitted by the lexer will be of kind
-EOF, after which the lexer will repeatedly return EOF tokens whenever
-called.
+给定一个 Source 对象，为这个对象返回一个词法分析器。词法分析器每次被调用的时候会表现得像一个生成器，返回 Source 里的下一个 token。假设对某个 source 进行词法分析，最后返回的 token 就将是某种类型的文件结尾符，而在这之后，词法分析器不管何时被调用都会重复返回文件结尾符的 token。
 
-The argument to the lexer function is optional, and can be used to
-rewind or fast forward the lexer to a new position in the source.
+词法分析器函数的参数是可选的，而且可被用于在 Source 里将词法分析器回退或者前进到某个新位置。
 
-## Parser
+## 解析器
 
-### parse
+### 解析
 
 ```js
 export function parse(
@@ -162,9 +152,9 @@ export function parse(
 ): Document
 ```
 
-Given a GraphQL source, parses it into a Document.
+给定一个 GraphQL 源，将其解析并放入文档里。
 
-Throws GraphQLError if a syntax error is encountered.
+如果遇到语法错误则抛出 GraphQLError。
 
 ### parseValue
 
@@ -175,18 +165,17 @@ export function parseValue(
 ): Value
 ```
 
-Given a string containing a GraphQL value, parse the AST for that value.
+给定一个包含 GraphQL 值的字符串，将这个值解析为 AST。
 
-Throws GraphQLError if a syntax error is encountered.
+如果遇到语法错误则抛出 GraphQLError。
 
-This is useful within tools that operate upon GraphQL Values directly and
-in isolation of complete GraphQL documents.
+这在某些工具中会很有用，比如直接在 GraphQL 值上进行操作，并且与 GraphQL 文档完全分离开来。
 
 ### Kind
 
-An enum that describes the different kinds of AST nodes.
+这是一个枚举类型，用于描述不同类型的 AST 节点。
 
-## Visitor
+## 访问方法
 
 ### visit
 
@@ -194,46 +183,36 @@ An enum that describes the different kinds of AST nodes.
 function visit(root, visitor, keyMap)
 ```
 
-visit() will walk through an AST using a depth first traversal, calling
-the visitor's enter function at each node in the traversal, and calling the
-leave function after visiting that node and all of it's child nodes.
+`visit()` 将使用深度优先遍历一个 AST，在遍历当中对每个节点调用访问方法的 `enter` 函数，并在访问完当前节点及其子节点后调用 `leave` 函数。
 
-By returning different values from the enter and leave functions, the
-behavior of the visitor can be altered, including skipping over a sub-tree of
-the AST (by returning false), editing the AST by returning a value or null
-to remove the value, or to stop the whole traversal by returning BREAK.
+通过从 `enter` 和 `leave` 函数里返回不同的值，访问方法的行为可以进行更改，包括跳过 AST 的一个子树（返回 `false`）、编辑这个 AST（返回一个值或者返回 `null` 来删除这个节点）、或者返回 `BREAK` 停止整个遍历。
 
-When using visit() to edit an AST, the original AST will not be modified, and
-a new version of the AST with the changes applied will be returned from the
-visit function.
+当使用 `visit()` 编辑一个 AST 的时候，原始的 AST 不会被修改，`visit` 函数会生成一个经过修改的新版本 AST 返回。
 
 ```js
 var editedAST = visit(ast, {
   enter(node, key, parent, path, ancestors) {
     // @return
-    //   undefined: no action
-    //   false: skip visiting this node
-    //   visitor.BREAK: stop visiting altogether
-    //   null: delete this node
-    //   any value: replace this node with the returned value
+    //   undefined: 无操作
+    //   false: 跳过访问该节点
+    //   visitor.BREAK: 停止访问
+    //   null: 删除该节点
+    //   any value: 使用返回的这个值替代原本的节点
   },
   leave(node, key, parent, path, ancestors) {
     // @return
-    //   undefined: no action
-    //   false: no action
-    //   visitor.BREAK: stop visiting altogether
-    //   null: delete this node
-    //   any value: replace this node with the returned value
+    //   undefined: 无操作
+    //   false: 跳过访问该节点
+    //   visitor.BREAK: 停止访问
+    //   null: 删除该节点
+    //   any value: 使用返回的这个值替代原本的节点
   }
 });
 ```
 
-Alternatively to providing enter() and leave() functions, a visitor can
-instead provide functions named the same as the kinds of AST nodes, or
-enter/leave visitors at a named key, leading to four permutations of
-visitor API:
+访问方法可以通过提供和节点类型同名的函数来替代 `enter()` 和 `leave()` 函数，或者通过名称的关键字来使用 `enter` 或 `leave` 访问方法，这就造成访问方法的 API 有四种形式：
 
-1) Named visitors triggered when entering a node a specific kind.
+1) 当进入特定类型的节点时，触发同名访问方法。
 
 ```js
 visit(ast, {
@@ -243,8 +222,7 @@ visit(ast, {
 })
 ```
 
-2) Named visitors that trigger upon entering and leaving a node of
-   a specific kind.
+2) 在进入或离开特定类型的节点时，触发同名访问方法。
 
 ```js
 visit(ast, {
@@ -259,7 +237,7 @@ visit(ast, {
 })
 ```
 
-3) Generic visitors that trigger upon entering and leaving any node.
+3) 在进入或离开任意节点时，触发通用的访问方法。
 
 ```js
 visit(ast, {
@@ -272,7 +250,7 @@ visit(ast, {
 })
 ```
 
-4) Parallel visitors for entering and leaving nodes of a specific kind.
+4) 为进入或离开特定类型的节点创建平行的访问方法。
 
 ```js
 visit(ast, {
@@ -291,7 +269,7 @@ visit(ast, {
 
 ### BREAK
 
-The sentinel `BREAK` value described in the documentation of `visitor`.
+`BREAK` 标记在 `visitor` 的文档中有描述。
 
 ## Printer
 
@@ -301,5 +279,4 @@ The sentinel `BREAK` value described in the documentation of `visitor`.
 function print(ast): string
 ```
 
-Converts an AST into a string, using one set of reasonable
-formatting rules.
+使用一组合理的格式化规则，将一个 AST 转化成一个字符串。
