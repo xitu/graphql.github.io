@@ -1,7 +1,7 @@
 ---
 title: graphql/types
 layout: ../_core/GraphQLJSLayout
-category: API Reference
+category: API 参考
 permalink: /graphql-js/type/
 sublinks: getNamedType,getNullableType,GraphQLBoolean,GraphQLEnumType,GraphQLFloat,GraphQLID,GraphQLInputObjectType,GraphQLInt,GraphQLInterfaceType,GraphQLList,GraphQLNonNull,GraphQLObjectType,GraphQLScalarType,GraphQLSchema,GraphQLString,GraphQLUnionType,isAbstractType,isCompositeType,isInputType,isLeafType,isOutputType
 next: /graphql-js/utilities/
@@ -181,7 +181,7 @@ type GraphQLSchemaConfig = {
 }
 ```
 
-使用指定的 query 及 mutation（可选）的根类型来创建 Schema。生成的 Schema 可用于之后的校验器和执行器。
+使用指定的 query 及 mutation（可选）的根类型来创建 Schema。生成的 Schema 可用于之后的验证器和执行器。
 
 #### 示例
 
