@@ -45,7 +45,7 @@ type ExecutionResult = {
 }
 ```
 
-上面的代码实现了 GraphQL 规范中”处理请求“的部分。
+上面的代码实现了 GraphQL 规范中“处理请求”的部分。
 
 它会返回一个最终一定会被 resolve 而不会被 reject 的 Promise。
 
