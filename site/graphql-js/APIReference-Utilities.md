@@ -7,7 +7,7 @@ sublinks: astFromValue,buildASTSchema,buildClientSchema,buildSchema,introspectio
 next: /graphql-js/validation/
 ---
 
-`graphql/utilities` 模块包含用于 GraphQL 语言和类型对象的常用计算。你可以从 `graphql/utilities` 模块或是根 `graphql` 模块引入。如下：
+`graphql/utilities` 模块包含用于 GraphQL 语言和类型对象的常用计算。你可以从 `graphql/utilities` 模块或是 `graphql` 根模块引入。如下：
 
 ```js
 import { introspectionQuery } from 'graphql'; // ES6
