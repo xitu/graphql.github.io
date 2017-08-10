@@ -34,7 +34,7 @@
 }
 ```
 
-Fetch the "preview info" for the first 20 drafts in the main account
+获取主账户的前二十封草稿邮件的“预览信息”
 ```graphql
 {
   mainAccount {
