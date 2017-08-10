@@ -16,13 +16,13 @@ var { introspectionQuery } = require('graphql'); // CommonJS
 
 ## 概览
 
-*Introspection*
+**内省**
 
 <ul class="apiIndex">
   <li>
     <a href="#introspectionquery">
       <pre>var introspectionQuery</pre>
-      GraphQL 内省查询，包含足够的信息以重建类型系统。
+      GraphQL 内省查询，包含足够的信息以重现类型系统。
     </a>
   </li>
   <li>
@@ -33,13 +33,13 @@ var { introspectionQuery } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-*Schema Language*
+**Schema Language**
 
 <ul class="apiIndex">
   <li>
     <a href="#buildschema">
       <pre>function buildSchema</pre>
-      基于 GraphQL schema languag 构建一个 Schema 对象。
+      基于 GraphQL schema language 构建一个 Schema 对象。
     </a>
   </li>
   <li>
@@ -74,7 +74,7 @@ var { introspectionQuery } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-*Visitors*
+**Visitors**
 
 <ul class="apiIndex">
   <li>
@@ -85,24 +85,24 @@ var { introspectionQuery } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-*Value Validation*
+**值验证**
 
 <ul class="apiIndex">
   <li>
     <a href="#isvalidjsvalue">
       <pre>function isValidJSValue</pre>
-      判断一个 JavaScript 值是否是有效的 GraphQL 类型。
+      判断一个 JavaScript 值是否是有效的 GraphQL 类型的值。
     </a>
   </li>
   <li>
     <a href="#isvalidliteralvalue">
       <pre>function isValidLiteralValue</pre>
-      判断一个 AST 中的字面量值是否是有效的 GraphQL 类型。
+      判断一个 AST 中的字面量值是否是有效的 GraphQL 类型的值。
     </a>
   </li>
 </ul>
 
-## Introspection
+## 内省
 
 ### introspectionQuery
 
@@ -110,7 +110,7 @@ var { introspectionQuery } = require('graphql'); // CommonJS
 var introspectionQuery: string
 ```
 
-GraphQL 内省查询，用于查询服务器的内省系统，得到足够的信息以重建服务器类型系统。
+GraphQL 内省查询，用于查询服务器的内省系统，得到足够的信息以重现服务器类型系统。
 
 ### buildClientSchema
 
@@ -122,9 +122,9 @@ function buildClientSchema(
 
 构建客户端工具用的 GraphQLSchema。
 
-假设客户端有运行内省查询的结果，创建并返回了一个 GraphQLSchema 实例，这个实例可以用于所有的 GraphQL.js工具，但不能用于执行查询，因为内省并不代表有“解析器”、“分析”或者“序列化”函数，或者其他服务器内部机制。
+假设客户端有运行内省查询的结果，创建并返回了一个 GraphQLSchema 实例，这个实例可以用于所有的 GraphQL.js 工具，但不能用于执行查询，因为内省并不代表有“解析器”、“分析”或者“序列化”函数，或者其他服务器内部机制。
 
-## Schema Representation
+## Schema 表示
 
 ### buildSchema
 
@@ -132,7 +132,7 @@ function buildClientSchema(
 function buildSchema(source: string | Source): GraphQLSchema {
 ```
 
-基于 GraphQL schema language 创建一个 GraphQLSchema 对象。schema 将会使用默认解析器。关于 GraphQL schema language 的更多细节，请查看 [schema language 文档](/learn/schema/) 或者  [schema language 速查表](https://wehavefaces.net/graphql-shorthand-notation-cheatsheet-17cd715861b6#.9oztv0a7n)。
+基于 GraphQL schema language 创建一个 GraphQLSchema 对象。schema 将会使用默认解析器。关于 GraphQL schema language 的更多细节，请查看 [schema language 文档](/learn/schema/) 或者 [schema language 速查表](https://wehavefaces.net/graphql-shorthand-notation-cheatsheet-17cd715861b6#.9oztv0a7n)。
 
 ### printSchema
 
@@ -202,9 +202,9 @@ class TypeInfo {
 }
 ```
 
-TypeInfo 是一个工具类，在 GraphQL 文档 AST 的递归分析中的任何位置上，调用 `enter(node)` 和 `leave(node)` 的时候，可以追踪当前字段和类型定义。
+TypeInfo 是一个工具类，在 GraphQL 文档 AST 的递归分析中的任何位置上，调用 `enter(node)` 和 `leave(node)` 的时候，可以追踪指定 GraphQL schema 中当前字段和类型定义。
 
-## Value Validation
+## 值验证
 
 ### isValidJSValue
 
@@ -212,7 +212,7 @@ TypeInfo 是一个工具类，在 GraphQL 文档 AST 的递归分析中的任何
 function isValidJSValue(value: any, type: GraphQLInputType): string[]
 ```
 
-给定一个 JavaScript 值和 GraphQL 类型，判断这个值是否能被这个类型接受。这个功能在验证运行时查询参数的时候特别有用。
+给定一个 JavaScript 值和 GraphQL 类型，判断这个值是否能被这个类型接受。这个功能在验证运行时查询参数值的时候特别有用。
 
 ### isValidLiteralValue
 
@@ -225,4 +225,4 @@ function isValidLiteralValue(
 
 验证器的工具可以判断 AST 字面量值是否是一个给定输入类型的有效值。
 
-注意，这个功能只验证字面量值，并假设变量值的是正确的类型。
+注意，这个功能只验证字面量值，并假设变量值是正确的类型。
