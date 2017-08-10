@@ -67,19 +67,19 @@ var { Source } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-**访问方法**
+**Visitor**
 
 <ul class="apiIndex">
   <li>
     <a href="#visit">
       <pre>function visit</pre>
-      一个通用的访问方法，用于遍历一个已解析的 GraphQL AST。
+      一个通用的 visitor，用于遍历一个已解析的 GraphQL AST。
     </a>
   </li>
   <li>
     <a href="#break">
       <pre>var BREAK</pre>
-      用于允许中断访问方法的 token。
+      用于允许中断 visitor 的 token。
     </a>
   </li>
 </ul>
@@ -175,7 +175,7 @@ export function parseValue(
 
 这是一个枚举类型，用于描述不同类型的 AST 节点。
 
-## 访问方法
+## Visitor
 
 ### visit
 
@@ -183,9 +183,9 @@ export function parseValue(
 function visit(root, visitor, keyMap)
 ```
 
-`visit()` 将使用深度优先遍历一个 AST，在遍历当中对每个节点调用访问方法的 `enter` 函数，并在访问完当前节点及其子节点后调用 `leave` 函数。
+`visit()` 将使用深度优先遍历一个 AST，在遍历当中对每个节点调用 visitor 的 `enter` 函数，并在访问完当前节点及其子节点后调用 `leave` 函数。
 
-通过从 `enter` 和 `leave` 函数里返回不同的值，访问方法的行为可以进行更改，包括跳过 AST 的一个子树（返回 `false`）、编辑这个 AST（返回一个值或者返回 `null` 来删除这个节点）、或者返回 `BREAK` 停止整个遍历。
+通过从 `enter` 和 `leave` 函数里返回不同的值，visitor 的行为可以进行更改，包括跳过 AST 的一个子树（返回 `false`）、编辑这个 AST（返回一个值或者返回 `null` 来删除这个节点）、或者返回 `BREAK` 停止整个遍历。
 
 当使用 `visit()` 编辑一个 AST 的时候，原始的 AST 不会被修改，`visit` 函数会返回一个经过修改的新版本 AST。
 
@@ -210,9 +210,9 @@ var editedAST = visit(ast, {
 });
 ```
 
-访问方法可以通过提供和节点类型同名的函数来替代 `enter()` 和 `leave()` 函数，或者通过名称的关键字来使用 `enter` 或 `leave` 访问方法，这就造成访问方法的 API 有四种形式：
+Visitor 可以通过提供和节点类型同名的函数来替代 `enter()` 和 `leave()` 函数，或者通过名称的关键字来使用 visitor 中的 `enter` 或 `leave`，这就造成 visitor 的 API 有四种形式：
 
-1) 当进入特定类型的节点时，触发同名访问方法。
+1) 当进入特定类型的节点时，触发同名的 visitor。
 
 ```js
 visit(ast, {
@@ -222,7 +222,7 @@ visit(ast, {
 })
 ```
 
-2) 在进入或离开特定类型的节点时，触发同名访问方法。
+2) 在进入或离开特定类型的节点时，触发同名的 visitor。
 
 ```js
 visit(ast, {
@@ -237,7 +237,7 @@ visit(ast, {
 })
 ```
 
-3) 在进入或离开任意节点时，触发通用的访问方法。
+3) 在进入或离开任意节点时，触发通用的 visitor。
 
 ```js
 visit(ast, {
@@ -250,7 +250,7 @@ visit(ast, {
 })
 ```
 
-4) 为进入或离开特定类型的节点创建平行的访问方法。
+4) 为进入或离开特定类型的节点创建平行的 visitor。
 
 ```js
 visit(ast, {
