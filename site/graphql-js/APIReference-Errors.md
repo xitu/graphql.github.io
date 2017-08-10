@@ -1,7 +1,7 @@
 ---
 title: graphql/error
 layout: ../_core/GraphQLJSLayout
-category: API Reference
+category: API 参考
 permalink: /graphql-js/error/
 sublinks: formatError,GraphQLError,locatedError,syntaxError
 next: /graphql-js/execution/

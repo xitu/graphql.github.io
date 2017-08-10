@@ -1,7 +1,7 @@
 ---
 title: graphql/utilities
 layout: ../_core/GraphQLJSLayout
-category: API Reference
+category: API 参考
 permalink: /graphql-js/utilities/
 sublinks: astFromValue,buildASTSchema,buildClientSchema,buildSchema,introspectionQuery,isValidJSValue,isValidLiteralValue,printIntrospectionSchema,printSchema,typeFromAST,TypeInfo
 next: /graphql-js/validation/

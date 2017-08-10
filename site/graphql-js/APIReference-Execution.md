@@ -1,7 +1,7 @@
 ---
 title: graphql/execution
 layout: ../_core/GraphQLJSLayout
-category: API Reference
+category: API 参考
 permalink: /graphql-js/execution/
 sublinks: execute
 next: /graphql-js/language/

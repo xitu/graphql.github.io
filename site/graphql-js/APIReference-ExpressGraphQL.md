@@ -1,7 +1,7 @@
 ---
 title: express-graphql
 layout: ../_core/GraphQLJSLayout
-category: API Reference
+category: API 参考
 permalink: /graphql-js/express-graphql/
 sublinks: graphqlHTTP
 next: /graphql-js/graphql/

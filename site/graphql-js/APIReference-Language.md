@@ -1,7 +1,7 @@
 ---
 title: graphql/language
 layout: ../_core/GraphQLJSLayout
-category: API Reference
+category: API 参考
 permalink: /graphql-js/language/
 sublinks: BREAK,getLocation,Kind,lex,parse,parseValue,printSource,visit
 next: /graphql-js/type/
