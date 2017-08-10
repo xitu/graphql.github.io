@@ -9,7 +9,7 @@ next: /graphql-js/running-an-express-graphql-server/
 
 ## 学前准备
 
-即使这些示例大部分在以前版本的 Node 中也能正常运行，你也应该至少在开始学习之前安装了 v6 以上版本的 Node 环境。在本篇指南中，我们不会使用任何需要转换的语言特性，但是我们会使用 ES6 的部分新特性，比如 [Promises](http://www.html5rocks.com/en/tutorials/es6/promises/)，[classes](http://javascriptplayground.com/blog/2014/07/introduction-to-es6-classes-tutorial/) 和 [fat arrow functions](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-arrow-functions/)。所以如果你不熟悉它们，你应该先去了解一下。
+即使这些示例大部分在以前版本的 Node 中也能正常运行，你也应该至少在开始学习之前安装了 v6 以上版本的 Node 环境。在本篇指南中，我们不会使用任何需要转换的语言特性，但是我们会使用 ES6 的部分新特性，比如 [Promises](http://www.html5rocks.com/en/tutorials/es6/promises/)、[classes](http://javascriptplayground.com/blog/2014/07/introduction-to-es6-classes-tutorial/) 和 [fat arrow functions](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-arrow-functions/)。所以如果你不熟悉它们，你应该先去了解一下。
 
 创建一个新项目，在你当前目录去安装 GraphQL.js：
 
