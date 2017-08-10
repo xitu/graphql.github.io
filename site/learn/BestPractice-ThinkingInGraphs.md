@@ -1,9 +1,9 @@
 ---
--title: 关于 Graphs 的思考
--layout: ../_core/DocsLayout
--category: 最佳实践
--permalink: /learn/thinking-in-graphs/
--next: /learn/serving-over-http/
+title: 关于 Graphs 的思考
+layout: ../_core/DocsLayout
+category: 最佳实践
+permalink: /learn/thinking-in-graphs/
+next: /learn/serving-over-http/
 ---
 
 ## 一切皆是图 [\*](https://en.wikipedia.org/wiki/Turtles_all_the_way_down)
