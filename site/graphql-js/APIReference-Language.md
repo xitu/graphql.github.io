@@ -84,7 +84,7 @@ var { Source } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-*Printer*
+**Printer**
 
 <ul class="apiIndex">
   <li>
@@ -122,7 +122,7 @@ type SourceLocation = {
 
 ## 词法分析器
 
-### 词法分析
+### lex
 
 ```js
 function lex(source: Source): Lexer;
@@ -143,7 +143,7 @@ export type Token = {
 
 ## 解析器
 
-### 解析
+### parse
 
 ```js
 export function parse(
@@ -187,7 +187,7 @@ function visit(root, visitor, keyMap)
 
 通过从 `enter` 和 `leave` 函数里返回不同的值，访问方法的行为可以进行更改，包括跳过 AST 的一个子树（返回 `false`）、编辑这个 AST（返回一个值或者返回 `null` 来删除这个节点）、或者返回 `BREAK` 停止整个遍历。
 
-当使用 `visit()` 编辑一个 AST 的时候，原始的 AST 不会被修改，`visit` 函数会生成一个经过修改的新版本 AST 返回。
+当使用 `visit()` 编辑一个 AST 的时候，原始的 AST 不会被修改，`visit` 函数会返回一个经过修改的新版本 AST。
 
 ```js
 var editedAST = visit(ast, {
@@ -202,7 +202,7 @@ var editedAST = visit(ast, {
   leave(node, key, parent, path, ancestors) {
     // @return
     //   undefined: 无操作
-    //   false: 跳过访问该节点
+    //   false: 无操作
     //   visitor.BREAK: 停止访问
     //   null: 删除该节点
     //   any value: 使用返回的这个值替代原本的节点
