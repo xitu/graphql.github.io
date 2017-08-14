@@ -28,7 +28,7 @@ type Query {
 }
 ```
 
-对于跟级别解析器 `RandomDie` 类型来说，我们可以用 ES6 的 class 语法来替代，这样的话这些解析器就是这个类的实例方法了。下面的代码展示了如何使用 ES6 的 class 语法来实现上面的 `RandomDie` 对象类型：
+对于 `RandomDie` 类型的根级别解析器来说，我们可以用 ES6 的 class 语法来替代，这样的话这些解析器就是这个类的实例方法了。下面的代码展示了如何使用 ES6 的 class 语法来实现上面的 `RandomDie` 对象类型：
 
 ```javascript
 class RandomDie {
@@ -90,7 +90,6 @@ var schema = buildSchema(`
   }
 `);
 
-// This class implements the RandomDie GraphQL type
 // 该类继承 RandomDie GraphQL 类型
 class RandomDie {
   constructor(numSides) {
@@ -110,7 +109,7 @@ class RandomDie {
   }
 }
 
-// root 规定了顶层的 API 端点
+// root 规定了顶层的 API 入口端点
 var root = {
   getDie: function ({numSides}) {
     return new RandomDie(numSides || 6);
@@ -127,7 +126,7 @@ app.listen(4000);
 console.log('Running a GraphQL API server at localhost:4000/graphql');
 ```
 
-当你对一个返回对象类型的 API 发出 GraphQL 查询时，你可以通过嵌套 GraphQL 字段名来调用对象上的多个方法。例如，如果你想在调用 `rollOnce` 方法掷 1 次骰子的同时也调用 `roll` 方法来掷 3 次骰子的话，你可以这么做：
+当你对一个返回对象类型的 API 发出 GraphQL 查询时，你可以通过嵌套 GraphQL 字段名来一次性调用对象上的多个方法。例如，如果你想在调用 `rollOnce` 方法掷 1 次骰子的同时也调用 `roll` 方法来掷 3 次骰子的话，你可以这么做：
 
 ```javascript
 {
@@ -140,6 +139,6 @@ console.log('Running a GraphQL API server at localhost:4000/graphql');
 
 如果你用 `node server.js` 命令来运行这些代码并且访问 http://localhost:4000/graphql 的话，你可以用 GraphiQL 试一下这些 API。
 
-这种定义对象类型的方式通常会比传统的 REST 风格的 API 会带来更多的好处。你可以只用一次请求，而不是一次 API 只能获得一个对象，然后还得再加一堆 API 获取其他对象，当然你也可以通过一次请求来获取该对象的所有信息。这样不仅节省了带宽、让你的应用跑得更快，同时也简化了你客户端应用的逻辑。
+这种定义对象类型的方式通常会比传统的 REST 风格的 API 会带来更多的好处。你可以只用一次请求就能获取到所有信息，而不是一次请求只能获取到一个对象的相关信息，然后还要请求一系列 API 才能获取到其他对象的信息。这样不仅节省了带宽、让你的应用跑得更快，同时也简化了你客户端应用的逻辑。
 
 到目前为止，我们所看到的每个 API 都是为返回数据而设计的。为了修改存储的数据或处理复杂的输入，需要继续 [学习 mutations 和 input types](/graphql-js/mutations-and-input-types/)。
