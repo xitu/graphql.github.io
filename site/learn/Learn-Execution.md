@@ -69,7 +69,7 @@ Query: {
 }
 ```
 
-这个例子使用了 JavaScript 语言，但 GraphQL 服务端应用可以被[多种语言实现](https://github.com/whisperfairy/graphql-china.github.io/blob/zh-cn/code).无论哪种语言，解析器函数都接受3个参数
+这个例子使用了 JavaScript 语言，但 GraphQL 服务端应用可以被 [多种语言实现](https://github.com/whisperfairy/graphql-china.github.io/blob/zh-cn/code) .无论哪种语言，解析器函数都接受3个参数
 
 - `obj` 上一级对象，如果字段属于根节点查询类型通常不会被使用。
 - `args` 可以提供在 GraphQL 查询中传入的参数
