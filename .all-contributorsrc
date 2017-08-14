@@ -24,7 +24,67 @@
       "profile": "https://jonirrings.com/",
       "contributions": [
         "eventOrganizing",
-        "review"
+        "review",
+        "translation"
+      ]
+    },
+    {
+      "login": "linonetwo",
+      "name": "lin onetwo",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3746270?v=4",
+      "profile": "http://onetwo.ren",
+      "contributions": [
+        "review",
+        "translation"
+      ]
+    },
+    {
+      "login": "Tina92",
+      "name": "Tina92",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/17871352?v=4",
+      "profile": "https://github.com/Tina92",
+      "contributions": [
+        "review",
+        "translation"
+      ]
+    },
+    {
+      "login": "hikerpig",
+      "name": "hikerpig",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2259688?v=4",
+      "profile": "http://hikerpig.github.io",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "XatMassacrE",
+      "name": "Xat_MassacrE",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/7938748?v=4",
+      "profile": "https://github.com/XatMassacrE",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "llp0574",
+      "name": "linpu.li",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/6203602?v=4",
+      "profile": "http://llp0574.github.io",
+      "contributions": [
+        "review",
+        "translation"
+      ]
+    },
+    {
+      "login": "ydfzgyj",
+      "name": "高英健",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1191515?v=4",
+      "profile": "http://www.baliqieluo.com/",
+      "contributions": [
+        "eventOrganizing",
+        "review",
+        "translation"
       ]
     }
   ]
