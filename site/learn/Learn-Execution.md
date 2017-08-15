@@ -6,7 +6,7 @@ permalink: /learn/execution/
 next: /learn/introspection/
 ---
 
-在验证环节之后，GraphQL 服务端在处理数据之后，会根据 GraphQL 查询的请求内容生成对应结构的结果，一般情况下会以JSON形式返回。
+在验证环节之后，GraphQL 服务端在处理数据之后，会根据 GraphQL 查询的请求内容生成对应结构的结果，一般情况下会以 JSON 形式返回。
 
 GraphQL 不能脱离类型系统处理查询，让我们用一个类型系统的例子来说明一个查询的执行过程，在这一系列的文章中我们重复使用了这些类型，下文是其中的一部分
 
@@ -87,7 +87,7 @@ human(obj, args, context) {
 }
 ```
 
-`context` 提供了一个数据库访问对象用来通过查询中传递的参数 `id` 来查询数据，因为从数据库拉去数据的过程是一个异步操作，该方法返回了一个 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 对象，在 JavaScript 语言中 Promise 对象用来返回异步操作，但这个概念在各种语言中都有提及，比如 Futures ，Tasks 或者 Defferred 。当数据库返回查询结果，我们就能通过构造函数返回一个新的 `Human` 对象。
+`context` 提供了一个数据库访问对象用来通过查询中传递的参数 `id` 来查询数据，因为从数据库拉去数据的过程是一个异步操作，该方法返回了一个 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 对象，在 JavaScript 语言中 Promise 对象用来返回异步操作，但这个概念在各种语言中都有提及，比如 Futures、Tasks 或者 Defferred。当数据库返回查询结果，我们就能通过构造函数返回一个新的 `Human` 对象。
 
 这里要注意的是，只有解析器函数能感知到 Promise，GraphQL 查询只关注 `human` 字段是否返回，在执行期间如果异步操作没有完成，则 GraphQL 会一直等待下去，因此在这个环节需要关注异步处理上的优化。
 
