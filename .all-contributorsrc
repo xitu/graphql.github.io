@@ -86,6 +86,33 @@
         "review",
         "translation"
       ]
+    },
+    {
+      "login": "JustClear",
+      "name": "大板栗",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/7371867?v=4",
+      "profile": "https://justclear.github.io/",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "Joursion",
+      "name": "Joursion",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/10599678?v=4",
+      "profile": "http://jours.cc",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "whisperfairy",
+      "name": "胡戎",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/7280653?v=4",
+      "profile": "https://github.com/whisperfairy",
+      "contributions": [
+        "translation"
+      ]
     }
   ]
 }
