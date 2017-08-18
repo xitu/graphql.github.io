@@ -1,7 +1,7 @@
 ---
-title: Execution
+title: 执行
 layout: ../_core/DocsLayout
-category: Learn
+category: 学习
 permalink: /learn/execution/
 next: /learn/introspection/
 ---

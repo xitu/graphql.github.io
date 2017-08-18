@@ -12,7 +12,7 @@ next: /learn/pagination/
 
 **“只有作者才能看到他们自己的草稿”**
 
-应当在 [业务逻辑层](/learn/thinking-in-graphs/#business-logic-layer) 实施这种行为。在 GraphQL 层中放置授权逻辑是很吸引人的，如下所示：
+应当在 [业务逻辑层](/learn/thinking-in-graphs/#业务逻辑层) 实施这种行为。在 GraphQL 层中放置授权逻辑是很吸引人的，如下所示：
 
 ```javascript
 var postType = new GraphQLObjectType({
@@ -32,7 +32,7 @@ var postType = new GraphQLObjectType({
 });
 ```
 
-可以看到我们通过检查帖子的 `authorId` 字段是否等于当前用户的 `id` 来定义“作者拥有一个帖子”。你能发现其中的问题吗？我们需要复制这段代码到服务中的每一个入口端点。一旦我们无法保证授权逻辑的完全同步，用户可能在使用不同的 API 时看到不同的数据。我们可以通过确定授权的 [唯一真实来源](/learn/thinking-in-graphs/#business-logic-layer) 来避免这种情况。
+可以看到我们通过检查帖子的 `authorId` 字段是否等于当前用户的 `id` 来定义“作者拥有一个帖子”。你能发现其中的问题吗？我们需要复制这段代码到服务中的每一个入口端点。一旦我们无法保证授权逻辑的完全同步，用户可能在使用不同的 API 时看到不同的数据。我们可以通过确定授权的 [唯一真实来源](/learn/thinking-in-graphs/#业务逻辑层) 来避免这种情况。
 
 在学习 GraphQL 或原型设计时，在解析器内定义授权逻辑是可以接受的。然而，对于生产代码库来说，还是将授权逻辑委托给业务逻辑层。这里有一个例子：
 

@@ -17,7 +17,22 @@ export function toSlug(string) {
 
   var without = "aaaaeeeeiiiioooouuuunc";
 
-  return String(string)
+  string = String(string)
+
+  if (string.indexOf('（') === -1) {
+    return string
+    
+        // Handle uppercase characters
+        .toLowerCase()
+    
+        // Dash blank characters
+        .replace(/\s+/g, '-')
+    
+        // Trim dashes
+        .replace(/^-|-$/g, '');
+  }
+
+  return string
 
     // Handle uppercase characters
     .toLowerCase()
