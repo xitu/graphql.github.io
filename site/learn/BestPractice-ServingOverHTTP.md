@@ -69,7 +69,7 @@ http://myapi/graphql?query={me{name}}
 }
 ```
 
-如果没有返回错误，响应中不应当出现 `"errors"` 字段。如果没有返回数据，则 [根据 GraphQL 规范](http://facebook.github.io/graphql/#sec-Data)，只能在执行期间发生错误时才能包含 `"data"` 字段。
+如果没有返回错误，响应中不应当出现 `"errors"` 字段。如果没有返回数据，则 [根据 GraphQL 规范](http://spec.graphql.cn//#sec-Data-)，只能在执行期间发生错误时才能包含 `"data"` 字段。
 
 ## GraphiQL
 GraphiQL 在测试和开发过程中非常有用，但在生产环境下应当默认被禁用。如果你使用的是 express-graphql，可以根据 NODE_ENV 环境变量进行切换：

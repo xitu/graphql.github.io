@@ -23,7 +23,7 @@ GraphQL 通常通过单入口来提供 HTTP 服务的完整功能，这一实现
 
 ### JSON（使用 GZIP 压缩）
 
-GraphQL 服务通常返回 JSON 格式的数据，但 GraphQL 规范 [并未要求这一点](http://facebook.github.io/graphql/#sec-Serialization-Format)。对于期望更好的网络性能的 API 层来说，使用 JSON 似乎是一个奇怪的选择，但由于它主要是文本，因而在 GZIP 压缩后表现非常好。
+GraphQL 服务通常返回 JSON 格式的数据，但 GraphQL 规范 [并未要求这一点](http://spec.graphql.cn/#sec-Serialization-Format-)。对于期望更好的网络性能的 API 层来说，使用 JSON 似乎是一个奇怪的选择，但由于它主要是文本，因而在 GZIP 压缩后表现非常好。
 
 推荐任何在生产环境下的 GraphQL 服务都启用 GZIP，并推荐在客户端请求头中加入：
 

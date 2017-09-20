@@ -13,7 +13,7 @@ const links = [
   { section: 'code', text: '代码', href: '/code/' },
   { section: 'community', text: '社区', href: '/community/' },
   { section: 'blog', text: '博客', href: '/blog/' },
-  { section: 'spec', text: '规范', href: 'http://facebook.github.io/graphql/' },
+  { section: 'spec', text: '规范', href: 'http://spec.graphql.cn/' },
 ];
 
 export default ({ section }) =>
