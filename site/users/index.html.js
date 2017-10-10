@@ -531,6 +531,71 @@ var logos = [
     img: 'myntra.png',
     link: 'https://www.myntra.com/'
   },
+  {
+    name: 'Conduit',
+    img: 'conduit.png',
+    link: 'https://conduithq.com/'
+  },
+  {
+    name: 'Medallia',
+    img: 'medallia.png',
+    link: 'https://www.medallia.com/'
+  },
+  {
+    name: 'Colectica',
+    img: 'colectica.png',
+    link: 'http://www.colectica.com/'
+  },
+  {
+    name: 'Neo4j',
+    img: 'neo4j_logo.png',
+    link: 'https://www.neo4j.com/developer/graphql/'
+  },
+  {
+    name: 'ComparaOnline',
+    img: 'comparaonline.png',
+    link: 'https://www.comparaonline.com'
+  },
+  {
+    name: 'Goalify.plus',
+    img: 'goalify.png',
+    link: 'https://goalify.plus'
+  },
+  {
+    name: 'Teachers Pay Teachers',
+    img: 'teacherspayteachers.png',
+    link: 'https://teacherspayteachers.com'
+  },
+  {
+    name: '1stdibs',
+    img: '1stdibs.png',
+    link: 'https://www.1stdibs.com/'
+  },
+  {
+    name: 'Hackages',
+    img: 'hackages.png',
+    link: 'https://hackages.io/'
+  },
+  {
+    name: 'Fairfax Media',
+    img: 'fairfaxmedia.png',
+    link: 'https://www.fairfaxmedia.com.au'
+  },
+  {
+    name: 'Amplitude',
+    img: 'amplitude.png',
+    link: 'https://amplitude.com/engineering'
+  },
+  {
+    name: 'Gentux',
+    img: 'gentux.png',
+    link: 'https://www.generationtux.com'
+  },
+  {
+    name: 'Bynder',
+    img: 'bynder.png',
+    link: 'https://www.bynder.com'
+  },
   // Adding your logo?
   // Add it to the /users/logos/ directory and then append an entry above this comment.
   //
@@ -560,7 +625,7 @@ module.exports = ({ page }) =>
         {logos.sort((a, b) =>
           a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1
         ).map(logo =>
-          <a href={logo.link} target="_blank" rel="noopener noreferrer" key={logo.name}>
+          <a href={logo.link} target="_blank" rel="noopener noreferrer nofollow" key={logo.name}>
             <img src={'/users/logos/' + logo.img} title={logo.name} className={logo.isRound ? 'round' : null} />
           </a>
         )}

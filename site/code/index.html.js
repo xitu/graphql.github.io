@@ -19,7 +19,7 @@ export default ({ page, site }) =>
           <h1>Code</h1>
           <Marked>{`
 
-GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框架、客户端库和其他有用的内容。
+GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框架、客户端库、服务和其他有用的内容。
 
 ## 服务端库
 
@@ -30,6 +30,7 @@ GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框
 - [Elixir](#elixir)
 - [Erlang](#erlang)
 - [Go](#go)
+- [Groovy](#groovy)
 - [Java](#java)
 - [JavaScript](#javascript)
 - [PHP](#php)
@@ -122,6 +123,26 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
   - [graphql-relay-go](https://github.com/graphql-go/relay): 一个用于帮助构建 graphql-go 服务器的 Go/Golang 库，支持 react-relay 。
   - [neelance/graphql-go](https://github.com/neelance/graphql-go)：一个活跃的 Golang GraphQL 实现。
 
+### Groovy
+
+#### [gorm-graphql](https://github.com/grails/gorm-graphql/)
+
+**核心库** —— GORM GraphQL 库提供了基于你的 GORM 实体来生成 GraphQL schema 的功能。除了能够将域类映射到 GraphQL schema 之外，核心库还提供了通过 schema 的执行来查询、更新和删除数据的“数据访问者”的默认实现。
+
+**Grails 插件** —— 作为对核心库的补充，GORM GraphQL Grails 插件能够：
+
+- 提供一个通过 HTTP 来接收和响应 GraphQL 请求的控制器。
+- 在启动时使用 spring bean 配置生成 schema，以便于扩展。
+- 包含一个在开发环境下默认启用的 [GraphiQL](https://github.com/graphql/graphiql) 浏览器。这一浏览器可以在 /graphql/browser 下访问。
+- 使用 Grails 提供的数据绑定覆盖默认的数据绑定
+- 提供一个 [特质](https://grails.github.io/gorm-graphql/latest/api/org/grails/gorm/graphql/plugin/testing/GraphQLSpec.html) 以使您更容易对 GraphQL 入口端点进行集成测试
+
+更多信息请查看 [文档](https://grails.github.io/gorm-graphql/latest/guide/index.html)。
+
+#### [GQL](https://grooviter.github.io/gql/) 
+
+GQL 是一个在 Groovy 中使用 GraphQL 的库。
+  
 ### Java
 
 #### [graphql-java](https://github.com/graphql-java/graphql-java)
@@ -391,8 +412,9 @@ Executor.execute(schema, query) map println
 
   - [Relay](https://facebook.github.io/relay/) ([github](https://github.com/facebook/relay)) ([npm](https://www.npmjs.com/package/react-relay))：Facebook 的框架，用于构建与 GraphQL 后端交流的 React 应用。
   - [Apollo Client](http://dev.apollodata.com/react/) ([github](https://github.com/apollostack/apollo-client))：一个强大的 JavaScript GraphQL 客户端，设计用于与 React、React Native、Angular 2 或者原生 JavaScript 一同工作。
-  - [graphql-request](https://github.com/graphcool/graphql-request)：个简单的弹性的 JavaScript GraphQL 客户端，可以运行于所有的 JavaScript 环境（浏览器，Node.js 和 React Native）—— 基本上是 \`fetch\` 的轻度封装。
+  - [graphql-request](https://github.com/graphcool/graphql-request)：一个简单的弹性的 JavaScript GraphQL 客户端，可以运行于所有的 JavaScript 环境（浏览器，Node.js 和 React Native）—— 基本上是 \`fetch\` 的轻度封装。
   - [Lokka](https://github.com/kadirahq/lokka)：一个简单的 JavaScript GraphQL 客户端，可以运行于所有的 JavaScript 环境 —— 浏览器，Node.js 和 React Native。
+  - [nanogql](https://github.com/yoshuawuyts/nanogql)：一个使用模板字符串的小型 GraphQL 客户端库。
 
 ### Swift / Objective-C iOS
 
@@ -404,6 +426,14 @@ Executor.execute(schema, query) map println
   - [graphiql](https://github.com/graphql/graphiql) ([npm](https://www.npmjs.com/package/graphiql))：一个交互式的运行于浏览器中的 GraphQL IDE.
   - [libgraphqlparser](https://github.com/graphql/libgraphqlparser)：一个 C++ 版 GraphQL 查询语言分析器，提供 C 和 C++ API。
   - [Graphql Language Service](https://github.com/graphql/graphql-language-service)：一个用于构建 IDE 的 GraphQL 语言服务（诊断、自动完成等）的接口。
+
+## 服务
+
+  - [Apollo Optics](http://www.apollodata.com/optics/)：一个用于监视 GraphQL 后端的性能和使用的服务。
+  - [GraphCMS](https://graphcms.com/)：一个 BaaS（后端即服务），它为您配置了一个作为内容编辑工具来处理存储数据的 GraphQL 后端。
+  - [Graphcool](https://www.graph.cool) ([github](https://github.com/graphcool))：一个BaaS（后端即服务），它为您的应用程序提供了一个 GraphQL 后端，且具有用于管理数据库和存储数据的强大的 web ui。
+  - [Reindex](https://www.reindex.io/baas/) ([github](https://github.com/reindexio/reindex-js))：一个BaaS（后端即服务），它针对使用 React 和 Relay 的应用程序配置了 GraphQL 后端。
+  - [Scaphold](https://scaphold.io) ([github](https://github.com/scaphold-io))：一个BaaS（后端即服务），为您的应用程序配置了一个拥有多种不同集成的 GraphQL 后端。
 
 ## 更多内容
 

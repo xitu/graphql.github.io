@@ -56,7 +56,8 @@ sublinks: 博客,视频
 - [GraphQL 讲解](https://medium.com/apollo-stack/graphql-explained-5844742f195e#.zdykxos6i) - Jonas Helfer
 - [GraphQL 概念可视化](https://medium.com/apollo-stack/the-concepts-of-graphql-bc68bd819be3#.hfczgtdsj) - Dhaivat Pandya
 - [构建 f8 App：使用 GraphQL & Relay](http://makeitopen.com/tutorials/building-the-f8-app/relay/)
-- [您的第一个 GraphQL 服务器](https://medium.com/the-graphqlhub/your-first-graphql-server-3c766ab4f0a2#.ovn0y19k4) - Clay Allsopp
+- [你的第一个 GraphQL 服务器](https://medium.com/the-graphqlhub/your-first-graphql-server-3c766ab4f0a2#.ovn0y19k4) - Clay Allsopp
+- [教程：用 Apollo-server、Dataloader 和 Knex 启动一个 JS API](https://bamtech.gitbooks.io/dev-standards/content/backend/graphql-js/getting-started-with-apollo-server-dataloader-knex.mo.html) - Thomas Pucci
 - [教程：如何构建一个 GraphQL 服务器](https://medium.com/apollo-stack/tutorial-building-a-graphql-server-cddaa023c035#.bu6sdnst4) - Jonas Helfer
 - [使用 GraphQL 查询参数设计强大的 API](https://www.graph.cool/docs/tutorials/designing-powerful-apis-with-graphql-query-parameters-aing7uech3/) - Johannes Schickling
 - [GraphQL 和不可思议的 Apollo Client](https://medium.com/google-developer-experts/graphql-and-the-amazing-apollo-client-fe57e162a70c) - Gerard Sans
@@ -108,3 +109,4 @@ Facebook 内外的开发者在世界各地的会议和聚会上都谈到了 Grap
 - [Scaphold Community](https://scaphold.io/community/): 一些帮助您将使用 GraphQL 的 app 发布到生产环境的资源
 - [GraphQL World](https://graphql-world.com): GraphQL 开发者和活动的全球社区
 - [GraphQL Talks](https://www.graph.cool/talks/): 找到并观看最好的 GraphQL 演讲
+- [Basically, Full-stack GraphQL](https://github.com/TejasQ/basically-fullstack-graphql)：使用简单英文的一个基于代码的介绍在客户端_和_服务端使用 GraphQL

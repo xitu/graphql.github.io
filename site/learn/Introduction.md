@@ -7,7 +7,7 @@ permalink: /learn/
 next: /learn/queries/
 ---
 
-> 在接下来的一系列文章中，我们会了解 GraphQL 是什么，它是如何运作以及如何使用它。在找如何搭建 GraphQL 服务的文档？这有一些类库可以帮你用[多种不同语言](/code/)实现 GraphQL。
+> 在接下来的一系列文章中，我们会了解 GraphQL 是什么，它是如何运作以及如何使用它。在找如何搭建 GraphQL 服务的文档？这有一些类库可以帮你用[多种不同语言](/code/)实现 GraphQL。通过实用教程深入学习体验，请访问 [How to GraphQL](https://www.howtographql.com) 全栈教程网站。
 
 GraphQL 是一个用于 API 的查询语言，是一个使用基于类型系统来执行查询的服务端运行时（类型系统由你的数据定义）。GraphQL 并没有和任何特定数据库或者存储引擎绑定，而是依靠你现有的代码和数据支撑。
 

@@ -1,5 +1,5 @@
 ---
-title: graphql/types
+title: graphql/type
 layout: ../_core/GraphQLJSLayout
 category: API 参考
 permalink: /graphql-js/type/
@@ -251,6 +251,7 @@ type GraphQLInterfacesThunk = () => Array<GraphQLInterfaceType>;
 
 type GraphQLFieldConfigMapThunk = () => GraphQLFieldConfigMap;
 
+// 关于解析器函数，请参见下文
 type GraphQLFieldResolveFn = (
   source?: any,
   args?: {[argName: string]: any},
@@ -296,6 +297,8 @@ type GraphQLFieldConfigMap = {
 几乎所有你要去定义的 GraphQL 类型都会是 Object 类型。Object 类型有自己的名字 `name`，但最重要的是它描述了它有哪些字段。
 
 当两个类型需要相互指代，或是某类型的某一字段类型为其自身，你可以使用函数表达式（也可称为闭包或是 thunk）来实现字段类型的延后求值。
+
+注意，解析器函数提供 `source` 对象作为第一个参数。但是，如果未提供解析器函数，则将在 `source` 中查找与该字段名称相同的方法来作为默认的解析器。如果找到，则使用 `(args, context, info)` 调用该方法。由于它是一个在 `source` 上的方法，因此始终可以使用 `this` 来引用值。
 
 #### 示例
 
