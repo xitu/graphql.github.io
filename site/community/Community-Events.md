@@ -85,6 +85,7 @@ GraphQL-Europe 是欧洲非营利性的 GraphQL 大会，邀请了来自世界�
 - [GraphQL Austin](https://www.meetup.com/ATX-GraphQL/)
 - [GraphQL Miami](https://www.meetup.com/Miami-GraphQL/)
 - [GraphQL Los Angeles](https://www.meetup.com/Los-Angeles-GraphQL-Meetup/)
+- [GraphQL Dallas-Fort Worth](https://www.meetup.com/DFW-GraphQL-Meetup/)
 
 ### 欧洲
 
@@ -101,7 +102,7 @@ GraphQL-Europe 是欧洲非营利性的 GraphQL 大会，邀请了来自世界�
 ### 澳洲
 
 - [GraphQL Melbourne](http://graphql.melbourne/)
-- [GraphQL Sydney](https://www.meetup.com/GraphQL-Sydney/)
+- [GraphQL Sydney](http://graphql.sydney/)
 
 ### 亚洲
 

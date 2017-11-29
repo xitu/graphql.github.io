@@ -253,14 +253,14 @@ app.use('/graphql', graphqlHTTP({
 app.listen(4000, () => console.log('Now browse to localhost:4000/graphql'));
 \`\`\`
 
-#### [graphql-server](http://dev.apollodata.com/tools/graphql-server/index.html) ([github](https://github.com/apollostack/graphql-server)) ([npm](https://www.npmjs.com/package/graphql-server-express))
+#### [apollo-server](https://www.apollographql.com/docs/apollo-server/) ([github](https://github.com/apollographql/apollo-server)) ([npm](https://www.npmjs.com/package/apollo-server-express))
 
 来自于 Apollo 的一套 GraphQL server 包，可用于多种 Node.js HTTP 框架（Express，Connect，Hapi，Koa 等）。
 
-如果要运行 \`graphql-server-express\` 的 hello world 服务器：
+如果要运行 \`apollo-server-express\` 的 hello world 服务器：
 
 \`\`\`bash
-npm install graphql-server-express body-parser express graphql graphql-tools
+npm install apollo-server-express body-parser express graphql graphql-tools
 \`\`\`
 
 然后使用 \`node server.js\` 以运行 \`server.js\` 中的代码：
@@ -268,7 +268,7 @@ npm install graphql-server-express body-parser express graphql graphql-tools
 \`\`\`js
 var express = require('express');
 var bodyParser = require('body-parser');
-var { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
+var { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
 var { makeExecutableSchema } = require('graphql-tools');
 
 var typeDefs = [\`
@@ -295,7 +295,7 @@ app.use('/graphiql', graphiqlExpress({endpointURL: '/graphql'}));
 app.listen(4000, () => console.log('Now browse to localhost:4000/graphiql'));
 \`\`\`
 
-GraphQL Server 也支持所有的 Node.js HTTP 服务器框架：Express、Connect、HAPI 和 Koa。
+Apollo Server 也支持所有的 Node.js HTTP 服务器框架：Express、Connect、HAPI 和 Koa。
 
 ### PHP
 
@@ -395,6 +395,7 @@ Executor.execute(schema, query) map println
 - [Java / Android](#java-android)
 - [JavaScript](#javascript-1)
 - [Swift / Objective-C iOS](#swift-objective-c-ios)
+- [Python](#python-1)
 
 ### C# / .NET
 
@@ -411,15 +412,19 @@ Executor.execute(schema, query) map println
 ### JavaScript
 
   - [Relay](https://facebook.github.io/relay/) ([github](https://github.com/facebook/relay)) ([npm](https://www.npmjs.com/package/react-relay))：Facebook 的框架，用于构建与 GraphQL 后端交流的 React 应用。
-  - [Apollo Client](http://dev.apollodata.com/react/) ([github](https://github.com/apollostack/apollo-client))：一个强大的 JavaScript GraphQL 客户端，设计用于与 React、React Native、Angular 2 或者原生 JavaScript 一同工作。
+  - [Apollo Client](http://apollographql.com/client/) ([github](https://github.com/apollographql/apollo-client))：一个强大的 JavaScript GraphQL 客户端，设计用于与 React、React Native、Angular 2 或者原生 JavaScript 一同工作。
   - [graphql-request](https://github.com/graphcool/graphql-request)：一个简单的弹性的 JavaScript GraphQL 客户端，可以运行于所有的 JavaScript 环境（浏览器，Node.js 和 React Native）—— 基本上是 \`fetch\` 的轻度封装。
   - [Lokka](https://github.com/kadirahq/lokka)：一个简单的 JavaScript GraphQL 客户端，可以运行于所有的 JavaScript 环境 —— 浏览器，Node.js 和 React Native。
   - [nanogql](https://github.com/yoshuawuyts/nanogql)：一个使用模板字符串的小型 GraphQL 客户端库。
 
 ### Swift / Objective-C iOS
 
-  - [Apollo iOS](http://dev.apollodata.com/ios/) ([github](https://github.com/apollostack/apollo-ios))：一个用于 iOS 的 GraphQL 客户端，返回查询特定的 Swift 类型，与 Xcode 集成后可以分屏显示你的 Swift 源代码和 GraphQL，并能在行内展示验证错误。
-  - [GraphQL iOS](https://github.com/funcompany/graphql-ios): 一个用于 iOS 的  Objective-C GraphQL 客户端。
+  - [Apollo iOS](https://www.apollographql.com/docs/ios/) ([github](https://github.com/apollographql/apollo-ios))：一个用于 iOS 的 GraphQL 客户端，返回查询特定的 Swift 类型，与 Xcode 集成后可以分屏显示你的 Swift 源代码和 GraphQL，并能在行内展示验证错误。
+  - [GraphQL iOS](https://github.com/funcompany/graphql-ios)：一个用于 iOS 的  Objective-C GraphQL 客户端。
+
+### Python
+
+  - [GQL](https://github.com/graphql-python/gql)：一个 Python 中的 GraphQL 客户端。
 
 ## 工具
 
@@ -429,11 +434,12 @@ Executor.execute(schema, query) map println
 
 ## 服务
 
-  - [Apollo Optics](http://www.apollodata.com/optics/)：一个用于监视 GraphQL 后端的性能和使用的服务。
+  - [Apollo Engine](http://www.apollographql.com/engine/)：一个用于监视 GraphQL 后端的性能和使用的服务。
   - [GraphCMS](https://graphcms.com/)：一个 BaaS（后端即服务），它为您配置了一个作为内容编辑工具来处理存储数据的 GraphQL 后端。
-  - [Graphcool](https://www.graph.cool) ([github](https://github.com/graphcool))：一个BaaS（后端即服务），它为您的应用程序提供了一个 GraphQL 后端，且具有用于管理数据库和存储数据的强大的 web ui。
-  - [Reindex](https://www.reindex.io/baas/) ([github](https://github.com/reindexio/reindex-js))：一个BaaS（后端即服务），它针对使用 React 和 Relay 的应用程序配置了 GraphQL 后端。
-  - [Scaphold](https://scaphold.io) ([github](https://github.com/scaphold-io))：一个BaaS（后端即服务），为您的应用程序配置了一个拥有多种不同集成的 GraphQL 后端。
+  - [Graphcool](https://www.graph.cool) ([github](https://github.com/graphcool))：一个 BaaS（后端即服务），它为您的应用程序提供了一个 GraphQL 后端，且具有用于管理数据库和存储数据的强大的 web ui。
+  - [Reindex](https://www.reindex.io/baas/) ([github](https://github.com/reindexio/reindex-js))：一个 BaaS（后端即服务），它针对使用 React 和 Relay 的应用程序配置了 GraphQL 后端。
+  - [Scaphold](https://scaphold.io) ([github](https://github.com/scaphold-io))：一个 BaaS（后端即服务），为您的应用程序配置了一个拥有多种不同集成的 GraphQL 后端。
+  - [Tipe](https://tipe.io) ([github](https://github.com/tipeio)): 一个 SaaS（软件即服务）内容管理系统，允许您使用强大的编辑工具创建您的内容，并通过 GraphQL 或 REST API 从任何地方访问它。
 
 ## 更多内容
 
