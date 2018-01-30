@@ -416,6 +416,7 @@ Executor.execute(schema, query) map println
   - [graphql-request](https://github.com/graphcool/graphql-request)：一个简单的弹性的 JavaScript GraphQL 客户端，可以运行于所有的 JavaScript 环境（浏览器，Node.js 和 React Native）—— 基本上是 \`fetch\` 的轻度封装。
   - [Lokka](https://github.com/kadirahq/lokka)：一个简单的 JavaScript GraphQL 客户端，可以运行于所有的 JavaScript 环境 —— 浏览器，Node.js 和 React Native。
   - [nanogql](https://github.com/yoshuawuyts/nanogql)：一个使用模板字符串的小型 GraphQL 客户端库。
+  - [gq-loader](https://github.com/Houfeng/gq-loader)：一个处理 `.gql` 和 `.graphql` 文件的 webpack loader，通过 `gq-loader` 可直接在 `js` 文件中导入 `.gql` 文件，并像函数一样调用。
 
 ### Swift / Objective-C iOS
 
