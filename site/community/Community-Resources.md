@@ -61,6 +61,9 @@ sublinks: 博客,视频
 - [教程：如何构建一个 GraphQL 服务器](https://medium.com/apollo-stack/tutorial-building-a-graphql-server-cddaa023c035#.bu6sdnst4) - Jonas Helfer
 - [使用 GraphQL 查询参数设计强大的 API](https://www.graph.cool/docs/tutorials/designing-powerful-apis-with-graphql-query-parameters-aing7uech3/) - Johannes Schickling
 - [GraphQL 和不可思议的 Apollo Client](https://medium.com/google-developer-experts/graphql-and-the-amazing-apollo-client-fe57e162a70c) - Gerard Sans
+- [GraphQL 服务器基础（第一部分）：Schema](https://blog.graph.cool/graphql-server-basics-the-schema-ac5e2950214e) - Nikolas Burk
+- [GraphQL 服务器基础（第二部分）：网络层](https://blog.graph.cool/graphql-server-basics-the-network-layer-51d97d21861) - Nikolas Burk
+- [GraphQL 服务器基础（第三部分）：揭秘 GraphQL 解析器中的 `info` 参数](https://blog.graph.cool/graphql-server-basics-demystifying-the-info-argument-in-graphql-resolvers-6f26249f613a) - Nikolas Burk
 
 ## 视频
 
