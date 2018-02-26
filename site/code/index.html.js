@@ -439,7 +439,8 @@ Executor.execute(schema, query) map println
   - [Graphcool](https://www.graph.cool) ([github](https://github.com/graphcool))：一个 BaaS（后端即服务），它为您的应用程序提供了一个 GraphQL 后端，且具有用于管理数据库和存储数据的强大的 web ui。
   - [Reindex](https://www.reindex.io/baas/) ([github](https://github.com/reindexio/reindex-js))：一个 BaaS（后端即服务），它针对使用 React 和 Relay 的应用程序配置了 GraphQL 后端。
   - [Scaphold](https://scaphold.io) ([github](https://github.com/scaphold-io))：一个 BaaS（后端即服务），为您的应用程序配置了一个拥有多种不同集成的 GraphQL 后端。
-  - [Tipe](https://tipe.io) ([github](https://github.com/tipeio)): 一个 SaaS（软件即服务）内容管理系统，允许您使用强大的编辑工具创建您的内容，并通过 GraphQL 或 REST API 从任何地方访问它。
+  - [Tipe](https://tipe.io) ([github](https://github.com/tipeio))：一个 SaaS（软件即服务）内容管理系统，允许您使用强大的编辑工具创建您的内容，并通过 GraphQL 或 REST API 从任何地方访问它。
+  - [AWS AppSync](https://aws.amazon.com/appsync/)：完全托管的 GraphQL 服务，包含实时订阅、离线编程和同步、企业级安全特性以及细粒度的授权控制。
 
 ## 更多内容
 
