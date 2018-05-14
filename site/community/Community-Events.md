@@ -8,21 +8,13 @@ sublinks: 即将举行的活动,聚会
 
 ## 即将举行的活动
 
-### GraphQL Day
-
-- **日期：** 2018 年 4 月 14 日
-- **地点：** 荷兰 阿姆斯特丹
-- **链接：** https://www.graphqlday.org/
-
-GraphQL Day 是针对亲身实践过 GraphQL 开发的爱好者们的会议（包括广泛的实践研讨会）。GraphQL Day 是 [GraphQL Europe](https://graphql-europe.org) 大家庭的一部分。
-
 ### GraphQL Europe 会议
 
 - **日期：** 2018 年 6 月 15 日
 - **地点：** 德国 柏林
 - **链接：** https://graphql-europe.org
 
-GraphQL Europe 是欧洲非营利性的 GraphQL 大会，邀请了来自世界各地的演讲嘉宾。了解来自行业专家的 GraphQL 最佳实践，并成为蓬勃发展的 GraphQL 社区的一部分。**[会议征文](https://www.papercall.io/graphql-eu) 截止至 3 月 31 日**.
+GraphQL Europe 是欧洲非营利性的 GraphQL 大会，邀请了来自世界各地的演讲嘉宾。了解来自行业专家的 GraphQL 最佳实践，并成为蓬勃发展的 GraphQL 社区的一部分。
 
 ## 聚会
 
