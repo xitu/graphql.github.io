@@ -13,7 +13,7 @@ import { graphql } from 'graphql'; // ES6
 var { graphql } = require('graphql'); // CommonJS
 ```
 
-## 概述
+## 概览
 
 **入口点**
 

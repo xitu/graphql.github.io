@@ -14,7 +14,7 @@ import { GraphQLError } from 'graphql'; // ES6
 var { GraphQLError } = require('graphql'); // CommonJS
 ```
 
-## 概述
+## 概览
 
 <ul class="apiIndex">
   <li>

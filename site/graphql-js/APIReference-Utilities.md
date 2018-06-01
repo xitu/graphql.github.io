@@ -16,7 +16,7 @@ var { introspectionQuery } = require('graphql'); // CommonJS
 
 ## 概览
 
-**内省**
+**内省（Introspection）**
 
 <ul class="apiIndex">
   <li>
@@ -102,7 +102,7 @@ var { introspectionQuery } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-## 内省
+## 内省（Introspection）
 
 ### introspectionQuery
 

@@ -14,7 +14,7 @@ import { execute } from 'graphql'; // ES6
 var { execute } = require('graphql'); // CommonJS
 ```
 
-## 概述
+## 概览
 
 <ul class="apiIndex">
   <li>
@@ -27,7 +27,7 @@ var { execute } = require('graphql'); // CommonJS
 
 ## 执行
 
-### 执行
+### execute
 
 ```js
 export function execute(

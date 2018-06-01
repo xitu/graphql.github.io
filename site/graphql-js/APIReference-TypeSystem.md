@@ -131,7 +131,7 @@ var { GraphQLSchema } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-**标量（Scalar）类型**
+**标量类型（Scalars）**
 
 <ul class="apiIndex">
   <li>
@@ -595,7 +595,7 @@ function getNamedType(type: ?GraphQLType): ?GraphQLNamedType
 
 若该类型是非空类型或列表类型的包装结果，该函数会去掉包装，返回原先的类型。
 
-## Scalars
+## 标量类型（Scalars）
 
 ### GraphQLInt
 

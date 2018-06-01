@@ -14,7 +14,7 @@ import { Source } from 'graphql'; // ES6
 var { Source } = require('graphql'); // CommonJS
 ```
 
-## 概述
+## 概览
 
 **Source**
 
@@ -33,7 +33,7 @@ var { Source } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-**词法分析器**
+**词法分析器（Lexer）**
 
 <ul class="apiIndex">
   <li>
@@ -44,7 +44,7 @@ var { Source } = require('graphql'); // CommonJS
   </li>
 </ul>
 
-**解析器**
+**解析器（Parser）**
 
 <ul class="apiIndex">
   <li>
@@ -120,7 +120,7 @@ type SourceLocation = {
 
 接收一个 Source 对象和一个 UTF-8 编码的字符偏移量作为参数，返回一个 SourceLocation 对象，包含相关的行列位置信息。
 
-## 词法分析器
+## 词法分析器（Lexer）
 
 ### lex
 
@@ -141,7 +141,7 @@ export type Token = {
 
 词法分析器函数的参数是可选的，而且可被用于在 Source 里将词法分析器回退或者前进到某个新位置。
 
-## 解析器
+## 解析器（Parser）
 
 ### parse
 
