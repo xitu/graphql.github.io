@@ -442,7 +442,7 @@ var RGBType = new GraphQLEnumType({
 
 ```js
 class GraphQLInputObjectType {
-  constructor(config: GraphQLInputObjectTypeConfig)
+  constructor(config: GraphQLInputObjectConfig)
 }
 
 type GraphQLInputObjectConfig = {

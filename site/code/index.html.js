@@ -42,6 +42,7 @@ GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框
 
   - [graphql-dotnet](https://github.com/graphql-dotnet/graphql-dotnet)：.NET 的 GraphQL 实现
   - [graphql-net](https://github.com/ckimes89/graphql-net)：转换 GraphQL 到 IQueryable
+  - [Hot Chocolate](https://github.com/ChilliCream/hotchocolate)：针对 .net core 和 .net classic 的 GraphQL 服务
 
 ### Clojure
 
@@ -111,7 +112,7 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
 ### Elixir
 
   - [absinthe](https://github.com/absinthe-graphql/absinthe)：Elixir 的 GraphQL 实现。
-  - [graphql-elixir](https://github.com/graphql-elixir/graphql): 一个 Facebook GraphQL 的 Elixir 实现。
+  - [graphql-elixir](https://github.com/graphql-elixir/graphql)：一个 Facebook GraphQL 的 Elixir 实现。
 
 ### Erlang
 
@@ -119,9 +120,11 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
 
 ### Go
 
-  - [graphql-go](https://github.com/graphql-go/graphql): 一个 Go/Golang 的 GraphQL 实现。
-  - [graphql-relay-go](https://github.com/graphql-go/relay): 一个用于帮助构建 graphql-go 服务器的 Go/Golang 库，支持 react-relay 。
+  - [graphql-go](https://github.com/graphql-go/graphql)：一个 Go/Golang 的 GraphQL 实现。
+  - [graphql-relay-go](https://github.com/graphql-go/relay)：一个用于帮助构建 graphql-go 服务器的 Go/Golang 库，支持 react-relay 。
   - [neelance/graphql-go](https://github.com/neelance/graphql-go)：一个活跃的 Golang GraphQL 实现。
+  - [machinebox/graphql](https://github.com/machinebox/graphql)：用于 GraphQL 的一个优雅的底层 HTTP 客户端。
+  - [samsarahq/thunder](https://github.com/samsarahq/thunder)：可轻松进行 schema 构建、实时查询和批处理的 GraphQL 实现。
 
 ### Groovy
 
@@ -135,7 +138,7 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
 - 在启动时使用 spring bean 配置生成 schema，以便于扩展。
 - 包含一个在开发环境下默认启用的 [GraphiQL](https://github.com/graphql/graphiql) 浏览器。这一浏览器可以在 /graphql/browser 下访问。
 - 使用 Grails 提供的数据绑定覆盖默认的数据绑定
-- 提供一个 [特质](https://grails.github.io/gorm-graphql/latest/api/org/grails/gorm/graphql/plugin/testing/GraphQLSpec.html) 以使您更容易对 GraphQL 入口端点进行集成测试
+- 提供一个 [特质](https://grails.github.io/gorm-graphql/latest/api/org/grails/gorm/graphql/plugin/testing/GraphQLSpec.html) 以使你更容易对 GraphQL 入口端点进行集成测试
 
 更多信息请查看 [文档](https://grails.github.io/gorm-graphql/latest/guide/index.html)。
 
@@ -302,6 +305,47 @@ Apollo Server 也支持所有的 Node.js HTTP 服务器框架：Express、Connec
   - [graphql-php](https://github.com/webonyx/graphql-php)：GraphQL 参考实现的 PHP 移植版本。
   - [graphql-relay-php](https://github.com/ivome/graphql-relay-php)：一个用于辅助构建 graphql-php 服务器的库，支持 react-relay。
 
+#### [Siler](https://siler.leocavalcante.com/graphql/) ([github](https://github.com/leocavalcante/siler))
+
+Siler 是一个具有高级抽象功能，可与 GraphQL 搭配使用的 PHP 库。
+
+如果要运行 Siler 的 hello world 脚本：
+
+\`\`\`graphql
+type Query {
+  hello: String
+}
+\`\`\`
+
+\`\`\`php
+<?php
+declare(strict_types=1);
+require_once '/path/to/vendor/autoload.php';
+
+use Siler\Diactoros;
+use Siler\Graphql;
+use Siler\Http;
+
+$typeDefs = file_get_contents(__DIR__.'/schema.graphql');
+$resolvers = [
+    'Query' => [
+        'hello' => 'world',
+    ],
+];
+$schema = Graphql\schema($typeDefs, $resolvers);
+
+echo "Server running at http://127.0.0.1:8080\\n";
+Http\server(Graphql\psr7($schema), function (\Throwable $err) {
+    var_dump($err);
+    return Diactoros\json([
+        'error'   => true,
+        'message' => $err->getMessage(),
+    ]);
+})()->run();
+\`\`\`
+
+它还根据 Apollo 的工作原理提供了构建 WebSocket 订阅服务器的功能。
+
 ### Python
 
 #### [Graphene](http://graphene-python.org/) ([github](https://github.com/graphql-python/graphene))
@@ -320,14 +364,14 @@ pip install graphene
 import graphene
 
 class Query(graphene.ObjectType):
-  hello = graphene.String()
+  hello = graphene.String(name=graphene.String(default_value="World"))
 
-  def resolve_hello(self, args, context, info):
-    return 'Hello world!'
+  def resolve_hello(self, info, name):
+    return 'Hello ' + name
 
 schema = graphene.Schema(query=Query)
 result = schema.execute('{ hello }')
-print(result.data['hello'])
+print(result.data['hello']) # "Hello World"
 \`\`\`
 
 其也有对 [Relay](https://facebook.github.io/relay/)、Django、SQLAlchemy 和 Google App Engine 的良好绑定。
@@ -361,7 +405,7 @@ Schema = GraphQL::Schema.define do
   query QueryType
 end
 
-puts Schema.execute('{ hello }')
+puts Schema.execute('{ hello }').to_json
 \`\`\`
 
 其也有对于 Relay 和 Rails 的良好绑定。
@@ -391,6 +435,7 @@ Executor.execute(schema, query) map println
 ## GraphQL 客户端
 
 - [C# / .NET](#c-net-1)
+- [Clojurescript](#clojurescript-1)
 - [Go](#go-1)
 - [Java / Android](#java-android)
 - [JavaScript](#javascript-1)
@@ -399,15 +444,22 @@ Executor.execute(schema, query) map println
 
 ### C# / .NET
 
+  - [GraphQL.Client](https://github.com/graphql-dotnet/graphql-client)：一个用于 .NET 的 GraphQL 客户端。
   - [graphql-net-client](https://github.com/bkniffler/graphql-net-client)：基于 .Net 的 GraphQL 客户端基本样例。
+  - [SAHB.GraphQLClient](https://github.com/sahb1239/SAHB.GraphQLClient)：GraphQL 客户端，支持从 C# 的类生成查询。
+
+### Clojurescript
+
+  - [re-graph](https://github.com/oliyh/re-graph/)：一个在 Clojurescript 中实现的 GraphQL 客户端，支持 websockets。
 
 ### Go
 
-  - [graphql](https://github.com/shurcooL/graphql#readme): 一个使用 Go 编写的 GraphQL 客户端实现。
+  - [graphql](https://github.com/shurcooL/graphql#readme)：一个使用 Go 编写的 GraphQL 客户端实现。
 
 ### Java / Android
 
   - [Apollo Android](https://github.com/apollographql/apollo-android)：一个用于 Android 的 GraphQL 客户端，强类型、带缓存功能，使用 Java 编写。
+  - [Nodes](https://github.com/americanexpress/nodes)：一个 GraphQL JVM 客户端，用于从标准模型定义构建查询。
 
 ### JavaScript
 
@@ -416,6 +468,8 @@ Executor.execute(schema, query) map println
   - [graphql-request](https://github.com/graphcool/graphql-request)：一个简单的弹性的 JavaScript GraphQL 客户端，可以运行于所有的 JavaScript 环境（浏览器，Node.js 和 React Native）—— 基本上是 \`fetch\` 的轻度封装。
   - [Lokka](https://github.com/kadirahq/lokka)：一个简单的 JavaScript GraphQL 客户端，可以运行于所有的 JavaScript 环境 —— 浏览器，Node.js 和 React Native。
   - [nanogql](https://github.com/yoshuawuyts/nanogql)：一个使用模板字符串的小型 GraphQL 客户端库。
+  - [gq-loader](https://github.com/Houfeng/gq-loader)：一个简单的 JavaScript GraphQL 客户端，通过 webpack 加载器让 *.gql 文件作为模块使用。
+  - [AWS Amplify](https://aws.github.io/aws-amplify)：使用云服务进行应用开发的 JavaScript 库，支持 GraphQL 后端和用于处理 GraphQL 数据的 React 组件。
 
 ### Swift / Objective-C iOS
 
@@ -425,22 +479,26 @@ Executor.execute(schema, query) map println
 ### Python
 
   - [GQL](https://github.com/graphql-python/gql)：一个 Python 中的 GraphQL 客户端。
-
+  - [python-graphql-client](https://github.com/graphcool/python-graphql-client)：适用于 Python 2.7+ 的简单 GraphQL 客户端。
+  - [sgqlc](https://github.com/profusion/sgqlc)：一个简单的 Python GraphQL 客户端。支持为 GraphQL schema 中定义的类型生成代码。
+   
 ## 工具
 
   - [graphiql](https://github.com/graphql/graphiql) ([npm](https://www.npmjs.com/package/graphiql))：一个交互式的运行于浏览器中的 GraphQL IDE.
   - [libgraphqlparser](https://github.com/graphql/libgraphqlparser)：一个 C++ 版 GraphQL 查询语言分析器，提供 C 和 C++ API。
   - [Graphql Language Service](https://github.com/graphql/graphql-language-service)：一个用于构建 IDE 的 GraphQL 语言服务（诊断、自动完成等）的接口。
+  - [quicktype](https://quicktype.io) ([github](https://github.com/quicktype/quicktype))：在 TypeScript、Swift、golang、C#、C++ 等语言中为 GraphQL 查询生成类型。
 
 ## 服务
 
   - [Apollo Engine](http://www.apollographql.com/engine/)：一个用于监视 GraphQL 后端的性能和使用的服务。
-  - [GraphCMS](https://graphcms.com/)：一个 BaaS（后端即服务），它为您配置了一个作为内容编辑工具来处理存储数据的 GraphQL 后端。
-  - [Graphcool](https://www.graph.cool) ([github](https://github.com/graphcool))：一个 BaaS（后端即服务），它为您的应用程序提供了一个 GraphQL 后端，且具有用于管理数据库和存储数据的强大的 web ui。
+  - [GraphCMS](https://graphcms.com/)：一个 BaaS（后端即服务），它为你配置了一个作为内容编辑工具来处理存储数据的 GraphQL 后端。
+  - [Graphcool](https://www.graph.cool) ([github](https://github.com/graphcool))：一个 BaaS（后端即服务），它为你的应用程序提供了一个 GraphQL 后端，且具有用于管理数据库和存储数据的强大的 web ui。
   - [Reindex](https://www.reindex.io/baas/) ([github](https://github.com/reindexio/reindex-js))：一个 BaaS（后端即服务），它针对使用 React 和 Relay 的应用程序配置了 GraphQL 后端。
-  - [Scaphold](https://scaphold.io) ([github](https://github.com/scaphold-io))：一个 BaaS（后端即服务），为您的应用程序配置了一个拥有多种不同集成的 GraphQL 后端。
-  - [Tipe](https://tipe.io) ([github](https://github.com/tipeio))：一个 SaaS（软件即服务）内容管理系统，允许您使用强大的编辑工具创建您的内容，并通过 GraphQL 或 REST API 从任何地方访问它。
+  - [Scaphold](https://scaphold.io) ([github](https://github.com/scaphold-io))：一个 BaaS（后端即服务），为你的应用程序配置了一个拥有多种不同集成的 GraphQL 后端。
+  - [Tipe](https://tipe.io) ([github](https://github.com/tipeio))：一个 SaaS（软件即服务）内容管理系统，允许你使用强大的编辑工具创建你的内容，并通过 GraphQL 或 REST API 从任何地方访问它。
   - [AWS AppSync](https://aws.amazon.com/appsync/)：完全托管的 GraphQL 服务，包含实时订阅、离线编程和同步、企业级安全特性以及细粒度的授权控制。
+  - [Hasura](https://hasura.io)：一个 BaaS（后端即服务），允许你在 Postgres 上创建数据表、定义权限并使用 GraphQL 接口查询和操作。
 
 ## 更多内容
 

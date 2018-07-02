@@ -165,28 +165,30 @@ mutation {
 ```javascript
 var author = 'andy';
 var content = 'hope is a good thing';
-var xhr = new XMLHttpRequest();
-xhr.responseType = 'json';
-xhr.open("POST", "/graphql");
-xhr.setRequestHeader("Content-Type", "application/json");
-xhr.setRequestHeader("Accept", "application/json");
-xhr.onload = function () {
-  console.log('data returned:', xhr.response);
-}
 var query = `mutation CreateMessage($input: MessageInput) {
   createMessage(input: $input) {
     id
   }
 }`;
-xhr.send(JSON.stringify({
-  query: query,
-  variables: {
-    input: {
-      author: author,
-      content: content,
+
+fetch('/graphql', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
+  body: JSON.stringify({
+    query,
+    variables: {
+      input: {
+        author,
+        content,
+      }
     }
-  }
-}));
+  })
+})
+  .then(r => r.json())
+  .then(data => console.log('data returned:', data));
 ```
 
 一个十分特殊的变更类型是“改变用户”，譬如注册新用户。除了使用 GraphQL 变更来实现这个功能之外，在学完 [GraphQL 认证和 Express 中间件](/graphql-js/authentication-and-express-middleware/) 之后你还能使用现有库来实现。

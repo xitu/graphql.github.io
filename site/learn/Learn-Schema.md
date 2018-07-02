@@ -114,7 +114,7 @@ type Query {
 
 一个对象类型有自己的名字和字段，而某些时候，这些字段必然会解析到具体数据。这就是标量类型的来源：它们表示对应 GraphQL 查询的叶子节点。
 
-下列查询中，`name` 和 `appearsIn` 将解析到标量类型：
+下列查询中，`name` 和 `appearsIn` 字段将解析到标量类型：
 
 ```graphql
 # { "graphiql": true }

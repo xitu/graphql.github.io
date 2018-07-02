@@ -128,7 +128,6 @@ fragment comparisonFields on Character {
 ## 操作名称（Operation name）
 
 这之前，我们都使用了简写句法，省略了 `query` 关键字和查询名称，但是生产中使用这些可以使我们代码减少歧义。
-如果你想要执行查询以外的操作或传递动态变量，则需要将这些可选部分用于 GraphQL 操作。
 
 下面的示例包含了作为**操作类型**的关键字 `query` 以及**操作名称** `HeroNameAndFriends`：
 
@@ -144,9 +143,9 @@ query HeroNameAndFriends {
 }
 ```
 
-**操作类型**可以是 _query_、_mutation_ 或 _subscription_，描述你打算做什么类型的操作。
+**操作类型**可以是 _query_、_mutation_ 或 _subscription_，描述你打算做什么类型的操作。操作类型是必需的，除非你使用查询简写语法，在这种情况下，你无法为操作提供名称或变量定义。
 
-**操作名称**是你的操作的有意义和明确的名称。这对于调试和服务器端日志记录的原因可能非常有用。
+**操作名称**是你的操作的有意义和明确的名称。它仅在有多个操作的文档中是必需的，但我们鼓励使用它，因为它对于调试和服务器端日志记录非常有用。
 当在你的网络日志或是 GraphQL 服务器中出现问题时，通过名称来从你的代码库中找到一个查询比尝试去破译内容更加容易。
 就把它想成你喜欢的程序语言中的函数名。例如，在 JavaScript 中，我们只用匿名函数就可以工作，但是当我们给了函数名之后，就更加容易追踪、调试我们的代码，并在其被调用的时候做日志。同理，GraphQL 的查询和变更名称，以及片段名称，都可以成为服务端侧用来识别不同 GraphQL 请求的有效调试工具。
 
@@ -166,7 +165,7 @@ query HeroNameAndFriends {
 全部做完之后就像这个样子：
 
 ```graphql
-# { "graphiql": true, "variables": { "episode": "JEDI" } }
+# { "graphiql": true, "variables": { "episode": JEDI } }
 query HeroNameAndFriends($episode: Episode) {
   hero(episode: $episode) {
     name

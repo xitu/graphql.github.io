@@ -23,18 +23,21 @@ http://localhost:4000/graphql
 {"data":{"hello":"Hello world!"}}
 ```
 
+如果你更倾向于使用图形用户界面发送测试查询，你可以使用客户端，例如 [GraphiQL](https://github.com/graphql/graphiql) 和 [Insomnia](https://github.com/getinsomnia/insomnia)。
+
 通过浏览器发送 GraphQL 也很简单。打开 http://localhost:4000 ，开启开发者控制台，粘贴：
 
 ```javascript
-var xhr = new XMLHttpRequest();
-xhr.responseType = 'json';
-xhr.open("POST", "/graphql");
-xhr.setRequestHeader("Content-Type", "application/json");
-xhr.setRequestHeader("Accept", "application/json");
-xhr.onload = function () {
-  console.log('data returned:', xhr.response);
-}
-xhr.send(JSON.stringify({query: "{ hello }"}));
+fetch('/graphql', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
+  body: JSON.stringify({query: "{ hello }"})
+})
+  .then(r => r.json())
+  .then(data => console.log('data returned:', data));
 ```
 
 你会在控制台中见到返回的数据：
@@ -58,21 +61,23 @@ type Query {
 ```javascript
 var dice = 3;
 var sides = 6;
-var xhr = new XMLHttpRequest();
-xhr.responseType = 'json';
-xhr.open("POST", "/graphql");
-xhr.setRequestHeader("Content-Type", "application/json");
-xhr.setRequestHeader("Accept", "application/json");
-xhr.onload = function () {
-  console.log('data returned:', xhr.response);
-}
 var query = `query RollDice($dice: Int!, $sides: Int) {
   rollDice(numDice: $dice, numSides: $sides)
 }`;
-xhr.send(JSON.stringify({
-  query: query,
-  variables: { dice: dice, sides: sides },
-}));
+
+fetch('/graphql', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+  },
+  body: JSON.stringify({
+    query,
+    variables: { dice, sides },
+  })
+})
+  .then(r => r.json())
+  .then(data => console.log('data returned:', data));
 ```
 
 这种语法的变量有助于自动避免转义 bug，也更容易监控服务器。

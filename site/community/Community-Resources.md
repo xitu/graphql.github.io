@@ -13,7 +13,7 @@ sublinks: 博客,视频
 
 ## Facebook Group
 
-加入 [GraphQL Facebook Group](https://www.facebook.com/groups/graphql.community/) 来提出问题、讨论和分享。GraphQL Facebook group 是首选的发布公告和进行广泛讨论的场所。
+加入 [GraphQL Facebook Group](https://www.facebook.com/groups/graphql.community/) 分享和发现新内容。GraphQL Facebook group 是首选的发布公告和进行广泛讨论的场所。
 
 ## Twitter
 
@@ -55,7 +55,7 @@ sublinks: 博客,视频
 - [从 REST 到 GraphQL](https://0x2a.sh/from-rest-to-graphql-b4e95e94c26b#.tag7nzkrb) - Jacob Gillespie
 - [GraphQL 讲解](https://medium.com/apollo-stack/graphql-explained-5844742f195e#.zdykxos6i) - Jonas Helfer
 - [GraphQL 概念可视化](https://medium.com/apollo-stack/the-concepts-of-graphql-bc68bd819be3#.hfczgtdsj) - Dhaivat Pandya
-- [构建 f8 App：使用 GraphQL & Relay](http://makeitopen.com/tutorials/building-the-f8-app/relay/)
+- [构建 f8 App：使用 GraphQL & Relay](http://makeitopen.com/docs/en/1-A2-relay.html)
 - [你的第一个 GraphQL 服务器](https://medium.com/the-graphqlhub/your-first-graphql-server-3c766ab4f0a2#.ovn0y19k4) - Clay Allsopp
 - [教程：用 Apollo-server、Dataloader 和 Knex 启动一个 JS API](https://bamtech.gitbooks.io/dev-standards/content/backend/graphql-js/getting-started-with-apollo-server-dataloader-knex.mo.html) - Thomas Pucci
 - [教程：如何构建一个 GraphQL 服务器](https://medium.com/apollo-stack/tutorial-building-a-graphql-server-cddaa023c035#.bu6sdnst4) - Jonas Helfer
@@ -92,9 +92,15 @@ Facebook 内外的开发者在世界各地的会议和聚会上都谈到了 Grap
 - [使用 Angular 2 释放 GraphQL 的力量](https://www.youtube.com/watch?v=VYpJ9pfugM8) - Gerard Sans, NG-BE 2016
 - [网络研讨会系列：GraphQL 在世界各地](https://graphql-world.com/webinar) - Vince Ning & Michael Paris
 - [GraphQL Europe 中的所有演讲](https://www.youtube.com/playlist?list=PLn2e1F9Rfr6n_WFm9fPE-_wYPrYvSTySt) - Lee Byron, Sashko Stubailo, Dan Schafer, Johannes Schickling 等
+- [学习基于 React 和 Relay 的 GraphQL](https://www.packtpub.com/application-development/learning-graphql-react-and-relay-video) - Divyendu Singh
+- [实践比 RESTful Web 服务更好的 GraphQL（视频）](https://www.packtpub.com/application-development/hands-graphql-better-restful-web-services-video) - Ashwin Hegde
 
 ## 图书
 
+- [GraphQL 指南](https://graphql.guide) - John Resig 和 Loren Sands-Ramshaw
+- [学习 GraphQL](https://www.amazon.com/Learning-GraphQL-Declarative-Fetching-Modern/dp/1492030716/) - Eve Porcello 和 Alex Banks
+- [全栈 GraphQL](https://www.graphql.college/fullstack-graphql) - Julian Mayorga
+- [在 Elixir 和 Absinthe 中使用 Craft GraphQL API](https://pragprog.com/book/wwgraphql/craft-graphql-apis-in-elixir-with-absinthe) - Bruce Williams and Ben Wilson
 - [学习 GraphQL 和 Relay](https://www.packtpub.com/web-development/learning-graphql-and-relay) - Samer Buna
 
 ## 更多资源
