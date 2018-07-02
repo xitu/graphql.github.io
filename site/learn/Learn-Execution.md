@@ -59,7 +59,7 @@ type Starship {
 
 ```js
 Query: {
-  human(obj, args, context) {
+  human(obj, args, context, info) {
     return context.db.loadHumanByID(args.id).then(
       userData => new Human(userData)
     )
@@ -67,18 +67,19 @@ Query: {
 }
 ```
 
-这个例子使用了 JavaScript 语言，但 GraphQL 服务端应用可以被 [多种语言实现](/code/)。解析器函数接收 3 个参数：
+这个例子使用了 JavaScript 语言，但 GraphQL 服务端应用可以被 [多种语言实现](/code/)。解析器函数接收 4 个参数：
 
 - `obj` 上一级对象，如果字段属于根节点查询类型通常不会被使用。
 - `args` 可以提供在 GraphQL 查询中传入的参数。
 - `context` 会被提供给所有解析器，并且持有重要的上下文信息比如当前登入的用户或者数据库访问对象。
+- `info` 一个保存与当前查询相关的字段特定信息以及 schema 详细信息的值，[更多详情请参考类型 GraphQLResolveInfo](/graphql-js/type/#graphqlobjecttype).
 
 ## 异步解析器
 
 让我们来分析一下在这个解析器函数中发生了什么。
 
 ```js
-human(obj, args, context) {
+human(obj, args, context, info) {
   return context.db.loadHumanByID(args.id).then(
     userData => new Human(userData)
   )
@@ -95,7 +96,7 @@ human(obj, args, context) {
 
 ```js
 Human: {
-  name(obj, args, context) {
+  name(obj, args, context, info) {
     return obj.name
   }
 }
@@ -129,7 +130,7 @@ Human: {
 
 ```js
 Human: {
-  starships(obj, args, context) {
+  starships(obj, args, context, info) {
     return obj.starshipIDs.map(
       id => context.db.loadStarshipByID(id).then(
         shipData => new Starship(shipData)

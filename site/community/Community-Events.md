@@ -16,6 +16,14 @@ sublinks: 即将举行的活动,聚会
 
 GraphQL Europe 是欧洲非营利性的 GraphQL 大会，邀请了来自世界各地的演讲嘉宾。了解来自行业专家的 GraphQL 最佳实践，并成为蓬勃发展的 GraphQL 社区的一部分。
 
+### GraphQL Finland 会议
+
+- **日期：** 2018 年 10 月 18 - 19 日
+- **地点：** 芬兰 赫尔辛基
+- **链接：** https://graphql-finland.fi/
+
+GraphQL Finland 是一个社区组织的 GraphQL 会议。这是首次在芬兰举办这样的活动，该活动由一天的研讨会和一天的专题演讲组成。GraphQL Finland 由 React Finland 的团队组织。
+
 ## 聚会
 
 ### 北美洲
@@ -27,7 +35,6 @@ GraphQL Europe 是欧洲非营利性的 GraphQL 大会，邀请了来自世界�
 - [GraphQL NYC](https://www.meetup.com/GraphQL-NYC/)
 - [GraphQL Atlanta](https://www.meetup.com/GraphQL-Atlanta/)
 - [GraphQL Austin](https://www.meetup.com/ATX-GraphQL/)
-- [GraphQL Miami](https://www.meetup.com/Miami-GraphQL/)
 - [GraphQL Los Angeles](https://www.meetup.com/Los-Angeles-GraphQL-Meetup/)
 - [GraphQL Dallas-Fort Worth](https://www.meetup.com/DFW-GraphQL-Meetup/)
 - [GraphQL Ottawa](https://www.meetup.com/GraphQL-Ottawa/)
@@ -46,7 +53,6 @@ GraphQL Europe 是欧洲非营利性的 GraphQL 大会，邀请了来自世界�
 
 - [GraphQL Amsterdam](https://www.meetup.com/Amsterdam-GraphQL-Meetup/)
 - [GraphQL Berlin](https://www.meetup.com/graphql-berlin/)
-- [GraphQL Istanbul](https://www.meetup.com/GraphQL-Istanbul/)
 - [GraphQL London](https://www.meetup.com/GraphQL-London)
 - [GraphQL Paris](https://www.meetup.com/GraphQL-Paris/)
 - [GraphQL Munich](https://www.meetup.com/GraphQL-Munich/)
@@ -59,7 +65,7 @@ GraphQL Europe 是欧洲非营利性的 GraphQL 大会，邀请了来自世界�
 ### 澳洲
 
 - [GraphQL Melbourne](http://graphql.melbourne/)
-- [GraphQL Sydney](http://graphql.sydney/)
+- [GraphQL Sydney](https://graphql.sydney/)
 
 ### 亚洲
 
