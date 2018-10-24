@@ -16,7 +16,7 @@ GraphQL 规范特意忽略了一些面向 API 的重要问题，例如处理网�
 
 ### HTTP
 
-GraphQL 通常通过单入口来提供 HTTP 服务的完整功能，这一实现方式与暴露一组 URL 且每个 URL 只暴露一个资源的 REST API 不同。虽然 GraphQL 也可以暴露多个资源 URL 来使用，但这可能导致您在使用 GraphiQL 等工具时遇到困难。
+GraphQL 通常通过单入口来提供 HTTP 服务的完整功能，这一实现方式与暴露一组 URL 且每个 URL 只暴露一个资源的 REST API 不同。虽然 GraphQL 也可以暴露多个资源 URL 来使用，但这可能导致您在使用 [GraphiQL](https://github.com/graphql/graphiql) 等工具时遇到困难。
 
 了解更多：[提供 HTTP 服务](/learn/serving-over-http/)。
 

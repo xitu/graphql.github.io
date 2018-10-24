@@ -14,15 +14,13 @@ sublinks: 即将举行的活动,聚会
 - **地点：** 德国 柏林
 - **链接：** https://graphql-europe.org
 
-GraphQL Europe 是欧洲非营利性的 GraphQL 大会，邀请了来自世界各地的演讲嘉宾。了解来自行业专家的 GraphQL 最佳实践，并成为蓬勃发展的 GraphQL 社区的一部分。
+### GraphQL Conf
 
-### GraphQL Finland 会议
+- **日期：** 2019 年 6 月 20 - 21 日
+- **地点：** 德国 柏林
+- **链接：** https://www.graphqlconf.org/
 
-- **日期：** 2018 年 10 月 18 - 19 日
-- **地点：** 芬兰 赫尔辛基
-- **链接：** https://graphql-finland.fi/
-
-GraphQL Finland 是一个社区组织的 GraphQL 会议。这是首次在芬兰举办这样的活动，该活动由一天的研讨会和一天的专题演讲组成。GraphQL Finland 由 React Finland 的团队组织。
+GraphQL Conf 是欧洲非营利性的 GraphQL 大会，邀请了来自世界各地的演讲嘉宾。了解来自行业专家的 GraphQL 最佳实践，并成为蓬勃发展的 GraphQL 社区的一部分。
 
 ## 聚会
 
