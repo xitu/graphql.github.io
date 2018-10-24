@@ -42,7 +42,7 @@ GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框
 
   - [graphql-dotnet](https://github.com/graphql-dotnet/graphql-dotnet)：.NET 的 GraphQL 实现
   - [graphql-net](https://github.com/ckimes89/graphql-net)：转换 GraphQL 到 IQueryable
-  - [Hot Chocolate](https://github.com/ChilliCream/hotchocolate)：针对 .net core 和 .net classic 的 GraphQL 服务
+  - [Hot Chocolate](https://github.com/ChilliCream/hotchocolate)：针对 .net core 和 .net classic 的 GraphQL 服务器
 
 ### Clojure
 
@@ -470,6 +470,7 @@ Executor.execute(schema, query) map println
   - [nanogql](https://github.com/yoshuawuyts/nanogql)：一个使用模板字符串的小型 GraphQL 客户端库。
   - [gq-loader](https://github.com/Houfeng/gq-loader)：一个简单的 JavaScript GraphQL 客户端，通过 webpack 加载器让 *.gql 文件作为模块使用。
   - [AWS Amplify](https://aws.github.io/aws-amplify)：使用云服务进行应用开发的 JavaScript 库，支持 GraphQL 后端和用于处理 GraphQL 数据的 React 组件。
+  - [Grafoo](https://github.com/grafoojs/grafoo)：一个通用的 GraphQL 客户端，具有仅 1.6kb 的多框架的视图层集成。
 
 ### Swift / Objective-C iOS
 

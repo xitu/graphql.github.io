@@ -57,7 +57,7 @@ sublinks: 博客,视频
 - [GraphQL 概念可视化](https://medium.com/apollo-stack/the-concepts-of-graphql-bc68bd819be3#.hfczgtdsj) - Dhaivat Pandya
 - [构建 f8 App：使用 GraphQL & Relay](http://makeitopen.com/docs/en/1-A2-relay.html)
 - [你的第一个 GraphQL 服务器](https://medium.com/the-graphqlhub/your-first-graphql-server-3c766ab4f0a2#.ovn0y19k4) - Clay Allsopp
-- [教程：用 Apollo-server、Dataloader 和 Knex 启动一个 JS API](https://bamtech.gitbooks.io/dev-standards/content/backend/graphql-js/getting-started-with-apollo-server-dataloader-knex.mo.html) - Thomas Pucci
+- [教程：用 Apollo-server、Dataloader 和 Knex 启动一个 JS API](https://bamtech.gitbook.io/dev-standards/backend/graphql-js/getting-started-with-apollo-server-dataloader-knex.mo.html) - Thomas Pucci
 - [教程：如何构建一个 GraphQL 服务器](https://medium.com/apollo-stack/tutorial-building-a-graphql-server-cddaa023c035#.bu6sdnst4) - Jonas Helfer
 - [使用 GraphQL 查询参数设计强大的 API](https://www.graph.cool/docs/tutorials/designing-powerful-apis-with-graphql-query-parameters-aing7uech3/) - Johannes Schickling
 - [GraphQL 和不可思议的 Apollo Client](https://medium.com/google-developer-experts/graphql-and-the-amazing-apollo-client-fe57e162a70c) - Gerard Sans
