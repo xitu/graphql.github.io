@@ -81,9 +81,9 @@ export default ({ page, category, title, section, className, noSearch, children 
           </div>
           <div>
             <h5>更多</h5>
-            <a href="/blog">GraphQL 团队博客</a>
-            <a href="http://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">阅读规范</a>
-            <a href="https://github.com/graphql" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="http://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">GraphQL 规范</a>
+            <a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">GraphQL 基金会</a>
+            <a href="https://github.com/graphql" target="_blank" rel="noopener noreferrer">GraphQL GitHub</a>
             {page && <a href={'https://github.com/xitu/graphql.github.io/edit/zh-Hans/site/' + page.relPath} target="_blank" rel="noopener noreferrer">编辑本页 &#x270E;</a>}
           </div>
         </section>

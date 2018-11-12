@@ -121,8 +121,9 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
 ### Go
 
   - [graphql-go](https://github.com/graphql-go/graphql)：一个 Go/Golang 的 GraphQL 实现。
+  - [graph-gophers/graphql-go](https://github.com/graph-gophers/graphql-go)：一个活跃的 Golang GraphQL 实现。
+  - [GQLGen](https://github.com/99designs/gqlgen)：生成基于 graphql 的服务器的库。
   - [graphql-relay-go](https://github.com/graphql-go/relay)：一个用于帮助构建 graphql-go 服务器的 Go/Golang 库，支持 react-relay 。
-  - [neelance/graphql-go](https://github.com/neelance/graphql-go)：一个活跃的 Golang GraphQL 实现。
   - [machinebox/graphql](https://github.com/machinebox/graphql)：用于 GraphQL 的一个优雅的底层 HTTP 客户端。
   - [samsarahq/thunder](https://github.com/samsarahq/thunder)：可轻松进行 schema 构建、实时查询和批处理的 GraphQL 实现。
 
