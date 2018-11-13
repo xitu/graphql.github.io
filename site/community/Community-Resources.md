@@ -51,6 +51,12 @@ sublinks: 博客,视频
 
 以下是一些值得注意的博客文章，以帮助您更好地了解 GraphQL：
 
+- [GraphQL：一种数据查询语言](/blog/graphql-a-query-language/) - Lee Byron
+- [GraphQL 和 Relay 中的订阅](/blog/subscriptions-in-graphql-and-relay/) - Dan Schafer and Laney Kuenzel
+- [用 GraphQL 轻松 mock 你的服务器](/blog/mocking-with-graphql/) - Jonas Helfer
+- [在 GraphQL 中包装 REST API](/blog/rest-api-graphql-wrapper/) - Steven Luscher
+- [告别技术预览](/blog/production-ready/) - Lee Byron
+- [重新许可 GraphQL 规范](https://medium.com/@leeb/relicensing-the-graphql-specification-e7d07a52301b) - Lee Byron
 - [GraphQL 简介](https://facebook.github.io/react/blog/2015/05/01/graphql-introduction.html) - Nick Schrock
 - [从 REST 到 GraphQL](https://0x2a.sh/from-rest-to-graphql-b4e95e94c26b#.tag7nzkrb) - Jacob Gillespie
 - [GraphQL 讲解](https://medium.com/apollo-stack/graphql-explained-5844742f195e#.zdykxos6i) - Jonas Helfer

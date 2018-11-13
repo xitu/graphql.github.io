@@ -8,13 +8,15 @@ sublinks: 即将举行的活动,聚会
 
 ## 即将举行的活动
 
-### GraphQL Europe 会议
+### GraphQL 峰会
 
-- **日期：** 2018 年 6 月 15 日
-- **地点：** 德国 柏林
-- **链接：** https://graphql-europe.org
+- **日期：** 2018 年 11 月 7 - 8 日
+- **地点：** 美国 旧金山
+- **链接：** https://summit.graphql.com
 
-### GraphQL Conf
+世界上最大的致力于 GraphQL 的会议。
+
+### GraphQL Conf Berlin 2019
 
 - **日期：** 2019 年 6 月 20 - 21 日
 - **地点：** 德国 柏林

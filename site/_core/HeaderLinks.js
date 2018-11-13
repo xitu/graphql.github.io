@@ -12,8 +12,8 @@ const links = [
   { section: 'learn', text: '学习', href: '/learn/' },
   { section: 'code', text: '代码', href: '/code/' },
   { section: 'community', text: '社区', href: '/community/' },
-  { section: 'blog', text: '博客', href: '/blog/' },
   { section: 'spec', text: '规范', href: 'http://spec.graphql.cn/' },
+  { section: 'foundation', text: '基金会', href: 'https://foundation.graphql.org/' },
 ];
 
 export default ({ section }) =>
