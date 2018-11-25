@@ -107,7 +107,9 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
 (executor/execute nil schema resolver-fn "{ hello }")
 \`\`\`
 
-  - [lacinia](https://github.com/walmartlabs/lacinia)：一套 GraphQL 规范的完整实现，致力于维护对规范的外部兼容。
+#### [lacinia](https://github.com/walmartlabs/lacinia)
+
+一套 GraphQL 规范的完整实现，致力于维护对规范的外部兼容。
 
 ### Elixir
 
@@ -335,7 +337,7 @@ $resolvers = [
 ];
 $schema = Graphql\schema($typeDefs, $resolvers);
 
-echo "Server running at http://127.0.0.1:8080\\n";
+echo "Server running at http://127.0.0.1:8080";
 Http\server(Graphql\psr7($schema), function (\Throwable $err) {
     var_dump($err);
     return Diactoros\json([
