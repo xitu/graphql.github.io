@@ -23,7 +23,6 @@ sublinks: 博客,视频
 
 - [@GraphQL](https://twitter.com/GraphQL)
 - [@graphqlweekly](https://twitter.com/graphqlweekly)
-- [@graphqlnews](https://twitter.com/graphqlnews)
 - [@GraphQLStackOverflow](https://twitter.com/GraphQLatSO)
 - [@apollographql](https://twitter.com/apollographql)
 - [@graphcool](https://twitter.com/graphcool)

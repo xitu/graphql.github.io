@@ -124,6 +124,33 @@ fragment comparisonFields on Character {
 
 你可以看到上面的查询如何漂亮地重复了字段。片段的概念经常用于将复杂的应用数据需求分割成小块，特别是你要将大量不同片段的 UI 组件组合成一个初始数据获取的时候。
 
+### 在片段内使用变量
+
+片段可以访问查询或变更中声明的变量。详见 [变量](learn/queries/#variables)。
+
+```graphql
+# { "graphiql": true }
+query HeroComparison($first: Int = 3) {
+  leftComparison: hero(episode: EMPIRE) {
+    ...comparisonFields
+  }
+  rightComparison: hero(episode: JEDI) {
+    ...comparisonFields
+  }
+}
+
+fragment comparisonFields on Character {
+  name
+  friendsConnection(first: $first) {
+    totalCount
+    edges {
+      node {
+        name
+      }
+    }
+  }
+}
+```
 
 ## 操作名称（Operation name）
 

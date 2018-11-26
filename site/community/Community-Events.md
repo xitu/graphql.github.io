@@ -72,3 +72,4 @@ GraphQL Conf 是欧洲非营利性的 GraphQL 大会，邀请了来自世界各�
 - [GraphQL Tel Aviv](https://www.meetup.com/GraphQL-TLV/)
 - [GraphQL Tokyo](https://www.meetup.com/GraphQL-Tokyo/)
 - [GraphQL Meetup (Bangalore)](https://www.meetup.com/GraphQL-Meetup/)
+- [GraphQL Meetup (Bangkok)](https://www.meetup.com/GraphQL-Bangkok/)
