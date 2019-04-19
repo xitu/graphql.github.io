@@ -311,6 +311,7 @@ union SearchResult = Human | Droid | Starship
 # { "graphiql": true}
 {
   search(text: "an") {
+    __typename
     ... on Human {
       name
       height
@@ -326,6 +327,33 @@ union SearchResult = Human | Droid | Starship
   }
 }
 ```
+
+`_typename` 字段解析为 `String`，它允许你在客户端区分不同的数据类型。
+
+此外，在这种情况下，由于 `Human` 和 `Droid` 共享一个公共接口（`Character`），你可以在一个地方查询它们的公共字段，而不必在多个类型中重复相同的字段：
+
+```graphql
+{
+  search(text: "an") {
+    __typename
+    ... on Character {
+      name
+    }
+    ... on Human {
+      height
+    }
+    ... on Droid {
+      primaryFunction
+    }
+    ... on Starship {
+      name
+      length
+    }
+  }
+}
+```
+
+注意 `name` 仍然需要指定在 `Starship` 上，否则它不会出现在结果中，因为 `Starship` 并不是一个 `Character`！
 
 ### 输入类型（Input Types） 
 

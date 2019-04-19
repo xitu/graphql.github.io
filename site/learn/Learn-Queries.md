@@ -126,7 +126,7 @@ fragment comparisonFields on Character {
 
 ### 在片段内使用变量
 
-片段可以访问查询或变更中声明的变量。详见 [变量](learn/queries/#variables)。
+片段可以访问查询或变更中声明的变量。详见 [变量](#variables)。
 
 ```graphql
 # { "graphiql": true }
