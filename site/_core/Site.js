@@ -87,14 +87,8 @@ export default ({ page, category, title, section, className, noSearch, children 
             {page && <a href={'https://github.com/xitu/graphql.github.io/edit/zh-Hans/site/' + page.relPath} target="_blank" rel="noopener noreferrer">编辑本页 &#x270E;</a>}
           </div>
         </section>
-        <a href="https://code.facebook.com/projects/" target="_blank" rel="noopener noreferrer" className="fbOpenSource">
-          <img src="/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45" />
-        </a>
         <section className="copyright">
-          Copyright &copy;
-          <span><script>document.write(new Date().getFullYear())</script> </span>
-          <noscript>2017 </noscript>
-          Facebook Inc. The contents of this page are licensed BSD-3-Clause.
+          Copyright © 2019 GraphQL 基金会。保留所有权利。Linux 基金会已经注册了商标和使用商标。有关 Linux 基金会的商标清单，请参阅我们的 <a href="https://www.linuxfoundation.org/trademark-usage">商标使用</a> 页面。Linux 是 Linus Torvalds 的注册商标。<a href="http://www.linuxfoundation.org/privacy">隐私政策</a> 和 <a href="http://www.linuxfoundation.org/terms">使用条款</a>。
         </section>
       </footer>
 
