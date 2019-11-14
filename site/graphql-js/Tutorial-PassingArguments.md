@@ -6,7 +6,7 @@ permalink: /graphql-js/passing-arguments/
 next: /graphql-js/object-types/
 ---
 
-就像 REST API 一样，在 GraphQL API 中，通常向入口端点传入参数，在 schema language 中定义参数，并自动进行类型检查。每一个参数必须有名字和数据类型。举个例子，在 [基础类型文档](/graphql-js/basic-types/) 中，我们定义了一个名为 `rollThreeDice` 的入口端点：
+就像 REST API 一样，在 GraphQL API 中，通常向入口端点传入参数，在 schema language 中定义参数，并自动进行类型检查。每一个参数必须有名字和数据类型。举个例子，在 [基本类型文档](/graphql-js/basic-types/) 中，我们定义了一个名为 `rollThreeDice` 的入口端点：
 
 ```javascript
 type Query {
@@ -127,4 +127,4 @@ fetch('/graphql', {
 
 使用 `$dice` 和 `$sides` 作为 GraphQL 中的变量，我们无需在客户端对它们进行转义。
 
-通过基础类型和参数传递，你可以定义任意你"能够"在 REST API 中定义的内容。但 GraphQL 支持更强大的查询。如果你学习了 [定义你自己的对象类型](/graphql-js/object-types/)，你可以用单个 API 调用来代替多个 API 调用。
+通过基本类型和参数传递，你可以定义任意你"能够"在 REST API 中定义的内容。但 GraphQL 支持更强大的查询。如果你学习了 [定义你自己的对象类型](/graphql-js/object-types/)，你可以用单个 API 调用来代替多个 API 调用。
