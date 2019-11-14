@@ -127,4 +127,4 @@ fetch('/graphql', {
 
 使用 `$dice` 和 `$sides` 作为 GraphQL 中的变量，我们无需在客户端对它们进行转义。
 
-通过基础类型和参数传递，你可以定义任意你"能够"在 REST API 中定义的内容。但 GraphQL 支持更强大的查询。如果你学习了 [定义你自己的对象类型](/graphql-js/object-types/)，你可以用单个 API 调用来代替多个 API 调用。
+通过基本类型和参数传递，你可以定义任意你"能够"在 REST API 中定义的内容。但 GraphQL 支持更强大的查询。如果你学习了 [定义你自己的对象类型](/graphql-js/object-types/)，你可以用单个 API 调用来代替多个 API 调用。
