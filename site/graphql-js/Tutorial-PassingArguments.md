@@ -28,7 +28,7 @@ type Query {
 
 ```javascript
 var root = {
-  rollDice: function (args) {
+  rollDice: (args) => {
     var output = [];
     for (var i = 0; i < args.numDice; i++) {
       output.push(1 + Math.floor(Math.random() * (args.numSides || 6)));
@@ -42,7 +42,7 @@ var root = {
 
 ```javascript
 var root = {
-  rollDice: function ({numDice, numSides}) {
+  rollDice: ({numDice, numSides}) => {
     var output = [];
     for (var i = 0; i < numDice; i++) {
       output.push(1 + Math.floor(Math.random() * (numSides || 6)));
@@ -70,7 +70,7 @@ var schema = buildSchema(`
 
 // root 为每个端点入口 API 提供一个解析器
 var root = {
-  rollDice: function ({numDice, numSides}) {
+  rollDice: ({numDice, numSides}) => {
     var output = [];
     for (var i = 0; i < numDice; i++) {
       output.push(1 + Math.floor(Math.random() * (numSides || 6)));

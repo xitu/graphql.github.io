@@ -50,7 +50,7 @@ class RandomDie {
 }
 
 var root = {
-  getDie: function ({numSides}) {
+  getDie: ({numSides}) => {
     return new RandomDie(numSides || 6);
   }
 }
@@ -111,7 +111,7 @@ class RandomDie {
 
 // root 规定了顶层的 API 入口端点
 var root = {
-  getDie: function ({numSides}) {
+  getDie: ({numSides}) => {
     return new RandomDie(numSides || 6);
   }
 }

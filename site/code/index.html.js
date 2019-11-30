@@ -37,12 +37,41 @@ GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框
 - [PHP](#php)
 - [Python](#python)
 - [Ruby](#ruby)
-- [Scala](#scala)
+- [Rust](#rust)
+- [Scala](#scala)]
+- [Swift](#swift)
 
 ### C# / .NET
 
-  - [graphql-dotnet](https://github.com/graphql-dotnet/graphql-dotnet)：.NET 的 GraphQL 实现
+#### [graphql-dotnet](https://github.com/graphql-dotnet/graphql-dotnet)：.NET 的 GraphQL 实现
+
+\`\`\`csharp
+using System;
+using GraphQL;
+using GraphQL.Types;
+
+public class Program
+{
+  public static void Main(string[] args)
+  {
+    var schema = Schema.For(@"
+      type Query {
+        hello: String
+      }
+    ");
+    var json = schema.Execute(_ =>
+    {
+      _.Query = "{ hello }";
+      _.Root = new { Hello = "Hello World!" };
+    });
+    Console.WriteLine(json);
+  }
+}                   
+\`\`\`
+
   - [graphql-net](https://github.com/ckimes89/graphql-net)：转换 GraphQL 到 IQueryable
+  - [Entity GraphQL](https://github.com/lukemurray/EntityGraphQL)：针对 .NET Core 的 GraphQL 库。编译为 IQueryable 以轻松地从现有的数据模型（例如从 Entity Framework 数据模型）中暴露出 schema
+  - [DotNetGraphQLQueryGen](https://github.com/lukemurray/DotNetGraphQLQueryGen)：从 GraphQL schema 生成类，以在 dotnet 中进行类型安全的查询的 .NET Core 库
   - [Hot Chocolate](https://github.com/ChilliCream/hotchocolate)：针对 .NET core 和 .NET classic 的 GraphQL 服务器
 
 ### Clojure
@@ -129,6 +158,7 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
   - [graphql-relay-go](https://github.com/graphql-go/relay)：一个用于帮助构建 graphql-go 服务器的 Go/Golang 库，支持 react-relay 。
   - [machinebox/graphql](https://github.com/machinebox/graphql)：用于 GraphQL 的一个优雅的底层 HTTP 客户端。
   - [samsarahq/thunder](https://github.com/samsarahq/thunder)：可轻松进行 schema 构建、实时查询和批处理的 GraphQL 实现。
+  - [99designs/gqlgen](https://github.com/99designs/gqlgen)：一个 schema 优先的 GraphQL 服务器生成。
   - [appointy/jaal](https://github.com/appointy/jaal)：在 Go 中开发符合规范的 GraphQL 服务器。
 
 ### Groovy
@@ -179,7 +209,7 @@ public class HelloWorld {
         SchemaParser schemaParser = new SchemaParser();
         TypeDefinitionRegistry typeDefinitionRegistry = schemaParser.parse(schema);
 
-        RuntimeWiring runtimeWiring = newRuntimeWiring()
+        RuntimeWiring runtimeWiring = new RuntimeWiring()
                 .type("Query", builder -> builder.dataFetcher("hello", new StaticDataFetcher("world")))
                 .build();
 
@@ -305,6 +335,46 @@ Apollo Server 也支持所有的 Node.js HTTP 服务器框架：Express、Connec
 
   - [graphql-php](https://github.com/webonyx/graphql-php)：GraphQL 参考实现的 PHP 移植版本。
   - [graphql-relay-php](https://github.com/ivome/graphql-relay-php)：一个用于辅助构建 graphql-php 服务器的库，支持 react-relay。
+  - [Lighthouse](https://github.com/nuwave/lighthouse)：一个用于 Laravel 的 GraphQL 服务器
+  - [GraphQLBundle](https://github.com/overblog/GraphQLBundle)：一个用于 Symfony 的 GraphQL 服务器
+
+#### [API Platform](https://api-platform.com) ([github](https://github.com/api-platform/api-platform))
+
+API Platform 是一个基于 Symfony 构建的功能齐全、灵活且可扩展的 API 框架。
+以下的类足以创建与 Relay 兼容的 GraphQL 服务器和支持现代 REST 格式（JSON-LD、JSONAPI...）的超媒体 API：
+
+\`\`\`php
+<?php
+
+namespace App\Entity;
+
+use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Greet someone!
+ *
+ * @ApiResource
+ * @ORM\Entity
+ */
+class Greeting
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="guid")
+     */
+    public $id;
+
+    /**
+     * @var string Your nice message
+     *
+     * @ORM\Column
+     */
+    public $hello;
+}
+\`\`\`
+
+API Platform 的其他功能还包括数据验证、身份验证、授权、弃用、缓存和 GraphiQL 集成。
 
 #### [Siler](https://siler.leocavalcante.com/graphql/) ([github](https://github.com/leocavalcante/siler))
 
@@ -346,6 +416,10 @@ Http\server(Graphql\psr7($schema), function (\Throwable $err) {
 \`\`\`
 
 它还根据 Apollo 的工作原理提供了构建 WebSocket 订阅服务器的功能。
+
+### Swift
+
+  - [Graphiti](https://github.com/GraphQLSwift/Graphiti)：一个 Swift 库，可快速、安全且轻松地构建 GraphQL schema/类型。
 
 ### Python
 
@@ -394,15 +468,15 @@ gem install graphql
 \`\`\`ruby
 require 'graphql'
 
-QueryType = GraphQL::ObjectType.define do
-  name 'Query'
+class QueryType < GraphQL::Schema::Object
+  graphql_name 'Query'
   field :hello do
     type types.String
     resolve -> (obj, args, ctx) { 'Hello world!' }
   end
 end
 
-Schema = GraphQL::Schema.define do
+class Schema < GraphQL::Schema
   query QueryType
 end
 
@@ -410,6 +484,10 @@ puts Schema.execute('{ hello }').to_json
 \`\`\`
 
 其也有对于 Relay 和 Rails 的良好绑定。
+
+### Rust
+
+ - [graphql-rust/juniper](https://github.com/graphql-rust/juniper)：用于 Rust 的 GraphQL 服务端库
 
 ### Scala
 
@@ -437,6 +515,7 @@ Executor.execute(schema, query) map println
 
 - [C# / .NET](#c-net-1)
 - [Clojurescript](#clojurescript-1)
+- [Flutter](#flutter)
 - [Go](#go-1)
 - [Java / Android](#java-android)
 - [JavaScript](#javascript-1)
@@ -452,6 +531,10 @@ Executor.execute(schema, query) map println
 ### Clojurescript
 
   - [re-graph](https://github.com/oliyh/re-graph/)：一个在 Clojurescript 中实现的 GraphQL 客户端，支持 websockets。
+
+### Flutter
+
+  - [graphql](https://github.com/zino-app/graphql-flutter#readme)：一个 Flutter 中的 GraphQL 客户端实现。
 
 ### Go
 
@@ -494,7 +577,7 @@ Executor.execute(schema, query) map println
 
 ## 服务
 
-  - [Apollo Engine](http://www.apollographql.com/engine/)：一个用于监视 GraphQL 后端的性能和使用的服务。
+  - [Apollo Graph Manage](http://engine.apollographql.com)：一个用于监视 GraphQL 后端的性能和使用的云服务。
   - [GraphCMS](https://graphcms.com/)：一个 BaaS（后端即服务），它为你配置了一个作为内容编辑工具来处理存储数据的 GraphQL 后端。
   - [Prisma](https://www.prisma.io) ([github](https://github.com/prisma))：一个 BaaS（后端即服务），它为你的应用程序提供了一个 GraphQL 后端，且具有用于管理数据库和存储数据的强大的 web ui。
   - [Reindex](https://www.reindex.io/baas/) ([github](https://github.com/reindexio/reindex-js))：一个 BaaS（后端即服务），它针对使用 React 和 Relay 的应用程序配置了 GraphQL 后端。
@@ -502,6 +585,7 @@ Executor.execute(schema, query) map println
   - [Tipe](https://tipe.io) ([github](https://github.com/tipeio))：一个 SaaS（软件即服务）内容管理系统，允许你使用强大的编辑工具创建你的内容，并通过 GraphQL 或 REST API 从任何地方访问它。
   - [AWS AppSync](https://aws.amazon.com/appsync/)：完全托管的 GraphQL 服务，包含实时订阅、离线编程和同步、企业级安全特性以及细粒度的授权控制。
   - [Hasura](https://hasura.io)：一个 BaaS（后端即服务），允许你在 Postgres 上创建数据表、定义权限并使用 GraphQL 接口查询和操作。
+  - [FaunaDB](https://docs.fauna.com/fauna/current/graphql)：通过导入 gql schema 创建即时 GraphQL 后端。数据库将为你创建关系和索引，因此你无需编写任何数据库代码即可在几秒钟内查询。Serverless 定价可免费开始使用。
 
 ## 更多内容
 
