@@ -25,7 +25,7 @@ http://localhost:4000/graphql
 
 如果你更倾向于使用图形用户界面发送测试查询，你可以使用客户端，例如 [GraphiQL](https://github.com/graphql/graphiql) 和 [Insomnia](https://github.com/getinsomnia/insomnia)。
 
-通过浏览器发送 GraphQL 也很简单。打开 http://localhost:4000 ，开启开发者控制台，粘贴：
+通过浏览器发送 GraphQL 也很简单。打开 http://localhost:4000/graphql ，开启开发者控制台，粘贴：
 
 ```javascript
 fetch('/graphql', {

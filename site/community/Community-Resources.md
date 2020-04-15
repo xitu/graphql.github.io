@@ -26,7 +26,7 @@ sublinks: 博客,视频,图书,更多资源
 - [@GraphQLStackOverflow](https://twitter.com/GraphQLatSO)
 - [@apollographql](https://twitter.com/apollographql)
 - [@prisma](https://twitter.com/prisma)
-- [@ScapholdDotIO](https://twitter.com/ScapholdDotIO)
+- [@HasuraHQ](https://twitter.com/HasuraHQ)
 
 ## IRC
 
@@ -42,9 +42,7 @@ sublinks: 博客,视频,图书,更多资源
 
 - [**#general** on GraphQL](https://graphql.slack.com/messages/general/). [在这里获得邀请！](https://graphql-slack.herokuapp.com/)
 - [Apollo Slack](http://apollostack.com/#slack)
-- [Reindex Slack](http://slack.reindex.io/)
 - [Graphcool Slack](https://slack.graph.cool/)
-- [Scaphold.io Slack](http://slack.scaphold.io/)
 
 ## 博客
 
@@ -70,6 +68,7 @@ sublinks: 博客,视频,图书,更多资源
 - [GraphQL 服务器基础（第二部分）：网络层](https://blog.graph.cool/graphql-server-basics-the-network-layer-51d97d21861) - Nikolas Burk
 - [GraphQL 服务器基础（第三部分）：揭秘 GraphQL 解析器中的 `info` 参数](https://blog.graph.cool/graphql-server-basics-demystifying-the-info-argument-in-graphql-resolvers-6f26249f613a) - Nikolas Burk
 - [GraphQL 入门指南](https://www.freecodecamp.org/news/a-beginners-guide-to-graphql-86f849ce1bec/) - Leonardo Maldonado
+- [高性能 GraphQL to SQL 引擎的架构](https://blog.hasura.io/architecture-of-a-high-performance-graphql-to-sql-server-58d9944b8a87) - Hasura
 
 ## 视频
 
@@ -100,6 +99,7 @@ Facebook 内外的开发者在世界各地的会议和聚会上都谈到了 Grap
 - [GraphQL Europe 中的所有演讲](https://www.youtube.com/playlist?list=PLn2e1F9Rfr6n_WFm9fPE-_wYPrYvSTySt) - Lee Byron, Sashko Stubailo, Dan Schafer, Johannes Schickling 等
 - [学习基于 React 和 Relay 的 GraphQL](https://www.packtpub.com/application-development/learning-graphql-react-and-relay-video) - Divyendu Singh
 - [实践比 RESTful Web 服务更好的 GraphQL（视频）](https://www.packtpub.com/application-development/hands-graphql-better-restful-web-services-video) - Ashwin Hegde
+- [一个 PostgreSQL 支持的 GraphQL BaaS](https://www.youtube.com/watch?v=neIZcc8y3B0) - Tanmai Gopal
 
 ## 图书
 
@@ -108,7 +108,9 @@ Facebook 内外的开发者在世界各地的会议和聚会上都谈到了 Grap
 - [全栈 GraphQL](https://www.graphql.college/fullstack-graphql) - Julian Mayorga
 - [在 Elixir 和 Absinthe 中使用 Craft GraphQL API](https://pragprog.com/book/wwgraphql/craft-graphql-apis-in-elixir-with-absinthe) - Bruce Williams and Ben Wilson
 - [学习 GraphQL 和 Relay](https://www.packtpub.com/web-development/learning-graphql-and-relay) - Samer Buna
+- [动手使用 GraphQL 和 React 进行全栈 Web 开发](https://www.packtpub.com/web-development/hands-full-stack-web-development-graphql-and-react) - Sebastian Grebe
 - [GraphQL 之路](https://www.robinwieruch.de/the-road-to-graphql-book/) - Robin Wieruch
+- [生产可用的 GraphQL](https://book.productionreadygraphql.com/) - Marc-Andre Giroux
 
 ## 更多资源
 
@@ -116,14 +118,7 @@ Facebook 内外的开发者在世界各地的会议和聚会上都谈到了 Grap
 
 - [Exploring GraphQL: A Query Language For APIs](https://www.edx.org/course/exploring-graphql-a-query-language-for-apis)：免费的 7 周 edX 课程
 - [How to GraphQL](https://www.howtographql.com)：GraphQL 的全栈教程
-- [Building Apollo](https://dev-blog.apollodata.com/)
-- [Learn GraphQL](https://learngraphql.com/basics/introduction)
+- [Building Apollo](https://blog.apollographql.com)
 - [awesome-graphql](https://github.com/chentsulin/awesome-graphql): 一个奇妙的社区，维护了库、资源等的合集。
 - [graphql-apis](https://github.com/APIs-guru/graphql-apis): 公开 GraphQL API 的集合列表。
-- [Graphcool Blog](https://www.graph.cool/blog/)
-- [Learn Apollo](https://www.learnapollo.com/): Apollo GraphQL Client 的动手教程（适用于 React、ReactNative、Exponent、Angular、Vue 和 iOS）
-- [Learn Relay](https://www.learnrelay.org): 对 Relay 的全面介绍（包含视频教程）
-- [Scaphold Community](https://scaphold.io/community/): 一些帮助您将使用 GraphQL 的 app 发布到生产环境的资源
-- [GraphQL World](https://graphql-world.com): GraphQL 开发者和活动的全球社区
-- [GraphQL Talks](https://www.graph.cool/talks/): 找到并观看最好的 GraphQL 演讲
 - [Basically, Full-stack GraphQL](https://github.com/TejasQ/basically-fullstack-graphql)：使用简单英文的一个基于代码的介绍在客户端_和_服务端使用 GraphQL
