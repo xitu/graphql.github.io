@@ -3,7 +3,7 @@ title: 分页
 layout: ../_core/DocsLayout
 category: 最佳实践
 permalink: /learn/pagination/
-next: /learn/caching/
+next: /learn/global-object-identification/
 ---
 
 > 不同的分页模型可以实现不同的客户端功能
@@ -136,3 +136,7 @@ next: /learn/caching/
   }
 }
 ```
+
+## 连接规范
+
+为了确保该模式的一致实现，Relay 项目具有正式的[规范](https://facebook.github.io/relay/graphql/connections.htm)，你可以遵循该规范来构建使用基于游标的连接模式的 GraphQL API。

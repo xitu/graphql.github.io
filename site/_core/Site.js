@@ -12,7 +12,7 @@ var Search = require('./Search');
 var SiteData = require('./SiteData');
 
 export default ({ page, category, title, section, className, noSearch, children }) =>
-  <html>
+  <html lang="zh-Hans-CN">
     <head>
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -22,6 +22,7 @@ export default ({ page, category, title, section, className, noSearch, children 
           `GraphQL | ${SiteData.description}`}
       </title>
       <meta name="viewport" content="width=640" />
+      <meta name="description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。" />
       <meta property="og:title" content="GraphQL: 一种用于 API 的查询语言。" />
       <meta property="og:description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。" />
       <meta property="og:type" content="website" />
@@ -45,7 +46,7 @@ export default ({ page, category, title, section, className, noSearch, children 
       <header>
         <section>
           <a className="nav-home" href="/">
-            <img className="nav-logo" src="/img/logo.svg" width="30" height="30" />
+            <img className="nav-logo" src="/img/logo.svg" alt="GraphQL Logo" width="30" height="30" />
             GraphQL
           </a>
           <HeaderLinks section={section} />
@@ -57,7 +58,7 @@ export default ({ page, category, title, section, className, noSearch, children 
 
       <footer>
         <section className="sitemap">
-          <a href="/" className="nav-home" />
+          <a href="/" className="nav-home" aria-label="主页" />
           <div>
             <h5><a href="/learn/">学习</a></h5>
             <a href="/learn/">入门</a>
@@ -88,19 +89,21 @@ export default ({ page, category, title, section, className, noSearch, children 
           </div>
         </section>
         <section className="copyright">
-          Copyright © 2019 GraphQL 基金会。保留所有权利。Linux 基金会已经注册了商标和使用商标。有关 Linux 基金会的商标清单，请参阅我们的 <a href="https://www.linuxfoundation.org/trademark-usage">商标使用</a> 页面。Linux 是 Linus Torvalds 的注册商标。<a href="http://www.linuxfoundation.org/privacy">隐私政策</a> 和 <a href="http://www.linuxfoundation.org/terms">使用条款</a>。
+          Copyright © {`${new Date().getFullYear()}`} GraphQL 基金会。保留所有权利。Linux 基金会已经注册了商标和使用商标。有关 Linux 基金会的商标清单，请参阅我们的 <a href="https://www.linuxfoundation.org/trademark-usage">商标使用</a> 页面。Linux 是 Linus Torvalds 的注册商标。<a href="http://www.linuxfoundation.org/privacy">隐私政策</a> 和 <a href="http://www.linuxfoundation.org/terms">使用条款</a>。
         </section>
       </footer>
 
       <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script>
-      <script dangerouslySetInnerHTML={{__html: `
+      <script dangerouslySetInnerHTML={{
+        __html: `
         docsearch({
           apiKey: 'd103541f3e6041148aade2e746ed4d61',
           indexName: 'graphql',
           inputSelector: '#algolia-search-input'
         });
       `}} />
-      <script dangerouslySetInnerHTML={{__html: `
+      <script dangerouslySetInnerHTML={{
+        __html: `
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)

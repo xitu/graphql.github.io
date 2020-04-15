@@ -35,6 +35,8 @@ permalink: /learn/caching/
 
 如果后端使用类似 UUID 的标识符，那么暴露这个全局唯一 ID 可能非常简单！如果后端对于每个对象并未分配全局唯一 ID，则 GraphQL 层可能需要构造此 ID。通常来说，将类型的名称附加到 ID 并将其用作标识符都很简单；服务器可能会通过 base64 编码使该 ID 不透明。
 
+可选地，此 ID 之后可以和 [全局对象标识](/learn/global-object-identification) 的 `node` 模式一起使用。
+
 ## 与现有 API 的兼容
 
 为了这一目的而使用 `id` 字段的一个问题是如何让使用 GraphQL API 的客户端能够与现有的 API 并存。例如，如果我们现有的 API 接受了特定类型的 ID，但是我们的 GraphQL API 使用了全局唯一 ID，那么同时使用两者可能比较棘手。

@@ -15,6 +15,7 @@ const links = [
   { section: 'spec', text: '规范', href: 'https://spec.graphql.cn/' },
   { section: 'codeofconduct', text: '行为守则', href: '/codeofconduct/' },
   { section: 'foundation', text: '基金会', href: 'https://foundation.graphql.org/' },
+  { section: 'landscape', text: '社区总览', href: 'https://l.graphql.org/' },
   { section: 'principles', text: '开发原则', href: 'https://principles.graphql.cn/' },
 ];
 
