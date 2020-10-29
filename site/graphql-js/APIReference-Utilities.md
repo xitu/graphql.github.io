@@ -178,7 +178,7 @@ function typeFromAST(
 ```js
 function astFromValue(
   value: any,
-  type?: ?GraphQLType
+  type: GraphQLInputType
 ): ?Value
 ```
 

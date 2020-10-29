@@ -14,7 +14,7 @@ next: /graphql-js/express-graphql/
 
 ```javascript
 var express = require('express');
-var graphqlHTTP = require('express-graphql');
+var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
 var schema = buildSchema(`
@@ -60,7 +60,7 @@ console.log('Running a GraphQL API server at localhost:4000/graphql');
 
 ```javascript
 var express = require('express');
-var graphqlHTTP = require('express-graphql');
+var { graphqlHTTP } = require('express-graphql');
 var graphql = require('graphql');
 
 // Maps id to User object

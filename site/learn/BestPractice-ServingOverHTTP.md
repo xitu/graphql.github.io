@@ -82,4 +82,4 @@ app.use('/graphql', graphqlHTTP({
 ```
 
 ## Node
-如果你正在使用 NodeJS，我们推荐使用 [express-graphql](https://github.com/graphql/express-graphql) 或 [graphql-server](https://github.com/apollostack/graphql-server)。
+如果你正在使用 NodeJS，我们推荐使用 [express-graphql](https://github.com/graphql/express-graphql) 或 [apollo-server](https://github.com/apollographql/apollo-server)。

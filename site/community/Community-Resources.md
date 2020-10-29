@@ -27,6 +27,7 @@ sublinks: 博客,视频,图书,更多资源
 - [@apollographql](https://twitter.com/apollographql)
 - [@prisma](https://twitter.com/prisma)
 - [@HasuraHQ](https://twitter.com/HasuraHQ)
+- [@TheGuildDev](https://twitter.com/TheGuildDev)
 
 ## IRC
 

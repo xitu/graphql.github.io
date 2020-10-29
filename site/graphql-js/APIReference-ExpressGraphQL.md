@@ -10,8 +10,8 @@ next: /graphql-js/graphql/
 `express-graphql` 模块提供了一个创建 [Express](https://expressjs.com/) 服务的简单方法来运行 GraphQL API。
 
 ```js
-import graphqlHTTP from 'express-graphql'; // ES6
-var graphqlHTTP = require('express-graphql'); // CommonJS
+import { graphqlHTTP } from 'express-graphql'; // ES6
+var { graphqlHTTP } = require('express-graphql'); // CommonJS
 ```
 
 ### graphqlHTTP

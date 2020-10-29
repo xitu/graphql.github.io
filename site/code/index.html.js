@@ -41,6 +41,7 @@ GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框
 - [Rust](#rust)
 - [Scala](#scala)
 - [Swift](#swift)
+- [OCaml / Reason](#ocaml-reason)
 
 ### C# / .NET
 
@@ -156,8 +157,7 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
   - [graphql-go](https://github.com/graphql-go/graphql)：一个 Go/Golang 的 GraphQL 实现。
   - [graph-gophers/graphql-go](https://github.com/graph-gophers/graphql-go)：一个活跃的 Golang GraphQL 实现。
   - [99designs/gqlgen](https://github.com/99designs/gqlgen)：生成基于 graphql 的服务器的库。
-  - [graphql-relay-go](https://github.com/graphql-go/relay)：一个用于帮助构建 graphql-go 服务器的 Go/Golang 库，支持 react-relay 。
-  - [machinebox/graphql](https://github.com/machinebox/graphql)：用于 GraphQL 的一个优雅的底层 HTTP 客户端。
+  - [graphql-relay-go](https://github.com/graphql-go/relay)：一个用于帮助构建 graphql-go 服务器的 Go/Golang 库，支持 react-relay。
   - [samsarahq/thunder](https://github.com/samsarahq/thunder)：可轻松进行 schema 构建、实时查询和批处理的 GraphQL 实现。
   - [appointy/jaal](https://github.com/appointy/jaal)：在 Go 中开发符合规范的 GraphQL 服务器。
 
@@ -271,7 +271,7 @@ npm install express express-graphql graphql
 
 \`\`\`js
 var express = require('express');
-var graphqlHTTP = require('express-graphql');
+var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
 var schema = buildSchema(\`
@@ -591,6 +591,10 @@ val query = graphql"{ hello }"
 Executor.execute(schema, query) map println
 \`\`\`
 
+### OCaml / Reason
+
+#### [ocaml-graphql-server](https://github.com/andreas/ocaml-graphql-server)：用于 OCaml 和 Reason 的 GraphQL 服务端库。
+
 ## GraphQL 客户端
 
 - [C# / .NET](#c#-/-.net-1)
@@ -601,6 +605,7 @@ Executor.execute(schema, query) map println
 - [Java / Android](#java-android)
 - [JavaScript](#javascript-1)
 - [Julia](#julia)
+- [Kotlin](#kotlin)
 - [Swift / Objective-C iOS](#swift-objective-c-ios)
 - [Python](#python-1)
 - [R](#r)
@@ -626,10 +631,11 @@ Executor.execute(schema, query) map println
 ### Go
 
   - [graphql](https://github.com/shurcooL/graphql#readme)：一个使用 Go 编写的 GraphQL 客户端实现。
+  - [machinebox/graphql](https://github.com/machinebox/graphql)：用于 GraphQL 的一个优雅的底层 HTTP 客户端。
 
 ### Java / Android
 
-  - [Apollo Android](https://github.com/apollographql/apollo-android)：一个用于 Android 的 GraphQL 客户端，强类型、带缓存功能，使用 Java 编写。
+  - [Apollo Android](https://github.com/apollographql/apollo-android)：一个用于 JVM、Android 和 Kotlin native 的 GraphQL 客户端，强类型、带缓存功能。
   - [Nodes](https://github.com/americanexpress/nodes)：一个 GraphQL JVM 客户端，用于从标准模型定义构建查询。
 
 ### JavaScript
@@ -648,6 +654,10 @@ Executor.execute(schema, query) map println
 ### Julia
 
   - [Diana.jl](https://github.com/codeneomatrix/Diana.jl)：一个 Julia GraphQL 服务端实现.
+
+### Kotlin
+
+  - [graphql-kotlin](https://github.com/ExpediaGroup/graphql-kotlin/)：一组 GraphQL 库，包括一个轻量级、类型安全的 GraphQL HTTP 客户端。
 
 ### Swift / Objective-C iOS
 
@@ -689,6 +699,7 @@ Executor.execute(schema, query) map println
   - [Elide](https://elide.io)：一个 Java 库，可以在任何关系数据库上将 JPA 注释的数据模型公开为 GraphQL 服务。
   - [Hasura](https://hasura.io) ([github](https://github.com/hasura))：Hasura 连接到你的数据库和微服务，并立即为你提供可用于生产的 GraphQL API。
   - [FaunaDB](https://docs.fauna.com/fauna/current/graphql)：通过导入 gql schema 创建即时 GraphQL 后端。数据库将为你创建关系和索引，因此你无需编写任何数据库代码即可在几秒钟内查询。Serverless 定价可免费开始使用。
+  - [Back4App](https://www.back4app.com/docs/parse-graphql/graphql-getting-started)：Back4App 是一个后端即服务平台，可帮助你基于 GraphQL 构建和扩展现代应用程序。
 
 ## 更多内容
 

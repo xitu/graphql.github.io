@@ -17,7 +17,7 @@ npm install express express-graphql graphql --save
 
 ```javascript
 var express = require('express');
-var graphqlHTTP = require('express-graphql');
+var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
 // 使用 GraphQL Schema Language 创建一个 schema
