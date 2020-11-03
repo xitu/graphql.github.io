@@ -1,6 +1,6 @@
 ---
 title: 变更和输入类型
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: GraphQL.js 教程
 permalink: /graphql-js/mutations-and-input-types/
 next: /graphql-js/authentication-and-express-middleware/

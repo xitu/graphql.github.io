@@ -1,5 +1,7 @@
 ---
-page: code
+title: Code
+layout: code
+permalink: /code/
 ---
 
 GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框架、客户端库、服务和其他有用的内容。

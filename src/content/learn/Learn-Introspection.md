@@ -1,6 +1,6 @@
 ---
 title: 内省
-layout: ../_core/DocsLayout
+layout: docs
 category: 学习
 permalink: /learn/introspection/
 next: /learn/best-practices/

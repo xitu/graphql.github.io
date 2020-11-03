@@ -1,6 +1,6 @@
 ---
 title: 验证
-layout: ../_core/DocsLayout
+layout: docs
 category: 学习
 permalink: /learn/validation/
 next: /learn/execution/

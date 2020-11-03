@@ -1,6 +1,6 @@
 ---
 title: Schema 和类型
-layout: ../_core/DocsLayout
+layout: docs
 category: 学习
 permalink: /learn/schema/
 next: /learn/validation/

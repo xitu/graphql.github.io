@@ -1,6 +1,6 @@
 ---
 title: graphql
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: API 参考
 permalink: /graphql-js/graphql/
 sublinks: graphql

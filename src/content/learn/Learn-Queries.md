@@ -1,6 +1,6 @@
 ---
 title: 查询和变更
-layout: ../_core/DocsLayout
+layout: docs
 category: 学习
 permalink: /learn/queries/
 next: /learn/schema/

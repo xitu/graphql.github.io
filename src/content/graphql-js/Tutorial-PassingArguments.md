@@ -1,6 +1,6 @@
 ---
 title: 传递参数
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: GraphQL.js 教程
 permalink: /graphql-js/passing-arguments/
 next: /graphql-js/object-types/

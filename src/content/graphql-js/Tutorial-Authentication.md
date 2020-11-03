@@ -1,7 +1,7 @@
 ---
 title: 认证和 Express 中间件
 sidebarTitle: 认证 & 中间件
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: GraphQL.js 教程
 permalink: /graphql-js/authentication-and-express-middleware/
 next: /graphql-js/constructing-types/

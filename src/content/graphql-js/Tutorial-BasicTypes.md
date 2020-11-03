@@ -1,6 +1,6 @@
 ---
 title: 基本类型
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: GraphQL.js 教程
 permalink: /graphql-js/basic-types/
 next: /graphql-js/passing-arguments/

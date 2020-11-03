@@ -1,6 +1,6 @@
 ---
 title: 全局对象识别
-layout: ../_core/DocsLayout
+layout: docs
 category: 最佳实践
 permalink: /learn/global-object-identification/
 next: /learn/caching/

@@ -1,6 +1,6 @@
 ---
 title: graphql/execution
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: API 参考
 permalink: /graphql-js/execution/
 sublinks: execute

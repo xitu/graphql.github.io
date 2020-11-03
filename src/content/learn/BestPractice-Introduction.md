@@ -1,7 +1,7 @@
 ---
 title: GraphQL 最佳实践
 sidebarTitle: 介绍
-layout: ../_core/DocsLayout
+layout: docs
 category: 最佳实践
 permalink: /learn/best-practices/
 next: /learn/thinking-in-graphs/

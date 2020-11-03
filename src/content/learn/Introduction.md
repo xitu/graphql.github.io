@@ -1,7 +1,7 @@
 ---
 title: GraphQL 入门
 sidebarTitle: 入门
-layout: ../_core/DocsLayout
+layout: docs
 category: 学习
 permalink: /learn/
 next: /learn/queries/

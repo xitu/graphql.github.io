@@ -1,6 +1,6 @@
 ---
 title: graphql/language
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: API 参考
 permalink: /graphql-js/language/
 sublinks: BREAK,getLocation,Kind,lex,parse,parseValue,printSource,visit

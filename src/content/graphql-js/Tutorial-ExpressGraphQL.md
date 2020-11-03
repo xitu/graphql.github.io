@@ -1,7 +1,7 @@
 ---
 title: 运行一个 Express GraphQL 服务器
 sidebarTitle: Express + GraphQL
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: GraphQL.js 教程
 permalink: /graphql-js/running-an-express-graphql-server/
 next: /graphql-js/graphql-clients/

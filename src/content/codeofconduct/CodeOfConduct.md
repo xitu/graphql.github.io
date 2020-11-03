@@ -1,6 +1,6 @@
 ---
 title: 行为守则
-layout: ../_core/DocsLayout
+layout: docs
 category: 行为守则
 permalink: /codeofconduct/
 ---

@@ -1,6 +1,6 @@
 ---
 title: 即将举行的活动
-layout: ../_core/DocsLayout
+layout: docs
 category: 社区
 permalink: /community/upcoming-events/
 sublinks: 即将举行的活动,聚会

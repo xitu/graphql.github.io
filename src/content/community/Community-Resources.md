@@ -1,6 +1,6 @@
 ---
 title: 社区资源
-layout: ../_core/DocsLayout
+layout: docs
 category: 社区
 permalink: /community/
 next: /community/upcoming-events/

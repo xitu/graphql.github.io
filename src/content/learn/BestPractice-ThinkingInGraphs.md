@@ -1,6 +1,6 @@
 ---
 title: 关于 Graphs 的思考
-layout: ../_core/DocsLayout
+layout: docs
 category: 最佳实践
 permalink: /learn/thinking-in-graphs/
 next: /learn/serving-over-http/

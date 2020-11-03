@@ -1,6 +1,6 @@
 ---
 title: 对象类型
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: GraphQL.js 教程
 permalink: /graphql-js/object-types/
 next: /graphql-js/mutations-and-input-types/

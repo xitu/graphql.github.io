@@ -1,6 +1,6 @@
 ---
 title: 分页
-layout: ../_core/DocsLayout
+layout: docs
 category: 最佳实践
 permalink: /learn/pagination/
 next: /learn/global-object-identification/

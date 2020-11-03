@@ -1,6 +1,6 @@
 ---
 title: 通过 HTTP 提供服务
-layout: ../_core/DocsLayout
+layout: docs
 category: 最佳实践
 permalink: /learn/serving-over-http/
 next: /learn/authorization/

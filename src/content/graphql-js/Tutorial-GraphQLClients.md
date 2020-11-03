@@ -1,6 +1,6 @@
 ---
 title: GraphQL 客户端
-layout: ../_core/GraphQLJSLayout
+layout: docs
 category: GraphQL.js 教程
 permalink: /graphql-js/graphql-clients/
 next: /graphql-js/basic-types/

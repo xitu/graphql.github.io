@@ -1,6 +1,6 @@
 ---
 title: 执行
-layout: ../_core/DocsLayout
+layout: docs
 category: 学习
 permalink: /learn/execution/
 next: /learn/introspection/

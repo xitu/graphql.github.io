@@ -1,6 +1,6 @@
 ---
 title: 授权
-layout: ../_core/DocsLayout
+layout: docs
 category: 最佳实践
 permalink: /learn/authorization/
 next: /learn/pagination/
