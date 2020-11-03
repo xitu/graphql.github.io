@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: "A query language for your API",
+    title: "一种为你的 API 而生的查询语言",
     description:
-      "GraphQL provides a complete description of the data in your API, gives clients the power to ask for exactly what they need and nothing more, makes it easier to evolve APIs over time, and enables powerful developer tools.",
-    siteUrl: "http://graphql.org/",
+      "GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。",
+    siteUrl: "http://graphql.cn/",
   },
 
   plugins: [
