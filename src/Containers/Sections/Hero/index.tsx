@@ -20,7 +20,7 @@ const Hero = () => {
             </div>
 
             <div className="marketing-col">
-              <h3>Describe your data</h3>
+              <h3>描述你的数据</h3>
               <Prism
                 code={`type Project {
   name: String
@@ -32,7 +32,7 @@ const Hero = () => {
             </div>
 
             <div className="marketing-col">
-              <h3>Ask for what you want</h3>
+              <h3>请求你所要的数据</h3>
               <Prism
                 code={`{
   project(name: "GraphQL") {
@@ -44,7 +44,7 @@ const Hero = () => {
             </div>
 
             <div className="marketing-col">
-              <h3>Get predictable results</h3>
+              <h3>得到可预测的结果</h3>
               <Prism
                 code={`{
   "project": {
@@ -58,10 +58,10 @@ const Hero = () => {
 
           <div className="buttons-unit">
             <Link className="button" to="/code/">
-              Get Started
+              马上开始
             </Link>
             <Link className="button" to="/learn/">
-              Learn More
+              了解更多
             </Link>
           </div>
         </div>

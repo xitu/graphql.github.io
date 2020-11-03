@@ -14,30 +14,30 @@ interface FooterLinks {
 
 const getLinks = (sourcePath: string): FooterLinks[] => [
   {
-    text: "Learn",
+    text: "学习",
     href: "/learn/",
     subsections: [
-      { text: "Introduction", href: "/learn/" },
-      { text: "Query Language", href: "/learn/queries/" },
-      { text: "Type System", href: "/learn/schema/" },
-      { text: "Execution", href: "/learn/execution/" },
-      { text: "Best Practices", href: "/learn/best-practices/" },
+      { text: "入门", href: "/learn/" },
+      { text: "查询语言", href: "/learn/queries/" },
+      { text: "类型系统", href: "/learn/schema/" },
+      { text: "执行", href: "/learn/execution/" },
+      { text: "最佳实践", href: "/learn/best-practices/" },
     ],
   },
   {
-    text: "Code",
+    text: "代码",
     href: "/code",
     subsections: [
-      { text: "Servers", href: "/code/#server-libraries" },
-      { text: "Clients", href: "/code/#graphql-clients" },
-      { text: "Tools", href: "/code/#tools" },
+      { text: "服务端", href: "/code/#server-libraries" },
+      { text: "客户端", href: "/code/#graphql-clients" },
+      { text: "工具", href: "/code/#tools" },
     ],
   },
   {
-    text: "Community",
+    text: "社区",
     href: "/community",
     subsections: [
-      { text: "Upcoming Events", href: "/community/upcoming-events/" },
+      { text: "即将到来的活动", href: "/community/upcoming-events/" },
       {
         text: "Stack Overflow",
         href: "http://stackoverflow.com/questions/tagged/graphql",
@@ -53,16 +53,16 @@ const getLinks = (sourcePath: string): FooterLinks[] => [
     text: "More",
     subsections: [
       {
-        text: "GraphQL Specification",
+        text: "GraphQL 规范",
         href: "/https://graphql.github.io/graphql-spec/",
       },
-      { text: "GraphQL Foundation", href: "https://foundation.graphql.org/" },
+      { text: "GraphQL 基金会", href: "https://foundation.graphql.org/" },
       {
         text: "GraphQL GitHub",
         href: "https://github.com/graphql",
       },
       {
-        text: "Edit this page ✎",
+        text: "编辑本页 ✎",
         href:
           "https://github.com/graphql/graphql.github.io/edit/source/" +
           sourcePath,
@@ -95,16 +95,7 @@ const Footer = ({sourcePath}: { sourcePath: string }) => {
           ))}
         </section>
         <section className="copyright">
-          Copyright © {`${new Date().getFullYear()}`} The GraphQL Foundation.
-          All rights reserved. The Linux Foundation has registered trademarks
-          and uses trademarks. For a list of trademarks of The Linux Foundation,
-          please see our{" "}
-          <a href="https://www.linuxfoundation.org/trademark-usage">
-            Trademark Usage
-          </a>{" "}
-          page. Linux is a registered trademark of Linus Torvalds.{" "}
-          <a href="http://www.linuxfoundation.org/privacy">Privacy Policy</a>{" "}
-          and <a href="http://www.linuxfoundation.org/terms">Terms of Use</a>.
+          Copyright © {`${new Date().getFullYear()}`} GraphQL 基金会。保留所有权利。Linux 基金会已经注册了商标和使用商标。有关 Linux 基金会的商标清单，请参阅我们的 <a href="https://www.linuxfoundation.org/trademark-usage">商标使用</a> 页面。Linux 是 Linus Torvalds 的注册商标。<a href="http://www.linuxfoundation.org/privacy">隐私政策</a> 和 <a href="http://www.linuxfoundation.org/terms">使用条款</a>。
         </section>
       </footer>
 

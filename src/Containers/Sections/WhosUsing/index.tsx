@@ -5,12 +5,8 @@ const WhosUsing = () => {
   return (
     <section className="powered-by" id="whos-using">
       <div className="prose">
-        <h2>Who&rsquo;s using GraphQL?</h2>
-        <p>
-          Facebook's mobile apps have been powered by GraphQL since 2012. A
-          GraphQL spec was open sourced in 2015 and is now available in many
-          environments and used by teams of all sizes.
-        </p>
+        <h2>谁在使用 GraphQL？</h2>
+        <p>Facebook 的移动应用从 2012 年就开始使用 GraphQL。GraphQL 规范于 2015 年开源，现已经在多种环境下可用，并被各种体量的团队所使用。</p>
       </div>
       <div className="logos">
         {/* Waiting for permission from some of the below */}
@@ -77,7 +73,7 @@ const WhosUsing = () => {
       </div>
 
       <Link to="/users" className="button">
-        More GraphQL Users
+        更多 GraphQL 使用者
       </Link>
     </section>
   )

@@ -20,19 +20,9 @@ const Index = (): JSX.Element => {
   return (
     <section className="point6" id="bring-your-own-code">
       <div className="prose">
-        <h2>
-          Bring your own
-          <br />
-          data and code
-        </h2>
+        <h2>使用你现有的<br />数据和代码</h2>
         {/*Illustration of each field becoming a function?]*/}
-        <p>
-          GraphQL creates a uniform API across your entire application without
-          being limited by a specific storage engine. Write GraphQL APIs that
-          leverage your existing data and code with GraphQL engines available in
-          many languages. You provide functions for each field in the type
-          system, and GraphQL calls them with optimal&nbsp;concurrency.
-        </p>
+        <p>GraphQL 让你的整个应用共享一套 API，而不用被限制于特定存储引擎。GraphQL 引擎已经有多种语言实现，通过 GraphQL API 能够更好利用你的现有数据和代码。你只需要为类型系统的字段编写函数，GraphQL 就能通过优化并发的方式来调用它们。</p>
       </div>
       <div className="window leverage-code" aria-hidden>
         <div id="leverageCodeView">

@@ -6,22 +6,13 @@ export default ({ pageContext }) => {
     <Layout title="Who's Using | GraphQL" pageContext={pageContext}>
       <section className="whos-using-page">
         <div className="prose">
-          <h1>Who&rsquo;s using GraphQL?</h1>
+          <h1>谁在使用 GraphQL？</h1>
           <p>
-            GraphQL is used by teams of all sizes in many different environments
-            and languages to power mobile apps, websites, and APIs.
+            GraphQL 已经被各种体量的团队所使用，在不同的环境、不同的语言下，用于增强移动应用、网站和 API。
           </p>
           <p>
-            Is your company using GraphQL?
-            <br />
-            Please send a pull request to the{" "}
-            <a href="https://github.com/graphql/graphql-landscape">
-              GraphQL Landscape
-            </a>{" "}
-            and follow{" "}
-            <a href="https://github.com/graphql/graphql-landscape#new-entries">
-              instructions.
-            </a>
+            你的公司也在使用 GraphQL 吗？<br />
+            请参考 <a href="https://github.com/graphql/graphql-landscape#new-entries">说明文档</a> 来向 <a href="https://github.com/graphql/graphql-landscape">GraphQL Landscape</a> 提交你的拉取请求吧。
           </p>
         </div>
 

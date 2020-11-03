@@ -16,19 +16,9 @@ const WithoutVersion = () => {
     <div className="grayWash">
       <section className="point5" id="without-versions">
         <div className="prose">
-          <h2>
-            Evolve your API
-            <br />
-            without versions
-          </h2>
+          <h2>API 演进<br />无需划分版本</h2>
           {/*Illustration showing more legs added to a graph? Or a type evolving over time?]*/}
-          <p>
-            Add new fields and types to your GraphQL API without impacting
-            existing queries. Aging fields can be deprecated and hidden from
-            tools. By using a single evolving version, GraphQL APIs give apps
-            continuous access to new features and encourage cleaner, more
-            maintainable server&nbsp;code.
-          </p>
+          <p>给你的 GraphQL API 添加字段和类型而无需影响现有查询。老旧的字段可以废弃，从工具中隐藏。通过使用单一演进版本，GraphQL API 使得应用始终能够使用新的特性，并鼓励使用更加简洁、更好维护的服务端代码。</p>
         </div>
         <div className="window type-evolution" aria-hidden>
           <div id="typeEvolveView">

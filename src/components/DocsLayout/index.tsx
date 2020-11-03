@@ -21,7 +21,7 @@ const index = ({ title, nextDoc, sideBarData, rawMarkdownBody }: Props) => {
           {nextDoc?.frontmatter?.permalink && (
             <Link className="read-next" to={nextDoc.frontmatter.permalink}>
               <span className="read-next-continue">
-                Continue Reading &rarr;
+                继续阅读 &rarr;
               </span>
               <span className="read-next-title">
                 {nextDoc.frontmatter.title}

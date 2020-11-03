@@ -51,18 +51,9 @@ const PredictableResults = () => {
   return (
     <section className="point1" id="predictable-results">
       <div className="prose">
-        <h2>
-          Ask for what you need,
-          <br />
-          get exactly that
-        </h2>
+        <h2>请求你所要的数据<br />不多不少</h2>
         {/*[Illustration: just a simple query and response?]*/}
-        <p>
-          Send a GraphQL query to your API and get exactly what you need,
-          nothing more and nothing less. GraphQL queries always return
-          predictable results. Apps using GraphQL are fast and stable because
-          they control the data they get, not the&nbsp;server.
-        </p>
+        <p>向你的 API 发出一个 GraphQL 请求就能准确获得你想要的数据，不多不少。 GraphQL 查询总是返回可预测的结果。使用 GraphQL 的应用可以工作得又快又稳，因为控制数据的是应用，而不是服务器。</p>
       </div>
       <div className="window faux-graphiql" aria-hidden>
         <div className="query">

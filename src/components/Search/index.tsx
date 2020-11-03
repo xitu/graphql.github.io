@@ -57,8 +57,8 @@ const Search = ({searchID}: { searchID?: string}): JSX.Element => {
       <input
         id={searchInputID}
         type="text"
-        placeholder="Search docs..."
-        aria-label="Search docs"
+        placeholder="搜索文档..."
+        aria-label="搜索文档"
       />
     </div>
   )

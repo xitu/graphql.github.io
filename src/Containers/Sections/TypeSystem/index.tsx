@@ -22,20 +22,10 @@ const TypeSysyem = () => {
   return (
     <section className="point3" id="type-system">
       <div className="prose">
-        <h2>
-          Describe what&rsquo;s possible
-          <br />
-          with a type system
-        </h2>
+        <h2>描述所有的可能<br />类型系统</h2>
         {/*Illustration of a type IDL following a query by line]*/}
         {/*Under: a server <-> client (Capabilities, Requirements)]?*/}
-        <p>
-          GraphQL APIs are organized in terms of types and fields, not
-          endpoints. Access the full capabilities of your data from a single
-          endpoint. GraphQL uses types to ensure Apps only ask for what&rsquo;s
-          possible and provide clear and helpful errors. Apps can use types to
-          avoid writing manual parsing&nbsp;code.
-        </p>
+        <p>GraphQL API 基于类型和字段的方式进行组织，而非入口端点。你可以通过一个单一入口端点得到你所有的数据能力。GraphQL 使用类型来保证应用只请求可能的数据，还提供了清晰的辅助性错误信息。应用可以使用类型，而避免编写手动解析代码。</p>
       </div>
       <div className="window strong-typed-query" aria-hidden>
         <div className="query">
