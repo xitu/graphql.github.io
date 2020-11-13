@@ -305,7 +305,7 @@ union SearchResult = Human | Droid | Starship
 
 在我们的schema中，任何返回一个 `SearchResult` 类型的地方，都可能得到一个 `Human`、`Droid` 或者 `Starship`。注意，联合类型的成员需要是具体对象类型；你不能使用接口或者其他联合类型来创造一个联合类型。
 
-这时候，如果你需要查询一个返回 `SearchResult` 联合类型的字段，那么你得使用条件片段才能查询任意字段。
+这时候，如果你需要查询一个返回 `SearchResult` 联合类型的字段，那么你得使用内联片段才能查询任意字段。
 
 ```graphql
 # { "graphiql": true}

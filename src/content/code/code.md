@@ -12,10 +12,12 @@ GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框
 
 - [C# / .NET](#c#-/-.net)
 - [Clojure](#clojure)
+- [D](#d)
 - [Elixir](#elixir)
 - [Erlang](#erlang)
 - [Go](#go)
 - [Groovy](#groovy)
+- [Haskell](#haskell)
 - [Java](#java)
 - [JavaScript](#javascript)
 - [Kotlin](#kotlin)
@@ -60,6 +62,7 @@ public class Program
   - [Entity GraphQL](https://github.com/lukemurray/EntityGraphQL)：针对 .NET Core 的 GraphQL 库。编译为 IQueryable 以轻松地从现有的数据模型（例如从 Entity Framework 数据模型）中暴露出 schema
   - [DotNetGraphQLQueryGen](https://github.com/lukemurray/DotNetGraphQLQueryGen)：从 GraphQL schema 生成类，以在 dotnet 中进行类型安全的查询的 .NET Core 库
   - [Hot Chocolate](https://github.com/ChilliCream/hotchocolate)：针对 .NET core 和 .NET classic 的 GraphQL 服务器
+  - [NGraphQL](https://github.com/rivantsov/starwars)：用于 .NET Core 和完整框架的 GraphQL 服务器
 
 ### Clojure
 
@@ -128,6 +131,10 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
 
 一套 GraphQL 规范的完整实现，致力于维护对规范的外部兼容。
 
+### D
+
+  - [graphqld](https://github.com/burner/graphqld)：D 编程语言的 GraphQL 实现。
+
 ### Elixir
 
   - [absinthe](https://github.com/absinthe-graphql/absinthe)：Elixir 的 GraphQL 实现。
@@ -165,6 +172,66 @@ $ curl -XPOST "http://0:3000" -H'Content-Type: application/json' -d'{
 #### [GQL](https://grooviter.github.io/gql/)
 
 GQL 是一个在 Groovy 中使用 GraphQL 的库。
+
+### Haskell
+
+#### [Morpheus GraphQL](https://github.com/morpheusgraphql/morpheus-graphql)
+
+用于构建 GraphQL API 的 Haskell 库。
+
+一个使用 `morpheus-graphql` 的 hello world 示例：
+
+```graphql
+# schema.gql
+"""
+A supernatural being considered divine and sacred
+"""
+type Deity {
+  name: String!
+  power: String @deprecated(reason: "no more supported")
+}
+type Query {
+  deity(name: String! = "Morpheus"): Deity!
+}
+```
+
+```haskell
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE DuplicateRecordFields #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE TypeFamilies #-}
+module API (api) where
+import Data.ByteString.Lazy.Char8 (ByteString)
+import Data.Morpheus (interpreter)
+import Data.Morpheus.Document (importGQLDocument)
+import Data.Morpheus.Types (RootResolver (..), Undefined (..))
+import Data.Text (Text)
+importGQLDocument "schema.gql"
+rootResolver :: RootResolver IO () Query Undefined Undefined
+rootResolver =
+  RootResolver
+    { queryResolver = Query {deity},
+      mutationResolver = Undefined,
+      subscriptionResolver = Undefined
+    }
+  where
+    deity DeityArgs {name} =
+      pure
+        Deity
+          { name = pure name,
+            power = pure (Just "Shapeshifting")
+          }
+api :: ByteString -> IO ByteString
+api = interpreter rootResolver
+```
+
+查看 [morpheus-graphql-examples](https://github.com/morpheusgraphql/morpheus-graphql) 了解更复杂的 API。
   
 ### Java
 
@@ -316,6 +383,7 @@ Apollo Server 也支持所有的 Node.js HTTP 服务器框架：Express、Connec
 ### Kotlin
 
   - [graphql-kotlin](https://github.com/ExpediaGroup/graphql-kotlin/)：一组用于在 Kotlin 中运行 GraphQL 服务器的库。
+  - [KGraphQL](https://github.com/aPureBase/KGraphQL)：设置 GraphQL 服务器的一个纯 Kotlin 实现。
 
 ### Perl
 
@@ -333,6 +401,8 @@ Apollo Server 也支持所有的 Node.js HTTP 服务器框架：Express、Connec
   - [Lighthouse](https://github.com/nuwave/lighthouse)：一个用于 Laravel 的 GraphQL 服务器
   - [GraphQLBundle](https://github.com/overblog/GraphQLBundle)：一个用于 Symfony 的 GraphQL 服务器
   - [WPGraphQL](https://github.com/wp-graphql/wp-graphql)：一个免费的开源 WordPress 插件，可为任何 WordPress 网站提供可扩展的 GraphQL schema 和 API
+  - [GraphQL API for WordPress](https://github.com/GraphQLAPI/graphql-api-for-wp)：WordPress 的 GraphQL 服务器
+  - [GraPHPinator](https://github.com/infinityloop-dev/graphpinator)：现代 PHP 的一个 GraphQL 实现
 
 #### [API Platform](https://api-platform.com) ([github](https://github.com/api-platform/api-platform))
 
@@ -586,9 +656,11 @@ Executor.execute(schema, query) map println
 
 - [C# / .NET](#c#-/-.net-1)
 - [Clojurescript](#clojurescript-1)
+- [Elixir](#elixir-1)
 - [Elm](#elm)
 - [Flutter](#flutter)
 - [Go](#go-1)
+- [Haskell](#haskell-1)
 - [Java / Android](#java-android)
 - [JavaScript](#javascript-1)
 - [Julia](#julia)
@@ -607,6 +679,11 @@ Executor.execute(schema, query) map println
 
   - [re-graph](https://github.com/oliyh/re-graph/)：一个在 Clojurescript 中实现的 GraphQL 客户端，支持 websockets。
 
+### Elixir
+
+  - [Neuron](https://github.com/uesteibar/neuron)：Elixir 的 GraphQL 客户端
+  - [common_graphql_client](https://github.com/annkissam/common_graphql_client)：支持 HTTP 和 WebSocket 的 Elixir GraphQL 客户端
+
 ### Elm
 
   - [dillonkearns/elm-graphql](https://github.com/dillonkearns/elm-graphql)：一个库和命令行代码生成器，用于为 GraphQL 入口端点创建类型安全的 Elm 代码。
@@ -619,6 +696,10 @@ Executor.execute(schema, query) map println
 
   - [graphql](https://github.com/shurcooL/graphql#readme)：一个使用 Go 编写的 GraphQL 客户端实现。
   - [machinebox/graphql](https://github.com/machinebox/graphql)：用于 GraphQL 的一个优雅的底层 HTTP 客户端。
+
+### Haskell
+
+  - [morpheus-graphql-client](https://github.com/morpheusgraphql/morpheus-graphql)：使用 Haskell 的一个强类型 GraphQL 客户端实现。
 
 ### Java / Android
 
