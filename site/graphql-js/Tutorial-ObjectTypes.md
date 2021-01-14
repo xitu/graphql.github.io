@@ -74,7 +74,7 @@ type Query {
 
 ```javascript
 var express = require('express');
-var graphqlHTTP = require('express-graphql');
+var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
 // 用 GraphQL schema language 构造一个 schema

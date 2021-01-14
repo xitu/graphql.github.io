@@ -18,7 +18,7 @@ GraphQL schema language 支持的标量类型有 `String`、`Int`、`Float`、`B
 
 ```javascript
 var express = require('express');
-var graphqlHTTP = require('express-graphql');
+var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
 // 使用 GraphQL schema language 构建一个 schema

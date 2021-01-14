@@ -271,7 +271,7 @@ npm install express express-graphql graphql
 
 \`\`\`js
 var express = require('express');
-var graphqlHTTP = require('express-graphql');
+var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
 var schema = buildSchema(\`

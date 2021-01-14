@@ -11,7 +11,7 @@ next: /graphql-js/graphql/
 
 ```js
 import graphqlHTTP from 'express-graphql'; // ES6
-var graphqlHTTP = require('express-graphql'); // CommonJS
+var { graphqlHTTP } = require('express-graphql'); // CommonJS
 ```
 
 ### graphqlHTTP

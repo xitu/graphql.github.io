@@ -15,7 +15,7 @@ Express 中间件可以很方便地结合 `express-graphql` 使用，这也是�
 
 ```javascript
 var express = require('express');
-var graphqlHTTP = require('express-graphql');
+var { graphqlHTTP } = require('express-graphql');
 var { buildSchema } = require('graphql');
 
 var schema = buildSchema(`
