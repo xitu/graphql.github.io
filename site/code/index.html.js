@@ -25,7 +25,7 @@ GraphQL 已有多种编程语言支持。下表包含一些流行的服务端框
 
 除了 GraphQL [JavaScript 参考实现](#javascript)，还有其他服务端库：
 
-- [C# / .NET](#c-net)
+- [C# / .NET](#c#-/-.net)
 - [Clojure](#clojure)
 - [Elixir](#elixir)
 - [Erlang](#erlang)
