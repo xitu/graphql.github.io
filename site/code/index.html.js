@@ -593,7 +593,7 @@ Executor.execute(schema, query) map println
 
 ## GraphQL 客户端
 
-- [C# / .NET](#c-net-1)
+- [C# / .NET](#c#-/-.net-1)
 - [Clojurescript](#clojurescript-1)
 - [Elm](#elm)
 - [Flutter](#flutter)
