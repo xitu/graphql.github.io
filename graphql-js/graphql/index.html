@@ -1,0 +1,134 @@
+<!DOCTYPE html><html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><title>graphql | API 参考</title><meta name="viewport" content="width=640"/><meta name="description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。"/><meta property="og:title" content="GraphQL: 一种用于 API 的查询语言。"/><meta property="og:description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。"/><meta property="og:type" content="website"/><meta property="og:url" content="http://graphql.cn/"/><meta property="og:image" content="/img/og_image.png"/><meta property="og:image:type" content="image/png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@graphql"/><meta name="twitter:title" content="GraphQL: 一种用于 API 的查询语言。"/><meta name="twitter:description" content="GraphQL 提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，并让 API 更加容易随着时间推移而演进。"/><meta name="twitter:image" content="/img/twitter_image.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="home" type="application/rss+xml" href="/blog/rss.xml" title="GraphQL 团队博客"/><link rel="stylesheet" href="/style.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300|Roboto:300"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,600"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/></head><body><header><section><a class="nav-home" href="/"><img class="nav-logo" src="/img/logo.svg" alt="GraphQL Logo" width="30" height="30"/>GraphQL</a><nav><a href="/learn/">学习</a><a href="/code/">代码</a><a href="/community/">社区</a><a href="https://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">规范</a><a href="/codeofconduct/">行为守则</a><a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">基金会</a><a href="https://l.graphql.org/" target="_blank" rel="noopener noreferrer">社区总览</a><a href="https://principles.graphql.cn/" target="_blank" rel="noopener noreferrer">开发原则</a></nav><div class="algolia-search-wrapper"><input type="text" id="algolia-search-input" placeholder="搜索文档..." aria-label="搜索文档"/></div></section></header><section><div class="documentationContent"><div class="inner-content"><h1>graphql</h1><div><p><code>graphql</code> 模块导出了 GraphQL 的一个核心子集，其主要功能是创建 GraphQL 的类型系统和服务。</p><pre class="prism language-js"><span class="keyword">import</span> <span class="punctuation">{</span> graphql <span class="punctuation">}</span> <span class="keyword">from</span> <span class="string">&#x27;graphql&#x27;</span><span class="punctuation">;</span> <span spellcheck="true" class="comment">// ES6</span>
+<span class="keyword">var</span> <span class="punctuation">{</span> graphql <span class="punctuation">}</span> <span class="operator">=</span> <span class="function">require</span><span class="punctuation">(</span><span class="string">&#x27;graphql&#x27;</span><span class="punctuation">)</span><span class="punctuation">;</span> <span spellcheck="true" class="comment">// CommonJS</span></pre><h2><a class="anchor" name="概览"></a>概览 <a class="hash-link" href="#概览">#</a></h2><p><strong>入口点</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="#graphql">
+      <pre>function graphql</pre>
+      根据 schema 对一个 GraphQL 请求进行词法分析、解析、验证及执行。
+    </a>
+  </li>
+</ul>
+
+</div><p><strong>Schema</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="../type/#graphqlschema">
+      <pre>class GraphQLSchema</pre>
+      一个 GraphQL 服务的功能配置描述
+    </a>
+  </li>
+</ul>
+
+</div><p><strong>类型定义</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="../type/#graphqlscalartype">
+      <pre>class GraphQLScalarType</pre>
+      GraphQL 里的标量类型。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqlobjecttype">
+      <pre>class GraphQLObjectType</pre>
+      GraphQL 里的自定义对象类型，包含一个 fields 字段。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqlinterfacetype">
+      <pre>class GraphQLInterfaceType</pre>
+      GraphQL 里的接口类型，定义多个类型中通用的字段。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqluniontype">
+      <pre>class GraphQLUnionType</pre>
+      GraphQL 里的联合类型，定义了（某个字段能支持的所有返回类型的）一个实现列表。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqlenumtype">
+      <pre>class GraphQLEnumType</pre>
+      GraphQL 里的枚举类型，定义了一个有效（可枚举）数据类型的列表。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqlinputobjecttype">
+      <pre>class GraphQLInputObjectType</pre>
+      GraphQL 里的输入对象类型，表示一些结构化的输入。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqllist">
+      <pre>class GraphQLList</pre>
+      这是对其他类型进行封装的类型，表示一个包含那些类型的列表。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqlnonnull">
+      <pre>class GraphQLNonNull</pre>
+      这也是对其他类型进行封装的类型，并强制要求类型值不能为空。
+    </a>
+  </li>
+</ul>
+
+</div><p><strong>标量类型</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="../type/#graphqlint">
+      <pre>var GraphQLInt</pre>
+      表示整数的标量类型。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqlfloat">
+      <pre>var GraphQLFloat</pre>
+      表示浮点数的标量类型。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqlstring">
+      <pre>var GraphQLString</pre>
+      表示字符串的标量类型。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqlboolean">
+      <pre>var GraphQLBoolean</pre>
+      表示布尔值的标量类型。
+    </a>
+  </li>
+  <li>
+    <a href="../type/#graphqlid">
+      <pre>var GraphQLID</pre>
+      表示 ID 值的标量类型。
+    </a>
+  </li>
+</ul>
+
+</div><p><strong>错误信息</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="../error/#formaterror">
+      <pre>function formatError</pre>
+      根据返回格式描述的规则格式化一个错误。
+    </a>
+  </li>
+</ul>
+
+</div><h2><a class="anchor" name="入口点"></a>入口点 <a class="hash-link" href="#入口点">#</a></h2><h3><a class="anchor" name="graphql"></a>graphql <a class="hash-link" href="#graphql">#</a></h3><pre class="prism language-js"><span class="function">graphql</span><span class="punctuation">(</span>
+  schema<span class="punctuation">:</span> GraphQLSchema<span class="punctuation">,</span>
+  requestString<span class="punctuation">:</span> string<span class="punctuation">,</span>
+  rootValue<span class="operator">?</span><span class="punctuation">:</span> <span class="operator">?</span>any<span class="punctuation">,</span>
+  contextValue<span class="operator">?</span><span class="punctuation">:</span> <span class="operator">?</span>any<span class="punctuation">,</span>
+  variableValues<span class="operator">?</span><span class="punctuation">:</span> <span class="operator">?</span><span class="punctuation">{</span><span class="punctuation">[</span>key<span class="punctuation">:</span> string<span class="punctuation">]</span><span class="punctuation">:</span> any<span class="punctuation">}</span><span class="punctuation">,</span>
+  operationName<span class="operator">?</span><span class="punctuation">:</span> <span class="operator">?</span>string
+<span class="punctuation">)</span><span class="punctuation">:</span> Promise<span class="operator">&lt;</span>GraphQLResult<span class="operator">&gt;</span></pre><p><code>graphql</code> 方法可以对一个 GraphQL 请求进行词法分析、解析、验证和执行。必要的参数是 <code>schema</code> 和 <code>requestString</code>，可选的参数则包括 <code>rootValue</code>（将作为根值传入执行器方法）、<code>contextValue</code>（将传入所有的解析函数）、<code>variableValues</code>（将传入执行器方法，为 <code>requestString</code> 中的任意类型变量赋值）以及 <code>operationName</code>（在 <code>requestString</code> 包含多个顶级操作的情况下，这个参数允许调用函数指定 <code>requestString</code> 运行哪个操作）。</p><h2><a class="anchor" name="schema"></a>Schema <a class="hash-link" href="#schema">#</a></h2><p>详细介绍请看 <a href="../type#schema" target="_blank" rel="nofollow noopener noreferrer">类型系统 API 参考</a>。</p><h2><a class="anchor" name="类型定义"></a>类型定义 <a class="hash-link" href="#类型定义">#</a></h2><p>详细介绍请看 <a href="../type#definitions" target="_blank" rel="nofollow noopener noreferrer">类型系统 API 参考</a>。</p><h2><a class="anchor" name="标量类型"></a>标量类型 <a class="hash-link" href="#标量类型">#</a></h2><p>详细介绍请看 <a href="../type#scalars" target="_blank" rel="nofollow noopener noreferrer">类型系统 API 参考</a>。</p><h2><a class="anchor" name="错误信息"></a>错误信息 <a class="hash-link" href="#错误信息">#</a></h2><p>详细介绍请看 <a href="../error" target="_blank" rel="nofollow noopener noreferrer">错误信息 API 参考</a></p></div><a class="read-next" href="/graphql-js/error"><span class="read-next-continue">继续阅读 →</span><span class="read-next-title">graphql/error</span></a></div><div class="nav-docs"><div><h3>GraphQL.js 教程</h3><ul><li><a style="margin-left:0;" class="active" href="/graphql-js/">入门</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/running-an-express-graphql-server/">Express + GraphQL</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/graphql-clients/">GraphQL 客户端</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/basic-types/">基本类型</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/passing-arguments/">传递参数</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/object-types/">对象类型</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/mutations-and-input-types/">变更和输入类型</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/authentication-and-express-middleware/">认证 &amp; 中间件</a></li></ul></div><div><h3>高级指南</h3><ul><li><a style="margin-left:0;" class="active" href="/graphql-js/constructing-types/">构建类型</a></li></ul></div><div><h3>API 参考</h3><ul><li><a style="margin-left:0;" class="active" href="/graphql-js/express-graphql/">express-graphql</a><ul><li><a href="/graphql-js/express-graphql/#graphqlhttp">graphqlHTTP</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/graphql/">graphql</a><ul><li><a href="/graphql-js/graphql/#graphql">graphql</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/error/">graphql/error</a><ul><li><a href="/graphql-js/error/#formaterror">formatError</a></li><li><a href="/graphql-js/error/#graphqlerror">GraphQLError</a></li><li><a href="/graphql-js/error/#locatederror">locatedError</a></li><li><a href="/graphql-js/error/#syntaxerror">syntaxError</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/execution/">graphql/execution</a><ul><li><a href="/graphql-js/execution/#execute">execute</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/language/">graphql/language</a><ul><li><a href="/graphql-js/language/#break">BREAK</a></li><li><a href="/graphql-js/language/#getlocation">getLocation</a></li><li><a href="/graphql-js/language/#kind">Kind</a></li><li><a href="/graphql-js/language/#lex">lex</a></li><li><a href="/graphql-js/language/#parse">parse</a></li><li><a href="/graphql-js/language/#parsevalue">parseValue</a></li><li><a href="/graphql-js/language/#printsource">printSource</a></li><li><a href="/graphql-js/language/#visit">visit</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/type/">graphql/type</a><ul><li><a href="/graphql-js/type/#getnamedtype">getNamedType</a></li><li><a href="/graphql-js/type/#getnullabletype">getNullableType</a></li><li><a href="/graphql-js/type/#graphqlboolean">GraphQLBoolean</a></li><li><a href="/graphql-js/type/#graphqlenumtype">GraphQLEnumType</a></li><li><a href="/graphql-js/type/#graphqlfloat">GraphQLFloat</a></li><li><a href="/graphql-js/type/#graphqlid">GraphQLID</a></li><li><a href="/graphql-js/type/#graphqlinputobjecttype">GraphQLInputObjectType</a></li><li><a href="/graphql-js/type/#graphqlint">GraphQLInt</a></li><li><a href="/graphql-js/type/#graphqlinterfacetype">GraphQLInterfaceType</a></li><li><a href="/graphql-js/type/#graphqllist">GraphQLList</a></li><li><a href="/graphql-js/type/#graphqlnonnull">GraphQLNonNull</a></li><li><a href="/graphql-js/type/#graphqlobjecttype">GraphQLObjectType</a></li><li><a href="/graphql-js/type/#graphqlscalartype">GraphQLScalarType</a></li><li><a href="/graphql-js/type/#graphqlschema">GraphQLSchema</a></li><li><a href="/graphql-js/type/#graphqlstring">GraphQLString</a></li><li><a href="/graphql-js/type/#graphqluniontype">GraphQLUnionType</a></li><li><a href="/graphql-js/type/#isabstracttype">isAbstractType</a></li><li><a href="/graphql-js/type/#iscompositetype">isCompositeType</a></li><li><a href="/graphql-js/type/#isinputtype">isInputType</a></li><li><a href="/graphql-js/type/#isleaftype">isLeafType</a></li><li><a href="/graphql-js/type/#isoutputtype">isOutputType</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/utilities/">graphql/utilities</a><ul><li><a href="/graphql-js/utilities/#astfromvalue">astFromValue</a></li><li><a href="/graphql-js/utilities/#buildastschema">buildASTSchema</a></li><li><a href="/graphql-js/utilities/#buildclientschema">buildClientSchema</a></li><li><a href="/graphql-js/utilities/#buildschema">buildSchema</a></li><li><a href="/graphql-js/utilities/#introspectionquery">introspectionQuery</a></li><li><a href="/graphql-js/utilities/#isvalidjsvalue">isValidJSValue</a></li><li><a href="/graphql-js/utilities/#isvalidliteralvalue">isValidLiteralValue</a></li><li><a href="/graphql-js/utilities/#printintrospectionschema">printIntrospectionSchema</a></li><li><a href="/graphql-js/utilities/#printschema">printSchema</a></li><li><a href="/graphql-js/utilities/#typefromast">typeFromAST</a></li><li><a href="/graphql-js/utilities/#typeinfo">TypeInfo</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/validation/">graphql/validation</a><ul><li><a href="/graphql-js/validation/#specifiedrules">specifiedRules</a></li><li><a href="/graphql-js/validation/#validate">validate</a></li></ul></li></ul></div></div></div></section><footer><section class="sitemap"><a href="/" class="nav-home" aria-label="主页"></a><div><h5><a href="/learn/">学习</a></h5><a href="/learn/">入门</a><a href="/learn/queries/">查询语言</a><a href="/learn/schema/">类型系统</a><a href="/learn/execution/">执行</a><a href="/learn/best-practices/">最佳实践</a></div><div><h5><a href="/code">代码</a></h5><a href="/code/#server-libraries">服务端</a><a href="/code/#graphql-clients">客户端</a><a href="/code/#tools">工具</a></div><div><h5><a href="/community">社区</a></h5><a href="/community/upcoming-events/">即将到来的活动</a><a href="http://stackoverflow.com/questions/tagged/graphql" target="_blank" rel="noopener noreferrer">Stack Overflow</a><a href="https://www.facebook.com/groups/graphql.community/" target="_blank" rel="noopener noreferrer">Facebook Group</a><a href="https://twitter.com/GraphQL" target="_blank" rel="noopener noreferrer">Twitter</a></div><div><h5>更多</h5><a href="http://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">GraphQL 规范</a><a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">GraphQL 基金会</a><a href="https://github.com/graphql" target="_blank" rel="noopener noreferrer">GraphQL GitHub</a><a href="https://github.com/xitu/graphql.github.io/edit/zh-Hans/site/graphql-js/APIReference-GraphQL.md" target="_blank" rel="noopener noreferrer">编辑本页 ✎</a></div></section><section class="copyright">Copyright © 2021 GraphQL 基金会。保留所有权利。Linux 基金会已经注册了商标和使用商标。有关 Linux 基金会的商标清单，请参阅我们的 <a href="https://www.linuxfoundation.org/trademark-usage">商标使用</a> 页面。Linux 是 Linus Torvalds 的注册商标。<a href="http://www.linuxfoundation.org/privacy">隐私政策</a> 和 <a href="http://www.linuxfoundation.org/terms">使用条款</a>。</section></footer><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+        docsearch({
+          apiKey: 'd103541f3e6041148aade2e746ed4d61',
+          indexName: 'graphql',
+          inputSelector: '#algolia-search-input'
+        });
+      </script><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-44373548-16', 'auto');
+ga('send', 'pageview');
+      </script></body></html>

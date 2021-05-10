@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><title>全局对象识别 | GraphQL</title><meta name="viewport" content="width=640"/><meta name="description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。"/><meta property="og:title" content="GraphQL: 一种用于 API 的查询语言。"/><meta property="og:description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。"/><meta property="og:type" content="website"/><meta property="og:url" content="http://graphql.cn/"/><meta property="og:image" content="/img/og_image.png"/><meta property="og:image:type" content="image/png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@graphql"/><meta name="twitter:title" content="GraphQL: 一种用于 API 的查询语言。"/><meta name="twitter:description" content="GraphQL 提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，并让 API 更加容易随着时间推移而演进。"/><meta name="twitter:image" content="/img/twitter_image.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="home" type="application/rss+xml" href="/blog/rss.xml" title="GraphQL 团队博客"/><link rel="stylesheet" href="/style.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300|Roboto:300"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,600"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/></head><body><header><section><a class="nav-home" href="/"><img class="nav-logo" src="/img/logo.svg" alt="GraphQL Logo" width="30" height="30"/>GraphQL</a><nav><a href="/learn/">学习</a><a href="/code/">代码</a><a href="/community/">社区</a><a href="https://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">规范</a><a href="/codeofconduct/">行为守则</a><a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">基金会</a><a href="https://l.graphql.org/" target="_blank" rel="noopener noreferrer">社区总览</a><a href="https://principles.graphql.cn/" target="_blank" rel="noopener noreferrer">开发原则</a></nav><div class="algolia-search-wrapper"><input type="text" id="algolia-search-input" placeholder="搜索文档..." aria-label="搜索文档"/></div></section></header><section><div class="documentationContent"><div class="inner-content"><h1>全局对象识别</h1><div><blockquote><p>一致的对象访问实现了简单的缓存和对象查找</p></blockquote><p>为了提供给 GraphQL 客户端选项以优雅地处理缓存和数据重新获取，GraphQL 服务端需要以标准化的方式公开对象标识符。</p><p>为此客户端需要通过以 ID 请求对象的标准机制进行查询。然后在响应中，schema 将需要提供一种提供这些 ID 的标准方式。</p><p>因为除了 ID 之外，对对象知之甚少，所以我们称它们为对象“节点”。这是一个查询节点的示例：</p><pre class="prism language-graphql"><span class="punctuation">{</span>
+  node<span class="punctuation">(</span><span class="attr-name">id</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    id
+    <span class="operator">...</span> <span class="keyword">on</span> User <span class="punctuation">{</span>
+      name
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span></pre><ul><li>GraphQL schema 的格式允许通过根查询对象上的 <code>node</code> 字段获取任何对象。返回的对象符合 “Node” <a href="/learn/schema/#interfaces">接口</a>。</li><li>可以安全地从响应中提取出 <code>id</code> 字段，并可以通过缓存和重新获取将其存储以供重用。</li><li>客户端可以使用接口片段来提取特定于类型的、符合节点接口的其他信息。在本示例中为 “User”。</li></ul><p>Node 接口如下：</p><pre class="prism language-graphql"><span spellcheck="true" class="comment"># 具有全局唯一 ID 的对象</span>
+interface Node <span class="punctuation">{</span>
+  <span spellcheck="true" class="comment"># 对象的 ID</span>
+  <span class="attr-name">id</span><span class="punctuation">:</span> ID<span class="operator">!</span>
+<span class="punctuation">}</span></pre><p>User 通过以下方式符合接口：</p><pre class="prism language-graphql">type User implements Node <span class="punctuation">{</span>
+  <span class="attr-name">id</span><span class="punctuation">:</span> ID<span class="operator">!</span>
+  <span spellcheck="true" class="comment"># 全名</span>
+  <span class="attr-name">name</span><span class="punctuation">:</span> String<span class="operator">!</span>
+<span class="punctuation">}</span></pre><h1><a class="anchor" name="规范"></a>规范 <a class="hash-link" href="#规范">#</a></h1><p>下面的所有内容以更加正式的要求描述了围绕对象标识的规范，以确保在服务端实现之间的一致性。
+这些规范是基于服务端如何与 <a href="https://facebook.github.io/relay/" target="_blank" rel="nofollow noopener noreferrer">Relay</a> API 客户端兼容来写的，但是对任何客户端都有用。</p><h1><a class="anchor" name="保留类型"></a>保留类型 <a class="hash-link" href="#保留类型">#</a></h1><p>与此规范兼容的 GraphQL 服务端必须保留某些类型和类型名称，以支持一致的对象标识模型。特别地，此规范为以下类型创建了准则：</p><ul><li>一个名为 <code>Node</code> 的接口。</li><li>根查询类型上的 <code>node</code> 字段。</li></ul><h1><a class="anchor" name="node-接口"></a>Node 接口 <a class="hash-link" href="#node-接口">#</a></h1><p>服务端必须提供一个名为 <code>Node</code> 的接口。该接口必须有且仅有一个名为 <code>id</code> 的字段，该字段返回非空的 <code>ID</code>。</p><p>这个 <code>id</code> 应当是该对象的全局唯一标识符，并且只要给出这个 <code>id</code>，服务端就应该能够重新获取该对象。</p><h2><a class="anchor" name="内省"></a>内省 <a class="hash-link" href="#内省">#</a></h2><p>正确实现上述接口的服务端将接受如下的内省查询，并返回提供的响应：</p><pre class="prism language-graphql"><span class="punctuation">{</span>
+  __type<span class="punctuation">(</span><span class="attr-name">name</span><span class="punctuation">:</span> <span class="string">&quot;Node&quot;</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    name
+    kind
+    fields <span class="punctuation">{</span>
+      name
+      <span class="type-def"><span class="keyword">type</span> <span class="fields"><span class="punctuation">{</span>
+        kind
+        ofType <span class="punctuation">{</span>
+          name
+          kind
+        <span class="punctuation">}</span>
+      <span class="punctuation">}</span></span></span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><p>返回</p><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;__type&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Node&quot;</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;INTERFACE&quot;</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;fields&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>
+      <span class="punctuation">{</span>
+        <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;id&quot;</span><span class="punctuation">,</span>
+        <span class="attr-name">&quot;type&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+          <span class="attr-name">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;NON_NULL&quot;</span><span class="punctuation">,</span>
+          <span class="attr-name">&quot;ofType&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+            <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ID&quot;</span><span class="punctuation">,</span>
+            <span class="attr-name">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;SCALAR&quot;</span>
+          <span class="punctuation">}</span>
+        <span class="punctuation">}</span>
+      <span class="punctuation">}</span>
+    <span class="punctuation">]</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><h1><a class="anchor" name="node-根字段"></a>Node 根字段 <a class="hash-link" href="#node-根字段">#</a></h1><p>服务端必须提供一个名为 <code>node</code>，且返回 <code>Node</code> 接口的根字段。该根字段必须有且仅有一个参数，即名为 <code>id</code> 的非空ID。</p><p>如果一个查询返回的对象实现了 <code>Node</code>，那么当服务端在 <code>Node</code> 的 <code>id</code> 字段中返回的值作为 <code>id</code> 参数传递给 <code>node</code> 的根字段时，该根字段应该重新获取相同的对象。</p><p>服务端必须尽最大努力来获取此数据，但并非总能成功。例如，服务端可能会返回一个带有有效 <code>id</code> 的 <code>User</code>，但是当发出使用 <code>node</code> 根字段重新获取该用户的请求时，该用户的数据库可能不可用，或者该用户可能已删除了他的
+帐户。在这种情况下，查询该字段的结果应为 <code>null</code>。</p><h2><a class="anchor" name="内省-1"></a>内省 <a class="hash-link" href="#内省-1">#</a></h2><p>正确实现上述需求的服务端将接受如下的内省查询，并返回包含所提供响应的响应：</p><pre class="prism language-graphql"><span class="punctuation">{</span>
+  __schema <span class="punctuation">{</span>
+    queryType <span class="punctuation">{</span>
+      fields <span class="punctuation">{</span>
+        name
+        <span class="type-def"><span class="keyword">type</span> <span class="fields"><span class="punctuation">{</span>
+          name
+          kind
+        <span class="punctuation">}</span></span></span>
+        args <span class="punctuation">{</span>
+          name
+          <span class="type-def"><span class="keyword">type</span> <span class="fields"><span class="punctuation">{</span>
+            kind
+            ofType <span class="punctuation">{</span>
+              name
+              kind
+            <span class="punctuation">}</span>
+          <span class="punctuation">}</span></span></span>
+        <span class="punctuation">}</span>
+      <span class="punctuation">}</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><p>返回</p><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;__schema&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;queryType&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+      <span class="attr-name">&quot;fields&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>
+        // 该数组可能还有其他条目
+        <span class="punctuation">{</span>
+          <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;node&quot;</span><span class="punctuation">,</span>
+          <span class="attr-name">&quot;type&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+            <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Node&quot;</span><span class="punctuation">,</span>
+            <span class="attr-name">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;INTERFACE&quot;</span>
+          <span class="punctuation">}</span><span class="punctuation">,</span>
+          <span class="attr-name">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>
+            <span class="punctuation">{</span>
+              <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;id&quot;</span><span class="punctuation">,</span>
+              <span class="attr-name">&quot;type&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+                <span class="attr-name">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;NON_NULL&quot;</span><span class="punctuation">,</span>
+                <span class="attr-name">&quot;ofType&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+                  <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ID&quot;</span><span class="punctuation">,</span>
+                  <span class="attr-name">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;SCALAR&quot;</span>
+                <span class="punctuation">}</span>
+              <span class="punctuation">}</span>
+            <span class="punctuation">}</span>
+          <span class="punctuation">]</span>
+        <span class="punctuation">}</span>
+      <span class="punctuation">]</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><h1><a class="anchor" name="字段稳定性"></a>字段稳定性 <a class="hash-link" href="#字段稳定性">#</a></h1><p>如果一个查询中出现两个对象，并且都使用相同的ID来实现 <code>Node</code>，则这两个对象必须相等。</p><p>出于此定义的目的，对象相等性定义如下：</p><ul><li>如果在两个对象上都查询了一个字段，则在第一个对象上查询该字段的结果必须等于在第二个对象上查询该字段的结果。<ul><li>如果该字段返回一个标量，则相等性定义为该标量的相等性。</li><li>如果该字段返回一个枚举，则相等性定义为两个字段都返回相同的枚举值。</li><li>如果该字段返回一个对象，则按照上述方法递归定义相等性。</li></ul></li></ul><p>例如：</p><pre class="prism language-graphql"><span class="punctuation">{</span>
+  <span class="attr-name">fourNode</span><span class="punctuation">:</span> node<span class="punctuation">(</span><span class="attr-name">id</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    id
+    <span class="operator">...</span> <span class="keyword">on</span> User <span class="punctuation">{</span>
+      name
+      userWithIdOneGreater <span class="punctuation">{</span>
+        id
+        name
+      <span class="punctuation">}</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+  <span class="attr-name">fiveNode</span><span class="punctuation">:</span> node<span class="punctuation">(</span><span class="attr-name">id</span><span class="punctuation">:</span> <span class="string">&quot;5&quot;</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    id
+    <span class="operator">...</span> <span class="keyword">on</span> User <span class="punctuation">{</span>
+      name
+      userWithIdOneLess <span class="punctuation">{</span>
+        id
+        name
+      <span class="punctuation">}</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><p>可能会返回：</p><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;fourNode&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Mark Zuckerberg&quot;</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;userWithIdOneGreater&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+      <span class="attr-name">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;5&quot;</span><span class="punctuation">,</span>
+      <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Chris Hughes&quot;</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span><span class="punctuation">,</span>
+  <span class="attr-name">&quot;fiveNode&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;5&quot;</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Chris Hughes&quot;</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;userWithIdOneLess&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+      <span class="attr-name">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">,</span>
+      <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Mark Zuckerberg&quot;</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><p>由于 <code>fourNode.id</code> 与 <code>fiveNode.userWithIdOneLess.id</code> 相同，我们可以通过上述条件保证 <code>fourNode.name</code> 必须与 <code>fiveNode.userWithIdOneLess.name</code> 相同，并且确实如此。</p><h1><a class="anchor" name="复数识别根字段"></a>复数识别根字段 <a class="hash-link" href="#复数识别根字段">#</a></h1><p>想象一下一个名为 <code>username</code> 的根字段，该根字段使用用户的用户名为参数并返回对应的用户：</p><pre class="prism language-graphql"><span class="punctuation">{</span>
+  username<span class="punctuation">(</span><span class="attr-name">username</span><span class="punctuation">:</span> <span class="string">&quot;zuck&quot;</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    id
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><p>可能会返回：</p><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;username&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">,</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><p>显然，我们可以将响应中的对象（ID 为 4 的用户）与请求链接起来，以用户名 “zuck” 识别对象。现在想象一下一个名为 <code>usernames</code> 的根字段，它包含一个用户名列表并返回一个对象列表：</p><pre class="prism language-graphql"><span class="punctuation">{</span>
+  usernames<span class="punctuation">(</span><span class="attr-name">usernames</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;zuck&quot;</span><span class="punctuation">,</span> <span class="string">&quot;moskov&quot;</span><span class="punctuation">]</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    id
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><p>可能会返回：</p><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;usernames&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>
+    <span class="punctuation">{</span>
+      <span class="attr-name">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;4&quot;</span><span class="punctuation">,</span>
+    <span class="punctuation">}</span><span class="punctuation">,</span>
+    <span class="punctuation">{</span>
+      <span class="attr-name">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;6&quot;</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">]</span>
+<span class="punctuation">}</span></pre><p>为了使客户端能够将用户名链接到响应，它需要知道响应中的数组将与作为参数传递的数组大小相同，并且响应中的顺序将与参数中的顺序匹配。我们称这些为<strong>复数识别根字段</strong>，其要求如下所述。</p><h2><a class="anchor" name="字段"></a>字段 <a class="hash-link" href="#字段">#</a></h2><p>符合此规范的服务端可能会公开接受输入参数列表的根字段，并返回响应列表。为了使符合规范的客户端使用这些字段，这些字段必须是<strong>复数识别根字段</strong>，并且必须满足以下要求。</p><p>注意：符合规范的服务端也可能会公开不是<strong>复数识别根字段</strong>的根字段。符合规范的客户端将无法在其查询中将这些字段用作根字段。</p><p><strong>复数识别根字段</strong>必须有且仅有一个参数。该参数的类型必须是非空的非空值列表。在我们的 <code>usernames</code> 示例中，该字段将使用名为 <code>usernames</code> 的单一参数，其类型（使用我们的类型系统速记）将为 <code>[String!]!</code>。</p><p><strong>复数识别根字段</strong>的返回类型必须是列表，或者包含一个列表的非空包装器。该列表必须包装 <code>Node</code> 接口，一个实现 <code>Node</code> 接口的对象或是包含这些类型的非空包装器。</p><p>每当使用<strong>复数识别根字段</strong>时，响应中列表的长度必须与参数中列表的长度相同。响应中的每个项目都必须与输入中的项目相对应。
+更正式地来说，如果传递给根字段一个输入列表 <code>Lin</code> 使得输出值为 <code>Lout</code>，那么对于任意置换 <code>P</code>，传递根字段 <code>P(Lin)</code> 必须使得输出值为 <code>P(Lout)</code>。</p><p>因此，建议服务端不要将为响应类型添加非空包装器，因为如果无法为输入中的给定条目获取对象，它仍然必须在输出中为该输入条目提供一个值；对这种情况来说 <code>null</code> 是一个有用的值。</p></div><a class="read-next" href="/learn/caching"><span class="read-next-continue">继续阅读 →</span><span class="read-next-title">缓存</span></a></div><div class="nav-docs"><div><h3>学习</h3><ul><li><a style="margin-left:0;" class="active" href="/learn/">入门</a></li><li><a style="margin-left:0;" class="active" href="/learn/queries/">查询和变更</a><ul><li><a href="/learn/queries/#fields">字段（Fields）</a></li><li><a href="/learn/queries/#arguments">参数（Arguments）</a></li><li><a href="/learn/queries/#aliases">别名（Aliases）</a></li><li><a href="/learn/queries/#fragments">片段（Fragments）</a></li><li><a href="/learn/queries/#operation-name">操作名称（Operation Name）</a></li><li><a href="/learn/queries/#variables">变量（Variables）</a></li><li><a href="/learn/queries/#directives">指令（Directives）</a></li><li><a href="/learn/queries/#mutations">变更（Mutations）</a></li><li><a href="/learn/queries/#inline-fragments">内联片段（Inline Fragments）</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/learn/schema/">Schema 和类型</a><ul><li><a href="/learn/schema/#type-system">类型系统（Type System）</a></li><li><a href="/learn/schema/#type-language">类型语言（Type Language）</a></li><li><a href="/learn/schema/#object-types-and-fields">对象类型和字段（Object Types and Fields）</a></li><li><a href="/learn/schema/#arguments">参数（Arguments）</a></li><li><a href="/learn/schema/#the-query-and-mutation-types">查询和变更类型（The Query and Mutation Types）</a></li><li><a href="/learn/schema/#scalar-types">标量类型（Scalar Types）</a></li><li><a href="/learn/schema/#enumeration-types">枚举类型（Enumeration Types）</a></li><li><a href="/learn/schema/#lists-and-non-null">列表和非空（Lists and Non-Null）</a></li><li><a href="/learn/schema/#interfaces">接口（Interfaces）</a></li><li><a href="/learn/schema/#union-types">联合类型（Union Types）</a></li><li><a href="/learn/schema/#input-types">输入类型（Input Types）</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/learn/validation/">验证</a></li><li><a style="margin-left:0;" class="active" href="/learn/execution/">执行</a></li><li><a style="margin-left:0;" class="active" href="/learn/introspection/">内省</a></li></ul></div><div><h3>最佳实践</h3><ul><li><a style="margin-left:0;" class="active" href="/learn/best-practices/">介绍</a></li><li><a style="margin-left:0;" class="active" href="/learn/thinking-in-graphs/">关于 Graphs 的思考</a></li><li><a style="margin-left:0;" class="active" href="/learn/serving-over-http/">通过 HTTP 提供服务</a></li><li><a style="margin-left:0;" class="active" href="/learn/authorization/">授权</a></li><li><a style="margin-left:0;" class="active" href="/learn/pagination/">分页</a></li><li><a style="margin-left:0;" class="active" href="/learn/global-object-identification/">全局对象识别</a></li><li><a style="margin-left:0;" class="active" href="/learn/caching/">缓存</a></li></ul></div></div></div></section><footer><section class="sitemap"><a href="/" class="nav-home" aria-label="主页"></a><div><h5><a href="/learn/">学习</a></h5><a href="/learn/">入门</a><a href="/learn/queries/">查询语言</a><a href="/learn/schema/">类型系统</a><a href="/learn/execution/">执行</a><a href="/learn/best-practices/">最佳实践</a></div><div><h5><a href="/code">代码</a></h5><a href="/code/#server-libraries">服务端</a><a href="/code/#graphql-clients">客户端</a><a href="/code/#tools">工具</a></div><div><h5><a href="/community">社区</a></h5><a href="/community/upcoming-events/">即将到来的活动</a><a href="http://stackoverflow.com/questions/tagged/graphql" target="_blank" rel="noopener noreferrer">Stack Overflow</a><a href="https://www.facebook.com/groups/graphql.community/" target="_blank" rel="noopener noreferrer">Facebook Group</a><a href="https://twitter.com/GraphQL" target="_blank" rel="noopener noreferrer">Twitter</a></div><div><h5>更多</h5><a href="http://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">GraphQL 规范</a><a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">GraphQL 基金会</a><a href="https://github.com/graphql" target="_blank" rel="noopener noreferrer">GraphQL GitHub</a><a href="https://github.com/xitu/graphql.github.io/edit/zh-Hans/site/learn/BestPractice-NodeInterface.md" target="_blank" rel="noopener noreferrer">编辑本页 ✎</a></div></section><section class="copyright">Copyright © 2021 GraphQL 基金会。保留所有权利。Linux 基金会已经注册了商标和使用商标。有关 Linux 基金会的商标清单，请参阅我们的 <a href="https://www.linuxfoundation.org/trademark-usage">商标使用</a> 页面。Linux 是 Linus Torvalds 的注册商标。<a href="http://www.linuxfoundation.org/privacy">隐私政策</a> 和 <a href="http://www.linuxfoundation.org/terms">使用条款</a>。</section></footer><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+        docsearch({
+          apiKey: 'd103541f3e6041148aade2e746ed4d61',
+          indexName: 'graphql',
+          inputSelector: '#algolia-search-input'
+        });
+      </script><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-44373548-16', 'auto');
+ga('send', 'pageview');
+      </script></body></html>

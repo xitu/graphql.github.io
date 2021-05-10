@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><title>graphql/language | API 参考</title><meta name="viewport" content="width=640"/><meta name="description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。"/><meta property="og:title" content="GraphQL: 一种用于 API 的查询语言。"/><meta property="og:description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。"/><meta property="og:type" content="website"/><meta property="og:url" content="http://graphql.cn/"/><meta property="og:image" content="/img/og_image.png"/><meta property="og:image:type" content="image/png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@graphql"/><meta name="twitter:title" content="GraphQL: 一种用于 API 的查询语言。"/><meta name="twitter:description" content="GraphQL 提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，并让 API 更加容易随着时间推移而演进。"/><meta name="twitter:image" content="/img/twitter_image.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="home" type="application/rss+xml" href="/blog/rss.xml" title="GraphQL 团队博客"/><link rel="stylesheet" href="/style.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300|Roboto:300"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,600"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/></head><body><header><section><a class="nav-home" href="/"><img class="nav-logo" src="/img/logo.svg" alt="GraphQL Logo" width="30" height="30"/>GraphQL</a><nav><a href="/learn/">学习</a><a href="/code/">代码</a><a href="/community/">社区</a><a href="https://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">规范</a><a href="/codeofconduct/">行为守则</a><a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">基金会</a><a href="https://l.graphql.org/" target="_blank" rel="noopener noreferrer">社区总览</a><a href="https://principles.graphql.cn/" target="_blank" rel="noopener noreferrer">开发原则</a></nav><div class="algolia-search-wrapper"><input type="text" id="algolia-search-input" placeholder="搜索文档..." aria-label="搜索文档"/></div></section></header><section><div class="documentationContent"><div class="inner-content"><h1>graphql/language</h1><div><p><code>graphql/language</code> 模块负责对 GraphQL 查询语言进行解析和操作。你既可以从 <code>graphql/language</code> 模块引入，也可以从根模块 <code>graphql</code> 引入。示例如下：</p><pre class="prism language-js"><span class="keyword">import</span> <span class="punctuation">{</span> Source <span class="punctuation">}</span> <span class="keyword">from</span> <span class="string">&#x27;graphql&#x27;</span><span class="punctuation">;</span> <span spellcheck="true" class="comment">// ES6</span>
+<span class="keyword">var</span> <span class="punctuation">{</span> Source <span class="punctuation">}</span> <span class="operator">=</span> <span class="function">require</span><span class="punctuation">(</span><span class="string">&#x27;graphql&#x27;</span><span class="punctuation">)</span><span class="punctuation">;</span> <span spellcheck="true" class="comment">// CommonJS</span></pre><h2><a class="anchor" name="概览"></a>概览 <a class="hash-link" href="#概览">#</a></h2><p><strong>Source</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="#source">
+      <pre>class Source</pre>
+      表示传递给 GraphQL 服务的输入字符串。
+    </a>
+  </li>
+  <li>
+    <a href="#getlocation">
+      <pre>function getLocation</pre>
+      将字符偏移量转化为 Source 中的行和列。
+    </a>
+  </li>
+</ul>
+
+</div><p><strong>词法分析器（Lexer）</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="#lex">
+      <pre>function lex</pre>
+      根据 GraphQL 语法对 GraphQL 的 Source 类进行词法分析。
+    </a>
+  </li>
+</ul>
+
+</div><p><strong>解析器（Parser）</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="#parse">
+      <pre>function parse</pre>
+      根据 GraphQL 语法对 GraphQL 的 Source 类进行解析。
+    </a>
+  </li>
+  <li>
+    <a href="#parseValue">
+      <pre>function parseValue</pre>
+      根据 GraphQL 语法对值进行解析。
+    </a>
+  </li>
+  <li>
+    <a href="#kind">
+      <pre>var Kind</pre>
+      表示已解析的抽象语法树（Abstract Syntax Tree, AST）中节点的各种类型。
+    </a>
+  </li>
+</ul>
+
+</div><p><strong>Visitor</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="#visit">
+      <pre>function visit</pre>
+      一个通用的 visitor，用于遍历一个已解析的 GraphQL AST。
+    </a>
+  </li>
+  <li>
+    <a href="#break">
+      <pre>var BREAK</pre>
+      用于允许中断 visitor 的 token。
+    </a>
+  </li>
+</ul>
+
+</div><p><strong>Printer</strong></p><div><ul class="apiIndex">
+  <li>
+    <a href="#print">
+      <pre>function print</pre>
+      以一个标准的格式打印出一个 AST。
+    </a>
+  </li>
+</ul>
+
+</div><h2><a class="anchor" name="source"></a>Source <a class="hash-link" href="#source">#</a></h2><h3><a class="anchor" name="source-1"></a>Source <a class="hash-link" href="#source-1">#</a></h3><pre class="prism language-js"><span class="keyword">export</span> <span class="keyword">class</span> <span class="class-name">Source</span> <span class="punctuation">{</span>
+  <span class="function">constructor</span><span class="punctuation">(</span>body<span class="punctuation">:</span> string<span class="punctuation">,</span> name<span class="operator">?</span><span class="punctuation">:</span> string<span class="punctuation">)</span>
+<span class="punctuation">}</span></pre><p>对 GraphQL 源输入的表示。name 参数是可选的，但对于将 GraphQL 文档存储在源文件里的客户端来说，这个参数是非常有用的；举个例子，如果 GraphQL 的输入是在一个名为 Foo.graphql 的文件里，那么将 name 设置为 &quot;Foo.graphql&quot; 在之后就会很有用了。</p><h3><a class="anchor" name="getlocation"></a>getLocation <a class="hash-link" href="#getlocation">#</a></h3><pre class="prism language-js"><span class="keyword">function</span> <span class="function">getLocation</span><span class="punctuation">(</span>source<span class="punctuation">:</span> Source<span class="punctuation">,</span> position<span class="punctuation">:</span> number<span class="punctuation">)</span><span class="punctuation">:</span> SourceLocation
+
+type SourceLocation <span class="operator">=</span> <span class="punctuation">{</span>
+  line<span class="punctuation">:</span> number<span class="punctuation">;</span>
+  column<span class="punctuation">:</span> number<span class="punctuation">;</span>
+<span class="punctuation">}</span></pre><p>接收一个 Source 对象和一个 UTF-8 编码的字符偏移量作为参数，返回一个 SourceLocation 对象，包含相关的行列位置信息。</p><h2><a class="anchor" name="lexer"></a>词法分析器（Lexer） <a class="hash-link" href="#lexer">#</a></h2><h3><a class="anchor" name="lex"></a>lex <a class="hash-link" href="#lex">#</a></h3><pre class="prism language-js"><span class="keyword">function</span> <span class="function">lex</span><span class="punctuation">(</span>source<span class="punctuation">:</span> Source<span class="punctuation">)</span><span class="punctuation">:</span> Lexer<span class="punctuation">;</span>
+
+type Lexer <span class="operator">=</span> <span class="punctuation">(</span>resetPosition<span class="operator">?</span><span class="punctuation">:</span> number<span class="punctuation">)</span> <span class="operator">=</span><span class="operator">&gt;</span> Token<span class="punctuation">;</span>
+
+<span class="keyword">export</span> type Token <span class="operator">=</span> <span class="punctuation">{</span>
+  kind<span class="punctuation">:</span> number<span class="punctuation">;</span>
+  start<span class="punctuation">:</span> number<span class="punctuation">;</span>
+  end<span class="punctuation">:</span> number<span class="punctuation">;</span>
+  value<span class="punctuation">:</span> <span class="operator">?</span>string<span class="punctuation">;</span>
+<span class="punctuation">}</span><span class="punctuation">;</span></pre><p>给定一个 Source 对象，为这个对象返回一个词法分析器。词法分析器每次被调用的时候会表现得像一个生成器，返回 Source 里的下一个 token。假设对某个 source 进行词法分析，最后返回的 token 就将是某种类型的文件结尾符，而在这之后，词法分析器不管何时被调用都会重复返回文件结尾符的 token。</p><p>词法分析器函数的参数是可选的，而且可被用于在 Source 里将词法分析器回退或者前进到某个新位置。</p><h2><a class="anchor" name="parser"></a>解析器（Parser） <a class="hash-link" href="#parser">#</a></h2><h3><a class="anchor" name="parse"></a>parse <a class="hash-link" href="#parse">#</a></h3><pre class="prism language-js"><span class="keyword">export</span> <span class="keyword">function</span> <span class="function">parse</span><span class="punctuation">(</span>
+  source<span class="punctuation">:</span> Source <span class="operator">|</span> string<span class="punctuation">,</span>
+  options<span class="operator">?</span><span class="punctuation">:</span> ParseOptions
+<span class="punctuation">)</span><span class="punctuation">:</span> Document</pre><p>给定一个 GraphQL 源，将其解析并放入文档里。</p><p>如果遇到语法错误则抛出 GraphQLError。</p><h3><a class="anchor" name="parsevalue"></a>parseValue <a class="hash-link" href="#parsevalue">#</a></h3><pre class="prism language-js"><span class="keyword">export</span> <span class="keyword">function</span> <span class="function">parseValue</span><span class="punctuation">(</span>
+  source<span class="punctuation">:</span> Source <span class="operator">|</span> string<span class="punctuation">,</span>
+  options<span class="operator">?</span><span class="punctuation">:</span> ParseOptions
+<span class="punctuation">)</span><span class="punctuation">:</span> Value</pre><p>给定一个包含 GraphQL 值的字符串，将这个值解析为 AST。</p><p>如果遇到语法错误则抛出 GraphQLError。</p><p>这在某些工具中会很有用，比如直接在 GraphQL 值上进行操作，并且与 GraphQL 文档完全分离开来。</p><h3><a class="anchor" name="kind"></a>Kind <a class="hash-link" href="#kind">#</a></h3><p>这是一个枚举类型，用于描述不同类型的 AST 节点。</p><h2><a class="anchor" name="visitor"></a>Visitor <a class="hash-link" href="#visitor">#</a></h2><h3><a class="anchor" name="visit"></a>visit <a class="hash-link" href="#visit">#</a></h3><pre class="prism language-js"><span class="keyword">function</span> <span class="function">visit</span><span class="punctuation">(</span>root<span class="punctuation">,</span> visitor<span class="punctuation">,</span> keyMap<span class="punctuation">)</span></pre><p><code>visit()</code> 将使用深度优先遍历一个 AST，在遍历当中对每个节点调用 visitor 的 <code>enter</code> 函数，并在访问完当前节点及其子节点后调用 <code>leave</code> 函数。</p><p>通过从 <code>enter</code> 和 <code>leave</code> 函数里返回不同的值，visitor 的行为可以进行更改，包括跳过 AST 的一个子树（返回 <code>false</code>）、编辑这个 AST（返回一个值或者返回 <code>null</code> 来删除这个节点）、或者返回 <code>BREAK</code> 停止整个遍历。</p><p>当使用 <code>visit()</code> 编辑一个 AST 的时候，原始的 AST 不会被修改，<code>visit</code> 函数会返回一个经过修改的新版本 AST。</p><pre class="prism language-js"><span class="keyword">var</span> editedAST <span class="operator">=</span> <span class="function">visit</span><span class="punctuation">(</span>ast<span class="punctuation">,</span> <span class="punctuation">{</span>
+  <span class="function">enter</span><span class="punctuation">(</span>node<span class="punctuation">,</span> key<span class="punctuation">,</span> parent<span class="punctuation">,</span> path<span class="punctuation">,</span> ancestors<span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span spellcheck="true" class="comment">// @return</span>
+    <span spellcheck="true" class="comment">//   undefined: 无操作</span>
+    <span spellcheck="true" class="comment">//   false: 跳过访问该节点</span>
+    <span spellcheck="true" class="comment">//   visitor.BREAK: 停止访问</span>
+    <span spellcheck="true" class="comment">//   null: 删除该节点</span>
+    <span spellcheck="true" class="comment">//   any value: 使用返回的这个值替代原本的节点</span>
+  <span class="punctuation">}</span><span class="punctuation">,</span>
+  <span class="function">leave</span><span class="punctuation">(</span>node<span class="punctuation">,</span> key<span class="punctuation">,</span> parent<span class="punctuation">,</span> path<span class="punctuation">,</span> ancestors<span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span spellcheck="true" class="comment">// @return</span>
+    <span spellcheck="true" class="comment">//   undefined: 无操作</span>
+    <span spellcheck="true" class="comment">//   false: 无操作</span>
+    <span spellcheck="true" class="comment">//   visitor.BREAK: 停止访问</span>
+    <span spellcheck="true" class="comment">//   null: 删除该节点</span>
+    <span spellcheck="true" class="comment">//   any value: 使用返回的这个值替代原本的节点</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span><span class="punctuation">)</span><span class="punctuation">;</span></pre><p>Visitor 可以通过提供和节点类型同名的函数来替代 <code>enter()</code> 和 <code>leave()</code> 函数，或者通过名称的关键字来使用 visitor 中的 <code>enter</code> 或 <code>leave</code>，这就造成 visitor 的 API 有四种形式：</p><p>1) 当进入特定类型的节点时，触发同名的 visitor。</p><pre class="prism language-js"><span class="function">visit</span><span class="punctuation">(</span>ast<span class="punctuation">,</span> <span class="punctuation">{</span>
+  <span class="function">Kind</span><span class="punctuation">(</span>node<span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span spellcheck="true" class="comment">// enter the &quot;Kind&quot; node</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span><span class="punctuation">)</span></pre><p>2) 在进入或离开特定类型的节点时，触发同名的 visitor。</p><pre class="prism language-js"><span class="function">visit</span><span class="punctuation">(</span>ast<span class="punctuation">,</span> <span class="punctuation">{</span>
+  Kind<span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="function">enter</span><span class="punctuation">(</span>node<span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span spellcheck="true" class="comment">// enter the &quot;Kind&quot; node</span>
+    <span class="punctuation">}</span>
+    <span class="function">leave</span><span class="punctuation">(</span>node<span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span spellcheck="true" class="comment">// leave the &quot;Kind&quot; node</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span><span class="punctuation">)</span></pre><p>3) 在进入或离开任意节点时，触发通用的 visitor。</p><pre class="prism language-js"><span class="function">visit</span><span class="punctuation">(</span>ast<span class="punctuation">,</span> <span class="punctuation">{</span>
+  <span class="function">enter</span><span class="punctuation">(</span>node<span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span spellcheck="true" class="comment">// enter any node</span>
+  <span class="punctuation">}</span><span class="punctuation">,</span>
+  <span class="function">leave</span><span class="punctuation">(</span>node<span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span spellcheck="true" class="comment">// leave any node</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span><span class="punctuation">)</span></pre><p>4) 为进入或离开特定类型的节点创建平行的 visitor。</p><pre class="prism language-js"><span class="function">visit</span><span class="punctuation">(</span>ast<span class="punctuation">,</span> <span class="punctuation">{</span>
+  enter<span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="function">Kind</span><span class="punctuation">(</span>node<span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span spellcheck="true" class="comment">// enter the &quot;Kind&quot; node</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span><span class="punctuation">,</span>
+  leave<span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="function">Kind</span><span class="punctuation">(</span>node<span class="punctuation">)</span> <span class="punctuation">{</span>
+      <span spellcheck="true" class="comment">// leave the &quot;Kind&quot; node</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span><span class="punctuation">)</span></pre><h3><a class="anchor" name="break"></a>BREAK <a class="hash-link" href="#break">#</a></h3><p><code>BREAK</code> 标记在 <code>visitor</code> 的文档中有描述。</p><h2><a class="anchor" name="printer"></a>Printer <a class="hash-link" href="#printer">#</a></h2><h3><a class="anchor" name="print"></a>print <a class="hash-link" href="#print">#</a></h3><pre class="prism language-js"><span class="keyword">function</span> <span class="function">print</span><span class="punctuation">(</span>ast<span class="punctuation">)</span><span class="punctuation">:</span> string</pre><p>使用一组合理的格式化规则，将一个 AST 转化成一个字符串。</p></div><a class="read-next" href="/graphql-js/type"><span class="read-next-continue">继续阅读 →</span><span class="read-next-title">graphql/type</span></a></div><div class="nav-docs"><div><h3>GraphQL.js 教程</h3><ul><li><a style="margin-left:0;" class="active" href="/graphql-js/">入门</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/running-an-express-graphql-server/">Express + GraphQL</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/graphql-clients/">GraphQL 客户端</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/basic-types/">基本类型</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/passing-arguments/">传递参数</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/object-types/">对象类型</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/mutations-and-input-types/">变更和输入类型</a></li><li><a style="margin-left:0;" class="active" href="/graphql-js/authentication-and-express-middleware/">认证 &amp; 中间件</a></li></ul></div><div><h3>高级指南</h3><ul><li><a style="margin-left:0;" class="active" href="/graphql-js/constructing-types/">构建类型</a></li></ul></div><div><h3>API 参考</h3><ul><li><a style="margin-left:0;" class="active" href="/graphql-js/express-graphql/">express-graphql</a><ul><li><a href="/graphql-js/express-graphql/#graphqlhttp">graphqlHTTP</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/graphql/">graphql</a><ul><li><a href="/graphql-js/graphql/#graphql">graphql</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/error/">graphql/error</a><ul><li><a href="/graphql-js/error/#formaterror">formatError</a></li><li><a href="/graphql-js/error/#graphqlerror">GraphQLError</a></li><li><a href="/graphql-js/error/#locatederror">locatedError</a></li><li><a href="/graphql-js/error/#syntaxerror">syntaxError</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/execution/">graphql/execution</a><ul><li><a href="/graphql-js/execution/#execute">execute</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/language/">graphql/language</a><ul><li><a href="/graphql-js/language/#break">BREAK</a></li><li><a href="/graphql-js/language/#getlocation">getLocation</a></li><li><a href="/graphql-js/language/#kind">Kind</a></li><li><a href="/graphql-js/language/#lex">lex</a></li><li><a href="/graphql-js/language/#parse">parse</a></li><li><a href="/graphql-js/language/#parsevalue">parseValue</a></li><li><a href="/graphql-js/language/#printsource">printSource</a></li><li><a href="/graphql-js/language/#visit">visit</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/type/">graphql/type</a><ul><li><a href="/graphql-js/type/#getnamedtype">getNamedType</a></li><li><a href="/graphql-js/type/#getnullabletype">getNullableType</a></li><li><a href="/graphql-js/type/#graphqlboolean">GraphQLBoolean</a></li><li><a href="/graphql-js/type/#graphqlenumtype">GraphQLEnumType</a></li><li><a href="/graphql-js/type/#graphqlfloat">GraphQLFloat</a></li><li><a href="/graphql-js/type/#graphqlid">GraphQLID</a></li><li><a href="/graphql-js/type/#graphqlinputobjecttype">GraphQLInputObjectType</a></li><li><a href="/graphql-js/type/#graphqlint">GraphQLInt</a></li><li><a href="/graphql-js/type/#graphqlinterfacetype">GraphQLInterfaceType</a></li><li><a href="/graphql-js/type/#graphqllist">GraphQLList</a></li><li><a href="/graphql-js/type/#graphqlnonnull">GraphQLNonNull</a></li><li><a href="/graphql-js/type/#graphqlobjecttype">GraphQLObjectType</a></li><li><a href="/graphql-js/type/#graphqlscalartype">GraphQLScalarType</a></li><li><a href="/graphql-js/type/#graphqlschema">GraphQLSchema</a></li><li><a href="/graphql-js/type/#graphqlstring">GraphQLString</a></li><li><a href="/graphql-js/type/#graphqluniontype">GraphQLUnionType</a></li><li><a href="/graphql-js/type/#isabstracttype">isAbstractType</a></li><li><a href="/graphql-js/type/#iscompositetype">isCompositeType</a></li><li><a href="/graphql-js/type/#isinputtype">isInputType</a></li><li><a href="/graphql-js/type/#isleaftype">isLeafType</a></li><li><a href="/graphql-js/type/#isoutputtype">isOutputType</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/utilities/">graphql/utilities</a><ul><li><a href="/graphql-js/utilities/#astfromvalue">astFromValue</a></li><li><a href="/graphql-js/utilities/#buildastschema">buildASTSchema</a></li><li><a href="/graphql-js/utilities/#buildclientschema">buildClientSchema</a></li><li><a href="/graphql-js/utilities/#buildschema">buildSchema</a></li><li><a href="/graphql-js/utilities/#introspectionquery">introspectionQuery</a></li><li><a href="/graphql-js/utilities/#isvalidjsvalue">isValidJSValue</a></li><li><a href="/graphql-js/utilities/#isvalidliteralvalue">isValidLiteralValue</a></li><li><a href="/graphql-js/utilities/#printintrospectionschema">printIntrospectionSchema</a></li><li><a href="/graphql-js/utilities/#printschema">printSchema</a></li><li><a href="/graphql-js/utilities/#typefromast">typeFromAST</a></li><li><a href="/graphql-js/utilities/#typeinfo">TypeInfo</a></li></ul></li><li><a style="margin-left:0;" class="active" href="/graphql-js/validation/">graphql/validation</a><ul><li><a href="/graphql-js/validation/#specifiedrules">specifiedRules</a></li><li><a href="/graphql-js/validation/#validate">validate</a></li></ul></li></ul></div></div></div></section><footer><section class="sitemap"><a href="/" class="nav-home" aria-label="主页"></a><div><h5><a href="/learn/">学习</a></h5><a href="/learn/">入门</a><a href="/learn/queries/">查询语言</a><a href="/learn/schema/">类型系统</a><a href="/learn/execution/">执行</a><a href="/learn/best-practices/">最佳实践</a></div><div><h5><a href="/code">代码</a></h5><a href="/code/#server-libraries">服务端</a><a href="/code/#graphql-clients">客户端</a><a href="/code/#tools">工具</a></div><div><h5><a href="/community">社区</a></h5><a href="/community/upcoming-events/">即将到来的活动</a><a href="http://stackoverflow.com/questions/tagged/graphql" target="_blank" rel="noopener noreferrer">Stack Overflow</a><a href="https://www.facebook.com/groups/graphql.community/" target="_blank" rel="noopener noreferrer">Facebook Group</a><a href="https://twitter.com/GraphQL" target="_blank" rel="noopener noreferrer">Twitter</a></div><div><h5>更多</h5><a href="http://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">GraphQL 规范</a><a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">GraphQL 基金会</a><a href="https://github.com/graphql" target="_blank" rel="noopener noreferrer">GraphQL GitHub</a><a href="https://github.com/xitu/graphql.github.io/edit/zh-Hans/site/graphql-js/APIReference-Language.md" target="_blank" rel="noopener noreferrer">编辑本页 ✎</a></div></section><section class="copyright">Copyright © 2021 GraphQL 基金会。保留所有权利。Linux 基金会已经注册了商标和使用商标。有关 Linux 基金会的商标清单，请参阅我们的 <a href="https://www.linuxfoundation.org/trademark-usage">商标使用</a> 页面。Linux 是 Linus Torvalds 的注册商标。<a href="http://www.linuxfoundation.org/privacy">隐私政策</a> 和 <a href="http://www.linuxfoundation.org/terms">使用条款</a>。</section></footer><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+        docsearch({
+          apiKey: 'd103541f3e6041148aade2e746ed4d61',
+          indexName: 'graphql',
+          inputSelector: '#algolia-search-input'
+        });
+      </script><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-44373548-16', 'auto');
+ga('send', 'pageview');
+      </script></body></html>

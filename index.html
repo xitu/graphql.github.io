@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="zh-Hans-CN"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><title>GraphQL | 一种为你的 API 而生的查询语言</title><meta name="viewport" content="width=640"/><meta name="description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。"/><meta property="og:title" content="GraphQL: 一种用于 API 的查询语言。"/><meta property="og:description" content="GraphQL 提供了 API 中数据的完整描述，提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，让 API 更加容易随着时间推移而演进，并提供强大的开发者工具。"/><meta property="og:type" content="website"/><meta property="og:url" content="http://graphql.cn/"/><meta property="og:image" content="/img/og_image.png"/><meta property="og:image:type" content="image/png"/><meta name="twitter:card" content="summary"/><meta name="twitter:site" content="@graphql"/><meta name="twitter:title" content="GraphQL: 一种用于 API 的查询语言。"/><meta name="twitter:description" content="GraphQL 提供让客户端能够准确地获取需要的数据而不包含任何冗余的能力，并让 API 更加容易随着时间推移而演进。"/><meta name="twitter:image" content="/img/twitter_image.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="home" type="application/rss+xml" href="/blog/rss.xml" title="GraphQL 团队博客"/><link rel="stylesheet" href="/style.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rubik:300|Roboto:300"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,600"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/></head><body class="index"><header><section><a class="nav-home" href="/"><img class="nav-logo" src="/img/logo.svg" alt="GraphQL Logo" width="30" height="30"/>GraphQL</a><nav><a href="/learn/">学习</a><a href="/code/">代码</a><a href="/community/">社区</a><a href="https://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">规范</a><a href="/codeofconduct/">行为守则</a><a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">基金会</a><a href="https://l.graphql.org/" target="_blank" rel="noopener noreferrer">社区总览</a><a href="https://principles.graphql.cn/" target="_blank" rel="noopener noreferrer">开发原则</a></nav></section></header><section class="fixedSearch"><div class="algolia-search-wrapper"><input type="text" id="algolia-search-input" placeholder="搜索文档..." aria-label="搜索文档"/></div></section><div class="hero"><div class="abs"><header aria-hidden="true"><section><nav><a href="/learn/">学习</a><a href="/code/">代码</a><a href="/community/">社区</a><a href="https://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">规范</a><a href="/codeofconduct/">行为守则</a><a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">基金会</a><a href="https://l.graphql.org/" target="_blank" rel="noopener noreferrer">社区总览</a><a href="https://principles.graphql.cn/" target="_blank" rel="noopener noreferrer">开发原则</a></nav></section></header><section class="intro"><div class="named-logo"><img src="/img/logo.svg" alt="GraphQL Logo"/><h1>GraphQL</h1></div><div class="marketing-col"><h3>描述你的数据</h3><pre class="prism language-graphql"><span class="type-def"><span class="keyword">type</span> Project <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">name</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">tagline</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">contributors</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="type-name">User</span><span class="punctuation">]</span>
+<span class="punctuation">}</span></span></span></pre></div><div class="marketing-col"><h3>请求你所要的数据</h3><pre class="prism language-graphql"><span class="punctuation">{</span>
+  project<span class="punctuation">(</span><span class="attr-name">name</span><span class="punctuation">:</span> <span class="string">&quot;GraphQL&quot;</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    tagline
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre></div><div class="marketing-col"><h3>得到可预测的结果</h3><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;project&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;tagline&quot;</span><span class="punctuation">:</span> <span class="string">&quot;A query language for APIs&quot;</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre></div></section><div class="buttons-unit"><a class="button" href="/code/">马上开始</a><a class="button" href="/learn/">了解更多</a></div></div></div><section class="lead"><h1>一种用于 API 的查询语言</h1><p>GraphQL 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时。 GraphQL 对你的 API 中的数据提供了一套易于理解的完整描述，使得客户端能够准确地获得它需要的数据，而且没有任何冗余，也让 API 更容易地随着时间推移而演进，还能用于构建强大的开发者工具。</p></section><section class="point1" id="predictable-results"><div class="prose"><h2>请求你所要的数据<br/>不多不少</h2><p>向你的 API 发出一个 GraphQL 请求就能准确获得你想要的数据，不多不少。 GraphQL 查询总是返回可预测的结果。使用 GraphQL 的应用可以工作得又快又稳，因为控制数据的是应用，而不是服务器。</p></div><div class="window faux-graphiql" aria-hidden="true"><div class="query"><pre class="prism">{
+  hero {
+    name<span id="ch0" class="ch"><br/></span><span id="ch1" class="ch"> </span><span id="ch2" class="ch"> </span><span id="ch3" class="ch"> </span><span id="ch4" class="ch"> </span><span id="ch5" class="ch">h</span><span id="ch6" class="ch">e</span><span id="ch7" class="ch">i</span><span id="ch8" class="ch">g</span><span id="ch9" class="ch">h</span><span id="ch10" class="ch">t</span><span id="ch11" class="ch"><br/></span><span id="ch12" class="ch"> </span><span id="ch13" class="ch"> </span><span id="ch14" class="ch"> </span><span id="ch15" class="ch"> </span><span id="ch16" class="ch">m</span><span id="ch17" class="ch">a</span><span id="ch18" class="ch">s</span><span id="ch19" class="ch">s</span><span class="cursor"></span>
+  }
+}</pre></div><div class="response"><div id="r1"><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;hero&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Luke Skywalker&quot;</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre></div><div id="r2"><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;hero&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Luke Skywalker&quot;</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;height&quot;</span><span class="punctuation">:</span> <span class="number">1.72</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre></div><div id="r3"><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;hero&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Luke Skywalker&quot;</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;height&quot;</span><span class="punctuation">:</span> <span class="number">1.72</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;mass&quot;</span><span class="punctuation">:</span> <span class="number">77</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre></div></div><script>(function(){
+          var i = 0;
+          var forward = true;
+          setTimeout(type, 2000);
+          showResponse(1);
+          function type() {
+            if (forward) {
+              document.getElementById('ch' + i).style.display = 'inline';
+              i++;
+              if (i === 20) {
+                forward = false;
+                showResponse(3);
+                setTimeout(type, 1500);
+              } else if (i === 11) {
+                showResponse(2);
+                setTimeout(type, 1500);
+              } else {
+                setTimeout(type, Math.random() * 180 + 70);
+              }
+            } else {
+              i--;
+              document.getElementById('ch' + i).style.display = 'none';
+              if (i === 0) {
+                forward = true;
+                showResponse(1);
+                setTimeout(type, 2000);
+              } else {
+                setTimeout(type, 80);
+              }
+            }
+          }
+          function showResponse(num) {
+            document.getElementById('r1').style.display = num === 1 ? 'block' : 'none';
+            document.getElementById('r2').style.display = num === 2 ? 'block' : 'none';
+            document.getElementById('r3').style.display = num === 3 ? 'block' : 'none';
+          }
+        })()</script></div></section><div class="grayWash"><section class="point2" id="single-request"><div class="prose"><h2>获取多个资源<br/>只用一个请求</h2><p>GraphQL 查询不仅能够获得资源的属性，还能沿着资源间引用进一步查询。典型的 REST API 请求多个资源时得载入多个 URL，而 GraphQL 可以通过一次请求就获取你应用所需的所有数据。这样一来，即使是比较慢的移动网络连接下，使用 GraphQL 的应用也能表现得足够迅速。</p></div><div class="app-to-server" aria-hidden="true"><img src="/img/phone.svg" width="496" height="440" class="phone"/><div class="query"><pre class="prism language-graphql"><span class="punctuation">{</span>
+  hero <span class="punctuation">{</span>
+    name
+    friends <span class="punctuation">{</span>
+      name
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre></div><div class="response"><pre class="prism language-json"><span class="punctuation">{</span>
+  <span class="attr-name">&quot;hero&quot;</span><span class="punctuation">:</span> <span class="punctuation">{</span>
+    <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Luke Skywalker&quot;</span><span class="punctuation">,</span>
+    <span class="attr-name">&quot;friends&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span>
+      <span class="punctuation">{</span> <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Obi-Wan Kenobi&quot;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="punctuation">{</span> <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;R2-D2&quot;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="punctuation">{</span> <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Han Solo&quot;</span> <span class="punctuation">}</span><span class="punctuation">,</span>
+      <span class="punctuation">{</span> <span class="attr-name">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Leia Organa&quot;</span> <span class="punctuation">}</span>
+    <span class="punctuation">]</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre></div><img src="/img/server.svg" width="496" height="440" class="server"/></div></section></div><section class="point3" id="type-system"><div class="prose"><h2>描述所有的可能<br/>类型系统</h2><p>GraphQL API 基于类型和字段的方式进行组织，而非入口端点。你可以通过一个单一入口端点得到你所有的数据能力。GraphQL 使用类型来保证应用只请求可能的数据，还提供了清晰的辅助性错误信息。应用可以使用类型，而避免编写手动解析代码。</p></div><div class="window strong-typed-query" aria-hidden="true"><div class="query"><div id="query-highlight" class="highlight"></div><pre class="prism language-graphql"><span class="punctuation">{</span>
+  hero <span class="punctuation">{</span>
+    name
+    friends <span class="punctuation">{</span>
+      name
+      homeWorld <span class="punctuation">{</span>
+        name
+        climate
+      <span class="punctuation">}</span>
+      species <span class="punctuation">{</span>
+        name
+        lifespan
+        origin <span class="punctuation">{</span>
+          name
+        <span class="punctuation">}</span>
+      <span class="punctuation">}</span>
+    <span class="punctuation">}</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre></div><div class="type-system"><div id="type-highlight" class="highlight"></div><pre class="prism language-graphql"><span class="type-def"><span class="keyword">type</span> Query <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">hero</span><span class="punctuation">:</span> <span class="type-name">Character</span>
+<span class="punctuation">}</span></span></span>
+
+<span class="type-def"><span class="keyword">type</span> Character <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">name</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">friends</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="type-name">Character</span><span class="punctuation">]</span>
+  <span class="attr-name">homeWorld</span><span class="punctuation">:</span> <span class="type-name">Planet</span>
+  <span class="attr-name">species</span><span class="punctuation">:</span> <span class="type-name">Species</span>
+<span class="punctuation">}</span></span></span>
+
+<span class="type-def"><span class="keyword">type</span> Planet <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">name</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">climate</span><span class="punctuation">:</span> <span class="type-name">String</span>
+<span class="punctuation">}</span></span></span>
+
+<span class="type-def"><span class="keyword">type</span> Species <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">name</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">lifespan</span><span class="punctuation">:</span> <span class="type-name">Int</span>
+  <span class="attr-name">origin</span><span class="punctuation">:</span> <span class="type-name">Planet</span>
+<span class="punctuation">}</span></span></span></pre></div><script>(function(){
+        var typeHighlight = document.getElementById('type-highlight');
+        var queryHighlight = document.getElementById('query-highlight');
+        var line = 0;
+        var typeLines  = [2,6,7,6,8,13,14, 9,18,19,20,13];
+        var queryLines = [2,3,4,5,6, 7, 8,10,11,12,13,14];
+        highlightLine();
+        function highlightLine() {
+          typeHighlight.style.top = (17 * typeLines[line] - 9) + 'px';
+          queryHighlight.style.top = (17 * queryLines[line] - 9) + 'px';
+          line = (line + 1) % typeLines.length;
+          setTimeout(highlightLine, 800 + Math.random() * 200);
+        }
+      })()</script></div></section><div class="darkWash"><section class="point4" id="powerful-tools"><div class="prose"><h2>快步前进<br/>强大的开发者工具</h2><p>不用离开编辑器就能准确知道你可以从 API 中请求的数据，发送查询之前就能高亮潜在问题，高级代码智能提示。利用 API 的类型系统，GraphQL 让你可以更简单地构建如同<a href="https://github.com/graphql/graphiql" target="_blank" rel="noopener">Graph<em>i</em>QL</a>的强大工具。</p></div><div class="graphiqlVid">
+        <video autoplay loop playsinline>
+          <source src="/img/graphiql.mp4?x" type="video/mp4" />
+        </video>
+      </div></section></div><div class="grayWash"><section class="point5" id="without-versions"><div class="prose"><h2>API 演进<br/>无需划分版本</h2><p>给你的 GraphQL API 添加字段和类型而无需影响现有查询。老旧的字段可以废弃，从工具中隐藏。通过使用单一演进版本，GraphQL API 使得应用始终能够使用新的特性，并鼓励使用更加简洁、更好维护的服务端代码。</p></div><div class="window type-evolution" aria-hidden="true"><div id="typeEvolveView"><div class="v1"><pre class="prism language-graphql"><span class="type-def"><span class="keyword">type</span> Film <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">title</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">episode</span><span class="punctuation">:</span> <span class="type-name">Int</span>
+  <span class="attr-name">releaseDate</span><span class="punctuation">:</span> <span class="type-name">String</span>
+
+
+
+<span class="punctuation">}</span></span></span></pre></div><div class="v2"><div class="add"></div><pre class="prism language-graphql"><span class="type-def"><span class="keyword">type</span> Film <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">title</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">episode</span><span class="punctuation">:</span> <span class="type-name">Int</span>
+  <span class="attr-name">releaseDate</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">openingCrawl</span><span class="punctuation">:</span> <span class="type-name">String</span>
+
+
+<span class="punctuation">}</span></span></span></pre></div><div class="v3"><div class="add"></div><pre class="prism language-graphql"><span class="type-def"><span class="keyword">type</span> Film <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">title</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">episode</span><span class="punctuation">:</span> <span class="type-name">Int</span>
+  <span class="attr-name">releaseDate</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">openingCrawl</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">director</span><span class="punctuation">:</span> <span class="type-name">String</span>
+
+<span class="punctuation">}</span></span></span></pre></div><div class="v4"><div class="add"></div><div class="add"></div><div class="add"></div><div class="add"></div><div class="add"></div><div class="add"></div><div class="remove"></div><pre class="prism language-graphql"><span class="type-def"><span class="keyword">type</span> Film <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">title</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">episode</span><span class="punctuation">:</span> <span class="type-name">Int</span>
+  <span class="attr-name">releaseDate</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">openingCrawl</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">director</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">directedBy</span><span class="punctuation">:</span> <span class="type-name">Person</span>
+<span class="punctuation">}</span></span></span>
+
+<span class="type-def"><span class="keyword">type</span> Person <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">name</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">directed</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="type-name">Film</span><span class="punctuation">]</span>
+  <span class="attr-name">actedIn</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="type-name">Film</span><span class="punctuation">]</span>
+<span class="punctuation">}</span></span></span></pre></div><div class="v5"><div class="add"></div><pre class="prism language-graphql"><span class="type-def"><span class="keyword">type</span> Film <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">title</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">episode</span><span class="punctuation">:</span> <span class="type-name">Int</span>
+  <span class="attr-name">releaseDate</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">openingCrawl</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">director</span><span class="punctuation">:</span> <span class="type-name">String</span> <span class="directive"><span class="function">@deprecated</span></span>
+  <span class="attr-name">directedBy</span><span class="punctuation">:</span> <span class="type-name">Person</span>
+<span class="punctuation">}</span></span></span>
+
+<span class="type-def"><span class="keyword">type</span> Person <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">name</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">directed</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="type-name">Film</span><span class="punctuation">]</span>
+  <span class="attr-name">actedIn</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="type-name">Film</span><span class="punctuation">]</span>
+<span class="punctuation">}</span></span></span></pre></div></div><script>(function(){
+          var i = 0;
+          var inView = document.getElementById('typeEvolveView');
+          inView.className = 'step' + i;
+          setInterval(function () {
+            i = (i + 1) % 7;
+            inView.className = 'step' + i;
+          }, 2200);
+        })()</script></div></section></div><section class="point6" id="bring-your-own-code"><div class="prose"><h2>使用你现有的<br/>数据和代码</h2><p>GraphQL 让你的整个应用共享一套 API，而不用被限制于特定存储引擎。GraphQL 引擎已经有多种语言实现，通过 GraphQL API 能够更好利用你的现有数据和代码。你只需要为类型系统的字段编写函数，GraphQL 就能通过优化并发的方式来调用它们。</p></div><div class="window leverage-code" aria-hidden="true"><div id="leverageCodeView"><pre class="prism language-graphql"><span class="type-def"><span class="keyword">type</span> Character <span class="fields"><span class="punctuation">{</span>
+  <span class="attr-name">name</span><span class="punctuation">:</span> <span class="type-name">String</span>
+  <span class="attr-name">homeWorld</span><span class="punctuation">:</span> <span class="type-name">Planet</span>
+  <span class="attr-name">friends</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="type-name">Character</span><span class="punctuation">]</span>
+<span class="punctuation">}</span></span></span></pre><pre class="prism language-undefined"><span spellcheck="true" class="comment">// type Character</span>
+<span class="keyword">class</span> <span class="class-name">Character</span> <span class="punctuation">{</span>
+  <span spellcheck="true" class="comment">// name: String</span>
+  <span class="function">getName</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span class="keyword">return</span> <span class="keyword">this</span><span class="punctuation">.</span>_name
+  <span class="punctuation">}</span>
+
+  <span spellcheck="true" class="comment">// homeWorld: Planet</span>
+  <span class="function">getHomeWorld</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span class="keyword">return</span> <span class="function">fetchHomeworld</span><span class="punctuation">(</span><span class="keyword">this</span><span class="punctuation">.</span>_homeworldID<span class="punctuation">)</span>
+  <span class="punctuation">}</span>
+
+  <span spellcheck="true" class="comment">// friends: [Character]</span>
+  <span class="function">getFriends</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span class="keyword">return</span> <span class="keyword">this</span><span class="punctuation">.</span>_friendIDs<span class="punctuation">.</span><span class="function">map</span><span class="punctuation">(</span>fetchCharacter<span class="punctuation">)</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre><pre class="prism language-python"># type Character
+<span class="keyword">class</span> <span class="class-name">Character</span><span class="punctuation">:</span>
+  # name<span class="punctuation">:</span> String
+  def <span class="function">name</span><span class="punctuation">(</span>self<span class="punctuation">)</span><span class="punctuation">:</span>
+    <span class="keyword">return</span> self<span class="punctuation">.</span>_name
+
+  # homeWorld<span class="punctuation">:</span> Planet
+  def <span class="function">homeWorld</span><span class="punctuation">(</span>self<span class="punctuation">)</span><span class="punctuation">:</span>
+    <span class="keyword">return</span> <span class="function">fetchHomeworld</span><span class="punctuation">(</span>self<span class="punctuation">.</span>_homeworldID<span class="punctuation">)</span>
+
+  # friends<span class="punctuation">:</span> <span class="punctuation">[</span>Character<span class="punctuation">]</span>
+  def <span class="function">friends</span><span class="punctuation">(</span>self<span class="punctuation">)</span><span class="punctuation">:</span>
+    <span class="keyword">return</span> <span class="function">map</span><span class="punctuation">(</span>fetchCharacter<span class="punctuation">,</span> self<span class="punctuation">.</span>_friendIDs<span class="punctuation">)</span>
+</pre><pre class="prism language-undefined"><span spellcheck="true" class="comment">// type Character</span>
+<span class="keyword">public</span> <span class="keyword">class</span> <span class="class-name">Character</span> <span class="punctuation">{</span>
+  <span spellcheck="true" class="comment">// name: String</span>
+  <span class="keyword">public</span> String Name <span class="punctuation">{</span> <span class="keyword">get</span><span class="punctuation">;</span> <span class="punctuation">}</span>
+
+  <span spellcheck="true" class="comment">// homeWorld: Planet</span>
+  <span class="keyword">public</span> <span class="keyword">async</span> Task<span class="operator">&lt;</span>Planet<span class="operator">&gt;</span> <span class="function">GetHomeWorldAsync</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span class="keyword">return</span> <span class="keyword">await</span> <span class="function">FetchHomeworldAsync</span><span class="punctuation">(</span>_HomeworldID<span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+
+  <span spellcheck="true" class="comment">// friends: [Character]</span>
+  <span class="keyword">public</span> <span class="keyword">async</span> IEnumerable<span class="operator">&lt;</span>Task<span class="operator">&lt;</span>Character<span class="operator">&gt;</span><span class="operator">&gt;</span> <span class="function">GetFriendsAsync</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+    <span class="keyword">return</span> _FriendIDs<span class="punctuation">.</span><span class="function">Select</span><span class="punctuation">(</span>FetchCharacterAsync<span class="punctuation">)</span><span class="punctuation">;</span>
+  <span class="punctuation">}</span>
+<span class="punctuation">}</span></pre></div><script>(function(){
+          var i = 0;
+          var inView = document.getElementById('leverageCodeView');
+          var delayBefore = [ 800, 1800, 1200, 3000, 3000, 3000 ];
+          function step() {
+            inView.className = 'step' + i;
+            i = (i + 1) % 6;
+            setTimeout(step, delayBefore[i]);
+          }
+          step();
+        })()</script></div></section><section class="powered-by" id="whos-using"><div class="prose"><h2>谁在使用 GraphQL？</h2><p>Facebook 的移动应用从 2012 年就开始使用 GraphQL。GraphQL 规范于 2015 年开源，现已经在多种环境下可用，并被各种体量的团队所使用。</p></div><div class="logos"><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"><img src="/users/logos/facebook.png" title="Facebook"/></a><a href="https://twitter.com/" target="_blank" rel="noopener noreferrer"><img src="/users/logos/twitter.png" title="Twitter" class="round"/></a><a href="https://developer.github.com/v4/" target="_blank" rel="noopener noreferrer"><img src="/users/logos/github.png" title="GitHub" class="round"/></a><a href="https://www.pinterest.com/" target="_blank" rel="noopener noreferrer"><img src="/users/logos/pinterest.png" title="Pinterest" class="round"/></a><a href="https://www.airbnb.com/" target="_blank" rel="noopener noreferrer"><img src="/users/logos/airbnb.png" title="Airbnb" class="round"/></a><a href="https://www.intuit.com/" target="_blank" rel="noopener noreferrer"><img src="/users/logos/intuit.png" title="Intuit"/></a><a href="https://www.coursera.org/" target="_blank" rel="noopener noreferrer"><img src="/users/logos/coursera.png" title="Coursera"/></a><a href="https://www.shopify.com/" target="_blank" rel="noopener noreferrer"><img src="/users/logos/shopify.png" title="Shopify" class="round"/></a></div><a class="button" href="/users/">更多 GraphQL 使用者</a></section><footer><section class="sitemap"><a href="/" class="nav-home" aria-label="主页"></a><div><h5><a href="/learn/">学习</a></h5><a href="/learn/">入门</a><a href="/learn/queries/">查询语言</a><a href="/learn/schema/">类型系统</a><a href="/learn/execution/">执行</a><a href="/learn/best-practices/">最佳实践</a></div><div><h5><a href="/code">代码</a></h5><a href="/code/#server-libraries">服务端</a><a href="/code/#graphql-clients">客户端</a><a href="/code/#tools">工具</a></div><div><h5><a href="/community">社区</a></h5><a href="/community/upcoming-events/">即将到来的活动</a><a href="http://stackoverflow.com/questions/tagged/graphql" target="_blank" rel="noopener noreferrer">Stack Overflow</a><a href="https://www.facebook.com/groups/graphql.community/" target="_blank" rel="noopener noreferrer">Facebook Group</a><a href="https://twitter.com/GraphQL" target="_blank" rel="noopener noreferrer">Twitter</a></div><div><h5>更多</h5><a href="http://spec.graphql.cn/" target="_blank" rel="noopener noreferrer">GraphQL 规范</a><a href="https://foundation.graphql.org/" target="_blank" rel="noopener noreferrer">GraphQL 基金会</a><a href="https://github.com/graphql" target="_blank" rel="noopener noreferrer">GraphQL GitHub</a><a href="https://github.com/xitu/graphql.github.io/edit/zh-Hans/site/index.html.js" target="_blank" rel="noopener noreferrer">编辑本页 ✎</a></div></section><section class="copyright">Copyright © 2021 GraphQL 基金会。保留所有权利。Linux 基金会已经注册了商标和使用商标。有关 Linux 基金会的商标清单，请参阅我们的 <a href="https://www.linuxfoundation.org/trademark-usage">商标使用</a> 页面。Linux 是 Linus Torvalds 的注册商标。<a href="http://www.linuxfoundation.org/privacy">隐私政策</a> 和 <a href="http://www.linuxfoundation.org/terms">使用条款</a>。</section></footer><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+        docsearch({
+          apiKey: 'd103541f3e6041148aade2e746ed4d61',
+          indexName: 'graphql',
+          inputSelector: '#algolia-search-input'
+        });
+      </script><script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-44373548-16', 'auto');
+ga('send', 'pageview');
+      </script></body></html>
