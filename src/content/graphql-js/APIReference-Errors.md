@@ -61,7 +61,7 @@ class GraphQLError extends Error {
 }
 ```
 
-GraphQLError 表示 GraphQL 产生的错误信息。它包含一些用于调试的信息，比如查询语句中错误发生的位置。最常见的错误信息就是下面的的 `locatedError`。
+GraphQLError 表示 GraphQL 产生的错误信息。它包含一些用于调试的信息，比如查询语句中错误发生的位置。最常见的错误信息就是下面的 `locatedError`。
 
 ### syntaxError
 
