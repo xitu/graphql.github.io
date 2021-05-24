@@ -6,15 +6,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install and Build
-        uses: actions/setup-node@v2
-        run: |
-          yarn install
-          yarn build
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.3
+      - uses: actions/checkout@v2
+      - uses: enriikke/gatsby-gh-pages-action@v2
         with:
-          branch: master
-          folder: build
+          access-token: ${{ secrets.DEPLOY_TOKEN }}
