@@ -33,7 +33,7 @@ Anytime you make some changes, refresh the page to see the updates.
 
 ### Publish the Website
 
-Once pushed to the `source` branch, CI will publish http://graphql.cn/
+Once pushed to the `zh-Hans` branch, CI will publish to http://graphql.cn/
 
 ## Contributors
 
